@@ -12,7 +12,7 @@
 | -------- | ---------------------- | ------ | ----------------------- | ---------------------------------------- |
 | `array`  | `at`                   | ✅     | `arrayAtMulti`          | Extended to support a single array index |
 | `array`  | `cartesianProduct`     | ✅     | *same*                  | -                                        |
-| `array`  | `chunk`                | ⌛     | `arrayChunk` (?)        | -                                        |
+| `array`  | `chunk`                | ✅     | `arrayChunks`           | -                                        |
 | `array`  | `combinations`         | ⌛     | `arrayCombinations` (?) | -                                        |
 | `array`  | `compact`              | ⌛     | `arrayCompact` (?)      | -                                        |
 | `array`  | `countBy`              | ⌛     | TBD                     | -                                        |

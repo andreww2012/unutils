@@ -9,6 +9,7 @@ All without zero dependencies because the external dependencies are bundled.
 - The corresponding test should placed in `test/<group name>/<utility-name>.spec.ts` and must have a single describe called `<group name>/utilityName`
 - Only if an utility is a pure re-export from the external package, there should only be one test called `basic test`, testing the basic function usage
 - We target modern JavaScript execution environments (node 22+ and features from "Baseline Widely Available" group)
+- Update `README.md` to reflect the made changes after you've finished.
 
 ## Testing
 
