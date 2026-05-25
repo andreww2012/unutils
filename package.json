@@ -29,6 +29,10 @@
     "./array": {
       "types": "./dist/array/index.d.mts",
       "default": "./dist/array/index.mjs"
+    },
+    "./iterable": {
+      "types": "./dist/iterable/index.d.mts",
+      "default": "./dist/iterable/index.mjs"
     }
   },
   "main": "./dist/index.mjs",
