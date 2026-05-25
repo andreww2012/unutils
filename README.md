@@ -24,10 +24,10 @@
 | `array/difference`               | ✅     | `array/arrayDifference`           | Consolidated with `differenceBy`/`differenceWith`  |
 | `array/differenceBy`             | ✅     | `array/arrayDifference`           | Pass a mapper `(value) => key` as third arg        |
 | `array/differenceWith`           | ✅     | `array/arrayDifference`           | Pass a comparator `(a, b) => boolean` as third arg |
-| `array/drop`                     | ⌛     | TBD                               | -                                                  |
+| `array/drop`                     | ✅     | `array/arrayDrop`                 | Consolidated with `dropWhile`                      |
 | `array/dropRight`                | ⌛     | TBD                               | -                                                  |
 | `array/dropRightWhile`           | ⌛     | TBD                               | -                                                  |
-| `array/dropWhile`                | ⌛     | TBD                               | -                                                  |
+| `array/dropWhile`                | ✅     | `array/arrayDrop`                 | Pass a predicate `(item) => boolean` as second arg |
 | `array/fill`                     | ⌛     | TBD                               | -                                                  |
 | `array/filterAsync`              | ⌛     | TBD                               | -                                                  |
 | `array/flatMap`                  | ⌛     | TBD                               | -                                                  |
