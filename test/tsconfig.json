@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig.json",
+  "extends": "../tsconfig.json",
+  "include": ["**/*.ts"],
+  "references": [{"path": ".."}],
+  "compilerOptions": {
+    "types": ["node", "vitest/globals"],
+    "outDir": "../temp/tsbuild/test",
+    "tsBuildInfoFile": "../temp/tsbuild/test.tsbuildinfo",
+  },
+}

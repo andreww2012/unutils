@@ -1,0 +1,33 @@
+// Based on https://www.totaltypescript.com/tsconfig-cheat-sheet
+{
+  "include": ["src"],
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "es2024",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "allowImportingTsExtensions": true,
+    "types": ["node"],
+
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "composite": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "./temp/tsbuild/src",
+    "tsBuildInfoFile": "./temp/tsbuild/src.tsbuildinfo",
+
+    "lib": ["es2024"],
+  },
+}

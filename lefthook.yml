@@ -1,0 +1,17 @@
+pre-push:
+  parallel: true
+  commands:
+    eslint:
+      run: pnpm exec eslint --no-warn-ignored {push_files}
+    prettier:
+      run: pnpm exec prettier --check --ignore-unknown {push_files}
+    spellcheck:
+      run: pnpm exec cspell --exclude '**/.*' --no-must-find-files {push_files}
+    knip:
+      run: nr knip
+    types:
+      run: nr lint:types:go
+commit-msg:
+  commands:
+    commitlint:
+      run: pnpm exec commitlint --edit {0}
