@@ -14,7 +14,7 @@
 | `array`  | `cartesianProduct`     | ✅     | *same*              | -                                        |
 | `array`  | `chunk`                | ✅     | `arrayChunks`       | -                                        |
 | `array`  | `combinations`         | ✅     | `arrayCombinations` | -                                        |
-| `array`  | `compact`              | ⌛     | `arrayCompact` (?)  | -                                        |
+| `array`  | `compact`              | ✅     | `arrayWithoutFalsy` | -                                        |
 | `array`  | `countBy`              | ⌛     | TBD                 | -                                        |
 | `array`  | `difference`           | ⌛     | TBD                 | -                                        |
 | `array`  | `differenceBy`         | ⌛     | TBD                 | -                                        |
