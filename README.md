@@ -25,8 +25,8 @@
 | `array/differenceBy`             | ✅     | `array/arrayDifference`           | Pass a mapper `(value) => key` as third arg        |
 | `array/differenceWith`           | ✅     | `array/arrayDifference`           | Pass a comparator `(a, b) => boolean` as third arg |
 | `array/drop`                     | ✅     | `array/arrayDrop`                 | Consolidated with `dropWhile`                      |
-| `array/dropRight`                | ⌛     | TBD                               | -                                                  |
-| `array/dropRightWhile`           | ⌛     | TBD                               | -                                                  |
+| `array/dropRight`                | ✅     | `array/arrayDropRight`            | Consolidated with `dropRightWhile`                 |
+| `array/dropRightWhile`           | ✅     | `array/arrayDropRight`            | Pass a predicate `(item) => boolean` as second arg |
 | `array/dropWhile`                | ✅     | `array/arrayDrop`                 | Pass a predicate `(item) => boolean` as second arg |
 | `array/fill`                     | ⌛     | TBD                               | -                                                  |
 | `array/filterAsync`              | ⌛     | TBD                               | -                                                  |
