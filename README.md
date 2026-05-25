@@ -28,7 +28,7 @@
 | `array/dropRight`                | ✅     | `array/arrayDropRight`            | Consolidated with `dropRightWhile`                 |
 | `array/dropRightWhile`           | ✅     | `array/arrayDropRight`            | Pass a predicate `(item) => boolean` as second arg |
 | `array/dropWhile`                | ✅     | `array/arrayDrop`                 | Pass a predicate `(item) => boolean` as second arg |
-| `array/fill`                     | ⌛     | TBD                               | -                                                  |
+| `array/fill`                     | ✅     | `array/arrayFill`                 | Consolidated with `toFilled`                       |
 | `array/filterAsync`              | ⌛     | TBD                               | -                                                  |
 | `array/flatMap`                  | ⌛     | TBD                               | -                                                  |
 | `array/flatMapAsync`             | ⌛     | TBD                               | -                                                  |
@@ -66,7 +66,7 @@
 | `array/takeRight`                | ⌛     | TBD                               | -                                                  |
 | `array/takeRightWhile`           | ⌛     | TBD                               | -                                                  |
 | `array/takeWhile`                | ⌛     | TBD                               | -                                                  |
-| `array/toFilled`                 | ⌛     | TBD                               | -                                                  |
+| `array/toFilled`                 | ✅     | `array/arrayFill`                 | Pass `{copy: true}` as fifth arg                   |
 | `array/union`                    | ⌛     | TBD                               | -                                                  |
 | `array/unionBy`                  | ⌛     | TBD                               | -                                                  |
 | `array/unionWith`                | ⌛     | TBD                               | -                                                  |

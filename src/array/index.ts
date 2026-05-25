@@ -3,6 +3,7 @@ export {arrayChunks} from './array-chunks.ts';
 export {arrayDifference} from './array-difference.ts';
 export {arrayDrop} from './array-drop.ts';
 export {arrayDropRight} from './array-drop-right.ts';
+export {arrayFill} from './array-fill.ts';
 export {arrayCombinations} from './array-combinations.ts';
 export {arrayWithoutFalsy} from './array-without-falsy.ts';
 export {cartesianProduct} from './cartesian-product.ts';
