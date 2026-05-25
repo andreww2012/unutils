@@ -29,7 +29,7 @@
 | `array/dropRightWhile`           | ✅     | `array/arrayDropRight`            | Pass a predicate `(item) => boolean` as second arg |
 | `array/dropWhile`                | ✅     | `array/arrayDrop`                 | Pass a predicate `(item) => boolean` as second arg |
 | `array/fill`                     | ✅     | `array/arrayFill`                 | Consolidated with `toFilled`                       |
-| `array/filterAsync`              | ⌛     | TBD                               | -                                                  |
+| `array/filterAsync`              | ✅     | `array/filterAsync` *(same)*      | -                                                  |
 | `array/flatMap`                  | ⌛     | TBD                               | -                                                  |
 | `array/flatMapAsync`             | ⌛     | TBD                               | -                                                  |
 | `array/flatMapDeep`              | ⌛     | TBD                               | -                                                  |

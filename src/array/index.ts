@@ -5,5 +5,6 @@ export {arrayDrop} from './array-drop.ts';
 export {arrayDropRight} from './array-drop-right.ts';
 export {arrayFill} from './array-fill.ts';
 export {arrayCombinations} from './array-combinations.ts';
+export {filterAsync} from './filter-async.ts';
 export {arrayWithoutFalsy} from './array-without-falsy.ts';
 export {cartesianProduct} from './cartesian-product.ts';
