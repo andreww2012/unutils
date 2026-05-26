@@ -4,6 +4,7 @@ export {arrayDifference} from './array-difference.ts';
 export {arrayDrop} from './array-drop.ts';
 export {arrayDropRight} from './array-drop-right.ts';
 export {arrayFill} from './array-fill.ts';
+export {arrayIntersection} from './array-intersection.ts';
 export {arrayCombinations} from './array-combinations.ts';
 export {filterAsync} from './filter-async.ts';
 export {arrayWithoutFalsy} from './array-without-falsy.ts';

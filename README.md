@@ -40,9 +40,9 @@
 | `array/groupBy`                  | ⌛     | TBD                               | -                                                  |
 | `array/head`                     | ⌛     | TBD                               | -                                                  |
 | `array/initial`                  | ⌛     | TBD                               | -                                                  |
-| `array/intersection`             | ⌛     | TBD                               | -                                                  |
-| `array/intersectionBy`           | ⌛     | TBD                               | -                                                  |
-| `array/intersectionWith`         | ⌛     | TBD                               | -                                                  |
+| `array/intersection`             | ✅     | `array/arrayIntersection`         | Consolidated with `intersectionBy`/`intersectionWith` |
+| `array/intersectionBy`           | ✅     | `array/arrayIntersection`         | Pass a mapper `(value) => key` as third arg        |
+| `array/intersectionWith`         | ✅     | `array/arrayIntersection`         | Pass a comparator `(a, b) => boolean` as third arg |
 | `array/isSubset`                 | ⌛     | TBD                               | -                                                  |
 | `array/isSubsetWith`             | ⌛     | TBD                               | -                                                  |
 | `array/keyBy`                    | ⌛     | TBD                               | -                                                  |
