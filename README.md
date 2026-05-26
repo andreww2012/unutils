@@ -5,6 +5,7 @@
 - ✅ - implemented
 - ⌛ - to be implemented
 - ❓ - under consideration
+- ❌ - won't be added (see notes)
 
 ## Custom functions
 
@@ -37,9 +38,9 @@
 | `array/flattenDeep`              | ✅     | `array/flatten`                   | Call without a `depth` argument (or with `Infinity`)                                  |
 | `array/forEachAsync`             | ✅     | `array/forEachAsync` *(same)*     | -                                                                                     |
 | `array/forEachRight`             | ✅     | `array/forEachRight` *(same)*     | -                                                                                     |
-| `array/groupBy`                  | ⌛     | TBD                               | -                                                                                     |
-| `array/head`                     | ⌛     | TBD                               | -                                                                                     |
-| `array/initial`                  | ⌛     | TBD                               | -                                                                                     |
+| `array/groupBy`                  | ❌     | *(native)*                        | Use the native `Object.groupBy` / `Map.groupBy`                                       |
+| `array/head`                     | ❌     | *(native)*                        | Use `array[0]` or `array.at(0)`                                                       |
+| `array/initial`                  | ❌     | *(native)*                        | Use `array.slice(0, -1)`                                                              |
 | `array/intersection`             | ✅     | `array/arrayIntersection`         | Consolidated with `intersectionBy`/`intersectionWith`                                 |
 | `array/intersectionBy`           | ✅     | `array/arrayIntersection`         | Pass a mapper `(value) => key` as third arg                                           |
 | `array/intersectionWith`         | ✅     | `array/arrayIntersection`         | Pass a comparator `(a, b) => boolean` as third arg                                    |
