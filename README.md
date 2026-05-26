@@ -54,7 +54,7 @@
 | `array/maxBy`                    | ✅     | `array/maxBy` *(same)*            | -                                                                                     |
 | `array/minBy`                    | ✅     | `array/minBy` *(same)*            | -                                                                                     |
 | `array/orderBy`                  | ✅     | `array/orderBy` *(same)*          | -                                                                                     |
-| `array/partition`                | ⌛     | TBD                               | -                                                                                     |
+| `array/partition`                | ✅     | `array/arrayPartition`            | -                                                                                     |
 | `array/pull`                     | ⌛     | TBD                               | -                                                                                     |
 | `array/pullAt`                   | ❌     | *(native)*                        | Use `array.splice(index, 1)`; for multiple indices, splice in descending order        |
 | `array/reduceAsync`              | ⌛     | TBD                               | -                                                                                     |
