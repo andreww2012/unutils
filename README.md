@@ -56,7 +56,7 @@
 | `array/orderBy`                  | ✅     | `array/orderBy` *(same)*          | -                                                                                      |
 | `array/partition`                | ✅     | `array/arrayPartition`            | -                                                                                      |
 | `array/pull`                     | ✅     | `array/arrayPurgeValues`          | Renamed for clarity — mutates the input, removing every occurrence of the given values |
-| `array/pullAt`                   | ❌     | *(native)*                        | Use `array.splice(index, 1)`; for multiple indices, splice in descending order         |
+| `array/pullAt`                   | ✅     | `array/arrayPurgeIndexes`         | Renamed for clarity — mutates the input, removing elements at the given indices        |
 | `array/reduceAsync`              | ⌛     | TBD                               | -                                                                                      |
 | `array/remove`                   | ❌     | *(native)*                        | Iterate in reverse with `array.splice(i, 1)` when the predicate matches                |
 | `array/sample`                   | ⌛     | TBD                               | -                                                                                      |
