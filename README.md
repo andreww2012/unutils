@@ -48,7 +48,7 @@
 | `array/isSubset`                 | ✅     | `array/arrayIsSubset`             | Consolidated with `isSubsetWith` and a custom mapper-based variant                    |
 | `array/isSubsetWith`             | ✅     | `array/arrayIsSubset`             | Pass a comparator `(a, b) => boolean` as third arg                                    |
 | `array/keyBy`                    | ✅     | `iterable/keyedBy`                | -                                                                                     |
-| `array/last`                     | ⌛     | TBD                               | -                                                                                     |
+| `array/last`                     | ❌     | *(native)*                        | Use `array.at(-1)`                                                                    |
 | `array/limitAsync`               | ⌛     | TBD                               | -                                                                                     |
 | `array/mapAsync`                 | ⌛     | TBD                               | -                                                                                     |
 | `array/maxBy`                    | ⌛     | TBD                               | -                                                                                     |
@@ -56,23 +56,23 @@
 | `array/orderBy`                  | ⌛     | TBD                               | -                                                                                     |
 | `array/partition`                | ⌛     | TBD                               | -                                                                                     |
 | `array/pull`                     | ⌛     | TBD                               | -                                                                                     |
-| `array/pullAt`                   | ⌛     | TBD                               | -                                                                                     |
+| `array/pullAt`                   | ❌     | *(native)*                        | Use `array.splice(index, 1)`; for multiple indices, splice in descending order        |
 | `array/reduceAsync`              | ⌛     | TBD                               | -                                                                                     |
-| `array/remove`                   | ⌛     | TBD                               | -                                                                                     |
+| `array/remove`                   | ❌     | *(native)*                        | Iterate in reverse with `array.splice(i, 1)` when the predicate matches               |
 | `array/sample`                   | ⌛     | TBD                               | -                                                                                     |
 | `array/sampleSize`               | ⌛     | TBD                               | -                                                                                     |
 | `array/shuffle`                  | ⌛     | TBD                               | -                                                                                     |
 | `array/sortBy`                   | ⌛     | TBD                               | -                                                                                     |
 | `array/tail`                     | ⌛     | TBD                               | -                                                                                     |
-| `array/take`                     | ⌛     | TBD                               | -                                                                                     |
-| `array/takeRight`                | ⌛     | TBD                               | -                                                                                     |
+| `array/take`                     | ❌     | *(native)*                        | Use `array.slice(0, n)`                                                               |
+| `array/takeRight`                | ❌     | *(native)*                        | Use `array.slice(-n)`                                                                 |
 | `array/takeRightWhile`           | ⌛     | TBD                               | -                                                                                     |
 | `array/takeWhile`                | ⌛     | TBD                               | -                                                                                     |
 | `array/toFilled`                 | ✅     | `array/arrayFill`                 | Pass `{copy: true}` as fifth arg                                                      |
 | `array/union`                    | ⌛     | TBD                               | -                                                                                     |
 | `array/unionBy`                  | ⌛     | TBD                               | -                                                                                     |
 | `array/unionWith`                | ⌛     | TBD                               | -                                                                                     |
-| `array/uniq`                     | ⌛     | TBD                               | -                                                                                     |
+| `array/uniq`                     | ❌     | *(native)*                        | Use `Array.from(new Set(array))`                                                      |
 | `array/uniqBy`                   | ⌛     | TBD                               | -                                                                                     |
 | `array/uniqWith`                 | ⌛     | TBD                               | -                                                                                     |
 | `array/unzip`                    | ⌛     | TBD                               | -                                                                                     |
