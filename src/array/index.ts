@@ -9,5 +9,6 @@ export {arrayCombinations} from './array-combinations.ts';
 export {filterAsync} from './filter-async.ts';
 export {flatMap} from './flat-map.ts';
 export {flatMapAsync} from './flat-map-async.ts';
+export {flatten} from './flatten.ts';
 export {arrayWithoutFalsy} from './array-without-falsy.ts';
 export {cartesianProduct} from './cartesian-product.ts';
