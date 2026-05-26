@@ -35,7 +35,7 @@
 | `array/flatMapDeep`              | ✅     | `array/flatMap`                   | Call without a `depth` argument (or with `Infinity`)                                  |
 | `array/flatten`                  | ✅     | `array/flatten` *(same)*          | Defaults to deep flattening; pass a finite `depth` as second arg for a specific level |
 | `array/flattenDeep`              | ✅     | `array/flatten`                   | Call without a `depth` argument (or with `Infinity`)                                  |
-| `array/forEachAsync`             | ⌛     | TBD                               | -                                                                                     |
+| `array/forEachAsync`             | ✅     | `array/forEachAsync` *(same)*     | -                                                                                     |
 | `array/forEachRight`             | ⌛     | TBD                               | -                                                                                     |
 | `array/groupBy`                  | ⌛     | TBD                               | -                                                                                     |
 | `array/head`                     | ⌛     | TBD                               | -                                                                                     |
