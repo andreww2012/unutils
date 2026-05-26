@@ -50,7 +50,7 @@
 | `array/keyBy`                    | ✅     | `iterable/keyedBy`                | -                                                                                     |
 | `array/last`                     | ❌     | *(native)*                        | Use `array.at(-1)`                                                                    |
 | `array/limitAsync`               | ✅     | `function/withConcurrencyLimit`   | -                                                                                     |
-| `array/mapAsync`                 | ⌛     | TBD                               | -                                                                                     |
+| `array/mapAsync`                 | ✅     | `array/mapAsync` *(same)*         | -                                                                                     |
 | `array/maxBy`                    | ⌛     | TBD                               | -                                                                                     |
 | `array/minBy`                    | ⌛     | TBD                               | -                                                                                     |
 | `array/orderBy`                  | ⌛     | TBD                               | -                                                                                     |

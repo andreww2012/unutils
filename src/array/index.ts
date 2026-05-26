@@ -13,5 +13,6 @@ export {flatMapAsync} from './flat-map-async.ts';
 export {flatten} from './flatten.ts';
 export {forEachAsync} from './for-each-async.ts';
 export {forEachRight} from './for-each-right.ts';
+export {mapAsync} from './map-async.ts';
 export {arrayWithoutFalsy} from './array-without-falsy.ts';
 export {cartesianProduct} from './cartesian-product.ts';
