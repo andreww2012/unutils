@@ -58,7 +58,7 @@
 | `array/pull`                     | ✅     | `array/arrayPurgeValues`          | Renamed for clarity — mutates the input, removing every occurrence of the given values |
 | `array/pullAt`                   | ✅     | `array/arrayPurgeIndexes`         | Renamed for clarity — mutates the input, removing elements at the given indices        |
 | `array/reduceAsync`              | ✅     | `array/reduceAsync` *(same)*      | -                                                                                      |
-| `array/remove`                   | ❌     | *(native)*                        | Iterate in reverse with `array.splice(i, 1)` when the predicate matches                |
+| `array/remove`                   | ✅     | `array/arrayPurgeBy`              | Renamed for clarity — mutates the input, removing elements matching the predicate      |
 | `array/sample`                   | ⌛     | TBD                               | -                                                                                      |
 | `array/sampleSize`               | ⌛     | TBD                               | -                                                                                      |
 | `array/shuffle`                  | ⌛     | TBD                               | -                                                                                      |
