@@ -51,8 +51,8 @@
 | `array/last`                     | ❌     | *(native)*                        | Use `array.at(-1)`                                                                    |
 | `array/limitAsync`               | ✅     | `function/withConcurrencyLimit`   | -                                                                                     |
 | `array/mapAsync`                 | ✅     | `array/mapAsync` *(same)*         | -                                                                                     |
-| `array/maxBy`                    | ⌛     | TBD                               | -                                                                                     |
-| `array/minBy`                    | ⌛     | TBD                               | -                                                                                     |
+| `array/maxBy`                    | ✅     | `array/maxBy` *(same)*            | -                                                                                     |
+| `array/minBy`                    | ✅     | `array/minBy` *(same)*            | -                                                                                     |
 | `array/orderBy`                  | ⌛     | TBD                               | -                                                                                     |
 | `array/partition`                | ⌛     | TBD                               | -                                                                                     |
 | `array/pull`                     | ⌛     | TBD                               | -                                                                                     |
