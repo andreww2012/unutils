@@ -5,6 +5,7 @@ export {arrayDrop} from './array-drop.ts';
 export {arrayDropRight} from './array-drop-right.ts';
 export {arrayFill} from './array-fill.ts';
 export {arrayIntersection} from './array-intersection.ts';
+export {arrayIsSubset} from './array-is-subset.ts';
 export {arrayCombinations} from './array-combinations.ts';
 export {filterAsync} from './filter-async.ts';
 export {flatMap} from './flat-map.ts';

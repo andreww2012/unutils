@@ -44,8 +44,8 @@
 | `array/intersection`             | ✅     | `array/arrayIntersection`         | Consolidated with `intersectionBy`/`intersectionWith`                                 |
 | `array/intersectionBy`           | ✅     | `array/arrayIntersection`         | Pass a mapper `(value) => key` as third arg                                           |
 | `array/intersectionWith`         | ✅     | `array/arrayIntersection`         | Pass a comparator `(a, b) => boolean` as third arg                                    |
-| `array/isSubset`                 | ⌛     | TBD                               | -                                                                                     |
-| `array/isSubsetWith`             | ⌛     | TBD                               | -                                                                                     |
+| `array/isSubset`                 | ✅     | `array/arrayIsSubset`             | Consolidated with `isSubsetWith` and a custom mapper-based variant                    |
+| `array/isSubsetWith`             | ✅     | `array/arrayIsSubset`             | Pass a comparator `(a, b) => boolean` as third arg                                    |
 | `array/keyBy`                    | ⌛     | TBD                               | -                                                                                     |
 | `array/last`                     | ⌛     | TBD                               | -                                                                                     |
 | `array/limitAsync`               | ⌛     | TBD                               | -                                                                                     |
