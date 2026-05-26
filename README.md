@@ -62,7 +62,7 @@
 | `array/sample`                   | ✅     | `array/arraySample`               | Consolidated with `sampleSize`                                                         |
 | `array/sampleSize`               | ✅     | `array/arraySample`               | Pass the desired sample size as second arg                                             |
 | `array/shuffle`                  | ✅     | `array/arrayShuffle`              | -                                                                                      |
-| `array/sortBy`                   | ⌛     | TBD                               | -                                                                                      |
+| `array/sortBy`                   | ✅     | `array/sortBy` *(same)*           | -                                                                                      |
 | `array/tail`                     | ⌛     | TBD                               | -                                                                                      |
 | `array/take`                     | ❌     | *(native)*                        | Use `array.slice(0, n)`                                                                |
 | `array/takeRight`                | ❌     | *(native)*                        | Use `array.slice(-n)`                                                                  |

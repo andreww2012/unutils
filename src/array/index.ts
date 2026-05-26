@@ -22,6 +22,7 @@ export {maxBy} from './max-by.ts';
 export {minBy} from './min-by.ts';
 export {orderBy} from './order-by.ts';
 export {reduceAsync} from './reduce-async.ts';
+export {sortBy} from './sort-by.ts';
 export {arraySample} from './array-sample.ts';
 export {arrayShuffle} from './array-shuffle.ts';
 export {arrayWithoutFalsy} from './array-without-falsy.ts';
