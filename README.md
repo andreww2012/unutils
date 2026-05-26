@@ -12,6 +12,7 @@
 | Our function group and name | Notes |
 | --------------------------- | ----- |
 | `iterable/countBy`          | -     |
+| `iterable/keyedBy`          | -     |
 
 ## `es-toolkit`
 
@@ -46,7 +47,7 @@
 | `array/intersectionWith`         | ✅     | `array/arrayIntersection`         | Pass a comparator `(a, b) => boolean` as third arg                                    |
 | `array/isSubset`                 | ✅     | `array/arrayIsSubset`             | Consolidated with `isSubsetWith` and a custom mapper-based variant                    |
 | `array/isSubsetWith`             | ✅     | `array/arrayIsSubset`             | Pass a comparator `(a, b) => boolean` as third arg                                    |
-| `array/keyBy`                    | ⌛     | TBD                               | -                                                                                     |
+| `array/keyBy`                    | ✅     | `iterable/keyedBy`                | -                                                                                     |
 | `array/last`                     | ⌛     | TBD                               | -                                                                                     |
 | `array/limitAsync`               | ⌛     | TBD                               | -                                                                                     |
 | `array/mapAsync`                 | ⌛     | TBD                               | -                                                                                     |
@@ -87,3 +88,5 @@
 | `array/countBy`                  | ✅     | `iterable/countBy`                | -                                                                                     |
 | `map/countBy`                    | ✅     | `iterable/countBy`                | -                                                                                     |
 | `set/countBy`                    | ✅     | `iterable/countBy`                | -                                                                                     |
+| `map/keyBy`                      | ✅     | `iterable/keyedBy`                | -                                                                                     |
+| `set/keyBy`                      | ✅     | `iterable/keyedBy`                | -                                                                                     |
