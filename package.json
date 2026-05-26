@@ -30,6 +30,10 @@
       "types": "./dist/array/index.d.mts",
       "default": "./dist/array/index.mjs"
     },
+    "./function": {
+      "types": "./dist/function/index.d.mts",
+      "default": "./dist/function/index.mjs"
+    },
     "./iterable": {
       "types": "./dist/iterable/index.d.mts",
       "default": "./dist/iterable/index.mjs"

@@ -49,7 +49,7 @@
 | `array/isSubsetWith`             | ✅     | `array/arrayIsSubset`             | Pass a comparator `(a, b) => boolean` as third arg                                    |
 | `array/keyBy`                    | ✅     | `iterable/keyedBy`                | -                                                                                     |
 | `array/last`                     | ❌     | *(native)*                        | Use `array.at(-1)`                                                                    |
-| `array/limitAsync`               | ⌛     | TBD                               | -                                                                                     |
+| `array/limitAsync`               | ✅     | `function/withConcurrencyLimit`   | -                                                                                     |
 | `array/mapAsync`                 | ⌛     | TBD                               | -                                                                                     |
 | `array/maxBy`                    | ⌛     | TBD                               | -                                                                                     |
 | `array/minBy`                    | ⌛     | TBD                               | -                                                                                     |
