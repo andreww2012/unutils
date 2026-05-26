@@ -59,8 +59,8 @@
 | `array/pullAt`                   | ✅     | `array/arrayPurgeIndexes`         | Renamed for clarity — mutates the input, removing elements at the given indices        |
 | `array/reduceAsync`              | ✅     | `array/reduceAsync` *(same)*      | -                                                                                      |
 | `array/remove`                   | ✅     | `array/arrayPurgeBy`              | Renamed for clarity — mutates the input, removing elements matching the predicate      |
-| `array/sample`                   | ⌛     | TBD                               | -                                                                                      |
-| `array/sampleSize`               | ⌛     | TBD                               | -                                                                                      |
+| `array/sample`                   | ✅     | `array/arraySample`               | Consolidated with `sampleSize`                                                         |
+| `array/sampleSize`               | ✅     | `array/arraySample`               | Pass the desired sample size as second arg                                             |
 | `array/shuffle`                  | ⌛     | TBD                               | -                                                                                      |
 | `array/sortBy`                   | ⌛     | TBD                               | -                                                                                      |
 | `array/tail`                     | ⌛     | TBD                               | -                                                                                      |

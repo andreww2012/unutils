@@ -22,5 +22,6 @@ export {maxBy} from './max-by.ts';
 export {minBy} from './min-by.ts';
 export {orderBy} from './order-by.ts';
 export {reduceAsync} from './reduce-async.ts';
+export {arraySample} from './array-sample.ts';
 export {arrayWithoutFalsy} from './array-without-falsy.ts';
 export {cartesianProduct} from './cartesian-product.ts';
