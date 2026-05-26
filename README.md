@@ -57,7 +57,7 @@
 | `array/partition`                | ✅     | `array/arrayPartition`            | -                                                                                      |
 | `array/pull`                     | ✅     | `array/arrayPurgeValues`          | Renamed for clarity — mutates the input, removing every occurrence of the given values |
 | `array/pullAt`                   | ✅     | `array/arrayPurgeIndexes`         | Renamed for clarity — mutates the input, removing elements at the given indices        |
-| `array/reduceAsync`              | ⌛     | TBD                               | -                                                                                      |
+| `array/reduceAsync`              | ✅     | `array/reduceAsync` *(same)*      | -                                                                                      |
 | `array/remove`                   | ❌     | *(native)*                        | Iterate in reverse with `array.splice(i, 1)` when the predicate matches                |
 | `array/sample`                   | ⌛     | TBD                               | -                                                                                      |
 | `array/sampleSize`               | ⌛     | TBD                               | -                                                                                      |
