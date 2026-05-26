@@ -53,7 +53,7 @@
 | `array/mapAsync`                 | ✅     | `array/mapAsync` *(same)*         | -                                                                                     |
 | `array/maxBy`                    | ✅     | `array/maxBy` *(same)*            | -                                                                                     |
 | `array/minBy`                    | ✅     | `array/minBy` *(same)*            | -                                                                                     |
-| `array/orderBy`                  | ⌛     | TBD                               | -                                                                                     |
+| `array/orderBy`                  | ✅     | `array/orderBy` *(same)*          | -                                                                                     |
 | `array/partition`                | ⌛     | TBD                               | -                                                                                     |
 | `array/pull`                     | ⌛     | TBD                               | -                                                                                     |
 | `array/pullAt`                   | ❌     | *(native)*                        | Use `array.splice(index, 1)`; for multiple indices, splice in descending order        |
