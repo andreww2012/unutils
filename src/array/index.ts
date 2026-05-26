@@ -8,6 +8,7 @@ export {arrayIntersection} from './array-intersection.ts';
 export {arrayIsSubset} from './array-is-subset.ts';
 export {arrayCombinations} from './array-combinations.ts';
 export {arrayPartition} from './array-partition.ts';
+export {arrayPurgeValues} from './array-purge-values.ts';
 export {filterAsync} from './filter-async.ts';
 export {flatMap} from './flat-map.ts';
 export {flatMapAsync} from './flat-map-async.ts';
