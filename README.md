@@ -61,7 +61,7 @@
 | `array/remove`                   | ✅     | `array/arrayPurgeBy`              | Renamed for clarity — mutates the input, removing elements matching the predicate      |
 | `array/sample`                   | ✅     | `array/arraySample`               | Consolidated with `sampleSize`                                                         |
 | `array/sampleSize`               | ✅     | `array/arraySample`               | Pass the desired sample size as second arg                                             |
-| `array/shuffle`                  | ⌛     | TBD                               | -                                                                                      |
+| `array/shuffle`                  | ✅     | `array/arrayShuffle`              | -                                                                                      |
 | `array/sortBy`                   | ⌛     | TBD                               | -                                                                                      |
 | `array/tail`                     | ⌛     | TBD                               | -                                                                                      |
 | `array/take`                     | ❌     | *(native)*                        | Use `array.slice(0, n)`                                                                |
