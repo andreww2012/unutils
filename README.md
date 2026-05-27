@@ -9,11 +9,16 @@
 
 ## Custom functions
 
-| Our function group and name | Notes |
-| --------------------------- | ----- |
-| `iterable/countBy`          | -     |
-| `iterable/keyedBy`          | -     |
-| `iterable/slidingWindow`    | -     |
+| Our function group and name | Notes                                                                |
+| --------------------------- | -------------------------------------------------------------------- |
+| `iterable/countBy`          | -                                                                    |
+| `iterable/every`            | Generalized from `set/every`; simple `(value) => boolean` callback   |
+| `iterable/find`             | Generalized from `set/find`; simple `(value) => boolean` callback    |
+| `iterable/forEach`          | Generalized from `set/forEach`; simple `(value) => void` callback    |
+| `iterable/keyedBy`          | -                                                                    |
+| `iterable/reduce`           | Generalized from `set/reduce`; simple `(acc, value) => acc` callback |
+| `iterable/slidingWindow`    | -                                                                    |
+| `iterable/some`             | Generalized from `set/some`; simple `(value) => boolean` callback    |
 
 ## `es-toolkit`
 
@@ -193,14 +198,14 @@
 | `object/toMerged`                | ⌛️     | `object/toMerged`                  | -                                                                                        |
 | `object/toSnakeCaseKeys`         | ⌛️     | `object/toSnakeCaseKeys`           | -                                                                                        |
 | `set/countBy`                    | ✅     | `iterable/countBy`                 | -                                                                                        |
-| `set/every`                      | ⌛️     | `set/every`                        | -                                                                                        |
-| `set/filter`                     | ⌛️     | `set/filter`                       | -                                                                                        |
-| `set/find`                       | ⌛️     | `set/find`                         | -                                                                                        |
-| `set/forEach`                    | ⌛️     | `set/forEach`                      | -                                                                                        |
+| `set/every`                      | ✅     | `iterable/every`                   | Generalized to any iterable; simple `(value) => boolean` callback                        |
+| `set/filter`                     | ⌛️     | `set/setFilter`                    | -                                                                                        |
+| `set/find`                       | ✅     | `iterable/find`                    | Generalized to any iterable; simple `(value) => boolean` callback                        |
+| `set/forEach`                    | ✅     | `iterable/forEach`                 | Generalized to any iterable; simple `(value) => void` callback                           |
 | `set/keyBy`                      | ✅     | `iterable/keyedBy`                 | -                                                                                        |
-| `set/map`                        | ⌛️     | `set/mapKeys`                      | -                                                                                        |
-| `set/reduce`                     | ⌛️     | `set/reduce`                       | -                                                                                        |
-| `set/some`                       | ⌛️     | `set/some`                         | -                                                                                        |
+| `set/map`                        | ⌛️     | `set/setMapValues`                 | Renamed for clarity — Sets only have values, not keys                                    |
+| `set/reduce`                     | ✅     | `iterable/reduce`                  | Generalized to any iterable; simple `(acc, value) => acc` callback                       |
+| `set/some`                       | ✅     | `iterable/some`                    | Generalized to any iterable; simple `(value) => boolean` callback                        |
 | `string/camelCase`               | ✅     | `string/toCamelCase`               | -                                                                                        |
 | `string/capitalize`              | ✅     | `string/capitalize` *(same)*       | -                                                                                        |
 | `string/constantCase`            | ✅     | `string/toConstantCase`            | -                                                                                        |
