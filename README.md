@@ -83,9 +83,9 @@
 | `array/xor`                      | ⌛     | TBD                               | -                                                                                      |
 | `array/xorBy`                    | ⌛     | TBD                               | -                                                                                      |
 | `array/xorBy`                    | ⌛     | TBD                               | -                                                                                      |
-| `array/zip`                      | ⌛     | TBD                               | -                                                                                      |
-| `array/zipObject`                | ⌛     | TBD                               | -                                                                                      |
-| `array/zipWith`                  | ⌛     | TBD                               | -                                                                                      |
+| `array/zip`                      | ✅     | `array/arrayTranspose`            | Wrap the arguments in an array: `arrayTranspose([arr1, arr2, ...])` — same operation   |
+| `array/zipObject`                | ❌     | *(native)*                        | Use `Object.fromEntries(keys.map((key, index) => [key, values[index]]))`               |
+| `array/zipWith`                  | ✅     | `array/arrayTranspose`            | Wrap the arguments in an array; pass an iteratee `(...column) => value` as second arg  |
 | `array/countBy`                  | ✅     | `iterable/countBy`                | -                                                                                      |
 | `map/countBy`                    | ✅     | `iterable/countBy`                | -                                                                                      |
 | `set/countBy`                    | ✅     | `iterable/countBy`                | -                                                                                      |
