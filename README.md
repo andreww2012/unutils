@@ -201,24 +201,24 @@
 | `set/map`                        | ⌛️     | `set/mapKeys`                     | -                                                                                        |
 | `set/reduce`                     | ⌛️     | `set/reduce`                      | -                                                                                        |
 | `set/some`                       | ⌛️     | `set/some`                        | -                                                                                        |
-| `string/camelCase`               | ⌛️     | `string/toCamelCase`              | -                                                                                        |
-| `string/capitalize`              | ⌛️     | TBD                               | -                                                                                        |
-| `string/constantCase`            | ⌛️     | `string/toConstantCase`           | -                                                                                        |
-| `string/deburr`                  | ⌛️     | TBD                               | -                                                                                        |
-| `string/escape`                  | ⌛️     | TBD                               | -                                                                                        |
-| `string/escapeRegExp`            | ⌛️     | TBD                               | -                                                                                        |
-| `string/kebabCase`               | ⌛️     | `string/toKebabCase`              | -                                                                                        |
-| `string/lowerCase`               | ⌛️     | `string/toLowerCase`              | -                                                                                        |
-| `string/lowerFirst`              | ⌛️     | TBD                               | -                                                                                        |
-| `string/pad`                     | ⌛️     | TBD                               | -                                                                                        |
-| `string/pascalCase`              | ⌛️     | `string/toPascalCase`             | -                                                                                        |
-| `string/reverseString`           | ⌛️     | TBD                               | -                                                                                        |
-| `string/snakeCase`               | ⌛️     | `string/toSnakeCase`              | -                                                                                        |
-| `string/startCase`               | ⌛️     | `string/toStartCase`              | -                                                                                        |
+| `string/camelCase`               | ✅     | `string/toCamelCase`              | -                                                                                        |
+| `string/capitalize`              | ✅     | `string/capitalize` *(same)*      | -                                                                                        |
+| `string/constantCase`            | ✅     | `string/toConstantCase`           | -                                                                                        |
+| `string/deburr`                  | ✅     | `string/deburr` *(same)*          | -                                                                                        |
+| `string/escape`                  | ✅     | `string/escapeHtml`               | Renamed for clarity — handles HTML entities specifically                                 |
+| `string/escapeRegExp`            | ✅     | `string/escapeRegExp` *(same)*    | -                                                                                        |
+| `string/kebabCase`               | ✅     | `string/toKebabCase`              | -                                                                                        |
+| `string/lowerCase`               | ✅     | `string/toLowerCase`              | -                                                                                        |
+| `string/lowerFirst`              | ✅     | `string/lowerFirst` *(same)*      | -                                                                                        |
+| `string/pad`                     | ✅     | `string/stringPad`                | Pads both sides; use native `padStart` / `padEnd` for one-sided padding                  |
+| `string/pascalCase`              | ✅     | `string/toPascalCase`             | -                                                                                        |
+| `string/reverseString`           | ✅     | `string/stringReverse`            | -                                                                                        |
+| `string/snakeCase`               | ✅     | `string/toSnakeCase`              | -                                                                                        |
+| `string/startCase`               | ✅     | `string/toStartCase`              | -                                                                                        |
 | `string/trim`                    | ❌     | *(native)*                        | Use `string.trim()`                                                                      |
 | `string/trimEnd`                 | ❌     | *(native)*                        | Use `string.trimEnd()`                                                                   |
 | `string/trimStart`               | ❌     | *(native)*                        | Use `string.trimStart()`                                                                 |
-| `string/unescape`                | ⌛️     | TBD                               | -                                                                                        |
-| `string/upperCase`               | ⌛️     | `string/toUpperCase`              | -                                                                                        |
-| `string/upperFirst`              | ⌛️     | TBD                               | -                                                                                        |
-| `string/words`                   | ⌛️     | TBD                               | -                                                                                        |
+| `string/unescape`                | ✅     | `string/unescapeHtml`             | Renamed for clarity — handles HTML entities specifically                                 |
+| `string/upperCase`               | ✅     | `string/toUpperCase`              | -                                                                                        |
+| `string/upperFirst`              | ✅     | `string/upperFirst` *(same)*      | -                                                                                        |
+| `string/words`                   | ✅     | `string/toWords`                  | -                                                                                        |
