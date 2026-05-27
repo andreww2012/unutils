@@ -5,5 +5,6 @@ export * from './math';
 export * from './misc';
 export * from './predicate';
 export * from './runtime';
+export * from './set';
 export * from './string';
 export * from './value';

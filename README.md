@@ -199,11 +199,11 @@
 | `object/toSnakeCaseKeys`         | ⌛️     | `object/toSnakeCaseKeys`           | -                                                                                        |
 | `set/countBy`                    | ✅     | `iterable/countBy`                 | -                                                                                        |
 | `set/every`                      | ✅     | `iterable/every`                   | Generalized to any iterable; simple `(value) => boolean` callback                        |
-| `set/filter`                     | ⌛️     | `set/setFilter`                    | -                                                                                        |
+| `set/filter`                     | ✅     | `set/setFilter`                    | Renamed for `set`-prefix consistency                                                     |
 | `set/find`                       | ✅     | `iterable/find`                    | Generalized to any iterable; simple `(value) => boolean` callback                        |
 | `set/forEach`                    | ✅     | `iterable/forEach`                 | Generalized to any iterable; simple `(value) => void` callback                           |
 | `set/keyBy`                      | ✅     | `iterable/keyedBy`                 | -                                                                                        |
-| `set/map`                        | ⌛️     | `set/setMapValues`                 | Renamed for clarity — Sets only have values, not keys                                    |
+| `set/map`                        | ✅     | `set/setMapValues`                 | Renamed for clarity — Sets only have values, not keys                                    |
 | `set/reduce`                     | ✅     | `iterable/reduce`                  | Generalized to any iterable; simple `(acc, value) => acc` callback                       |
 | `set/some`                       | ✅     | `iterable/some`                    | Generalized to any iterable; simple `(value) => boolean` callback                        |
 | `server/colors`                  | ✅     | `server/colors` *(same)*           | Only via the `/server` subpath; not exported from the main entry                         |
