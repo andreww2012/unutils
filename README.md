@@ -91,22 +91,22 @@
 | `function/ary`                   | ✅     | `function/withMaxArity`            | Renamed to spell out the operation (cap forwarded args at `n`); avoids the cryptic `ary` |
 | `function/asyncNoop`             | ✅     | `function/noopAsync`               | -                                                                                        |
 | `function/before`                | ✅     | `function/untilNthCall`            | Renamed to avoid the temporal-sounding `before`; ordinal semantics (calls 1..n-1 fire)   |
-| `function/curryRight`            | ⌛️     | `function/curryRight`              | -                                                                                        |
-| `function/curry`                 | ⌛️     | `function/curry`                   | -                                                                                        |
-| `function/debounce`              | ⌛️     | `function/debounce`                | -                                                                                        |
-| `function/flowRight`             | ⌛️     | `function/flowRight`               | -                                                                                        |
-| `function/flow`                  | ⌛️     | `function/flow`                    | -                                                                                        |
-| `function/identity`              | ⌛️     | `function/identity`                | -                                                                                        |
-| `function/memoize`               | ⌛️     | `function/memoize`                 | -                                                                                        |
-| `function/negate`                | ⌛️     | `function/negate`                  | -                                                                                        |
+| `function/curryRight`            | ✅     | `function/curry`                   | Pass `true` as second arg to collect arguments right-to-left                             |
+| `function/curry`                 | ✅     | `function/curry` *(same)*          | Consolidated with `curryRight`                                                           |
+| `function/debounce`              | ✅     | `function/debounce` *(same)*       | -                                                                                        |
+| `function/flowRight`             | ✅     | `function/flow`                    | Pass `true` as second arg to compose right-to-left                                       |
+| `function/flow`                  | ✅     | `function/flow` *(same)*           | Functions are passed as an array; consolidated with `flowRight`                          |
+| `function/identity`              | ✅     | `function/identity` *(same)*       | -                                                                                        |
+| `function/memoize`               | ✅     | `function/memoize` *(same)*        | -                                                                                        |
+| `function/negate`                | ✅     | `function/negate` *(same)*         | -                                                                                        |
 | `function/noop`                  | ✅     | `function/noop`                    | -                                                                                        |
-| `function/once`                  | ⌛️     | `function/once`                    | -                                                                                        |
-| `function/partialRight`          | ⌛️     | `function/partialRight`            | -                                                                                        |
-| `function/partial`               | ⌛️     | `function/partial`                 | -                                                                                        |
-| `function/rest`                  | ⌛️     | `function/rest`                    | -                                                                                        |
-| `function/retry`                 | ⌛️     | `function/retry`                   | -                                                                                        |
-| `function/spread`                | ⌛️     | `function/spread`                  | -                                                                                        |
-| `function/throttle`              | ⌛️     | `function/throttle`                | -                                                                                        |
+| `function/once`                  | ✅     | `function/once` *(same)*           | -                                                                                        |
+| `function/partialRight`          | ✅     | `function/partial`                 | Pass `true` as third arg to pre-apply trailing arguments                                 |
+| `function/partial`               | ✅     | `function/partial` *(same)*        | Args are passed as an array; consolidated with `partialRight`                            |
+| `function/rest`                  | ✅     | `function/rest` *(same)*           | -                                                                                        |
+| `function/retry`                 | ✅     | `function/retry` *(same)*          | -                                                                                        |
+| `function/spread`                | ✅     | `function/spread` *(same)*         | -                                                                                        |
+| `function/throttle`              | ✅     | `function/throttle` *(same)*       | -                                                                                        |
 | `function/unary`                 | ❌     | *(use `withMaxArity`)*             | Just `ary(fn, 1)` — call `withMaxArity(fn, 1)` instead                                   |
 | `map/countBy`                    | ✅     | `iterable/countBy`                 | -                                                                                        |
 | `map/every`                      | ⌛️     | `map/every`                        | -                                                                                        |
@@ -223,6 +223,6 @@
 | `string/upperFirst`              | ✅     | `string/upperFirst` *(same)*       | -                                                                                        |
 | `string/words`                   | ✅     | `string/toWords`                   | -                                                                                        |
 | `utility/assert`                 | ❌     | *(use `invariant`)*                | Alias of `invariant` in es-toolkit — use `misc/invariant`                                |
-| `utility/attempt`                | ⌛️     | `function/attempt`                 | -                                                                                        |
-| `utility/attemptAsync`           | ⌛️     | `function/attemptAsync`            | -                                                                                        |
+| `utility/attempt`                | ✅     | `function/attempt`                 | -                                                                                        |
+| `utility/attemptAsync`           | ✅     | `function/attemptAsync`            | -                                                                                        |
 | `utility/invariant`              | ✅     | `misc/invariant`                   | -                                                                                        |
