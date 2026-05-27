@@ -24,30 +24,31 @@
 | `array/chunk`                    | ✅     | `array/arrayChunks`               | -                                                                                      |
 | `array/combinations`             | ✅     | `array/arrayCombinations`         | -                                                                                      |
 | `array/compact`                  | ✅     | `array/arrayWithoutFalsy`         | -                                                                                      |
-| `array/difference`               | ✅     | `array/arrayDifference`           | Consolidated with `differenceBy`/`differenceWith`                                      |
+| `array/countBy`                  | ✅     | `iterable/countBy`                | -                                                                                      |
 | `array/differenceBy`             | ✅     | `array/arrayDifference`           | Pass a mapper `(value) => key` as third arg                                            |
 | `array/differenceWith`           | ✅     | `array/arrayDifference`           | Pass a comparator `(a, b) => boolean` as third arg                                     |
-| `array/drop`                     | ✅     | `array/arrayDrop`                 | Consolidated with `dropWhile`                                                          |
-| `array/dropRight`                | ✅     | `array/arrayDropRight`            | Consolidated with `dropRightWhile`                                                     |
+| `array/difference`               | ✅     | `array/arrayDifference`           | Consolidated with `differenceBy`/`differenceWith`                                      |
 | `array/dropRightWhile`           | ✅     | `array/arrayDropRight`            | Pass a predicate `(item) => boolean` as second arg                                     |
+| `array/dropRight`                | ✅     | `array/arrayDropRight`            | Consolidated with `dropRightWhile`                                                     |
 | `array/dropWhile`                | ✅     | `array/arrayDrop`                 | Pass a predicate `(item) => boolean` as second arg                                     |
+| `array/drop`                     | ✅     | `array/arrayDrop`                 | Consolidated with `dropWhile`                                                          |
 | `array/fill`                     | ✅     | `array/arrayFill`                 | Consolidated with `toFilled`                                                           |
 | `array/filterAsync`              | ✅     | `array/filterAsync` *(same)*      | -                                                                                      |
-| `array/flatMap`                  | ✅     | `array/flatMap` *(same)*          | Defaults to deep flattening; pass a finite `depth` as third arg for a specific level   |
 | `array/flatMapAsync`             | ✅     | `array/flatMapAsync` *(same)*     | -                                                                                      |
 | `array/flatMapDeep`              | ✅     | `array/flatMap`                   | Call without a `depth` argument (or with `Infinity`)                                   |
-| `array/flatten`                  | ✅     | `array/flatten` *(same)*          | Defaults to deep flattening; pass a finite `depth` as second arg for a specific level  |
+| `array/flatMap`                  | ✅     | `array/flatMap` *(same)*          | Defaults to deep flattening; pass a finite `depth` as third arg for a specific level   |
 | `array/flattenDeep`              | ✅     | `array/flatten`                   | Call without a `depth` argument (or with `Infinity`)                                   |
+| `array/flatten`                  | ✅     | `array/flatten` *(same)*          | Defaults to deep flattening; pass a finite `depth` as second arg for a specific level  |
 | `array/forEachAsync`             | ✅     | `array/forEachAsync` *(same)*     | -                                                                                      |
 | `array/forEachRight`             | ✅     | `array/forEachRight` *(same)*     | -                                                                                      |
 | `array/groupBy`                  | ❌     | *(native)*                        | Use the native `Object.groupBy` / `Map.groupBy`                                        |
 | `array/head`                     | ❌     | *(native)*                        | Use `array[0]` or `array.at(0)`                                                        |
 | `array/initial`                  | ❌     | *(native)*                        | Use `array.slice(0, -1)`                                                               |
-| `array/intersection`             | ✅     | `array/arrayIntersection`         | Consolidated with `intersectionBy`/`intersectionWith`                                  |
 | `array/intersectionBy`           | ✅     | `array/arrayIntersection`         | Pass a mapper `(value) => key` as third arg                                            |
 | `array/intersectionWith`         | ✅     | `array/arrayIntersection`         | Pass a comparator `(a, b) => boolean` as third arg                                     |
-| `array/isSubset`                 | ✅     | `array/arrayIsSubset`             | Consolidated with `isSubsetWith` and a custom mapper-based variant                     |
+| `array/intersection`             | ✅     | `array/arrayIntersection`         | Consolidated with `intersectionBy`/`intersectionWith`                                  |
 | `array/isSubsetWith`             | ✅     | `array/arrayIsSubset`             | Pass a comparator `(a, b) => boolean` as third arg                                     |
+| `array/isSubset`                 | ✅     | `array/arrayIsSubset`             | Consolidated with `isSubsetWith` and a custom mapper-based variant                     |
 | `array/keyBy`                    | ✅     | `iterable/keyedBy`                | -                                                                                      |
 | `array/last`                     | ❌     | *(native)*                        | Use `array.at(-1)`                                                                     |
 | `array/limitAsync`               | ✅     | `function/withConcurrencyLimit`   | -                                                                                      |
@@ -56,55 +57,75 @@
 | `array/minBy`                    | ✅     | `array/minBy` *(same)*            | -                                                                                      |
 | `array/orderBy`                  | ✅     | `array/orderBy` *(same)*          | -                                                                                      |
 | `array/partition`                | ✅     | `array/arrayPartition`            | -                                                                                      |
-| `array/pull`                     | ✅     | `array/arrayPurgeValues`          | Renamed for clarity — mutates the input, removing every occurrence of the given values |
 | `array/pullAt`                   | ✅     | `array/arrayPurgeIndexes`         | Renamed for clarity — mutates the input, removing elements at the given indices        |
+| `array/pull`                     | ✅     | `array/arrayPurgeValues`          | Renamed for clarity — mutates the input, removing every occurrence of the given values |
 | `array/reduceAsync`              | ✅     | `array/reduceAsync` *(same)*      | -                                                                                      |
 | `array/remove`                   | ✅     | `array/arrayPurgeBy`              | Renamed for clarity — mutates the input, removing elements matching the predicate      |
-| `array/sample`                   | ✅     | `array/arraySample`               | Consolidated with `sampleSize`                                                         |
 | `array/sampleSize`               | ✅     | `array/arraySample`               | Pass the desired sample size as second arg                                             |
+| `array/sample`                   | ✅     | `array/arraySample`               | Consolidated with `sampleSize`                                                         |
 | `array/shuffle`                  | ✅     | `array/arrayShuffle`              | -                                                                                      |
 | `array/sortBy`                   | ✅     | `array/sortBy` *(same)*           | -                                                                                      |
 | `array/tail`                     | ⌛     | TBD                               | -                                                                                      |
-| `array/take`                     | ❌     | *(native)*                        | Use `array.slice(0, n)`                                                                |
-| `array/takeRight`                | ❌     | *(native)*                        | Use `array.slice(-n)`                                                                  |
 | `array/takeRightWhile`           | ✅     | `array/arrayTakeWhile`            | Pass `true` as third arg to walk from the end                                          |
+| `array/takeRight`                | ❌     | *(native)*                        | Use `array.slice(-n)`                                                                  |
 | `array/takeWhile`                | ✅     | `array/arrayTakeWhile`            | Consolidated with `takeRightWhile`                                                     |
+| `array/take`                     | ❌     | *(native)*                        | Use `array.slice(0, n)`                                                                |
 | `array/toFilled`                 | ✅     | `array/arrayFill`                 | Pass `{copy: true}` as fifth arg                                                       |
-| `array/union`                    | ✅     | `array/arrayUnion`                | Consolidated with `unionBy`/`unionWith`                                                |
 | `array/unionBy`                  | ✅     | `array/arrayUnion`                | Pass a mapper `(value) => key` as third arg                                            |
 | `array/unionWith`                | ✅     | `array/arrayUnion`                | Pass a comparator `(a, b) => boolean` as third arg                                     |
-| `array/uniq`                     | ✅     | `array/arrayUnique`               | Consolidated with `uniqBy`/`uniqWith`                                                  |
+| `array/union`                    | ✅     | `array/arrayUnion`                | Consolidated with `unionBy`/`unionWith`                                                |
 | `array/uniqBy`                   | ✅     | `array/arrayUnique`               | Pass a mapper `(value) => key` as second arg                                           |
 | `array/uniqWith`                 | ✅     | `array/arrayUnique`               | Pass a comparator `(a, b) => boolean` as second arg                                    |
-| `array/unzip`                    | ✅     | `array/arrayTranspose`            | Renamed to match the math/CS term — same operation, broader recognition                |
+| `array/uniq`                     | ✅     | `array/arrayUnique`               | Consolidated with `uniqBy`/`uniqWith`                                                  |
 | `array/unzipWith`                | ✅     | `array/arrayTranspose`            | Pass an iteratee `(...column) => value` as second arg                                  |
+| `array/unzip`                    | ✅     | `array/arrayTranspose`            | Renamed to match the math/CS term — same operation, broader recognition                |
 | `array/windowed`                 | ✅     | `iterable/slidingWindow`          | Generalized to any iterable and returns a lazy generator; accepts the same options     |
 | `array/without`                  | ✅     | `array/arrayDifference`           | Pass the values to exclude as an array                                                 |
-| `array/xor`                      | ✅     | `array/arraySymmetricDifference`  | Consolidated with `xorBy`/`xorWith`; renamed to the set-theory term                    |
 | `array/xorBy`                    | ✅     | `array/arraySymmetricDifference`  | Pass a mapper `(value) => key` as third arg                                            |
 | `array/xorWith`                  | ✅     | `array/arraySymmetricDifference`  | Pass a comparator `(a, b) => boolean` as third arg                                     |
-| `array/zip`                      | ✅     | `array/arrayTranspose`            | Wrap the arguments in an array: `arrayTranspose([arr1, arr2, ...])` — same operation   |
+| `array/xor`                      | ✅     | `array/arraySymmetricDifference`  | Consolidated with `xorBy`/`xorWith`; renamed to the set-theory term                    |
 | `array/zipObject`                | ❌     | *(native)*                        | Use `Object.fromEntries(keys.map((key, index) => [key, values[index]]))`               |
 | `array/zipWith`                  | ✅     | `array/arrayTranspose`            | Wrap the arguments in an array; pass an iteratee `(...column) => value` as second arg  |
-| `array/countBy`                  | ✅     | `iterable/countBy`                | -                                                                                      |
+| `array/zip`                      | ✅     | `array/arrayTranspose`            | Wrap the arguments in an array: `arrayTranspose([arr1, arr2, ...])` — same operation   |
+| `function/after`                 | ⌛️     | `function/after`                  | -                                                                                      |
+| `function/ary`                   | ⌛️     | `function/ary`                    | -                                                                                      |
+| `function/asyncNoop`             | ⌛️     | `function/noopAsync`              | -                                                                                      |
+| `function/before`                | ⌛️     | `function/before`                 | -                                                                                      |
+| `function/curryRight`            | ⌛️     | `function/curryRight`             | -                                                                                      |
+| `function/curry`                 | ⌛️     | `function/curry`                  | -                                                                                      |
+| `function/debounce`              | ⌛️     | `function/debounce`               | -                                                                                      |
+| `function/flowRight`             | ⌛️     | `function/flowRight`              | -                                                                                      |
+| `function/flow`                  | ⌛️     | `function/flow`                   | -                                                                                      |
+| `function/identity`              | ⌛️     | `function/identity`               | -                                                                                      |
+| `function/memoize`               | ⌛️     | `function/memoize`                | -                                                                                      |
+| `function/negate`                | ⌛️     | `function/negate`                 | -                                                                                      |
+| `function/noop`                  | ⌛️     | `function/noop`                   | -                                                                                      |
+| `function/once`                  | ⌛️     | `function/once`                   | -                                                                                      |
+| `function/partialRight`          | ⌛️     | `function/partialRight`           | -                                                                                      |
+| `function/partial`               | ⌛️     | `function/partial`                | -                                                                                      |
+| `function/rest`                  | ⌛️     | `function/rest`                   | -                                                                                      |
+| `function/retry`                 | ⌛️     | `function/retry`                  | -                                                                                      |
+| `function/spread`                | ⌛️     | `function/spread`                 | -                                                                                      |
+| `function/throttle`              | ⌛️     | `function/throttle`               | -                                                                                      |
+| `function/unary`                 | ⌛️     | `function/unary`                  | -                                                                                      |
 | `map/countBy`                    | ✅     | `iterable/countBy`                | -                                                                                      |
-| `set/countBy`                    | ✅     | `iterable/countBy`                | -                                                                                      |
 | `map/keyBy`                      | ✅     | `iterable/keyedBy`                | -                                                                                      |
-| `set/keyBy`                      | ✅     | `iterable/keyedBy`                | -                                                                                      |
 | `math/clamp`                     | ✅     | `math/clamp` *(same)*             | -                                                                                      |
 | `math/inRange`                   | ✅     | `math/isInRange`                  | Renamed for clarity — same exclusive-upper-bound semantics                             |
-| `math/mean`                      | ✅     | `math/mean` *(same)*              | Consolidated with `meanBy`                                                             |
 | `math/meanBy`                    | ✅     | `math/mean`                       | Pass a selector `(item) => number` as second arg                                       |
-| `math/median`                    | ✅     | `math/median` *(same)*            | Consolidated with `medianBy`                                                           |
+| `math/mean`                      | ✅     | `math/mean` *(same)*              | Consolidated with `meanBy`                                                             |
 | `math/medianBy`                  | ✅     | `math/median`                     | Pass a selector `(item) => number` as second arg                                       |
+| `math/median`                    | ✅     | `math/median` *(same)*            | Consolidated with `medianBy`                                                           |
 | `math/percentile`                | ✅     | `math/percentile` *(same)*        | -                                                                                      |
-| `math/random`                    | ✅     | `math/random` *(same)*            | -                                                                                      |
 | `math/randomInt`                 | ✅     | `math/randomInt` *(same)*         | -                                                                                      |
-| `math/range`                     | ✅     | `math/range` *(same)*             | -                                                                                      |
+| `math/random`                    | ✅     | `math/random` *(same)*            | -                                                                                      |
 | `math/rangeRight`                | ✅     | `math/rangeRight` *(same)*        | -                                                                                      |
+| `math/range`                     | ✅     | `math/range` *(same)*             | -                                                                                      |
 | `math/round`                     | ✅     | `math/round` *(same)*             | -                                                                                      |
-| `math/sum`                       | ✅     | `math/sum` *(same)*               | Consolidated with `sumBy`                                                              |
 | `math/sumBy`                     | ✅     | `math/sum`                        | Pass a selector `(item, index) => number` as second arg                                |
-| `object/clone`                   | ✅     | `value/cloneShallow`              | Renamed for clarity — it shallow-clones any value, not only objects                    |
-| `object/cloneDeep`               | ✅     | `value/cloneDeep`                 | Consolidated with `cloneDeepWith`                                                      |
+| `math/sum`                       | ✅     | `math/sum` *(same)*               | Consolidated with `sumBy`                                                              |
 | `object/cloneDeepWith`           | ✅     | `value/cloneDeep`                 | Pass a customizer `(value, key, root, stack) => unknown` as second arg                 |
+| `object/cloneDeep`               | ✅     | `value/cloneDeep`                 | Consolidated with `cloneDeepWith`                                                      |
+| `object/clone`                   | ✅     | `value/cloneShallow`              | Renamed for clarity — it shallow-clones any value, not only objects                    |
+| `set/countBy`                    | ✅     | `iterable/countBy`                | -                                                                                      |
+| `set/keyBy`                      | ✅     | `iterable/keyedBy`                | -                                                                                      |
