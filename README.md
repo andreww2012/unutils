@@ -114,17 +114,17 @@
 | `function/throttle`              | ✅     | `function/throttle` *(same)*       | -                                                                                        |
 | `function/unary`                 | ❌     | *(use `withMaxArity`)*             | Just `ary(fn, 1)` — call `withMaxArity(fn, 1)` instead                                   |
 | `map/countBy`                    | ✅     | `iterable/countBy`                 | -                                                                                        |
-| `map/every`                      | ⌛️     | `map/every`                        | -                                                                                        |
-| `map/filter`                     | ⌛️     | `map/filter`                       | -                                                                                        |
-| `map/findKey`                    | ⌛️     | `map/findKey`                      | -                                                                                        |
-| `map/findValue`                  | ⌛️     | `map/findValue`                    | -                                                                                        |
-| `map/forEach`                    | ⌛️     | `map/forEach`                      | -                                                                                        |
-| `map/hasValue`                   | ⌛️     | `map/hasValue`                     | -                                                                                        |
+| `map/every`                      | ✅     | `map/mapEvery`                     | Renamed for `map`-prefix consistency                                                     |
+| `map/filter`                     | ✅     | `map/mapFilter`                    | Renamed for `map`-prefix consistency                                                     |
+| `map/findKey`                    | ✅     | `map/mapFindKey`                   | Renamed for `map`-prefix consistency                                                     |
+| `map/findValue`                  | ✅     | `map/mapFindValue`                 | Renamed for `map`-prefix consistency                                                     |
+| `map/forEach`                    | ✅     | `map/mapForEach`                   | Renamed for `map`-prefix consistency                                                     |
+| `map/hasValue`                   | ✅     | `map/mapHasValue`                  | Renamed for `map`-prefix consistency                                                     |
 | `map/keyBy`                      | ✅     | `iterable/keyedBy`                 | -                                                                                        |
-| `map/mapKeys`                    | ⌛️     | `map/mapKeys`                      | -                                                                                        |
-| `map/mapValues`                  | ⌛️     | `map/mapValues`                    | -                                                                                        |
-| `map/reduce`                     | ⌛️     | `map/reduce`                       | -                                                                                        |
-| `map/some`                       | ⌛️     | `map/some`                         | -                                                                                        |
+| `map/mapKeys`                    | ✅     | `map/mapMapKeys`                   | Renamed for `map`-prefix consistency — `mapKeys` is reserved for the object utility      |
+| `map/mapValues`                  | ✅     | `map/mapMapValues`                 | Renamed for `map`-prefix consistency — `mapValues` is reserved for the object utility    |
+| `map/reduce`                     | ✅     | `map/mapReduce`                    | Renamed for `map`-prefix consistency                                                     |
+| `map/some`                       | ✅     | `map/mapSome`                      | Renamed for `map`-prefix consistency                                                     |
 | `math/clamp`                     | ✅     | `math/clamp` *(same)*              | -                                                                                        |
 | `math/inRange`                   | ✅     | `math/isInRange`                   | Renamed for clarity — same exclusive-upper-bound semantics                               |
 | `math/meanBy`                    | ✅     | `math/mean`                        | Pass a selector `(item) => number` as second arg                                         |
