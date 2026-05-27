@@ -109,7 +109,17 @@
 | `function/throttle`              | ⌛️     | `function/throttle`               | -                                                                                      |
 | `function/unary`                 | ⌛️     | `function/unary`                  | -                                                                                      |
 | `map/countBy`                    | ✅     | `iterable/countBy`                | -                                                                                      |
+| `map/every`                      | ⌛️     | `map/every`                       | -                                                                                      |
+| `map/filter`                     | ⌛️     | `map/filter`                      | -                                                                                      |
+| `map/findKey`                    | ⌛️     | `map/findKey`                     | -                                                                                      |
+| `map/findValue`                  | ⌛️     | `map/findValue`                   | -                                                                                      |
+| `map/forEach`                    | ⌛️     | `map/forEach`                     | -                                                                                      |
+| `map/hasValue`                   | ⌛️     | `map/hasValue`                    | -                                                                                      |
 | `map/keyBy`                      | ✅     | `iterable/keyedBy`                | -                                                                                      |
+| `map/mapKeys`                    | ⌛️     | `map/mapKeys`                     | -                                                                                      |
+| `map/mapValues`                  | ⌛️     | `map/mapValues`                   | -                                                                                      |
+| `map/reduce`                     | ⌛️     | `map/reduce`                      | -                                                                                      |
+| `map/some`                       | ⌛️     | `map/some`                        | -                                                                                      |
 | `math/clamp`                     | ✅     | `math/clamp` *(same)*             | -                                                                                      |
 | `math/inRange`                   | ✅     | `math/isInRange`                  | Renamed for clarity — same exclusive-upper-bound semantics                             |
 | `math/meanBy`                    | ✅     | `math/mean`                       | Pass a selector `(item) => number` as second arg                                       |
@@ -128,4 +138,11 @@
 | `object/cloneDeep`               | ✅     | `value/cloneDeep`                 | Consolidated with `cloneDeepWith`                                                      |
 | `object/clone`                   | ✅     | `value/cloneShallow`              | Renamed for clarity — it shallow-clones any value, not only objects                    |
 | `set/countBy`                    | ✅     | `iterable/countBy`                | -                                                                                      |
+| `set/every`                      | ⌛️     | `set/every`                       | -                                                                                      |
+| `set/filter`                     | ⌛️     | `set/filter`                      | -                                                                                      |
+| `set/find`                       | ⌛️     | `set/find`                        | -                                                                                      |
+| `set/forEach`                    | ⌛️     | `set/forEach`                     | -                                                                                      |
 | `set/keyBy`                      | ✅     | `iterable/keyedBy`                | -                                                                                      |
+| `set/map`                        | ⌛️     | `set/mapKeys`                     | -                                                                                      |
+| `set/reduce`                     | ⌛️     | `set/reduce`                      | -                                                                                      |
+| `set/some`                       | ⌛️     | `set/some`                        | -                                                                                      |
