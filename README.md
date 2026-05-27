@@ -99,7 +99,7 @@
 | `function/identity`              | ⌛️     | `function/identity`                | -                                                                                        |
 | `function/memoize`               | ⌛️     | `function/memoize`                 | -                                                                                        |
 | `function/negate`                | ⌛️     | `function/negate`                  | -                                                                                        |
-| `function/noop`                  | ⌛️     | `function/noop`                    | -                                                                                        |
+| `function/noop`                  | ✅     | `function/noop`                    | -                                                                                        |
 | `function/once`                  | ⌛️     | `function/once`                    | -                                                                                        |
 | `function/partialRight`          | ⌛️     | `function/partialRight`            | -                                                                                        |
 | `function/partial`               | ⌛️     | `function/partial`                 | -                                                                                        |
