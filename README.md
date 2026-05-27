@@ -88,7 +88,7 @@
 | `array/zipWith`                  | ✅     | `array/arrayTranspose`            | Wrap the arguments in an array; pass an iteratee `(...column) => value` as second arg    |
 | `array/zip`                      | ✅     | `array/arrayTranspose`            | Wrap the arguments in an array: `arrayTranspose([arr1, arr2, ...])` — same operation     |
 | `function/after`                 | ✅     | `function/fromNthCall`            | Renamed to avoid the temporal-sounding `after`; ordinal semantics (calls 1..n-1 skipped) |
-| `function/ary`                   | ⌛️     | `function/ary`                    | -                                                                                        |
+| `function/ary`                   | ✅     | `function/withMaxArity`           | Renamed to spell out the operation (cap forwarded args at `n`); avoids the cryptic `ary` |
 | `function/asyncNoop`             | ⌛️     | `function/noopAsync`              | -                                                                                        |
 | `function/before`                | ✅     | `function/untilNthCall`           | Renamed to avoid the temporal-sounding `before`; ordinal semantics (calls 1..n-1 fire)   |
 | `function/curryRight`            | ⌛️     | `function/curryRight`             | -                                                                                        |
@@ -107,7 +107,7 @@
 | `function/retry`                 | ⌛️     | `function/retry`                  | -                                                                                        |
 | `function/spread`                | ⌛️     | `function/spread`                 | -                                                                                        |
 | `function/throttle`              | ⌛️     | `function/throttle`               | -                                                                                        |
-| `function/unary`                 | ⌛️     | `function/unary`                  | -                                                                                        |
+| `function/unary`                 | ❌     | *(use `withMaxArity`)*            | Just `ary(fn, 1)` — call `withMaxArity(fn, 1)` instead                                   |
 | `map/countBy`                    | ✅     | `iterable/countBy`                | -                                                                                        |
 | `map/every`                      | ⌛️     | `map/every`                       | -                                                                                        |
 | `map/filter`                     | ⌛️     | `map/filter`                      | -                                                                                        |
