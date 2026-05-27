@@ -37,6 +37,10 @@
     "./iterable": {
       "types": "./dist/iterable/index.d.mts",
       "default": "./dist/iterable/index.mjs"
+    },
+    "./math": {
+      "types": "./dist/math/index.d.mts",
+      "default": "./dist/math/index.mjs"
     }
   },
   "main": "./dist/index.mjs",

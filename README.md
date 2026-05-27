@@ -91,3 +91,17 @@
 | `set/countBy`                    | ✅     | `iterable/countBy`                | -                                                                                      |
 | `map/keyBy`                      | ✅     | `iterable/keyedBy`                | -                                                                                      |
 | `set/keyBy`                      | ✅     | `iterable/keyedBy`                | -                                                                                      |
+| `math/clamp`                     | ✅     | `math/clamp` *(same)*             | -                                                                                      |
+| `math/inRange`                   | ✅     | `math/isInRange`                  | Renamed for clarity — same exclusive-upper-bound semantics                             |
+| `math/mean`                      | ✅     | `math/mean` *(same)*              | Consolidated with `meanBy`                                                             |
+| `math/meanBy`                    | ✅     | `math/mean`                       | Pass a selector `(item) => number` as second arg                                       |
+| `math/median`                    | ✅     | `math/median` *(same)*            | Consolidated with `medianBy`                                                           |
+| `math/medianBy`                  | ✅     | `math/median`                     | Pass a selector `(item) => number` as second arg                                       |
+| `math/percentile`                | ✅     | `math/percentile` *(same)*        | -                                                                                      |
+| `math/random`                    | ✅     | `math/random` *(same)*            | -                                                                                      |
+| `math/randomInt`                 | ✅     | `math/randomInt` *(same)*         | -                                                                                      |
+| `math/range`                     | ✅     | `math/range` *(same)*             | -                                                                                      |
+| `math/rangeRight`                | ✅     | `math/rangeRight` *(same)*        | -                                                                                      |
+| `math/round`                     | ✅     | `math/round` *(same)*             | -                                                                                      |
+| `math/sum`                       | ✅     | `math/sum` *(same)*               | Consolidated with `sumBy`                                                              |
+| `math/sumBy`                     | ✅     | `math/sum`                        | Pass a selector `(item, index) => number` as second arg                                |
