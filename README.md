@@ -134,6 +134,40 @@
 | `math/round`                     | ✅     | `math/round` *(same)*             | -                                                                                      |
 | `math/sumBy`                     | ✅     | `math/sum`                        | Pass a selector `(item, index) => number` as second arg                                |
 | `math/sum`                       | ✅     | `math/sum` *(same)*               | Consolidated with `sumBy`                                                              |
+| `predicate/isArrayBuffer`        | ❌     | *(native)*                        | Use `x instanceof ArrayBuffer`                                                         |
+| `predicate/isBlob`               | ⌛️     | `predicates/isBlob`               | -                                                                                      |
+| `predicate/isBoolean`            | ❌     | *(native)*                        | Use `typeof x === 'boolean'`                                                           |
+| `predicate/isBrowser`            | ⌛️     | `predicates/isBrowser`            | -                                                                                      |
+| `predicate/isBuffer`             | ⌛️     | `predicates/isBuffer`             | -                                                                                      |
+| `predicate/isDate`               | ❌     | *(native)*                        | Use `x instanceof Date`                                                                |
+| `predicate/isEmptyObject`        | ⌛️     | `predicates/isEmptyObject`        | -                                                                                      |
+| `predicate/isEqual`              | ⌛️     | `predicates/isEqual`              | -                                                                                      |
+| `predicate/isEqualWith`          | ⌛️     | `predicates/isEqualWith`          | -                                                                                      |
+| `predicate/isError`              | ❌     | *(native)*                        | Use `Error.isError(x)` or `x instanceof Error`                                         |
+| `predicate/isFile`               | ⌛️     | `predicates/isFile`               | -                                                                                      |
+| `predicate/isFunction`           | ❌     | *(native)*                        | Use `typeof x === 'function'`                                                          |
+| `predicate/isJSON`               | ⌛️     | `predicates/isJSON`               | -                                                                                      |
+| `predicate/isJSONValue`          | ⌛️     | `predicates/isJSONValue`          | -                                                                                      |
+| `predicate/isJSONArray`          | ⌛️     | `predicates/isJSONArray`          | -                                                                                      |
+| `predicate/isJSONObject`         | ⌛️     | `predicates/isJSONObject`         | -                                                                                      |
+| `predicate/isLength`             | ⌛️     | `predicates/isLength`             | -                                                                                      |
+| `predicate/isMap`                | ❌     | *(native)*                        | Use `x instanceof Map`                                                                 |
+| `predicate/isNil`                | ❌     | *(native)*                        | Use `x == null`                                                                        |
+| `predicate/isNode`               | ⌛️     | `predicates/isNode`               | -                                                                                      |
+| `predicate/isNotNil`             | ❌     | *(native)*                        | Use `x != null`                                                                        |
+| `predicate/isNull`               | ❌     | *(native)*                        | Use `x === null`                                                                       |
+| `predicate/isNumber`             | ❌     | *(native)*                        | Use `typeof x === 'number'`                                                            |
+| `predicate/isPlainObject`        | ⌛️     | `predicates/isPlainObject`        | -                                                                                      |
+| `predicate/isPrimitive`          | ⌛️     | `predicates/isPrimitive`          | -                                                                                      |
+| `predicate/isPromise`            | ❌     | *(native)*                        | Use `x instanceof Promise`                                                             |
+| `predicate/isRegExp`             | ❌     | *(native)*                        | Use `x instanceof RegExp`                                                              |
+| `predicate/isSet`                | ❌     | *(native)*                        | Use `x instanceof Set`                                                                 |
+| `predicate/isString`             | ❌     | *(native)*                        | Use `typeof x === 'string'`                                                            |
+| `predicate/isSymbol`             | ❌     | *(native)*                        | Use `typeof x === 'symbol'`                                                            |
+| `predicate/isTypedArray`         | ⌛️     | `predicates/isTypedArray`         | -                                                                                      |
+| `predicate/isUndefined`          | ❌     | *(native)*                        | Use `typeof x === 'undefined'` or `x === undefined`                                    |
+| `predicate/isWeakMap`            | ❌     | *(native)*                        | Use `x instanceof WeakMap`                                                             |
+| `predicate/isWeakSet`            | ❌     | *(native)*                        | Use `x instanceof WeakSet`                                                             |
 | `object/cloneDeepWith`           | ✅     | `value/cloneDeep`                 | Pass a customizer `(value, key, root, stack) => unknown` as second arg                 |
 | `object/cloneDeep`               | ✅     | `value/cloneDeep`                 | Consolidated with `cloneDeepWith`                                                      |
 | `object/clone`                   | ✅     | `value/cloneShallow`              | Renamed for clarity — it shallow-clones any value, not only objects                    |
