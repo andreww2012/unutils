@@ -54,6 +54,10 @@
       "types": "./dist/runtime/index.d.mts",
       "default": "./dist/runtime/index.mjs"
     },
+    "./server": {
+      "types": "./dist/server/index.d.mts",
+      "default": "./dist/server/index.mjs"
+    },
     "./string": {
       "types": "./dist/string/index.d.mts",
       "default": "./dist/string/index.mjs"

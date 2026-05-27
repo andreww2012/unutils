@@ -206,6 +206,8 @@
 | `set/map`                        | ⌛️     | `set/setMapValues`                 | Renamed for clarity — Sets only have values, not keys                                    |
 | `set/reduce`                     | ✅     | `iterable/reduce`                  | Generalized to any iterable; simple `(acc, value) => acc` callback                       |
 | `set/some`                       | ✅     | `iterable/some`                    | Generalized to any iterable; simple `(value) => boolean` callback                        |
+| `server/colors`                  | ✅     | `server/colors` *(same)*           | Only via the `/server` subpath; not exported from the main entry                         |
+| `server/exec`                    | ✅     | `server/exec` *(same)*             | Only via the `/server` subpath; not exported from the main entry                         |
 | `string/camelCase`               | ✅     | `string/toCamelCase`               | -                                                                                        |
 | `string/capitalize`              | ✅     | `string/capitalize` *(same)*       | -                                                                                        |
 | `string/constantCase`            | ✅     | `string/toConstantCase`            | -                                                                                        |
