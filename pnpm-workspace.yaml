@@ -3,6 +3,7 @@ saveExact: true
 minimumReleaseAge: 960 # 16 hours in minutes
 minimumReleaseAgeExclude:
   - es-toolkit@1.47.0
+  - eslint-config-un@1.0.0-beta.12
 
 trustPolicy: no-downgrade
 trustPolicyIgnoreAfter: 43200 # 30 days in minutes

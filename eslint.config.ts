@@ -7,6 +7,9 @@ export default eslintConfig({
       allowDefaultProject: ['*.config.*ts'],
     },
 
+    // Not working with ESLint 10:
+    arrowReturnStyle: false,
+
     // False positives:
     zod: false,
   },
