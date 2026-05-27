@@ -75,8 +75,8 @@
 | `array/uniq`                     | ✅     | `array/arrayUnique`               | Consolidated with `uniqBy`/`uniqWith`                                                  |
 | `array/uniqBy`                   | ✅     | `array/arrayUnique`               | Pass a mapper `(value) => key` as second arg                                           |
 | `array/uniqWith`                 | ✅     | `array/arrayUnique`               | Pass a comparator `(a, b) => boolean` as second arg                                    |
-| `array/unzip`                    | ⌛     | TBD                               | -                                                                                      |
-| `array/unzipWith`                | ⌛     | TBD                               | -                                                                                      |
+| `array/unzip`                    | ✅     | `array/arrayTranspose`            | Renamed to match the math/CS term — same operation, broader recognition                |
+| `array/unzipWith`                | ✅     | `array/arrayTranspose`            | Pass an iteratee `(...column) => value` as second arg                                  |
 | `array/windowed`                 | ⌛     | TBD                               | -                                                                                      |
 | `array/without`                  | ⌛     | TBD                               | -                                                                                      |
 | `array/xor`                      | ⌛     | TBD                               | -                                                                                      |

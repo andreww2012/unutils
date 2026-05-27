@@ -24,6 +24,7 @@ export {orderBy} from './order-by.ts';
 export {reduceAsync} from './reduce-async.ts';
 export {sortBy} from './sort-by.ts';
 export {arrayTakeWhile} from './array-take-while.ts';
+export {arrayTranspose} from './array-transpose.ts';
 export {arrayUnion} from './array-union.ts';
 export {arrayUnique} from './array-unique.ts';
 export {arraySample} from './array-sample.ts';
