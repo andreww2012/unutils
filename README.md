@@ -222,7 +222,7 @@
 | `string/upperCase`               | ✅     | `string/toUpperCase`               | -                                                                                        |
 | `string/upperFirst`              | ✅     | `string/upperFirst` *(same)*       | -                                                                                        |
 | `string/words`                   | ✅     | `string/toWords`                   | -                                                                                        |
-| `utility/assert`                 | ⌛️     | `misc/assert`                      | -                                                                                        |
-| `utility/attempt`                | ⌛️     | `function/attempt` (?)             | -                                                                                        |
-| `utility/attemptAsync`           | ⌛️     | `function/attemptAsync` (?)        | -                                                                                        |
-| `utility/invariant`              | ⌛️     | `misc/invariant`                   | -                                                                                        |
+| `utility/assert`                 | ❌     | *(use `invariant`)*                | Alias of `invariant` in es-toolkit — use `misc/invariant`                                |
+| `utility/attempt`                | ⌛️     | `function/attempt`                 | -                                                                                        |
+| `utility/attemptAsync`           | ⌛️     | `function/attemptAsync`            | -                                                                                        |
+| `utility/invariant`              | ✅     | `misc/invariant`                   | -                                                                                        |
