@@ -13,6 +13,7 @@
 | --------------------------- | ----- |
 | `iterable/countBy`          | -     |
 | `iterable/keyedBy`          | -     |
+| `iterable/slidingWindow`    | -     |
 
 ## `es-toolkit`
 
@@ -77,7 +78,7 @@
 | `array/uniqWith`                 | ✅     | `array/arrayUnique`               | Pass a comparator `(a, b) => boolean` as second arg                                    |
 | `array/unzip`                    | ✅     | `array/arrayTranspose`            | Renamed to match the math/CS term — same operation, broader recognition                |
 | `array/unzipWith`                | ✅     | `array/arrayTranspose`            | Pass an iteratee `(...column) => value` as second arg                                  |
-| `array/windowed`                 | ⌛     | TBD                               | -                                                                                      |
+| `array/windowed`                 | ✅     | `iterable/slidingWindow`          | Generalized to any iterable and returns a lazy generator; accepts the same options     |
 | `array/without`                  | ✅     | `array/arrayDifference`           | Pass the values to exclude as an array                                                 |
 | `array/xor`                      | ⌛     | TBD                               | -                                                                                      |
 | `array/xorBy`                    | ⌛     | TBD                               | -                                                                                      |
