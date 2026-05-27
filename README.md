@@ -201,3 +201,24 @@
 | `set/map`                        | ⌛️     | `set/mapKeys`                     | -                                                                                        |
 | `set/reduce`                     | ⌛️     | `set/reduce`                      | -                                                                                        |
 | `set/some`                       | ⌛️     | `set/some`                        | -                                                                                        |
+| `string/camelCase`               | ⌛️     | `string/toCamelCase`              | -                                                                                        |
+| `string/capitalize`              | ⌛️     | TBD                               | -                                                                                        |
+| `string/constantCase`            | ⌛️     | `string/toConstantCase`           | -                                                                                        |
+| `string/deburr`                  | ⌛️     | TBD                               | -                                                                                        |
+| `string/escape`                  | ⌛️     | TBD                               | -                                                                                        |
+| `string/escapeRegExp`            | ⌛️     | TBD                               | -                                                                                        |
+| `string/kebabCase`               | ⌛️     | `string/toKebabCase`              | -                                                                                        |
+| `string/lowerCase`               | ⌛️     | `string/toLowerCase`              | -                                                                                        |
+| `string/lowerFirst`              | ⌛️     | TBD                               | -                                                                                        |
+| `string/pad`                     | ⌛️     | TBD                               | -                                                                                        |
+| `string/pascalCase`              | ⌛️     | `string/toPascalCase`             | -                                                                                        |
+| `string/reverseString`           | ⌛️     | TBD                               | -                                                                                        |
+| `string/snakeCase`               | ⌛️     | `string/toSnakeCase`              | -                                                                                        |
+| `string/startCase`               | ⌛️     | `string/toStartCase`              | -                                                                                        |
+| `string/trim`                    | ❌     | *(native)*                        | Use `string.trim()`                                                                      |
+| `string/trimEnd`                 | ❌     | *(native)*                        | Use `string.trimEnd()`                                                                   |
+| `string/trimStart`               | ❌     | *(native)*                        | Use `string.trimStart()`                                                                 |
+| `string/unescape`                | ⌛️     | TBD                               | -                                                                                        |
+| `string/upperCase`               | ⌛️     | `string/toUpperCase`              | -                                                                                        |
+| `string/upperFirst`              | ⌛️     | TBD                               | -                                                                                        |
+| `string/words`                   | ⌛️     | TBD                               | -                                                                                        |

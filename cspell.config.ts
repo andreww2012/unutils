@@ -3,7 +3,7 @@ import type {CSpellSettings} from 'cspell';
 const GLOBALLY_IGNORED_WORDS = {
   names: ['unutils'],
   misc: ['knipignore'],
-  englishIshWords: ['customizer'],
+  englishIshWords: ['customizer', 'deburr'],
 } satisfies Record<string, string[]>;
 
 export default {
