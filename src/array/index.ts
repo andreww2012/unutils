@@ -23,6 +23,7 @@ export {minBy} from './min-by.ts';
 export {orderBy} from './order-by.ts';
 export {reduceAsync} from './reduce-async.ts';
 export {sortBy} from './sort-by.ts';
+export {arraySymmetricDifference} from './array-symmetric-difference.ts';
 export {arrayTakeWhile} from './array-take-while.ts';
 export {arrayTranspose} from './array-transpose.ts';
 export {arrayUnion} from './array-union.ts';

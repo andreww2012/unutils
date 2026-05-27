@@ -80,9 +80,9 @@
 | `array/unzipWith`                | ✅     | `array/arrayTranspose`            | Pass an iteratee `(...column) => value` as second arg                                  |
 | `array/windowed`                 | ✅     | `iterable/slidingWindow`          | Generalized to any iterable and returns a lazy generator; accepts the same options     |
 | `array/without`                  | ✅     | `array/arrayDifference`           | Pass the values to exclude as an array                                                 |
-| `array/xor`                      | ⌛     | TBD                               | -                                                                                      |
-| `array/xorBy`                    | ⌛     | TBD                               | -                                                                                      |
-| `array/xorBy`                    | ⌛     | TBD                               | -                                                                                      |
+| `array/xor`                      | ✅     | `array/arraySymmetricDifference`  | Consolidated with `xorBy`/`xorWith`; renamed to the set-theory term                    |
+| `array/xorBy`                    | ✅     | `array/arraySymmetricDifference`  | Pass a mapper `(value) => key` as third arg                                            |
+| `array/xorWith`                  | ✅     | `array/arraySymmetricDifference`  | Pass a comparator `(a, b) => boolean` as third arg                                     |
 | `array/zip`                      | ✅     | `array/arrayTranspose`            | Wrap the arguments in an array: `arrayTranspose([arr1, arr2, ...])` — same operation   |
 | `array/zipObject`                | ❌     | *(native)*                        | Use `Object.fromEntries(keys.map((key, index) => [key, values[index]]))`               |
 | `array/zipWith`                  | ✅     | `array/arrayTranspose`            | Wrap the arguments in an array; pass an iteratee `(...column) => value` as second arg  |
