@@ -137,6 +137,21 @@
 | `object/cloneDeepWith`           | ✅     | `value/cloneDeep`                 | Pass a customizer `(value, key, root, stack) => unknown` as second arg                 |
 | `object/cloneDeep`               | ✅     | `value/cloneDeep`                 | Consolidated with `cloneDeepWith`                                                      |
 | `object/clone`                   | ✅     | `value/cloneShallow`              | Renamed for clarity — it shallow-clones any value, not only objects                    |
+| `object/findKey`                 | ⌛️     | `object/findKey`                  | -                                                                                      |
+| `object/flattenObject`           | ⌛️     | `object/flattenObject`            | -                                                                                      |
+| `object/invert`                  | ⌛️     | `object/invert`                   | -                                                                                      |
+| `object/mapKeys`                 | ⌛️     | `object/mapKeys`                  | -                                                                                      |
+| `object/mapValues`               | ⌛️     | `object/mapValues`                | -                                                                                      |
+| `object/merge`                   | ⌛️     | `object/merge`                    | -                                                                                      |
+| `object/mergeWith`               | ⌛️     | `object/mergeWith`                | -                                                                                      |
+| `object/omit`                    | ⌛️     | `object/omit`                     | -                                                                                      |
+| `object/omitBy`                  | ⌛️     | `object/omitBy`                   | -                                                                                      |
+| `object/pick`                    | ⌛️     | `object/pick`                     | -                                                                                      |
+| `object/pickBy`                  | ⌛️     | `object/pickBy`                   | -                                                                                      |
+| `object/sortKeys`                | ⌛️     | `object/sortKeys`                 | -                                                                                      |
+| `object/toCamelCaseKeys`         | ⌛️     | `object/toCamelCaseKeys`          | -                                                                                      |
+| `object/toMerged`                | ⌛️     | `object/toMerged`                 | -                                                                                      |
+| `object/toSnakeCaseKeys`         | ⌛️     | `object/toSnakeCaseKeys`          | -                                                                                      |
 | `set/countBy`                    | ✅     | `iterable/countBy`                | -                                                                                      |
 | `set/every`                      | ⌛️     | `set/every`                       | -                                                                                      |
 | `set/filter`                     | ⌛️     | `set/filter`                      | -                                                                                      |
