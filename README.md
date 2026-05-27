@@ -69,9 +69,9 @@
 | `array/takeRightWhile`           | ✅     | `array/arrayTakeWhile`            | Pass `true` as third arg to walk from the end                                          |
 | `array/takeWhile`                | ✅     | `array/arrayTakeWhile`            | Consolidated with `takeRightWhile`                                                     |
 | `array/toFilled`                 | ✅     | `array/arrayFill`                 | Pass `{copy: true}` as fifth arg                                                       |
-| `array/union`                    | ⌛     | TBD                               | -                                                                                      |
-| `array/unionBy`                  | ⌛     | TBD                               | -                                                                                      |
-| `array/unionWith`                | ⌛     | TBD                               | -                                                                                      |
+| `array/union`                    | ✅     | `array/arrayUnion`                | Consolidated with `unionBy`/`unionWith`                                                |
+| `array/unionBy`                  | ✅     | `array/arrayUnion`                | Pass a mapper `(value) => key` as third arg                                            |
+| `array/unionWith`                | ✅     | `array/arrayUnion`                | Pass a comparator `(a, b) => boolean` as third arg                                     |
 | `array/uniq`                     | ❌     | *(native)*                        | Use `Array.from(new Set(array))`                                                       |
 | `array/uniqBy`                   | ⌛     | TBD                               | -                                                                                      |
 | `array/uniqWith`                 | ⌛     | TBD                               | -                                                                                      |
