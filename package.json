@@ -30,6 +30,10 @@
       "types": "./dist/array/index.d.mts",
       "default": "./dist/array/index.mjs"
     },
+    "./async": {
+      "types": "./dist/async/index.d.mts",
+      "default": "./dist/async/index.mjs"
+    },
     "./function": {
       "types": "./dist/function/index.d.mts",
       "default": "./dist/function/index.mjs"

@@ -56,7 +56,7 @@
 | `array/isSubset`                 | ✅     | `array/arrayIsSubset`              | Consolidated with `isSubsetWith` and a custom mapper-based variant                       |
 | `array/keyBy`                    | ✅     | `iterable/keyedBy`                 | -                                                                                        |
 | `array/last`                     | ❌     | *(native)*                         | Use `array.at(-1)`                                                                       |
-| `array/limitAsync`               | ✅     | `function/withConcurrencyLimit`    | -                                                                                        |
+| `array/limitAsync`               | ✅     | `async/withConcurrencyLimit`       | -                                                                                        |
 | `array/mapAsync`                 | ✅     | `array/mapAsync` *(same)*          | -                                                                                        |
 | `array/maxBy`                    | ✅     | `array/maxBy` *(same)*             | -                                                                                        |
 | `array/minBy`                    | ✅     | `array/minBy` *(same)*             | -                                                                                        |
@@ -173,12 +173,12 @@
 | `predicate/isUndefined`          | ❌     | *(native)*                         | Use `typeof x === 'undefined'` or `x === undefined`                                      |
 | `predicate/isWeakMap`            | ❌     | *(native)*                         | Use `x instanceof WeakMap`                                                               |
 | `predicate/isWeakSet`            | ❌     | *(native)*                         | Use `x instanceof WeakSet`                                                               |
-| `promise/allKeyed`               | ⌛️     | ?                                  | -                                                                                        |
-| `promise/delay`                  | ⌛️     | ?                                  | -                                                                                        |
-| `promise/Muted`                  | ⌛️     | ?                                  | -                                                                                        |
-| `promise/Semaphore`              | ⌛️     | ?                                  | -                                                                                        |
-| `promise/timeout`                | ⌛️     | ?                                  | -                                                                                        |
-| `promise/withTimeout`            | ⌛️     | ?                                  | -                                                                                        |
+| `promise/allKeyed`               | ✅     | `async/allKeyed` *(same)*          | Moved to the new `async/` group                                                          |
+| `promise/delay`                  | ✅     | `async/sleep`                      | Renamed for clarity — same `(ms) => Promise<void>` semantics                             |
+| `promise/Mutex`                  | ✅     | `async/Mutex` *(same)*             | Moved to the new `async/` group                                                          |
+| `promise/Semaphore`              | ✅     | `async/Semaphore` *(same)*         | Moved to the new `async/` group                                                          |
+| `promise/timeout`                | ✅     | `async/rejectAfter`                | Renamed for clarity — `rejectAfter(ms)` returns a Promise that rejects after `ms`        |
+| `promise/withTimeout`            | ✅     | `async/withTimeout` *(same)*       | Moved to the new `async/` group                                                          |
 | `object/cloneDeepWith`           | ✅     | `value/cloneDeep`                  | Pass a customizer `(value, key, root, stack) => unknown` as second arg                   |
 | `object/cloneDeep`               | ✅     | `value/cloneDeep`                  | Consolidated with `cloneDeepWith`                                                        |
 | `object/clone`                   | ✅     | `value/cloneShallow`               | Renamed for clarity — it shallow-clones any value, not only objects                      |
