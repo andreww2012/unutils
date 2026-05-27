@@ -105,3 +105,6 @@
 | `math/round`                     | ✅     | `math/round` *(same)*             | -                                                                                      |
 | `math/sum`                       | ✅     | `math/sum` *(same)*               | Consolidated with `sumBy`                                                              |
 | `math/sumBy`                     | ✅     | `math/sum`                        | Pass a selector `(item, index) => number` as second arg                                |
+| `object/clone`                   | ✅     | `value/cloneShallow`              | Renamed for clarity — it shallow-clones any value, not only objects                    |
+| `object/cloneDeep`               | ✅     | `value/cloneDeep`                 | Consolidated with `cloneDeepWith`                                                      |
+| `object/cloneDeepWith`           | ✅     | `value/cloneDeep`                 | Pass a customizer `(value, key, root, stack) => unknown` as second arg                 |

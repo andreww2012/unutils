@@ -41,6 +41,10 @@
     "./math": {
       "types": "./dist/math/index.d.mts",
       "default": "./dist/math/index.mjs"
+    },
+    "./value": {
+      "types": "./dist/value/index.d.mts",
+      "default": "./dist/value/index.mjs"
     }
   },
   "main": "./dist/index.mjs",
