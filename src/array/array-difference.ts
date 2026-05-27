@@ -17,7 +17,7 @@ import {differenceBy, differenceWith} from 'es-toolkit/array';
  * @returns A new array containing the elements from `firstArray` that do not appear in `secondArray`.
  * @example
  * // Basic equality (SameValueZero)
- * arrayDifference([1, 2, 3, 4, 5], [2, 4, 6]);
+ * arrayDifference([1, 2, 3, 4, 5], [2, 4]);
  * // [1, 3, 5]
  * @example
  * // With a mapper — compare by a derived key

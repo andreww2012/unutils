@@ -78,7 +78,7 @@
 | `array/unzip`                    | ✅     | `array/arrayTranspose`            | Renamed to match the math/CS term — same operation, broader recognition                |
 | `array/unzipWith`                | ✅     | `array/arrayTranspose`            | Pass an iteratee `(...column) => value` as second arg                                  |
 | `array/windowed`                 | ⌛     | TBD                               | -                                                                                      |
-| `array/without`                  | ⌛     | TBD                               | -                                                                                      |
+| `array/without`                  | ✅     | `array/arrayDifference`           | Pass the values to exclude as an array                                                 |
 | `array/xor`                      | ⌛     | TBD                               | -                                                                                      |
 | `array/xorBy`                    | ⌛     | TBD                               | -                                                                                      |
 | `array/xorBy`                    | ⌛     | TBD                               | -                                                                                      |
