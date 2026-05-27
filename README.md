@@ -66,8 +66,8 @@
 | `array/tail`                     | ⌛     | TBD                               | -                                                                                      |
 | `array/take`                     | ❌     | *(native)*                        | Use `array.slice(0, n)`                                                                |
 | `array/takeRight`                | ❌     | *(native)*                        | Use `array.slice(-n)`                                                                  |
-| `array/takeRightWhile`           | ⌛     | TBD                               | -                                                                                      |
-| `array/takeWhile`                | ⌛     | TBD                               | -                                                                                      |
+| `array/takeRightWhile`           | ✅     | `array/arrayTakeWhile`            | Pass `true` as third arg to walk from the end                                          |
+| `array/takeWhile`                | ✅     | `array/arrayTakeWhile`            | Consolidated with `takeRightWhile`                                                     |
 | `array/toFilled`                 | ✅     | `array/arrayFill`                 | Pass `{copy: true}` as fifth arg                                                       |
 | `array/union`                    | ⌛     | TBD                               | -                                                                                      |
 | `array/unionBy`                  | ⌛     | TBD                               | -                                                                                      |
