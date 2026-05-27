@@ -168,6 +168,12 @@
 | `predicate/isUndefined`          | ❌     | *(native)*                        | Use `typeof x === 'undefined'` or `x === undefined`                                    |
 | `predicate/isWeakMap`            | ❌     | *(native)*                        | Use `x instanceof WeakMap`                                                             |
 | `predicate/isWeakSet`            | ❌     | *(native)*                        | Use `x instanceof WeakSet`                                                             |
+| `promise/allKeyed`               | ⌛️     | ?                                 | -                                                                                      |
+| `promise/delay`                  | ⌛️     | ?                                 | -                                                                                      |
+| `promise/Muted`                  | ⌛️     | ?                                 | -                                                                                      |
+| `promise/Semaphore`              | ⌛️     | ?                                 | -                                                                                      |
+| `promise/timeout`                | ⌛️     | ?                                 | -                                                                                      |
+| `promise/withTimeout`            | ⌛️     | ?                                 | -                                                                                      |
 | `object/cloneDeepWith`           | ✅     | `value/cloneDeep`                 | Pass a customizer `(value, key, root, stack) => unknown` as second arg                 |
 | `object/cloneDeep`               | ✅     | `value/cloneDeep`                 | Consolidated with `cloneDeepWith`                                                      |
 | `object/clone`                   | ✅     | `value/cloneShallow`              | Renamed for clarity — it shallow-clones any value, not only objects                    |
