@@ -2,5 +2,8 @@ export * from './array';
 export * from './function';
 export * from './iterable';
 export * from './math';
+export * from './misc';
+export * from './predicate';
+export * from './runtime';
 export * from './string';
 export * from './value';

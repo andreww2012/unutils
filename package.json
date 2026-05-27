@@ -42,6 +42,18 @@
       "types": "./dist/math/index.d.mts",
       "default": "./dist/math/index.mjs"
     },
+    "./misc": {
+      "types": "./dist/misc/index.d.mts",
+      "default": "./dist/misc/index.mjs"
+    },
+    "./predicate": {
+      "types": "./dist/predicate/index.d.mts",
+      "default": "./dist/predicate/index.mjs"
+    },
+    "./runtime": {
+      "types": "./dist/runtime/index.d.mts",
+      "default": "./dist/runtime/index.mjs"
+    },
     "./string": {
       "types": "./dist/string/index.d.mts",
       "default": "./dist/string/index.mjs"
