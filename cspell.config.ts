@@ -9,7 +9,13 @@ const GLOBALLY_IGNORED_WORDS = {
 export default {
   useGitignore: true,
   enableGlobDot: true,
-  ignorePaths: ['**/.gitignore', '**/.git/**', '**/pnpm-lock.yaml', 'patches/**'],
+  ignorePaths: [
+    '**/.gitignore',
+    '**/.git/**',
+    '**/pnpm-lock.yaml',
+    'patches/**',
+    '.all-contributorsrc',
+  ],
   dictionaries: ['npm', 'node', 'typescript', 'fullstack'],
   overrides: [
     {

@@ -11,6 +11,8 @@ export default eslintConfig({
     arrowReturnStyle: false,
 
     // False positives:
+    rxjs: false,
+    youDontNeedLodashUnderscore: false, // cspell:disable-line
     zod: false,
   },
 });
