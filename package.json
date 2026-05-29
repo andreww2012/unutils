@@ -112,6 +112,8 @@
     "test:vitest:cov": "nr t:cov run",
     "test:quick": "nr knip && nr spellcheck && nr lint && nr build:test",
     "test": "nr deps:check && nr test:quick && nr test:vitest:cov",
+    "ch": "changeset add --message \"___REPLACE_ME___\"",
+    "release": "changeset publish",
     "build": "tsdown --clean",
     "build:test": "tsdown --out-dir temp/dist",
     "prepublishOnly": "nr build"
@@ -119,6 +121,7 @@
   "devDependencies": {
     "@antfu/ni": "30.1.0",
     "@arethetypeswrong/core": "0.18.2",
+    "@changesets/cli": "2.31.0",
     "@commitlint/cli": "21.0.1",
     "@commitlint/config-conventional": "21.0.1",
     "@commitlint/types": "21.0.1",
