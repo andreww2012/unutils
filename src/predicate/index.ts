@@ -1,5 +1,6 @@
 export {isBuffer} from './is-buffer.ts';
 export {isEmptyObject} from './is-empty-object.ts';
+export {isEmptyValue} from './is-empty-value.ts';
 export {isJson} from './is-json.ts';
 export {isJsonArray} from './is-json-array.ts';
 export {isJsonObject} from './is-json-object.ts';

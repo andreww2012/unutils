@@ -374,7 +374,7 @@ Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e
 | `predicate/isArrayLike`          | ❌     | *(native)*                        | Length duck-typing — rarely needed with iterables                                                 |
 | `predicate/isArrayLikeObject`    | ❌     | *(native)*                        | As above, excluding strings                                                                       |
 | `predicate/isElement`            | ❌     | *(native)*                        | Use `x instanceof Element`                                                                        |
-| `predicate/isEmpty`              | ⌛     | `predicate/isEmpty`               | Uniform emptiness across strings/arrays/Maps/Sets/objects                                         |
+| `predicate/isEmpty`              | ✅     | `predicate/isEmptyValue`          | Renamed (any value, vs. `isEmptyObject`); empty strings/arrays/Maps/Sets/objects                  |
 | `predicate/isFinite`             | ❌     | *(native)*                        | Use `Number.isFinite(x)`                                                                          |
 | `predicate/isInteger`            | ❌     | *(native)*                        | Use `Number.isInteger(x)`                                                                         |
 | `predicate/isMatch`              | ❓     | TBD                               | Partial deep-equality match (matcher family)                                                      |
