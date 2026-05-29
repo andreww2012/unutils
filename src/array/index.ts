@@ -31,4 +31,7 @@ export {arrayUnique} from './array-unique.ts';
 export {arraySample} from './array-sample.ts';
 export {arrayShuffle} from './array-shuffle.ts';
 export {arrayWithoutFalsy} from './array-without-falsy.ts';
+export {arrayify} from './arrayify.ts';
 export {cartesianProduct} from './cartesian-product.ts';
+export {sortedArrayIndexOf} from './sorted-array-index-of.ts';
+export {sortedArrayInsertionIndex} from './sorted-array-insertion-index.ts';
