@@ -15,9 +15,11 @@ All without zero dependencies because the external dependencies are bundled.
 - It might be in one of 3 different forms:
   1. Pure re-export from an external package.
      Example: `src/array/array-combinations.ts`.
-  2. Enhanced version if external package's utility(-ies).
-     Example: `src/array/array-difference.ts`.
-  3. Fully custom implementation.
+  2. Fully custom implementation.
+  3. Enhanced version of an external package's utility(-ies).
+     Preferably a thin wrapper that delegates the
+     real work to the external function(s) while customizing/improving the UX.
+     Examples: `src/array/array-difference.ts`, `src/array/sorted-index.ts`.
 
   The latter two forms require it to have comprehensive JSDoc documentation with purpose, parameters and return value descriptions, as well as block of examples.
 
@@ -41,13 +43,25 @@ All without zero dependencies because the external dependencies are bundled.
 - The name of the added utility must exactly match the name of the function that it mirrors or based on - unless there are multiple candidates for the form (2).
   If the name wasn't provided and it is not inferable, explicitly ask user about it.
 
+#### Detailed naming guideline
+
+Names target a reader who has never used the source library: we rename whenever the original is unclear, and keep it only when it already explains itself (`debounce`, `memoize`, `clamp`, `flatMap`).
+
+- **Spell out the operation; drop terse or cryptic names.** `ary` → `withMaxArity`, `after` → `fromNthCall`, `sortedIndex` → `sortedArrayInsertionIndex`.
+- **Adopt a widely-recognized math/CS term when it names the operation precisely.** `zip`/`unzip` → `arrayTranspose`, `xor` → `arraySymmetricDifference`.
+- **Avoid ambiguous or misleading words.** `after`/`before` sound temporal → `fromNthCall`/`untilNthCall`; `escape` is vague → `escapeHtml`.
+- **Reflect behavior, including side effects.** Mutating array helpers share an `arrayPurge*` prefix: `pull` → `arrayPurgeValues`, `remove` → `arrayPurgeBy`, `pullAt` → `arrayPurgeIndexes`.
+- **Prefix by group to disambiguate and signal the operand**, where it helps: `map*` (`filter` → `mapFilter`), `set*` (`filter` → `setFilter`), and `array*` for many array utilities; likewise encode a precondition when it matters (`sortedArray…`). Not mandatory when the name is already unambiguous (`flatMap`, `sortBy`).
+- **Predicates read as a question (`is*`)** — `inRange` → `isInRange`, `isLength` → `isValidLength`; converters use `to*` — `camelCase` → `toCamelCase`.
+- **Strict camelCase, acronyms included.** `isJSON` → `isJson`.
+
 ## Testing tools
 
 Prefer running on the changed files unless not possible or instructed otherwise.
 
 - **Types**: `nr lint:types:go`
-- **ESLint**: `pnpm exec eslint changed.ts files.js`
+- **ESLint**: `pnpm exec eslint list.ext1 of.ext2 changed.ext3 files.ext4`
 - **Prettier**: `pnpm exec prettier --write --log-level warn changed.ts files.js`
-- **Vitest**: `nr test:vitest:cov changed.spec.ts files.spec.js`
+- **Vitest**: `nr test:vitest:cov --coverage.reporter=text changed.spec.ts files.spec.js`
 - Other project-wide tests: `nr knip && nr spellcheck && build:test`
 - If the lockfile was modified: `nr deps:check`
