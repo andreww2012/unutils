@@ -17,6 +17,10 @@ describe('math/mean', () => {
     it('returns NaN for an empty array', () => {
       expect(mean([])).toBeNaN();
     });
+
+    it('works on any iterable (Set)', () => {
+      expect(mean(new Set([1, 2, 3]))).toBe(2);
+    });
   });
 
   describe('with a selector', () => {

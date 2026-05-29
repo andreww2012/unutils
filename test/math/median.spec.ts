@@ -17,6 +17,10 @@ describe('math/median', () => {
     it('returns NaN for an empty array', () => {
       expect(median([])).toBeNaN();
     });
+
+    it('works on any iterable (Set) and does not depend on order', () => {
+      expect(median(new Set([5, 1, 3]))).toBe(3);
+    });
   });
 
   describe('with a selector', () => {

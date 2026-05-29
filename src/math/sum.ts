@@ -1,27 +1,30 @@
-import {sumBy, sum as sumFromEsToolkit} from 'es-toolkit/math';
-
 /**
- * Calculates the sum of a collection of numbers. When the second argument is
- * omitted, the input is treated as a `readonly number[]` and summed directly
- * (delegates to `sum` from `es-toolkit`). When a `getValue` function is
- * provided, each element (along with its zero-based index) is mapped through
- * it first and the resulting numbers are summed (delegates to `sumBy`).
+ * Calculates the sum of an iterable of numbers, in a single pass and without
+ * materializing an intermediate array — so it works on any iterable
+ * (generators, `Set`s, …), not just arrays. When the second argument is
+ * omitted, the elements are summed directly. When a `getValue` function is
+ * provided, each element (along with its zero-based position) is mapped through
+ * it first and the resulting numbers are summed.
  *
  * Returns `0` for an empty input.
- * @param items - The collection to sum. Not mutated.
+ * @param items - The iterable to sum. Not mutated.
  * @param getValue - Optional selector that produces the numeric value to add
- * from each element. Receives the element and its zero-based index.
+ * from each element. Receives the element and its zero-based position.
  * @returns The sum of the resolved numeric values, or `0` if `items` is empty.
  * @example
  * // Basic sum of a number array
  * sum([1, 2, 3, 4, 5]);
  * // 15
  * @example
+ * // Works on any iterable
+ * sum(new Set([1, 2, 3]));
+ * // 6
+ * @example
  * // With a selector — sum a numeric field of objects
  * sum([{a: 1}, {a: 2}, {a: 3}], (item) => item.a);
  * // 6
  * @example
- * // The selector receives the index too
+ * // The selector receives the position too
  * sum([{a: 1}, {a: 2}, {a: 3}], (item, index) => item.a * index);
  * // 8
  * @example
@@ -29,18 +32,19 @@ import {sumBy, sum as sumFromEsToolkit} from 'es-toolkit/math';
  * sum([]);
  * // 0
  */
+export function sum<T>(items: Iterable<T>, getValue: (element: T, index: number) => number): number;
+export function sum(items: Iterable<number>): number;
 export function sum<T>(
-  items: readonly T[],
-  getValue: (element: T, index: number) => number,
-): number;
-export function sum(items: readonly number[]): number;
-export function sum<T>(
-  items: readonly T[],
+  items: Iterable<T>,
   getValue?: (element: T, index: number) => number,
 ): number {
-  if (getValue) {
-    return sumBy(items, getValue);
+  let total = 0;
+  let index = 0;
+
+  for (const element of items) {
+    total += getValue ? getValue(element, index) : (element as number);
+    index += 1;
   }
 
-  return sumFromEsToolkit(items as readonly number[]);
+  return total;
 }

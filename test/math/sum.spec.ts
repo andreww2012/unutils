@@ -1,5 +1,11 @@
 import {sum} from '../../src/math/sum.ts';
 
+const naturals = function* () {
+  yield 1;
+  yield 2;
+  yield 3;
+};
+
 describe('math/sum', () => {
   describe('without a selector', () => {
     it('returns the sum of a number array', () => {
@@ -12,6 +18,14 @@ describe('math/sum', () => {
 
     it('handles negative numbers', () => {
       expect(sum([-1, -2, 3])).toBe(0);
+    });
+
+    it('works on any iterable (Set)', () => {
+      expect(sum(new Set([1, 2, 3]))).toBe(6);
+    });
+
+    it('works on a lazy generator', () => {
+      expect(sum(naturals())).toBe(6);
     });
   });
 
