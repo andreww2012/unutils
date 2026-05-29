@@ -33,6 +33,7 @@
 | `array/sortedArrayInsertionIndex` | Binary-search insertion point into a sorted array; `{iteratee?, rightmost?}`                     |
 | `function/curry`                  | Consolidates `curry`/`curryRight`; pass `true` to collect arguments right-to-left                |
 | `function/flow`                   | Consolidates `flow`/`flowRight`; functions as an array; pass `true` for right-to-left            |
+| `function/mapTimes`               | Renamed `times`; iteratee required; clearer than `Array.from({length}, ...)`                     |
 | `function/partial`                | Consolidates `partial`/`partialRight`; args as an array; pass `true` to pre-apply trailing       |
 | `iterable/countBy`                | -                                                                                                |
 | `iterable/every`                  | Generalized from `set/every`; simple `(value) => boolean` callback                               |
@@ -412,14 +413,14 @@ Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e
 | `util/methodOf`                  | ❓     | TBD                               | Inverted `method`                                                                                 |
 | `util/now`                       | ❌     | *(native)*                        | Use `Date.now()`                                                                                  |
 | `util/over`                      | ❓     | TBD                               | Run a value through several funcs, collecting results                                             |
-| `util/overEvery`                 | ⌛     | `function/overEvery`              | Compose predicates with `&&`                                                                      |
-| `util/overSome`                  | ⌛     | `function/overSome`               | Compose predicates with `\|\|`                                                                    |
+| `util/overEvery`                 | ✅     | `function/everyPredicate`         | Renamed; predicates joined with `&&` (short-circuiting)                                           |
+| `util/overSome`                  | ✅     | `function/somePredicate`          | Renamed; predicates joined with `\|\|` (short-circuiting)                                         |
 | `util/stubArray`                 | ❌     | *(native)*                        | Use `() => []`                                                                                    |
 | `util/stubFalse`                 | ❌     | *(native)*                        | Use `() => false`                                                                                 |
 | `util/stubObject`                | ❌     | *(native)*                        | Use `() => ({})`                                                                                  |
 | `util/stubString`                | ❌     | *(native)*                        | Use `() => ''`                                                                                    |
 | `util/stubTrue`                  | ❌     | *(native)*                        | Use `() => true`                                                                                  |
-| `util/times`                     | ⌛     | `function/times`                  | Call a function n times collecting results; clearer than `Array.from({length}, ...)`              |
+| `util/times`                     | ✅     | `function/mapTimes`               | Renamed; iteratee required, clearer than `Array.from({length}, ...)`                              |
 | `util/toArray`                   | ❌     | *(native)*                        | Use `Array.from(x)` / spread                                                                      |
 | `util/toFinite`                  | ❌     | *(native)*                        | Coercion — use `Number(x)`                                                                        |
 | `util/toInteger`                 | ❌     | *(native)*                        | Use `Math.trunc(Number(x))`                                                                       |
