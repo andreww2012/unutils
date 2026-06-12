@@ -63,6 +63,7 @@
 | `value/cloneDeep`                 | Consolidates `cloneDeep`/`cloneDeepWith`; optional customizer                                      |
 | `value/cloneShallow`              | Consolidates `clone`/`cloneWith`; optional customizer                                              |
 | `value/isEqual`                   | Consolidates `isEqual`/`isEqualWith`; optional customizer                                          |
+| `value/isObjectMatching`          | Consolidates `isMatch`/`isMatchWith`; deep partial match; optional customizer                      |
 
 ### `es-toolkit`
 
@@ -379,8 +380,8 @@ Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e
 | `object/updateWith`              | ✅     | `object/updateByPath`             | Consolidated — pass a container customizer as the fourth arg                                         |
 | `object/values`                  | ❌     | *(native)*                        | Use `Object.values(...)`                                                                             |
 | `object/valuesIn`                | ❌     | *(native)*                        | Values incl. inherited                                                                               |
-| `predicate/conforms`             | ❓     | TBD                               | Builds a predicate from a shape of predicates (matcher family)                                       |
-| `predicate/conformsTo`           | ❓     | TBD                               | Checks a value against a shape of predicates                                                         |
+| `predicate/conforms`             | ❌     | *(out of scope)*                  | Predicate factory — `(v) => conformsTo(v, source)`; shorthand-iteratee machinery                     |
+| `predicate/conformsTo`           | ❌     | *(native)*                        | Use `Object.entries(source).every(([key, predicate]) => predicate(target[key]))`                     |
 | `predicate/isArguments`          | ❌     | *(legacy)*                        | `arguments` is obsolete with rest params                                                             |
 | `predicate/isArray`              | ❌     | *(native)*                        | Use `Array.isArray(x)`                                                                               |
 | `predicate/isArrayLike`          | ❌     | *(native)*                        | Length duck-typing — rarely needed with iterables                                                    |
@@ -389,15 +390,15 @@ Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e
 | `predicate/isEmpty`              | ✅     | `predicate/isEmptyValue`          | Renamed (any value, vs. `isEmptyObject`); empty strings/arrays/Maps/Sets/objects                     |
 | `predicate/isFinite`             | ❌     | *(native)*                        | Use `Number.isFinite(x)`                                                                             |
 | `predicate/isInteger`            | ❌     | *(native)*                        | Use `Number.isInteger(x)`                                                                            |
-| `predicate/isMatch`              | ❓     | TBD                               | Partial deep-equality match (matcher family)                                                         |
-| `predicate/isMatchWith`          | ❓     | TBD                               | `isMatch` with a customizer                                                                          |
+| `predicate/isMatch`              | ✅     | `value/isObjectMatching`          | Renamed; moved beside `isEqual` — deep partial match                                                 |
+| `predicate/isMatchWith`          | ✅     | `value/isObjectMatching`          | Consolidated — pass a customizer as the third arg                                                    |
 | `predicate/isNaN`                | ❌     | *(native)*                        | Use `Number.isNaN(x)`                                                                                |
 | `predicate/isNative`             | ❌     | *(legacy)*                        | Detects native functions — niche                                                                     |
 | `predicate/isObject`             | ❌     | *(native)*                        | `typeof x === 'object' && x !== null` (lodash also counts functions)                                 |
 | `predicate/isObjectLike`         | ❌     | *(native)*                        | `typeof x === 'object' && x !== null`                                                                |
 | `predicate/isSafeInteger`        | ❌     | *(native)*                        | Use `Number.isSafeInteger(x)`                                                                        |
-| `predicate/matches`              | ❓     | TBD                               | Builds a partial-match predicate (matcher family)                                                    |
-| `predicate/matchesProperty`      | ❓     | TBD                               | Builds a path-equals predicate (matcher family)                                                      |
+| `predicate/matches`              | ❌     | *(out of scope)*                  | Predicate factory — `(v) => isObjectMatching(v, source)`; shorthand-iteratee machinery               |
+| `predicate/matchesProperty`      | ❌     | *(out of scope)*                  | Predicate factory — `(v) => isEqual(getByPath(v, path), value)`; shorthand-iteratee machinery        |
 | `string/endsWith`                | ❌     | *(native)*                        | Use `string.endsWith(...)`                                                                           |
 | `string/padEnd`                  | ❌     | *(native)*                        | Use `string.padEnd(...)`                                                                             |
 | `string/padStart`                | ❌     | *(native)*                        | Use `string.padStart(...)`                                                                           |
@@ -418,7 +419,7 @@ Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e
 | `util/gt`                        | ❌     | *(native)*                        | Use `a > b`                                                                                          |
 | `util/gte`                       | ❌     | *(native)*                        | Use `a >= b`                                                                                         |
 | `util/invoke`                    | ❓     | TBD                               | Invoke a method at a deep path                                                                       |
-| `util/iteratee`                  | ❓     | TBD                               | The shorthand-iteratee builder (matcher family)                                                      |
+| `util/iteratee`                  | ❌     | *(out of scope)*                  | The shorthand-iteratee builder — explicitly out of scope for this library                            |
 | `util/lt`                        | ❌     | *(native)*                        | Use `a < b`                                                                                          |
 | `util/lte`                       | ❌     | *(native)*                        | Use `a <= b`                                                                                         |
 | `util/method`                    | ❓     | TBD                               | Returns a function invoking a method at a path                                                       |
