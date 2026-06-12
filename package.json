@@ -54,6 +54,10 @@
       "types": "./dist/misc/index.d.mts",
       "default": "./dist/misc/index.mjs"
     },
+    "./object": {
+      "types": "./dist/object/index.d.mts",
+      "default": "./dist/object/index.mjs"
+    },
     "./predicate": {
       "types": "./dist/predicate/index.d.mts",
       "default": "./dist/predicate/index.mjs"

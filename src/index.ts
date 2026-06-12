@@ -5,6 +5,7 @@ export * from './iterable';
 export * from './map';
 export * from './math';
 export * from './misc';
+export * from './object';
 export * from './predicate';
 export * from './runtime';
 export * from './set';

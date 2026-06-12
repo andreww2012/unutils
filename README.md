@@ -11,46 +11,56 @@
 
 ### Custom functions
 
-| Our function group and name       | Notes                                                                                            |
-| --------------------------------- | ------------------------------------------------------------------------------------------------ |
-| `array/arrayAtMulti`              | Extended to also accept a single index, not just a list                                          |
-| `array/arrayDifference`           | Consolidates `difference`/`differenceBy`/`differenceWith`; optional mapper or comparator         |
-| `array/arrayDrop`                 | Consolidates `drop`/`dropWhile`; pass a predicate to drop while it holds                         |
-| `array/arrayDropRight`            | Consolidates `dropRight`/`dropRightWhile`; pass a predicate to drop while it holds               |
-| `array/arrayFill`                 | Consolidates `fill`/`toFilled`; pass `{copy: true}` to return a new array                        |
-| `array/arrayify`                  | Wraps non-arrays (tuple-preserving); nullish input returns `[]`                                  |
-| `array/arrayIntersection`         | Consolidates `intersection`/`intersectionBy`/`intersectionWith`; optional mapper or comparator   |
-| `array/arrayIsSubset`             | Consolidates `isSubset`/`isSubsetWith`; optional mapper or comparator                            |
-| `array/arraySample`               | Consolidates `sample`/`sampleSize`; pass a size for multiple elements                            |
-| `array/arraySymmetricDifference`  | Consolidates `xor`/`xorBy`/`xorWith`; renamed to the set-theory term                             |
-| `array/arrayTakeWhile`            | Consolidates `takeWhile`/`takeRightWhile`; pass `true` to walk from the end                      |
-| `array/arrayTranspose`            | Consolidates `zip`/`unzip`/`zipWith`/`unzipWith`; optional `(...column) => value` iteratee       |
-| `array/arrayUnion`                | Consolidates `union`/`unionBy`/`unionWith`; optional mapper or comparator                        |
-| `array/arrayUnique`               | Consolidates `uniq`/`uniqBy`/`uniqWith`; optional mapper or comparator                           |
-| `array/flatMap`                   | Defaults to deep flattening; pass a finite `depth` for a specific level                          |
-| `array/flatten`                   | Defaults to deep flattening; pass a finite `depth` for a specific level                          |
-| `array/sortedArrayIndexOf`        | Binary search for an existing value in a sorted array; returns its index or `-1`; `{rightmost?}` |
-| `array/sortedArrayInsertionIndex` | Binary-search insertion point into a sorted array; `{iteratee?, rightmost?}`                     |
-| `function/curry`                  | Consolidates `curry`/`curryRight`; pass `true` to collect arguments right-to-left                |
-| `function/flow`                   | Consolidates `flow`/`flowRight`; functions as an array; pass `true` for right-to-left            |
-| `function/mapTimes`               | Renamed `times`; iteratee required; clearer than `Array.from({length}, ...)`                     |
-| `function/partial`                | Consolidates `partial`/`partialRight`; args as an array; pass `true` to pre-apply trailing       |
-| `iterable/countBy`                | -                                                                                                |
-| `iterable/every`                  | Generalized from `set/every`; simple `(value) => boolean` callback                               |
-| `iterable/find`                   | Generalized from `set/find`; simple `(value) => boolean` callback                                |
-| `iterable/forEach`                | Generalized from `set/forEach`; simple `(value) => void` callback                                |
-| `iterable/keyedBy`                | -                                                                                                |
-| `iterable/reduce`                 | Generalized from `set/reduce`; simple `(acc, value) => acc` callback                             |
-| `iterable/slidingWindow`          | -                                                                                                |
-| `iterable/some`                   | Generalized from `set/some`; simple `(value) => boolean` callback                                |
-| `math/max`                        | Single-pass over any iterable; returns `undefined` for an empty input                            |
-| `math/mean`                       | Generalized to any iterable (single-pass); optional `(item) => number` selector                  |
-| `math/median`                     | Generalized to any iterable (materialized + sorted); optional `(item) => number` selector        |
-| `math/min`                        | Single-pass over any iterable; returns `undefined` for an empty input                            |
-| `math/sum`                        | Generalized to any iterable (single-pass); optional `(item, index) => number` selector           |
-| `predicate/isBuffer`              | Enhanced with a `value is Buffer` type guard                                                     |
-| `value/cloneDeep`                 | Consolidates `cloneDeep`/`cloneDeepWith`; optional customizer                                    |
-| `value/isEqual`                   | Consolidates `isEqual`/`isEqualWith`; optional customizer                                        |
+| Our function group and name       | Notes                                                                                              |
+| --------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `array/arrayAtMulti`              | Extended to also accept a single index, not just a list                                            |
+| `array/arrayDifference`           | Consolidates `difference`/`differenceBy`/`differenceWith`; optional mapper or comparator           |
+| `array/arrayDrop`                 | Consolidates `drop`/`dropWhile`; pass a predicate to drop while it holds                           |
+| `array/arrayDropRight`            | Consolidates `dropRight`/`dropRightWhile`; pass a predicate to drop while it holds                 |
+| `array/arrayFill`                 | Consolidates `fill`/`toFilled`; pass `{copy: true}` to return a new array                          |
+| `array/arrayify`                  | Wraps non-arrays (tuple-preserving); nullish input returns `[]`                                    |
+| `array/arrayIntersection`         | Consolidates `intersection`/`intersectionBy`/`intersectionWith`; optional mapper or comparator     |
+| `array/arrayIsSubset`             | Consolidates `isSubset`/`isSubsetWith`; optional mapper or comparator                              |
+| `array/arraySample`               | Consolidates `sample`/`sampleSize`; pass a size for multiple elements                              |
+| `array/arraySymmetricDifference`  | Consolidates `xor`/`xorBy`/`xorWith`; renamed to the set-theory term                               |
+| `array/arrayTakeWhile`            | Consolidates `takeWhile`/`takeRightWhile`; pass `true` to walk from the end                        |
+| `array/arrayTranspose`            | Consolidates `zip`/`unzip`/`zipWith`/`unzipWith`; optional `(...column) => value` iteratee         |
+| `array/arrayUnion`                | Consolidates `union`/`unionBy`/`unionWith`; optional mapper or comparator                          |
+| `array/arrayUnique`               | Consolidates `uniq`/`uniqBy`/`uniqWith`; optional mapper or comparator                             |
+| `array/flatMap`                   | Defaults to deep flattening; pass a finite `depth` for a specific level                            |
+| `array/flatten`                   | Defaults to deep flattening; pass a finite `depth` for a specific level                            |
+| `array/sortedArrayIndexOf`        | Binary search for an existing value in a sorted array; returns its index or `-1`; `{rightmost?}`   |
+| `array/sortedArrayInsertionIndex` | Binary-search insertion point into a sorted array; `{iteratee?, rightmost?}`                       |
+| `function/curry`                  | Consolidates `curry`/`curryRight`; pass `true` to collect arguments right-to-left                  |
+| `function/flow`                   | Consolidates `flow`/`flowRight`; functions as an array; pass `true` for right-to-left              |
+| `function/mapTimes`               | Renamed `times`; iteratee required; clearer than `Array.from({length}, ...)`                       |
+| `function/partial`                | Consolidates `partial`/`partialRight`; args as an array; pass `true` to pre-apply trailing         |
+| `iterable/countBy`                | -                                                                                                  |
+| `iterable/every`                  | Generalized from `set/every`; simple `(value) => boolean` callback                                 |
+| `iterable/find`                   | Generalized from `set/find`; simple `(value) => boolean` callback                                  |
+| `iterable/forEach`                | Generalized from `set/forEach`; simple `(value) => void` callback                                  |
+| `iterable/keyedBy`                | -                                                                                                  |
+| `iterable/reduce`                 | Generalized from `set/reduce`; simple `(acc, value) => acc` callback                               |
+| `iterable/slidingWindow`          | -                                                                                                  |
+| `iterable/some`                   | Generalized from `set/some`; simple `(value) => boolean` callback                                  |
+| `math/max`                        | Single-pass over any iterable; returns `undefined` for an empty input                              |
+| `math/mean`                       | Generalized to any iterable (single-pass); optional `(item) => number` selector                    |
+| `math/median`                     | Generalized to any iterable (materialized + sorted); optional `(item) => number` selector          |
+| `math/min`                        | Single-pass over any iterable; returns `undefined` for an empty input                              |
+| `math/sum`                        | Generalized to any iterable (single-pass); optional `(item, index) => number` selector             |
+| `object/assignDefaults`           | Consolidates `defaults`/`defaultsDeep`/`toDefaulted`; single source or array, `{deep, copy}` modes |
+| `object/findObjectKey`            | Consolidates `findKey`/`findLastKey`; pass `true` to scan from the end                             |
+| `object/hasPath`                  | Deep-path existence check; pass `{inherited: true}` to include the prototype chain                 |
+| `object/mergeDeep`                | Consolidates `merge`/`mergeWith`/`toMerged`; optional `mergeValues` customizer and `{copy}` mode   |
+| `object/omit`                     | Consolidates `omit`/`omitBy`; top-level keys, deep paths, or a predicate                           |
+| `object/pick`                     | Consolidates `pick`/`pickBy`; top-level keys, deep paths, or a predicate                           |
+| `object/setByPath`                | Consolidates `set`/`setWith`; mutating deep-path write with optional container customizer          |
+| `object/swapObjectKeysValues`     | Consolidates `invert`/`invertBy`; pass an iteratee to group colliding keys into arrays             |
+| `object/updateByPath`             | Consolidates `update`/`updateWith`; mutating deep-path update with optional container customizer   |
+| `predicate/isBuffer`              | Enhanced with a `value is Buffer` type guard                                                       |
+| `value/cloneDeep`                 | Consolidates `cloneDeep`/`cloneDeepWith`; optional customizer                                      |
+| `value/cloneShallow`              | Consolidates `clone`/`cloneWith`; optional customizer                                              |
+| `value/isEqual`                   | Consolidates `isEqual`/`isEqualWith`; optional customizer                                          |
 
 ### `es-toolkit`
 
@@ -213,22 +223,22 @@
 | `promise/withTimeout`            | ✅     | `async/withTimeout` *(same)*       | Moved to the new `async/` group                                                          |
 | `object/cloneDeepWith`           | ✅     | `value/cloneDeep`                  | Pass a customizer `(value, key, root, stack) => unknown` as second arg                   |
 | `object/cloneDeep`               | ✅     | `value/cloneDeep`                  | Consolidated with `cloneDeepWith`                                                        |
-| `object/clone`                   | ✅     | `value/cloneShallow`               | Renamed for clarity — it shallow-clones any value, not only objects                      |
-| `object/findKey`                 | ⌛️     | `object/findKey`                   | -                                                                                        |
-| `object/flattenObject`           | ⌛️     | `object/flattenObject`             | -                                                                                        |
-| `object/invert`                  | ⌛️     | `object/invert`                    | -                                                                                        |
-| `object/mapKeys`                 | ⌛️     | `object/mapKeys`                   | -                                                                                        |
-| `object/mapValues`               | ⌛️     | `object/mapValues`                 | -                                                                                        |
-| `object/merge`                   | ⌛️     | `object/merge`                     | -                                                                                        |
-| `object/mergeWith`               | ⌛️     | `object/mergeWith`                 | -                                                                                        |
-| `object/omit`                    | ⌛️     | `object/omit`                      | -                                                                                        |
-| `object/omitBy`                  | ⌛️     | `object/omitBy`                    | -                                                                                        |
-| `object/pick`                    | ⌛️     | `object/pick`                      | -                                                                                        |
-| `object/pickBy`                  | ⌛️     | `object/pickBy`                    | -                                                                                        |
-| `object/sortKeys`                | ⌛️     | `object/sortKeys`                  | -                                                                                        |
-| `object/toCamelCaseKeys`         | ⌛️     | `object/toCamelCaseKeys`           | -                                                                                        |
-| `object/toMerged`                | ⌛️     | `object/toMerged`                  | -                                                                                        |
-| `object/toSnakeCaseKeys`         | ⌛️     | `object/toSnakeCaseKeys`           | -                                                                                        |
+| `object/clone`                   | ✅     | `value/cloneShallow`               | Consolidated with `cloneWith`; renamed — shallow-clones any value, not only objects      |
+| `object/findKey`                 | ✅     | `object/findObjectKey`             | Renamed for clarity; consolidates `findLastKey` (pass `true` to scan from the end)       |
+| `object/flattenObject`           | ✅     | `object/flattenObject` *(same)*    | -                                                                                        |
+| `object/invert`                  | ✅     | `object/swapObjectKeysValues`      | Renamed for clarity; consolidates `invertBy` (pass an iteratee)                          |
+| `object/mapKeys`                 | ✅     | `object/mapKeys` *(same)*          | -                                                                                        |
+| `object/mapValues`               | ✅     | `object/mapValues` *(same)*        | -                                                                                        |
+| `object/merge`                   | ✅     | `object/mergeDeep`                 | Renamed; consolidated with `mergeWith`/`toMerged`                                        |
+| `object/mergeWith`               | ✅     | `object/mergeDeep`                 | Pass a `mergeValues` customizer in the options object                                    |
+| `object/omit`                    | ✅     | `object/omit` *(same)*             | Consolidated with `omitBy`; also accepts deep path strings                               |
+| `object/omitBy`                  | ✅     | `object/omit`                      | Pass a `(value, key) => boolean` predicate                                               |
+| `object/pick`                    | ✅     | `object/pick` *(same)*             | Consolidated with `pickBy`; also accepts deep path strings                               |
+| `object/pickBy`                  | ✅     | `object/pick`                      | Pass a `(value, key) => boolean` predicate                                               |
+| `object/sortKeys`                | ✅     | `object/sortKeys` *(same)*         | -                                                                                        |
+| `object/toCamelCaseKeys`         | ✅     | `object/toCamelCaseKeys` *(same)*  | -                                                                                        |
+| `object/toMerged`                | ✅     | `object/mergeDeep`                 | Pass `{copy: true}` for an immutable merge                                               |
+| `object/toSnakeCaseKeys`         | ✅     | `object/toSnakeCaseKeys` *(same)*  | -                                                                                        |
 | `set/countBy`                    | ✅     | `iterable/countBy`                 | -                                                                                        |
 | `set/every`                      | ✅     | `iterable/every`                   | Generalized to any iterable; simple `(value) => boolean` callback                        |
 | `set/filter`                     | ✅     | `set/setFilter`                    | Renamed for `set`-prefix consistency                                                     |
@@ -270,167 +280,167 @@
 
 Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e. those whose plain `es-toolkit` equivalent isn't already covered above. Pure name-duplicates of already-added utilities are intentionally omitted. Trivially native-replaceable functions are listed as ❌ so the decision isn't re-litigated.
 
-| Original function group and name | Status | Our function group and name       | Notes                                                                                             |
-| -------------------------------- | ------ | --------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `array/castArray`                | ✅     | `array/arrayify`                  | TS overloads widen non-arrays and preserve tuples; nullish input returns `[]` instead of `[null]` |
-| `array/concat`                   | ❌     | *(native)*                        | Use `array.concat(...)` or `[...a, ...b]`                                                         |
-| `array/each`                     | ❌     | *(use `iterable/forEach`)*        | Alias of `forEach`                                                                                |
-| `array/eachRight`                | ❌     | `array/forEachRight`              | Already added                                                                                     |
-| `array/every`                    | ❌     | *(use `iterable/every`)*          | Native `array.every` or the simple-callback `iterable/every`                                      |
-| `array/filter`                   | ❌     | *(native)*                        | Use `array.filter(...)`; shorthand iteratees are intentionally out of scope                       |
-| `array/find`                     | ❌     | *(use `iterable/find`)*           | Native `array.find` or the simple-callback `iterable/find`                                        |
-| `array/findIndex`                | ❌     | *(native)*                        | Use `array.findIndex(...)`                                                                        |
-| `array/findLast`                 | ❌     | *(native)*                        | Use `array.findLast(...)`                                                                         |
-| `array/findLastIndex`            | ❌     | *(native)*                        | Use `array.findLastIndex(...)`                                                                    |
-| `array/first`                    | ❌     | *(native)*                        | Alias of `head` — use `array[0]` / `array.at(0)`                                                  |
-| `array/flatMapDepth`             | ❌     | `array/flatMap`                   | Already added — pass a finite `depth`                                                             |
-| `array/flattenDepth`             | ❌     | `array/flatten`                   | Already added — pass a finite `depth`                                                             |
-| `array/forEach`                  | ❌     | *(use `iterable/forEach`)*        | Collection iterator                                                                               |
-| `array/includes`                 | ❌     | *(native)*                        | Use `array.includes(...)`                                                                         |
-| `array/indexOf`                  | ❌     | *(native)*                        | Use `array.indexOf(...)`                                                                          |
-| `array/invokeMap`                | ❓     | TBD                               | Path-based method invocation across a collection; depends on the path machinery                   |
-| `array/join`                     | ❌     | *(native)*                        | Use `array.join(...)`                                                                             |
-| `array/lastIndexOf`              | ❌     | *(native)*                        | Use `array.lastIndexOf(...)`                                                                      |
-| `array/map`                      | ❌     | *(native)*                        | Use `array.map(...)`; shorthand iteratees intentionally out of scope                              |
-| `array/nth`                      | ❌     | *(native)*                        | Use `array.at(n)`                                                                                 |
-| `array/pullAll`                  | ❌     | `array/arrayPurgeValues`          | Already added — pass the values as an array                                                       |
-| `array/pullAllBy`                | ❓     | `array/arrayPurgeValues`          | Would extend `arrayPurgeValues` with a mapper                                                     |
-| `array/pullAllWith`              | ❓     | `array/arrayPurgeValues`          | Would extend `arrayPurgeValues` with a comparator                                                 |
-| `array/reduce`                   | ❌     | *(use `iterable/reduce`)*         | Native `array.reduce` or the simple-callback `iterable/reduce`                                    |
-| `array/reduceRight`              | ❌     | *(native)*                        | Use `array.reduceRight(...)`                                                                      |
-| `array/reject`                   | ❌     | *(native)*                        | Negated filter — `array.filter((x) => !predicate(x))`                                             |
-| `array/reverse`                  | ❌     | *(native)*                        | Use `array.toReversed()` / `array.reverse()`                                                      |
-| `array/size`                     | ❌     | *(native)*                        | Use `array.length` / `collection.size`                                                            |
-| `array/slice`                    | ❌     | *(native)*                        | Use `array.slice(...)`                                                                            |
-| `array/some`                     | ❌     | *(use `iterable/some`)*           | Native `array.some` or the simple-callback `iterable/some`                                        |
-| `array/sortedIndex`              | ✅     | `array/sortedArrayInsertionIndex` | Consolidated binary-search insertion point; pass `{iteratee}` and/or `{rightmost: true}`          |
-| `array/sortedIndexBy`            | ✅     | `array/sortedArrayInsertionIndex` | Consolidated — pass `{iteratee}`                                                                  |
-| `array/sortedIndexOf`            | ✅     | `array/sortedArrayIndexOf`        | Split out — searches for an existing value, returns its index or `-1`                             |
-| `array/sortedLastIndex`          | ✅     | `array/sortedArrayInsertionIndex` | Consolidated — pass `{rightmost: true}` for the insertion point after equal elements              |
-| `array/sortedLastIndexBy`        | ✅     | `array/sortedArrayInsertionIndex` | Consolidated — pass `{iteratee, rightmost: true}`                                                 |
-| `array/sortedLastIndexOf`        | ✅     | `array/sortedArrayIndexOf`        | Split out — pass `{rightmost: true}` for the last matching index                                  |
-| `array/zipObjectDeep`            | ❓     | TBD                               | `zipObject` with deep-path keys — leans on the path/`set` machinery                               |
-| `function/bind`                  | ❌     | *(native / use `partial`)*        | Use `fn.bind(thisArg, ...args)`; for placeholder partials see `function/partial`                  |
-| `function/bindKey`               | ❓     | TBD                               | Late-bound method binding (resolves the method at call time)                                      |
-| `function/defer`                 | ❌     | *(native)*                        | Use `setTimeout(fn)` / `queueMicrotask(fn)`                                                       |
-| `function/delay`                 | ❌     | *(native)*                        | Use `setTimeout(fn, ms, ...args)`; for a Promise see `async/sleep`                                |
-| `function/flip`                  | ❓     | TBD                               | Returns a function with reversed argument order                                                   |
-| `function/nthArg`                | ❓     | TBD                               | Returns a function that yields its nth argument                                                   |
-| `function/overArgs`              | ❓     | TBD                               | Transforms arguments through per-position funcs before calling                                    |
-| `function/rearg`                 | ❓     | TBD                               | Reorders arguments by an index map                                                                |
-| `function/wrap`                  | ❓     | TBD                               | Wraps a value with a wrapper function                                                             |
-| `math/add`                       | ❌     | *(native)*                        | Use `a + b`                                                                                       |
-| `math/ceil`                      | ✅     | `math/ceil`                       | Precision rounding (`ceil(4.006, 2)`); companion to `math/round`                                  |
-| `math/divide`                    | ❌     | *(native)*                        | Use `a / b`                                                                                       |
-| `math/floor`                     | ✅     | `math/floor`                      | Precision rounding; companion to `math/round`                                                     |
-| `math/max`                       | ✅     | `math/max`                        | Single-pass over any iterable; `undefined` for empty; safe where `Math.max(...arr)` fails         |
-| `math/min`                       | ✅     | `math/min`                        | Single-pass over any iterable; `undefined` for empty; safe where `Math.min(...arr)` fails         |
-| `math/multiply`                  | ❌     | *(native)*                        | Use `a * b`                                                                                       |
-| `math/parseInt`                  | ❌     | *(native)*                        | Use `Number.parseInt(string, radix)`                                                              |
-| `math/subtract`                  | ❌     | *(native)*                        | Use `a - b`                                                                                       |
-| `object/assign`                  | ❌     | *(native)*                        | Use `Object.assign(...)` / spread                                                                 |
-| `object/assignIn`                | ❌     | *(native)*                        | `extend` alias; copies inherited props — rarely wanted                                            |
-| `object/assignInWith`            | ❌     | *(use `mergeWith`)*               | Customizer assign over inherited props                                                            |
-| `object/assignWith`              | ❌     | *(use `mergeWith`)*               | Customizer assign                                                                                 |
-| `object/at`                      | ❓     | TBD                               | Read multiple deep paths at once; sibling of `get`                                                |
-| `object/cloneWith`               | ❓     | TBD                               | Shallow clone with a customizer (gap left by `cloneDeep`'s consolidated customizer)               |
-| `object/create`                  | ❌     | *(native)*                        | Use `Object.create(proto)` + `Object.assign`                                                      |
-| `object/defaults`                | ❓     | TBD                               | Assigns only missing keys; overlaps with planned `merge`/`toMerged`                               |
-| `object/defaultsDeep`            | ❓     | TBD                               | Recursive `defaults`; overlaps with planned `merge`                                               |
-| `object/extend`                  | ❌     | *(native)*                        | Alias of `assignIn`                                                                               |
-| `object/extendWith`              | ❌     | *(use `mergeWith`)*               | Alias of `assignInWith`                                                                           |
-| `object/findLastKey`             | ❓     | `object/findKey`                  | Likely consolidated into the planned `findKey` via a from-right flag                              |
-| `object/forIn`                   | ❌     | *(native)*                        | Use `for...in`                                                                                    |
-| `object/forInRight`              | ❌     | *(native)*                        | Reverse `for...in`                                                                                |
-| `object/forOwn`                  | ❌     | *(native)*                        | Use `Object.keys(obj).forEach(...)`                                                               |
-| `object/forOwnRight`             | ❌     | *(native)*                        | Reverse own-key iteration                                                                         |
-| `object/fromPairs`               | ❌     | *(native)*                        | Use `Object.fromEntries(...)`                                                                     |
-| `object/functions`               | ❌     | *(legacy)*                        | Lists method names — niche legacy util                                                            |
-| `object/functionsIn`             | ❌     | *(legacy)*                        | Method names incl. inherited                                                                      |
-| `object/get`                     | ⌛     | `object/get`                      | Deep-path read with TS path typing — not trivially native                                         |
-| `object/has`                     | ⌛     | `object/has`                      | Deep-path existence check                                                                         |
-| `object/hasIn`                   | ⌛     | `object/hasIn`                    | Deep-path existence incl. inherited                                                               |
-| `object/invertBy`                | ❓     | TBD                               | Invert with a grouping iteratee (collision-preserving)                                            |
-| `object/keys`                    | ❌     | *(native)*                        | Use `Object.keys(...)`                                                                            |
-| `object/keysIn`                  | ❌     | *(native)*                        | Own + inherited keys — rarely wanted                                                              |
-| `object/property`                | ❓     | TBD                               | Path accessor builder; part of the matcher/iteratee family                                        |
-| `object/propertyOf`              | ❓     | TBD                               | Inverted `property`                                                                               |
-| `object/result`                  | ⌛     | `object/result`                   | Like `get`, but invokes function values found at the path                                         |
-| `object/set`                     | ⌛     | `object/set`                      | Deep-path write, creating intermediate containers                                                 |
-| `object/setWith`                 | ⌛     | `object/setWith`                  | `set` with a customizer for created containers                                                    |
-| `object/toDefaulted`             | ❓     | TBD                               | Immutable `defaults`                                                                              |
-| `object/toPairs`                 | ❌     | *(native)*                        | Use `Object.entries(...)`                                                                         |
-| `object/toPairsIn`               | ❌     | *(native)*                        | Entries incl. inherited                                                                           |
-| `object/transform`               | ❓     | TBD                               | Reduce with a mutable accumulator over objects/arrays                                             |
-| `object/unset`                   | ⌛     | `object/unset`                    | Delete the value at a deep path                                                                   |
-| `object/update`                  | ⌛     | `object/update`                   | `set` the result of an updater applied to the current path value                                  |
-| `object/updateWith`              | ⌛     | `object/updateWith`               | `update` with a customizer for created containers                                                 |
-| `object/values`                  | ❌     | *(native)*                        | Use `Object.values(...)`                                                                          |
-| `object/valuesIn`                | ❌     | *(native)*                        | Values incl. inherited                                                                            |
-| `predicate/conforms`             | ❓     | TBD                               | Builds a predicate from a shape of predicates (matcher family)                                    |
-| `predicate/conformsTo`           | ❓     | TBD                               | Checks a value against a shape of predicates                                                      |
-| `predicate/isArguments`          | ❌     | *(legacy)*                        | `arguments` is obsolete with rest params                                                          |
-| `predicate/isArray`              | ❌     | *(native)*                        | Use `Array.isArray(x)`                                                                            |
-| `predicate/isArrayLike`          | ❌     | *(native)*                        | Length duck-typing — rarely needed with iterables                                                 |
-| `predicate/isArrayLikeObject`    | ❌     | *(native)*                        | As above, excluding strings                                                                       |
-| `predicate/isElement`            | ❌     | *(native)*                        | Use `x instanceof Element`                                                                        |
-| `predicate/isEmpty`              | ✅     | `predicate/isEmptyValue`          | Renamed (any value, vs. `isEmptyObject`); empty strings/arrays/Maps/Sets/objects                  |
-| `predicate/isFinite`             | ❌     | *(native)*                        | Use `Number.isFinite(x)`                                                                          |
-| `predicate/isInteger`            | ❌     | *(native)*                        | Use `Number.isInteger(x)`                                                                         |
-| `predicate/isMatch`              | ❓     | TBD                               | Partial deep-equality match (matcher family)                                                      |
-| `predicate/isMatchWith`          | ❓     | TBD                               | `isMatch` with a customizer                                                                       |
-| `predicate/isNaN`                | ❌     | *(native)*                        | Use `Number.isNaN(x)`                                                                             |
-| `predicate/isNative`             | ❌     | *(legacy)*                        | Detects native functions — niche                                                                  |
-| `predicate/isObject`             | ❌     | *(native)*                        | `typeof x === 'object' && x !== null` (lodash also counts functions)                              |
-| `predicate/isObjectLike`         | ❌     | *(native)*                        | `typeof x === 'object' && x !== null`                                                             |
-| `predicate/isSafeInteger`        | ❌     | *(native)*                        | Use `Number.isSafeInteger(x)`                                                                     |
-| `predicate/matches`              | ❓     | TBD                               | Builds a partial-match predicate (matcher family)                                                 |
-| `predicate/matchesProperty`      | ❓     | TBD                               | Builds a path-equals predicate (matcher family)                                                   |
-| `string/endsWith`                | ❌     | *(native)*                        | Use `string.endsWith(...)`                                                                        |
-| `string/padEnd`                  | ❌     | *(native)*                        | Use `string.padEnd(...)`                                                                          |
-| `string/padStart`                | ❌     | *(native)*                        | Use `string.padStart(...)`                                                                        |
-| `string/repeat`                  | ❌     | *(native)*                        | Use `string.repeat(n)`                                                                            |
-| `string/replace`                 | ❌     | *(native)*                        | Use `string.replace(...)` / `replaceAll`                                                          |
-| `string/split`                   | ❌     | *(native)*                        | Use `string.split(...)`                                                                           |
-| `string/startsWith`              | ❌     | *(native)*                        | Use `string.startsWith(...)`                                                                      |
-| `string/template`                | ❓     | TBD                               | String-templating engine; `Function`-construction / CSP concerns                                  |
-| `string/templateSettings`        | ❓     | TBD                               | Configuration for `template`                                                                      |
-| `string/toLower`                 | ❌     | *(native)*                        | Use `string.toLowerCase()`                                                                        |
-| `string/toUpper`                 | ❌     | *(native)*                        | Use `string.toUpperCase()`                                                                        |
-| `string/truncate`                | ⌛     | `string/truncate`                 | Length + omission + word/regex separator-boundary truncation                                      |
-| `util/bindAll`                   | ❌     | *(legacy)*                        | Bind methods in place — use class fields / arrow methods                                          |
-| `util/cond`                      | ❓     | TBD                               | Predicate→action pair dispatcher                                                                  |
-| `util/constant`                  | ❌     | *(native)*                        | Use `() => value`                                                                                 |
-| `util/defaultTo`                 | ❌     | *(native)*                        | Use `value ?? fallback`                                                                           |
-| `util/eq`                        | ❌     | *(native)*                        | Use `Object.is(a, b)` / `===`                                                                     |
-| `util/gt`                        | ❌     | *(native)*                        | Use `a > b`                                                                                       |
-| `util/gte`                       | ❌     | *(native)*                        | Use `a >= b`                                                                                      |
-| `util/invoke`                    | ❓     | TBD                               | Invoke a method at a deep path                                                                    |
-| `util/iteratee`                  | ❓     | TBD                               | The shorthand-iteratee builder (matcher family)                                                   |
-| `util/lt`                        | ❌     | *(native)*                        | Use `a < b`                                                                                       |
-| `util/lte`                       | ❌     | *(native)*                        | Use `a <= b`                                                                                      |
-| `util/method`                    | ❓     | TBD                               | Returns a function invoking a method at a path                                                    |
-| `util/methodOf`                  | ❓     | TBD                               | Inverted `method`                                                                                 |
-| `util/now`                       | ❌     | *(native)*                        | Use `Date.now()`                                                                                  |
-| `util/over`                      | ❓     | TBD                               | Run a value through several funcs, collecting results                                             |
-| `util/overEvery`                 | ✅     | `function/everyPredicate`         | Renamed; predicates joined with `&&` (short-circuiting)                                           |
-| `util/overSome`                  | ✅     | `function/somePredicate`          | Renamed; predicates joined with `\|\|` (short-circuiting)                                         |
-| `util/stubArray`                 | ❌     | *(native)*                        | Use `() => []`                                                                                    |
-| `util/stubFalse`                 | ❌     | *(native)*                        | Use `() => false`                                                                                 |
-| `util/stubObject`                | ❌     | *(native)*                        | Use `() => ({})`                                                                                  |
-| `util/stubString`                | ❌     | *(native)*                        | Use `() => ''`                                                                                    |
-| `util/stubTrue`                  | ❌     | *(native)*                        | Use `() => true`                                                                                  |
-| `util/times`                     | ✅     | `function/mapTimes`               | Renamed; iteratee required, clearer than `Array.from({length}, ...)`                              |
-| `util/toArray`                   | ❌     | *(native)*                        | Use `Array.from(x)` / spread                                                                      |
-| `util/toFinite`                  | ❌     | *(native)*                        | Coercion — use `Number(x)`                                                                        |
-| `util/toInteger`                 | ❌     | *(native)*                        | Use `Math.trunc(Number(x))`                                                                       |
-| `util/toLength`                  | ❌     | *(native)*                        | Coercion — rarely needed                                                                          |
-| `util/toNumber`                  | ❌     | *(native)*                        | Use `Number(x)`                                                                                   |
-| `util/toPath`                    | ⌛     | `object/toPath`                   | Parses a path string into segments; shared by the path utils                                      |
-| `util/toPlainObject`             | ❌     | *(legacy)*                        | Flattens inherited props — niche                                                                  |
-| `util/toSafeInteger`             | ❌     | *(native)*                        | Coercion — rarely needed                                                                          |
-| `util/toString`                  | ❌     | *(native)*                        | Use `String(x)`                                                                                   |
-| `util/uniqueId`                  | ❓     | TBD                               | Counter-based id; module-global state is a design question                                        |
+| Original function group and name | Status | Our function group and name       | Notes                                                                                                |
+| -------------------------------- | ------ | --------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `array/castArray`                | ✅     | `array/arrayify`                  | TS overloads widen non-arrays and preserve tuples; nullish input returns `[]` instead of `[null]`    |
+| `array/concat`                   | ❌     | *(native)*                        | Use `array.concat(...)` or `[...a, ...b]`                                                            |
+| `array/each`                     | ❌     | *(use `iterable/forEach`)*        | Alias of `forEach`                                                                                   |
+| `array/eachRight`                | ❌     | `array/forEachRight`              | Already added                                                                                        |
+| `array/every`                    | ❌     | *(use `iterable/every`)*          | Native `array.every` or the simple-callback `iterable/every`                                         |
+| `array/filter`                   | ❌     | *(native)*                        | Use `array.filter(...)`; shorthand iteratees are intentionally out of scope                          |
+| `array/find`                     | ❌     | *(use `iterable/find`)*           | Native `array.find` or the simple-callback `iterable/find`                                           |
+| `array/findIndex`                | ❌     | *(native)*                        | Use `array.findIndex(...)`                                                                           |
+| `array/findLast`                 | ❌     | *(native)*                        | Use `array.findLast(...)`                                                                            |
+| `array/findLastIndex`            | ❌     | *(native)*                        | Use `array.findLastIndex(...)`                                                                       |
+| `array/first`                    | ❌     | *(native)*                        | Alias of `head` — use `array[0]` / `array.at(0)`                                                     |
+| `array/flatMapDepth`             | ❌     | `array/flatMap`                   | Already added — pass a finite `depth`                                                                |
+| `array/flattenDepth`             | ❌     | `array/flatten`                   | Already added — pass a finite `depth`                                                                |
+| `array/forEach`                  | ❌     | *(use `iterable/forEach`)*        | Collection iterator                                                                                  |
+| `array/includes`                 | ❌     | *(native)*                        | Use `array.includes(...)`                                                                            |
+| `array/indexOf`                  | ❌     | *(native)*                        | Use `array.indexOf(...)`                                                                             |
+| `array/invokeMap`                | ❓     | TBD                               | Path-based method invocation across a collection; now feasible with the `getByPath` path utility     |
+| `array/join`                     | ❌     | *(native)*                        | Use `array.join(...)`                                                                                |
+| `array/lastIndexOf`              | ❌     | *(native)*                        | Use `array.lastIndexOf(...)`                                                                         |
+| `array/map`                      | ❌     | *(native)*                        | Use `array.map(...)`; shorthand iteratees intentionally out of scope                                 |
+| `array/nth`                      | ❌     | *(native)*                        | Use `array.at(n)`                                                                                    |
+| `array/pullAll`                  | ❌     | `array/arrayPurgeValues`          | Already added — pass the values as an array                                                          |
+| `array/pullAllBy`                | ❓     | `array/arrayPurgeValues`          | Would extend `arrayPurgeValues` with a mapper                                                        |
+| `array/pullAllWith`              | ❓     | `array/arrayPurgeValues`          | Would extend `arrayPurgeValues` with a comparator                                                    |
+| `array/reduce`                   | ❌     | *(use `iterable/reduce`)*         | Native `array.reduce` or the simple-callback `iterable/reduce`                                       |
+| `array/reduceRight`              | ❌     | *(native)*                        | Use `array.reduceRight(...)`                                                                         |
+| `array/reject`                   | ❌     | *(native)*                        | Negated filter — `array.filter((x) => !predicate(x))`                                                |
+| `array/reverse`                  | ❌     | *(native)*                        | Use `array.toReversed()` / `array.reverse()`                                                         |
+| `array/size`                     | ❌     | *(native)*                        | Use `array.length` / `collection.size`                                                               |
+| `array/slice`                    | ❌     | *(native)*                        | Use `array.slice(...)`                                                                               |
+| `array/some`                     | ❌     | *(use `iterable/some`)*           | Native `array.some` or the simple-callback `iterable/some`                                           |
+| `array/sortedIndex`              | ✅     | `array/sortedArrayInsertionIndex` | Consolidated binary-search insertion point; pass `{iteratee}` and/or `{rightmost: true}`             |
+| `array/sortedIndexBy`            | ✅     | `array/sortedArrayInsertionIndex` | Consolidated — pass `{iteratee}`                                                                     |
+| `array/sortedIndexOf`            | ✅     | `array/sortedArrayIndexOf`        | Split out — searches for an existing value, returns its index or `-1`                                |
+| `array/sortedLastIndex`          | ✅     | `array/sortedArrayInsertionIndex` | Consolidated — pass `{rightmost: true}` for the insertion point after equal elements                 |
+| `array/sortedLastIndexBy`        | ✅     | `array/sortedArrayInsertionIndex` | Consolidated — pass `{iteratee, rightmost: true}`                                                    |
+| `array/sortedLastIndexOf`        | ✅     | `array/sortedArrayIndexOf`        | Split out — pass `{rightmost: true}` for the last matching index                                     |
+| `array/zipObjectDeep`            | ❓     | TBD                               | `zipObject` with deep-path keys — leans on the `setByPath` path utility                              |
+| `function/bind`                  | ❌     | *(native / use `partial`)*        | Use `fn.bind(thisArg, ...args)`; for placeholder partials see `function/partial`                     |
+| `function/bindKey`               | ❓     | TBD                               | Late-bound method binding (resolves the method at call time)                                         |
+| `function/defer`                 | ❌     | *(native)*                        | Use `setTimeout(fn)` / `queueMicrotask(fn)`                                                          |
+| `function/delay`                 | ❌     | *(native)*                        | Use `setTimeout(fn, ms, ...args)`; for a Promise see `async/sleep`                                   |
+| `function/flip`                  | ❓     | TBD                               | Returns a function with reversed argument order                                                      |
+| `function/nthArg`                | ❓     | TBD                               | Returns a function that yields its nth argument                                                      |
+| `function/overArgs`              | ❓     | TBD                               | Transforms arguments through per-position funcs before calling                                       |
+| `function/rearg`                 | ❓     | TBD                               | Reorders arguments by an index map                                                                   |
+| `function/wrap`                  | ❓     | TBD                               | Wraps a value with a wrapper function                                                                |
+| `math/add`                       | ❌     | *(native)*                        | Use `a + b`                                                                                          |
+| `math/ceil`                      | ✅     | `math/ceil`                       | Precision rounding (`ceil(4.006, 2)`); companion to `math/round`                                     |
+| `math/divide`                    | ❌     | *(native)*                        | Use `a / b`                                                                                          |
+| `math/floor`                     | ✅     | `math/floor`                      | Precision rounding; companion to `math/round`                                                        |
+| `math/max`                       | ✅     | `math/max`                        | Single-pass over any iterable; `undefined` for empty; safe where `Math.max(...arr)` fails            |
+| `math/min`                       | ✅     | `math/min`                        | Single-pass over any iterable; `undefined` for empty; safe where `Math.min(...arr)` fails            |
+| `math/multiply`                  | ❌     | *(native)*                        | Use `a * b`                                                                                          |
+| `math/parseInt`                  | ❌     | *(native)*                        | Use `Number.parseInt(string, radix)`                                                                 |
+| `math/subtract`                  | ❌     | *(native)*                        | Use `a - b`                                                                                          |
+| `object/assign`                  | ❌     | *(native)*                        | Use `Object.assign(...)` / spread                                                                    |
+| `object/assignIn`                | ❌     | *(native)*                        | `extend` alias; copies inherited props — rarely wanted                                               |
+| `object/assignInWith`            | ❌     | *(use `mergeWith`)*               | Customizer assign over inherited props                                                               |
+| `object/assignWith`              | ❌     | *(use `mergeWith`)*               | Customizer assign                                                                                    |
+| `object/at`                      | ✅     | `object/getByPaths`               | Read multiple deep paths at once; array result, plural sibling of `getByPath`                        |
+| `object/cloneWith`               | ✅     | `value/cloneShallow`              | Consolidated into `cloneShallow` — pass a customizer as the second arg                               |
+| `object/create`                  | ❌     | *(native)*                        | Use `Object.create(proto)` + `Object.assign`                                                         |
+| `object/defaults`                | ✅     | `object/assignDefaults`           | Consolidated — single source or array of sources, fully typed                                        |
+| `object/defaultsDeep`            | ✅     | `object/assignDefaults`           | Consolidated — pass `{deep: true}`                                                                   |
+| `object/extend`                  | ❌     | *(native)*                        | Alias of `assignIn`                                                                                  |
+| `object/extendWith`              | ❌     | *(use `mergeWith`)*               | Alias of `assignInWith`                                                                              |
+| `object/findLastKey`             | ✅     | `object/findObjectKey`            | Consolidated — pass `true` to scan from the end                                                      |
+| `object/forIn`                   | ❌     | *(native)*                        | Use `for...in`                                                                                       |
+| `object/forInRight`              | ❌     | *(native)*                        | Reverse `for...in`                                                                                   |
+| `object/forOwn`                  | ❌     | *(native)*                        | Use `Object.keys(obj).forEach(...)`                                                                  |
+| `object/forOwnRight`             | ❌     | *(native)*                        | Reverse own-key iteration                                                                            |
+| `object/fromPairs`               | ❌     | *(native)*                        | Use `Object.fromEntries(...)`                                                                        |
+| `object/functions`               | ❌     | *(legacy)*                        | Lists method names — niche legacy util                                                               |
+| `object/functionsIn`             | ❌     | *(legacy)*                        | Method names incl. inherited                                                                         |
+| `object/get`                     | ✅     | `object/getByPath`                | Renamed for clarity — deep-path read with TS path typing                                             |
+| `object/has`                     | ✅     | `object/hasPath`                  | Renamed for clarity — deep-path existence check                                                      |
+| `object/hasIn`                   | ✅     | `object/hasPath`                  | Consolidated — pass `{inherited: true}` to include the prototype chain                               |
+| `object/invertBy`                | ✅     | `object/swapObjectKeysValues`     | Pass an iteratee to group colliding keys into arrays                                                 |
+| `object/keys`                    | ❌     | *(native)*                        | Use `Object.keys(...)`                                                                               |
+| `object/keysIn`                  | ❌     | *(native)*                        | Own + inherited keys — rarely wanted                                                                 |
+| `object/property`                | ✅     | `object/createPathGetter`         | Renamed for clarity — builds a getter bound to a path (delegates to `getByPath`)                     |
+| `object/propertyOf`              | ✅     | `object/createObjectGetter`       | Renamed for clarity — builds a getter bound to an object (delegates to `getByPath`)                  |
+| `object/result`                  | ❌     | *(use `getByPath`)*               | Niche — read with `getByPath` and invoke the returned function yourself (`getByPath(obj, path)?.()`) |
+| `object/set`                     | ✅     | `object/setByPath`                | Renamed for clarity — mutating deep-path write, creating intermediate containers                     |
+| `object/setWith`                 | ✅     | `object/setByPath`                | Consolidated — pass a container customizer as the fourth arg                                         |
+| `object/toDefaulted`             | ✅     | `object/assignDefaults`           | Consolidated — pass `{copy: true}`                                                                   |
+| `object/toPairs`                 | ❌     | *(native)*                        | Use `Object.entries(...)`                                                                            |
+| `object/toPairsIn`               | ❌     | *(native)*                        | Entries incl. inherited                                                                              |
+| `object/transform`               | ❌     | *(native)*                        | Use `array.reduce(...)` / `Object.entries(obj).reduce(...)`                                          |
+| `object/unset`                   | ✅     | `object/deleteByPath`             | Renamed for clarity — mutating delete of the value at a deep path                                    |
+| `object/update`                  | ✅     | `object/updateByPath`             | Renamed for clarity — mutating deep-path update via an updater function                              |
+| `object/updateWith`              | ✅     | `object/updateByPath`             | Consolidated — pass a container customizer as the fourth arg                                         |
+| `object/values`                  | ❌     | *(native)*                        | Use `Object.values(...)`                                                                             |
+| `object/valuesIn`                | ❌     | *(native)*                        | Values incl. inherited                                                                               |
+| `predicate/conforms`             | ❓     | TBD                               | Builds a predicate from a shape of predicates (matcher family)                                       |
+| `predicate/conformsTo`           | ❓     | TBD                               | Checks a value against a shape of predicates                                                         |
+| `predicate/isArguments`          | ❌     | *(legacy)*                        | `arguments` is obsolete with rest params                                                             |
+| `predicate/isArray`              | ❌     | *(native)*                        | Use `Array.isArray(x)`                                                                               |
+| `predicate/isArrayLike`          | ❌     | *(native)*                        | Length duck-typing — rarely needed with iterables                                                    |
+| `predicate/isArrayLikeObject`    | ❌     | *(native)*                        | As above, excluding strings                                                                          |
+| `predicate/isElement`            | ❌     | *(native)*                        | Use `x instanceof Element`                                                                           |
+| `predicate/isEmpty`              | ✅     | `predicate/isEmptyValue`          | Renamed (any value, vs. `isEmptyObject`); empty strings/arrays/Maps/Sets/objects                     |
+| `predicate/isFinite`             | ❌     | *(native)*                        | Use `Number.isFinite(x)`                                                                             |
+| `predicate/isInteger`            | ❌     | *(native)*                        | Use `Number.isInteger(x)`                                                                            |
+| `predicate/isMatch`              | ❓     | TBD                               | Partial deep-equality match (matcher family)                                                         |
+| `predicate/isMatchWith`          | ❓     | TBD                               | `isMatch` with a customizer                                                                          |
+| `predicate/isNaN`                | ❌     | *(native)*                        | Use `Number.isNaN(x)`                                                                                |
+| `predicate/isNative`             | ❌     | *(legacy)*                        | Detects native functions — niche                                                                     |
+| `predicate/isObject`             | ❌     | *(native)*                        | `typeof x === 'object' && x !== null` (lodash also counts functions)                                 |
+| `predicate/isObjectLike`         | ❌     | *(native)*                        | `typeof x === 'object' && x !== null`                                                                |
+| `predicate/isSafeInteger`        | ❌     | *(native)*                        | Use `Number.isSafeInteger(x)`                                                                        |
+| `predicate/matches`              | ❓     | TBD                               | Builds a partial-match predicate (matcher family)                                                    |
+| `predicate/matchesProperty`      | ❓     | TBD                               | Builds a path-equals predicate (matcher family)                                                      |
+| `string/endsWith`                | ❌     | *(native)*                        | Use `string.endsWith(...)`                                                                           |
+| `string/padEnd`                  | ❌     | *(native)*                        | Use `string.padEnd(...)`                                                                             |
+| `string/padStart`                | ❌     | *(native)*                        | Use `string.padStart(...)`                                                                           |
+| `string/repeat`                  | ❌     | *(native)*                        | Use `string.repeat(n)`                                                                               |
+| `string/replace`                 | ❌     | *(native)*                        | Use `string.replace(...)` / `replaceAll`                                                             |
+| `string/split`                   | ❌     | *(native)*                        | Use `string.split(...)`                                                                              |
+| `string/startsWith`              | ❌     | *(native)*                        | Use `string.startsWith(...)`                                                                         |
+| `string/template`                | ❓     | TBD                               | String-templating engine; `Function`-construction / CSP concerns                                     |
+| `string/templateSettings`        | ❓     | TBD                               | Configuration for `template`                                                                         |
+| `string/toLower`                 | ❌     | *(native)*                        | Use `string.toLowerCase()`                                                                           |
+| `string/toUpper`                 | ❌     | *(native)*                        | Use `string.toUpperCase()`                                                                           |
+| `string/truncate`                | ⌛     | `string/truncate`                 | Length + omission + word/regex separator-boundary truncation                                         |
+| `util/bindAll`                   | ❌     | *(legacy)*                        | Bind methods in place — use class fields / arrow methods                                             |
+| `util/cond`                      | ❓     | TBD                               | Predicate→action pair dispatcher                                                                     |
+| `util/constant`                  | ❌     | *(native)*                        | Use `() => value`                                                                                    |
+| `util/defaultTo`                 | ❌     | *(native)*                        | Use `value ?? fallback`                                                                              |
+| `util/eq`                        | ❌     | *(native)*                        | Use `Object.is(a, b)` / `===`                                                                        |
+| `util/gt`                        | ❌     | *(native)*                        | Use `a > b`                                                                                          |
+| `util/gte`                       | ❌     | *(native)*                        | Use `a >= b`                                                                                         |
+| `util/invoke`                    | ❓     | TBD                               | Invoke a method at a deep path                                                                       |
+| `util/iteratee`                  | ❓     | TBD                               | The shorthand-iteratee builder (matcher family)                                                      |
+| `util/lt`                        | ❌     | *(native)*                        | Use `a < b`                                                                                          |
+| `util/lte`                       | ❌     | *(native)*                        | Use `a <= b`                                                                                         |
+| `util/method`                    | ❓     | TBD                               | Returns a function invoking a method at a path                                                       |
+| `util/methodOf`                  | ❓     | TBD                               | Inverted `method`                                                                                    |
+| `util/now`                       | ❌     | *(native)*                        | Use `Date.now()`                                                                                     |
+| `util/over`                      | ❓     | TBD                               | Run a value through several funcs, collecting results                                                |
+| `util/overEvery`                 | ✅     | `function/everyPredicate`         | Renamed; predicates joined with `&&` (short-circuiting)                                              |
+| `util/overSome`                  | ✅     | `function/somePredicate`          | Renamed; predicates joined with `\|\|` (short-circuiting)                                            |
+| `util/stubArray`                 | ❌     | *(native)*                        | Use `() => []`                                                                                       |
+| `util/stubFalse`                 | ❌     | *(native)*                        | Use `() => false`                                                                                    |
+| `util/stubObject`                | ❌     | *(native)*                        | Use `() => ({})`                                                                                     |
+| `util/stubString`                | ❌     | *(native)*                        | Use `() => ''`                                                                                       |
+| `util/stubTrue`                  | ❌     | *(native)*                        | Use `() => true`                                                                                     |
+| `util/times`                     | ✅     | `function/mapTimes`               | Renamed; iteratee required, clearer than `Array.from({length}, ...)`                                 |
+| `util/toArray`                   | ❌     | *(native)*                        | Use `Array.from(x)` / spread                                                                         |
+| `util/toFinite`                  | ❌     | *(native)*                        | Coercion — use `Number(x)`                                                                           |
+| `util/toInteger`                 | ❌     | *(native)*                        | Use `Math.trunc(Number(x))`                                                                          |
+| `util/toLength`                  | ❌     | *(native)*                        | Coercion — rarely needed                                                                             |
+| `util/toNumber`                  | ❌     | *(native)*                        | Use `Number(x)`                                                                                      |
+| `util/toPath`                    | ✅     | `object/toPathSegments`           | Renamed for clarity — parses a path string into an array of segments                                 |
+| `util/toPlainObject`             | ❌     | *(legacy)*                        | Flattens inherited props — niche                                                                     |
+| `util/toSafeInteger`             | ❌     | *(native)*                        | Coercion — rarely needed                                                                             |
+| `util/toString`                  | ❌     | *(native)*                        | Use `String(x)`                                                                                      |
+| `util/uniqueId`                  | ❓     | TBD                               | Counter-based id; module-global state is a design question                                           |
 
 ## Contributors
 
