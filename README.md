@@ -299,7 +299,7 @@ Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e
 | `array/forEach`                  | ❌     | *(use `iterable/forEach`)*        | Collection iterator                                                                                  |
 | `array/includes`                 | ❌     | *(native)*                        | Use `array.includes(...)`                                                                            |
 | `array/indexOf`                  | ❌     | *(native)*                        | Use `array.indexOf(...)`                                                                             |
-| `array/invokeMap`                | ❓     | TBD                               | Path-based method invocation across a collection; now feasible with the `getByPath` path utility     |
+| `array/invokeMap`                | ❌     | *(native)*                        | Thin over `collection.map((item) => getByPath(item, path)?.(...args))` — little value                |
 | `array/join`                     | ❌     | *(native)*                        | Use `array.join(...)`                                                                                |
 | `array/lastIndexOf`              | ❌     | *(native)*                        | Use `array.lastIndexOf(...)`                                                                         |
 | `array/map`                      | ❌     | *(native)*                        | Use `array.map(...)`; shorthand iteratees intentionally out of scope                                 |
