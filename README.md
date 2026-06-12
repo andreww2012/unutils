@@ -53,6 +53,7 @@
 | `object/findObjectKey`            | Consolidates `findKey`/`findLastKey`; pass `true` to scan from the end                             |
 | `object/hasPath`                  | Deep-path existence check; pass `{inherited: true}` to include the prototype chain                 |
 | `object/mergeDeep`                | Consolidates `merge`/`mergeWith`/`toMerged`; optional `mergeValues` customizer and `{copy}` mode   |
+| `object/objectFromEntriesDeep`    | Deep-path `Object.fromEntries`; builds nested objects/arrays from `[path, value]` entries          |
 | `object/omit`                     | Consolidates `omit`/`omitBy`; top-level keys, deep paths, or a predicate                           |
 | `object/pick`                     | Consolidates `pick`/`pickBy`; top-level keys, deep paths, or a predicate                           |
 | `object/setByPath`                | Consolidates `set`/`setWith`; mutating deep-path write with optional container customizer          |
@@ -320,7 +321,7 @@ Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e
 | `array/sortedLastIndex`          | ✅     | `array/sortedArrayInsertionIndex` | Consolidated — pass `{rightmost: true}` for the insertion point after equal elements                 |
 | `array/sortedLastIndexBy`        | ✅     | `array/sortedArrayInsertionIndex` | Consolidated — pass `{iteratee, rightmost: true}`                                                    |
 | `array/sortedLastIndexOf`        | ✅     | `array/sortedArrayIndexOf`        | Split out — pass `{rightmost: true}` for the last matching index                                     |
-| `array/zipObjectDeep`            | ❓     | TBD                               | `zipObject` with deep-path keys — leans on the `setByPath` path utility                              |
+| `array/zipObjectDeep`            | ✅     | `object/objectFromEntriesDeep`    | Moved to `object`; entries-pairs API (deep-path `Object.fromEntries`) via `setByPath`                |
 | `function/bind`                  | ❌     | *(native / use `partial`)*        | Use `fn.bind(thisArg, ...args)`; for placeholder partials see `function/partial`                     |
 | `function/bindKey`               | ❓     | TBD                               | Late-bound method binding (resolves the method at call time)                                         |
 | `function/defer`                 | ❌     | *(native)*                        | Use `setTimeout(fn)` / `queueMicrotask(fn)`                                                          |

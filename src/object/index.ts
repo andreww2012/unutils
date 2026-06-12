@@ -10,6 +10,7 @@ export {hasPath} from './has-path.ts';
 export {mapKeys} from './map-keys.ts';
 export {mapValues} from './map-values.ts';
 export {mergeDeep} from './merge-deep.ts';
+export {objectFromEntriesDeep} from './object-from-entries-deep.ts';
 export {omit} from './omit.ts';
 export {pick} from './pick.ts';
 export {setByPath} from './set-by-path.ts';
