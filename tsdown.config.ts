@@ -4,7 +4,7 @@ import {defineConfig} from 'tsdown';
 
 const utilityGroups = fs
   .readdirSync(path.join(import.meta.dirname, 'src'), {withFileTypes: true})
-  .filter((entry) => entry.isDirectory())
+  .filter((entry) => entry.isDirectory() && !entry.name.startsWith('_'))
   .map((entry) => entry.name);
 
 export default defineConfig({

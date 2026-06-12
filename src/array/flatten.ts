@@ -1,6 +1,5 @@
 import {flattenDeep, flatten as flattenEs} from 'es-toolkit/array';
-
-type ExtractNestedArrayType<T> = T extends readonly (infer U)[] ? ExtractNestedArrayType<U> : T;
+import type {ExtractNestedArrayType} from '../_internal/types.ts';
 
 /**
  * Flattens a nested array. When the optional `depth` is omitted — or explicitly

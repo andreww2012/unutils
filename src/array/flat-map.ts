@@ -1,6 +1,5 @@
 import {flatMapDeep, flatMap as flatMapEs} from 'es-toolkit/array';
-
-type ExtractNestedArrayType<T> = T extends readonly (infer U)[] ? ExtractNestedArrayType<U> : T;
+import type {ExtractNestedArrayType} from '../_internal/types.ts';
 
 /**
  * Maps each element through `iteratee` and flattens the resulting arrays. When
