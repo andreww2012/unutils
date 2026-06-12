@@ -1,17 +1,20 @@
 /**
  * Ensures a value is an array: returns it unchanged when it already is one,
- * wraps it in a single-element array otherwise, and returns an empty array for
- * nullish input (`null` / `undefined`). Note that this *wraps* rather than
- * *converts* — passing an iterable like a `Set` yields `[set]`, not its spread
- * contents (use `Array.from` for that).
+ * wraps it in a single-element array otherwise, and — by default — returns an
+ * empty array for nullish input (`null` / `undefined`). Note that this *wraps*
+ * rather than *converts* — passing an iterable like a `Set` yields `[set]`, not
+ * its spread contents (use `Array.from` for that).
  *
  * Based on `castArray` from `es-toolkit/compat`, but with two enhancements:
  * sharper typing (an existing array — including a tuple — keeps its exact type,
  * any other value widens to `value[]`), and nullish values collapse to `[]`
- * instead of `castArray`'s `[null]` / `[undefined]`.
+ * instead of `castArray`'s `[null]` / `[undefined]`. Pass `wrapNullish: true` to
+ * opt back into wrapping nullish values like any other value.
  * @param value - The value to ensure is an array.
+ * @param wrapNullish - When `true`, a nullish `value` is wrapped (`[value]`)
+ * like any other value instead of collapsing to `[]`. Defaults to `false`.
  * @returns The original array, a new single-element array wrapping `value`, or
- * an empty array when `value` is nullish.
+ * an empty array when `value` is nullish and `wrapNullish` is `false`.
  * @example
  * // Wraps a non-array
  * arrayify(1);
@@ -25,18 +28,30 @@
  * arrayify(new Set([1, 2, 3]));
  * // [Set(3) {1, 2, 3}]
  * @example
- * // Nullish input collapses to an empty array
+ * // Nullish input collapses to an empty array by default
  * arrayify(undefined);
  * // []
  * arrayify(null);
  * // []
+ * @example
+ * // ...unless `wrapNullish` opts into treating it like any other value
+ * arrayify(null, true);
+ * // [null]
+ * arrayify(undefined, true);
+ * // [undefined]
  */
-export function arrayify(value: null | undefined): [];
-export function arrayify<T extends readonly unknown[]>(value: T | null | undefined): T;
-export function arrayify<T>(value: T | null | undefined): NonNullable<T>[];
-export function arrayify(value: unknown): unknown {
+export function arrayify<T extends null | undefined>(value: T, wrapNullish: true): [T];
+export function arrayify<T extends readonly unknown[]>(value: T, wrapNullish: true): T;
+export function arrayify<T>(value: T, wrapNullish: true): NonNullable<T>[];
+export function arrayify(value: null | undefined, wrapNullish?: boolean): [];
+export function arrayify<T extends readonly unknown[]>(
+  value: T | null | undefined,
+  wrapNullish?: boolean,
+): T;
+export function arrayify<T>(value: T | null | undefined, wrapNullish?: boolean): NonNullable<T>[];
+export function arrayify(value: unknown, wrapNullish = false): unknown {
   if (value == null) {
-    return [];
+    return wrapNullish ? [value] : [];
   }
 
   return Array.isArray(value) ? (value as unknown[]) : [value];

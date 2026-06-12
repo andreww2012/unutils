@@ -41,4 +41,20 @@ describe('array/arrayify', () => {
 
     expect(result).toStrictEqual([1, 2, 3]);
   });
+
+  it('wraps `null` like any other value when `wrapNullish` is `true`', () => {
+    expect(arrayify(null, true)).toStrictEqual([null]);
+  });
+
+  it('wraps `undefined` like any other value when `wrapNullish` is `true`', () => {
+    expect(arrayify(undefined, true)).toStrictEqual([undefined]);
+  });
+
+  it('still collapses nullish input to `[]` when `wrapNullish` is `false`', () => {
+    expect(arrayify(null, false)).toStrictEqual([]);
+  });
+
+  it('does not wrap a non-nullish value twice when `wrapNullish` is `true`', () => {
+    expect(arrayify(1, true)).toStrictEqual([1]);
+  });
 });
