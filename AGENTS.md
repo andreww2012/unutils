@@ -55,6 +55,8 @@ Names target a reader who has never used the source library: we rename whenever 
 - **Predicates read as a question (`is*`)** — `inRange` → `isInRange`, `isLength` → `isValidLength`; converters use `to*` — `camelCase` → `toCamelCase`.
 - **Strict camelCase, acronyms included.** `isJSON` → `isJson`.
 
+> **The main good name test:** an average JavaScript developer should be able to well enough understand what the function does *only by its name*.
+
 ## Testing tools
 
 Prefer running on the changed files unless not possible or instructed otherwise.
