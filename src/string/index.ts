@@ -14,5 +14,6 @@ export {toSnakeCase} from './to-snake-case.ts';
 export {toStartCase} from './to-start-case.ts';
 export {toUpperCase} from './to-upper-case.ts';
 export {toWords} from './to-words.ts';
+export {truncate} from './truncate.ts';
 export {unescapeHtml} from './unescape-html.ts';
 export {upperFirst} from './upper-first.ts';
