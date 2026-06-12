@@ -323,14 +323,14 @@ Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e
 | `array/sortedLastIndexOf`        | ✅     | `array/sortedArrayIndexOf`        | Split out — pass `{rightmost: true}` for the last matching index                                     |
 | `array/zipObjectDeep`            | ✅     | `object/objectFromEntriesDeep`    | Moved to `object`; entries-pairs API (deep-path `Object.fromEntries`) via `setByPath`                |
 | `function/bind`                  | ❌     | *(native / use `partial`)*        | Use `fn.bind(thisArg, ...args)`; for placeholder partials see `function/partial`                     |
-| `function/bindKey`               | ❓     | TBD                               | Late-bound method binding (resolves the method at call time)                                         |
+| `function/bindKey`               | ✅     | `function/bindLate`               | Renamed for clarity — late-bound method binding (resolves `object[key]` at call time)                |
 | `function/defer`                 | ❌     | *(native)*                        | Use `setTimeout(fn)` / `queueMicrotask(fn)`                                                          |
 | `function/delay`                 | ❌     | *(native)*                        | Use `setTimeout(fn, ms, ...args)`; for a Promise see `async/sleep`                                   |
-| `function/flip`                  | ❓     | TBD                               | Returns a function with reversed argument order                                                      |
-| `function/nthArg`                | ❓     | TBD                               | Returns a function that yields its nth argument                                                      |
-| `function/overArgs`              | ❓     | TBD                               | Transforms arguments through per-position funcs before calling                                       |
-| `function/rearg`                 | ❓     | TBD                               | Reorders arguments by an index map                                                                   |
-| `function/wrap`                  | ❓     | TBD                               | Wraps a value with a wrapper function                                                                |
+| `function/flip`                  | ❌     | *(native)*                        | Use `(...args) => fn(...args.toReversed())`                                                          |
+| `function/nthArg`                | ❌     | *(native)*                        | Use `(...args) => args.at(n)` — `Array.prototype.at` already does negative indexing                  |
+| `function/overArgs`              | ❌     | *(native)*                        | Use `(...args) => fn(...args.map((a, i) => transforms[i] ? transforms[i](a) : a))`                   |
+| `function/rearg`                 | ❌     | *(native)*                        | Use `(...args) => fn(...indices.map((i) => args[i]))`                                                |
+| `function/wrap`                  | ❌     | *(use `partial`)*                 | `wrap(value, wrapper)` is just `partial(wrapper, [value])`                                           |
 | `math/add`                       | ❌     | *(native)*                        | Use `a + b`                                                                                          |
 | `math/ceil`                      | ✅     | `math/ceil`                       | Precision rounding (`ceil(4.006, 2)`); companion to `math/round`                                     |
 | `math/divide`                    | ❌     | *(native)*                        | Use `a / b`                                                                                          |

@@ -1,5 +1,6 @@
 export {attemptAsync} from './attempt-async.ts';
 export {attempt} from './attempt.ts';
+export {bindLate} from './bind-late.ts';
 export {curry} from './curry.ts';
 export {debounce} from './debounce.ts';
 export {everyPredicate} from './every-predicate.ts';
