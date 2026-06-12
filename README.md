@@ -21,6 +21,7 @@
 | `array/arrayify`                  | Wraps non-arrays (tuple-preserving); nullish input returns `[]`                                    |
 | `array/arrayIntersection`         | Consolidates `intersection`/`intersectionBy`/`intersectionWith`; optional mapper or comparator     |
 | `array/arrayIsSubset`             | Consolidates `isSubset`/`isSubsetWith`; optional mapper or comparator                              |
+| `array/arrayPurgeValues`          | Consolidates `pull`/`pullAllBy`/`pullAllWith`; mutating; optional mapper or comparator             |
 | `array/arraySample`               | Consolidates `sample`/`sampleSize`; pass a size for multiple elements                              |
 | `array/arraySymmetricDifference`  | Consolidates `xor`/`xorBy`/`xorWith`; renamed to the set-theory term                               |
 | `array/arrayTakeWhile`            | Consolidates `takeWhile`/`takeRightWhile`; pass `true` to walk from the end                        |
@@ -304,8 +305,8 @@ Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e
 | `array/map`                      | ❌     | *(native)*                        | Use `array.map(...)`; shorthand iteratees intentionally out of scope                                 |
 | `array/nth`                      | ❌     | *(native)*                        | Use `array.at(n)`                                                                                    |
 | `array/pullAll`                  | ❌     | `array/arrayPurgeValues`          | Already added — pass the values as an array                                                          |
-| `array/pullAllBy`                | ❓     | `array/arrayPurgeValues`          | Would extend `arrayPurgeValues` with a mapper                                                        |
-| `array/pullAllWith`              | ❓     | `array/arrayPurgeValues`          | Would extend `arrayPurgeValues` with a comparator                                                    |
+| `array/pullAllBy`                | ✅     | `array/arrayPurgeValues`          | Consolidated — pass a mapper `(value) => key` as third arg                                           |
+| `array/pullAllWith`              | ✅     | `array/arrayPurgeValues`          | Consolidated — pass a comparator `(a, b) => boolean` as third arg                                    |
 | `array/reduce`                   | ❌     | *(use `iterable/reduce`)*         | Native `array.reduce` or the simple-callback `iterable/reduce`                                       |
 | `array/reduceRight`              | ❌     | *(native)*                        | Use `array.reduceRight(...)`                                                                         |
 | `array/reject`                   | ❌     | *(native)*                        | Negated filter — `array.filter((x) => !predicate(x))`                                                |
