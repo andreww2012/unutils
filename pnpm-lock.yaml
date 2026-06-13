@@ -236,6 +236,9 @@ importers:
       '@types/node':
         specifier: 22.19.17
         version: 22.19.17
+      '@types/yieldable-json':
+        specifier: 2.0.2
+        version: 2.0.2
       '@typescript/native-preview':
         specifier: 7.0.0-dev.20260612.1
         version: 7.0.0-dev.20260612.1
@@ -305,6 +308,9 @@ importers:
       vitest:
         specifier: 4.1.8
         version: 4.1.8(@types/node@22.19.17)(@vitest/coverage-v8@4.1.8)(@vitest/ui@4.1.8)(vite@8.0.14)
+      yieldable-json:
+        specifier: 2.1.0
+        version: 2.1.0
 
 packages:
 
@@ -1937,6 +1943,9 @@ packages:
 
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
+
+  '@types/yieldable-json@2.0.2':
+    resolution: {integrity: sha512-4Z1pTM2qrQjBtT2wNUvwR7oHW/efgVZKcNiNHOC0zvd9hcSr33CSzdlSSdiLySJwE0V+7P5+0RFtAnuYon5ZQg==}
 
   '@typescript-eslint/eslint-plugin@8.60.1':
     resolution: {integrity: sha512-JQ4S5GB0tfjO8BuJ4fcX+HodkzJjYBV+7OJ+wLygaX7OGQ7FudyHL4NSCA6ob+w3Yn+5MkKIozOwQhXeM7opVg==}
@@ -5593,6 +5602,10 @@ packages:
     resolution: {integrity: sha512-4UEqdc2RYGHZc7Doyqkrqiln3p9X2DZVxaGbwhn2pi7MrRagKaOcIKe8L3OxYcbhXLgLFUS3zAYuQjKBQgmuNg==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=23}
 
+  yieldable-json@2.1.0:
+    resolution: {integrity: sha512-yi7ehVd4UPvdmD9xf/8DCsdGAo4yC6kYZ9mxNYgXk/b24+s3FIn9Vevfb2qjs4KNUe8BmL/Ci8FHsn174uvcYA==}
+    engines: {node: '>= 4.0.0'}
+
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
@@ -7213,6 +7226,8 @@ snapshots:
   '@types/unist@2.0.11': {}
 
   '@types/unist@3.0.3': {}
+
+  '@types/yieldable-json@2.0.2': {}
 
   '@typescript-eslint/eslint-plugin@8.60.1(@typescript-eslint/parser@8.60.1)(eslint@10.5.0)(typescript@6.0.3)':
     dependencies:
@@ -11053,6 +11068,8 @@ snapshots:
       string-width: 7.2.0
       y18n: 5.0.8
       yargs-parser: 22.0.0
+
+  yieldable-json@2.1.0: {}
 
   yocto-queue@0.1.0: {}
 

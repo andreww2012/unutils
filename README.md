@@ -45,7 +45,9 @@
 | `iterable/slidingWindow`          | -                                                                                                  |
 | `iterable/some`                   | Generalized from `set/some`; simple `(value) => boolean` callback                                  |
 | `json/jsonParse`                  | Strict, throwing `JSON.parse` upgrade; decodes standalone tokens; blocks prototype pollution       |
+| `json/jsonParseAsync`             | Promisified non-blocking `JSON.parse` (yields to the event loop); `yieldable-json` wrapper         |
 | `json/jsonParseSafe`              | Forgiving parse that never throws; falls back to the original input when it cannot be parsed       |
+| `json/jsonStringifyAsync`         | Promisified non-blocking `JSON.stringify` (yields to the event loop); `yieldable-json` wrapper     |
 | `math/max`                        | Single-pass over any iterable; returns `undefined` for an empty input                              |
 | `math/mean`                       | Generalized to any iterable (single-pass); optional `(item) => number` selector                    |
 | `math/median`                     | Generalized to any iterable (materialized + sorted); optional `(item) => number` selector          |
@@ -480,6 +482,15 @@ Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e
 | [`(default)`][safe-stable-stringify] | ✅     | `json/jsonStringifyStable`  | Renamed; deterministic output (recursively sorted keys); circular refs become `"[Circular]"`; supports `bigint` |
 | [`configure`][safe-stable-stringify] | ❓     | *(under consideration)*     | Escape hatch for custom comparator / circular handling — skipped to keep the surface minimal                    |
 
+### `yieldable-json`
+
+| Original function group and name   | Status | Our function group and name | Notes                                                                                             |
+| ---------------------------------- | ------ | --------------------------- | ------------------------------------------------------------------------------------------------- |
+| [`parseAsync`][yieldable-json]     | ✅     | `json/jsonParseAsync`       | Promisified, typed; non-blocking `JSON.parse` that yields to the event loop. Optional `intensity` |
+| [`stringifyAsync`][yieldable-json] | ✅     | `json/jsonStringifyAsync`   | Promisified, typed; non-blocking `JSON.stringify`. Optional `replacer`/`space`/`intensity`        |
+
+> **Note:** `yieldable-json`'s own argument parser mishandles `stringifyAsync`'s `space`/`intensity` when both are passed; the wrapper works around it. Its `ParseError`/`StringifyError` do not extend `Error`, so rejections carry those objects as-is.
+
 ## Contributors
 
 <!-- eslint-disable markdown-preferences/padding-line-between-blocks, markdown/require-alt-text -->
@@ -510,6 +521,8 @@ Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e
 [lossless-json]: https://github.com/josdejong/lossless-json
 
 [safe-stable-stringify]: https://github.com/BridgeAR/safe-stable-stringify
+
+[yieldable-json]: https://github.com/ibmruntimes/yieldable-json
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->

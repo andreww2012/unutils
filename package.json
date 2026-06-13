@@ -135,6 +135,7 @@
     "@commitlint/types": "21.0.1",
     "@eslint/config-inspector": "3.0.4",
     "@types/node": "22.19.17",
+    "@types/yieldable-json": "2.0.2",
     "@typescript/native-preview": "7.0.0-dev.20260612.1",
     "@vitest/coverage-v8": "4.1.8",
     "@vitest/eslint-plugin": "1.6.20",
@@ -157,7 +158,8 @@
     "semver": "7.8.4",
     "tsdown": "0.22.2",
     "typescript": "6.0.3",
-    "vitest": "4.1.8"
+    "vitest": "4.1.8",
+    "yieldable-json": "2.1.0"
   },
   "engines": {
     "node": "^22.18.0 || >=24"

@@ -1,9 +1,9 @@
 import type {CSpellSettings} from 'cspell';
 
 const GLOBALLY_IGNORED_WORDS = {
-  names: ['unutils', 'sonarjs', 'destr'],
+  names: ['unutils', 'sonarjs', 'destr', 'yieldable'],
   misc: ['knipignore', 'rearg'],
-  englishIshWords: ['arrayify', 'customizer', 'deburr', 'iteratees', 'nullary'],
+  englishIshWords: ['arrayify', 'customizer', 'deburr', 'iteratees', 'nullary', 'stringifiers'],
 } satisfies Record<string, string[]>;
 
 export default {
