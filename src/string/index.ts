@@ -5,6 +5,7 @@ export {escapeRegExp} from './escape-regexp.ts';
 export {lowerFirst} from './lower-first.ts';
 export {stringPad} from './string-pad.ts';
 export {stringReverse} from './string-reverse.ts';
+export {stringSplit} from './string-split.ts';
 export {toCamelCase} from './to-camel-case.ts';
 export {toConstantCase} from './to-constant-case.ts';
 export {toKebabCase} from './to-kebab-case.ts';

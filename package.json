@@ -82,6 +82,10 @@
       "types": "./dist/string/index.d.mts",
       "default": "./dist/string/index.mjs"
     },
+    "./ts": {
+      "types": "./dist/ts/index.d.mts",
+      "default": "./dist/ts/index.mjs"
+    },
     "./value": {
       "types": "./dist/value/index.d.mts",
       "default": "./dist/value/index.mjs"
@@ -156,6 +160,7 @@
     "publint": "0.3.21",
     "safe-stable-stringify": "2.5.0",
     "semver": "7.8.4",
+    "ts-extras": "1.0.0",
     "tsdown": "0.22.2",
     "typescript": "6.0.3",
     "vitest": "4.1.8",

@@ -13,69 +13,71 @@
 
 ### Custom functions
 
-| Our function group and name       | Notes                                                                                              |
-| --------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `array/arrayAtMulti`              | Extended to also accept a single index, not just a list                                            |
-| `array/arrayDifference`           | Consolidates `difference`/`differenceBy`/`differenceWith`; optional mapper or comparator           |
-| `array/arrayDrop`                 | Consolidates `drop`/`dropWhile`; pass a predicate to drop while it holds                           |
-| `array/arrayDropRight`            | Consolidates `dropRight`/`dropRightWhile`; pass a predicate to drop while it holds                 |
-| `array/arrayFill`                 | Consolidates `fill`/`toFilled`; pass `{copy: true}` to return a new array                          |
-| `array/arrayify`                  | Wraps non-arrays (tuple-preserving); nullish input returns `[]` (or `[value]` with `wrapNullish`)  |
-| `array/arrayIntersection`         | Consolidates `intersection`/`intersectionBy`/`intersectionWith`; optional mapper or comparator     |
-| `array/arrayIsSubset`             | Consolidates `isSubset`/`isSubsetWith`; optional mapper or comparator                              |
-| `array/arrayPurgeValues`          | Consolidates `pull`/`pullAllBy`/`pullAllWith`; mutating; optional mapper or comparator             |
-| `array/arraySample`               | Consolidates `sample`/`sampleSize`; pass a size for multiple elements                              |
-| `array/arraySymmetricDifference`  | Consolidates `xor`/`xorBy`/`xorWith`; renamed to the set-theory term                               |
-| `array/arrayTakeWhile`            | Consolidates `takeWhile`/`takeRightWhile`; pass `true` to walk from the end                        |
-| `array/arrayTranspose`            | Consolidates `zip`/`unzip`/`zipWith`/`unzipWith`; optional `(...column) => value` iteratee         |
-| `array/arrayUnion`                | Consolidates `union`/`unionBy`/`unionWith`; optional mapper or comparator                          |
-| `array/arrayUnique`               | Consolidates `uniq`/`uniqBy`/`uniqWith`; optional mapper or comparator                             |
-| `array/flatMap`                   | Defaults to deep flattening; pass a finite `depth` for a specific level                            |
-| `array/flatten`                   | Defaults to deep flattening; pass a finite `depth` for a specific level                            |
-| `array/sortedArrayIndexOf`        | Binary search for an existing value in a sorted array; returns its index or `-1`; `{rightmost?}`   |
-| `array/sortedArrayInsertionIndex` | Binary-search insertion point into a sorted array; `{iteratee?, rightmost?}`                       |
-| `function/curry`                  | Consolidates `curry`/`curryRight`; pass `true` to collect arguments right-to-left                  |
-| `function/flow`                   | Consolidates `flow`/`flowRight`; functions as an array; pass `true` for right-to-left              |
-| `function/mapTimes`               | Renamed `times`; iteratee required; clearer than `Array.from({length}, ...)`                       |
-| `function/partial`                | Consolidates `partial`/`partialRight`; args as an array; pass `true` to pre-apply trailing         |
-| `iterable/countBy`                | -                                                                                                  |
-| `iterable/every`                  | Generalized from `set/every`; simple `(value) => boolean` callback                                 |
-| `iterable/find`                   | Generalized from `set/find`; simple `(value) => boolean` callback                                  |
-| `iterable/forEach`                | Generalized from `set/forEach`; simple `(value) => void` callback                                  |
-| `iterable/keyedBy`                | -                                                                                                  |
-| `iterable/reduce`                 | Generalized from `set/reduce`; simple `(acc, value) => acc` callback                               |
-| `iterable/slidingWindow`          | -                                                                                                  |
-| `iterable/some`                   | Generalized from `set/some`; simple `(value) => boolean` callback                                  |
-| `json/jsonParse`                  | Strict, throwing `JSON.parse` upgrade; decodes standalone tokens; blocks prototype pollution       |
-| `json/jsonParseAsync`             | Promisified non-blocking `JSON.parse` (yields to the event loop); `yieldable-json` wrapper         |
-| `json/jsonParseSafe`              | Forgiving parse that never throws; falls back to the original input when it cannot be parsed       |
-| `json/jsonStringifyAsync`         | Promisified non-blocking `JSON.stringify` (yields to the event loop); `yieldable-json` wrapper     |
-| `math/max`                        | Single-pass over any iterable; returns `undefined` for an empty input                              |
-| `math/mean`                       | Generalized to any iterable (single-pass); optional `(item) => number` selector                    |
-| `math/median`                     | Generalized to any iterable (materialized + sorted); optional `(item) => number` selector          |
-| `math/min`                        | Single-pass over any iterable; returns `undefined` for an empty input                              |
-| `math/sum`                        | Generalized to any iterable (single-pass); optional `(item, index) => number` selector             |
-| `object/assignDefaults`           | Consolidates `defaults`/`defaultsDeep`/`toDefaulted`; single source or array, `{deep, copy}` modes |
-| `object/findObjectKey`            | Consolidates `findKey`/`findLastKey`; pass `true` to scan from the end                             |
-| `object/hasPath`                  | Deep-path existence check; pass `{inherited: true}` to include the prototype chain                 |
-| `object/mergeDeep`                | Consolidates `merge`/`mergeWith`/`toMerged`; optional `mergeValues` customizer and `{copy}` mode   |
-| `object/objectFromEntriesDeep`    | Deep-path `Object.fromEntries`; builds nested objects/arrays from `[path, value]` entries          |
-| `object/omit`                     | Consolidates `omit`/`omitBy`; top-level keys, deep paths, or a predicate                           |
-| `object/pick`                     | Consolidates `pick`/`pickBy`; top-level keys, deep paths, or a predicate                           |
-| `object/setByPath`                | Consolidates `set`/`setWith`; mutating deep-path write with optional container customizer          |
-| `object/swapObjectKeysValues`     | Consolidates `invert`/`invertBy`; pass an iteratee to group colliding keys into arrays             |
-| `object/updateByPath`             | Consolidates `update`/`updateWith`; mutating deep-path update with optional container customizer   |
-| `predicate/isBuffer`              | Enhanced with a `value is Buffer` type guard                                                       |
-| `value/cloneDeep`                 | Consolidates `cloneDeep`/`cloneDeepWith`; optional customizer                                      |
-| `value/cloneShallow`              | Consolidates `clone`/`cloneWith`; optional customizer                                              |
-| `value/isEqual`                   | Consolidates `isEqual`/`isEqualWith`; optional customizer                                          |
-| `value/isObjectMatching`          | Consolidates `isMatch`/`isMatchWith`; deep partial match; optional customizer                      |
+| Our function group and name       | Notes                                                                                                                                  |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `array/arrayAt`                   | Consolidates `ts-extras`' `arrayAt` (precise tuple typing for literal indices) with es-toolkit's `at` (also accepts a list of indices) |
+| `array/arrayDifference`           | Consolidates `difference`/`differenceBy`/`differenceWith`; optional mapper or comparator                                               |
+| `array/arrayDrop`                 | Consolidates `drop`/`dropWhile`; pass a predicate to drop while it holds                                                               |
+| `array/arrayDropRight`            | Consolidates `dropRight`/`dropRightWhile`; pass a predicate to drop while it holds                                                     |
+| `array/arrayFill`                 | Consolidates `fill`/`toFilled`; pass `{copy: true}` to return a new array                                                              |
+| `array/arrayify`                  | Wraps non-arrays (tuple-preserving); nullish input returns `[]` (or `[value]` with `wrapNullish`)                                      |
+| `array/arrayIntersection`         | Consolidates `intersection`/`intersectionBy`/`intersectionWith`; optional mapper or comparator                                         |
+| `array/arrayIsSubset`             | Consolidates `isSubset`/`isSubsetWith`; optional mapper or comparator                                                                  |
+| `array/arrayPurgeValues`          | Consolidates `pull`/`pullAllBy`/`pullAllWith`; mutating; optional mapper or comparator                                                 |
+| `array/arraySample`               | Consolidates `sample`/`sampleSize`; pass a size for multiple elements                                                                  |
+| `array/arraySymmetricDifference`  | Consolidates `xor`/`xorBy`/`xorWith`; renamed to the set-theory term                                                                   |
+| `array/arrayTakeWhile`            | Consolidates `takeWhile`/`takeRightWhile`; pass `true` to walk from the end                                                            |
+| `array/arrayTranspose`            | Consolidates `zip`/`unzip`/`zipWith`/`unzipWith`; optional `(...column) => value` iteratee                                             |
+| `array/arrayUnion`                | Consolidates `union`/`unionBy`/`unionWith`; optional mapper or comparator                                                              |
+| `array/arrayUnique`               | Consolidates `uniq`/`uniqBy`/`uniqWith`; optional mapper or comparator                                                                 |
+| `array/flatMap`                   | Defaults to deep flattening; pass a finite `depth` for a specific level                                                                |
+| `array/flatten`                   | Defaults to deep flattening; pass a finite `depth` for a specific level                                                                |
+| `array/sortedArrayIndexOf`        | Binary search for an existing value in a sorted array; returns its index or `-1`; `{rightmost?}`                                       |
+| `array/sortedArrayInsertionIndex` | Binary-search insertion point into a sorted array; `{iteratee?, rightmost?}`                                                           |
+| `function/curry`                  | Consolidates `curry`/`curryRight`; pass `true` to collect arguments right-to-left                                                      |
+| `function/flow`                   | Consolidates `flow`/`flowRight`; functions as an array; pass `true` for right-to-left                                                  |
+| `function/mapTimes`               | Renamed `times`; iteratee required; clearer than `Array.from({length}, ...)`                                                           |
+| `function/partial`                | Consolidates `partial`/`partialRight`; args as an array; pass `true` to pre-apply trailing                                             |
+| `iterable/countBy`                | -                                                                                                                                      |
+| `iterable/every`                  | Generalized from `set/every`; simple `(value) => boolean` callback                                                                     |
+| `iterable/find`                   | Generalized from `set/find`; simple `(value) => boolean` callback                                                                      |
+| `iterable/forEach`                | Generalized from `set/forEach`; simple `(value) => void` callback                                                                      |
+| `iterable/keyedBy`                | -                                                                                                                                      |
+| `iterable/reduce`                 | Generalized from `set/reduce`; simple `(acc, value) => acc` callback                                                                   |
+| `iterable/slidingWindow`          | -                                                                                                                                      |
+| `iterable/some`                   | Generalized from `set/some`; simple `(value) => boolean` callback                                                                      |
+| `json/jsonParse`                  | Strict, throwing `JSON.parse` upgrade; decodes standalone tokens; blocks prototype pollution                                           |
+| `json/jsonParseAsync`             | Promisified non-blocking `JSON.parse` (yields to the event loop); `yieldable-json` wrapper                                             |
+| `json/jsonParseSafe`              | Forgiving parse that never throws; falls back to the original input when it cannot be parsed                                           |
+| `json/jsonStringifyAsync`         | Promisified non-blocking `JSON.stringify` (yields to the event loop); `yieldable-json` wrapper                                         |
+| `math/max`                        | Single-pass over any iterable; returns `undefined` for an empty input                                                                  |
+| `math/mean`                       | Generalized to any iterable (single-pass); optional `(item) => number` selector                                                        |
+| `math/median`                     | Generalized to any iterable (materialized + sorted); optional `(item) => number` selector                                              |
+| `math/min`                        | Single-pass over any iterable; returns `undefined` for an empty input                                                                  |
+| `math/sum`                        | Generalized to any iterable (single-pass); optional `(item, index) => number` selector                                                 |
+| `object/assignDefaults`           | Consolidates `defaults`/`defaultsDeep`/`toDefaulted`; single source or array, `{deep, copy}` modes                                     |
+| `object/findObjectKey`            | Consolidates `findKey`/`findLastKey`; pass `true` to scan from the end                                                                 |
+| `object/hasPath`                  | Deep-path existence check; pass `{inherited: true}` to include the prototype chain                                                     |
+| `object/mergeDeep`                | Consolidates `merge`/`mergeWith`/`toMerged`; optional `mergeValues` customizer and `{copy}` mode                                       |
+| `object/objectFromEntriesDeep`    | Deep-path `Object.fromEntries`; builds nested objects/arrays from `[path, value]` entries                                              |
+| `object/omit`                     | Consolidates `omit`/`omitBy`; top-level keys, deep paths, or a predicate                                                               |
+| `object/pick`                     | Consolidates `pick`/`pickBy`; top-level keys, deep paths, or a predicate                                                               |
+| `object/setByPath`                | Consolidates `set`/`setWith`; mutating deep-path write with optional container customizer                                              |
+| `object/swapObjectKeysValues`     | Consolidates `invert`/`invertBy`; pass an iteratee to group colliding keys into arrays                                                 |
+| `object/updateByPath`             | Consolidates `update`/`updateWith`; mutating deep-path update with optional container customizer                                       |
+| `predicate/isBuffer`              | Enhanced with a `value is Buffer` type guard                                                                                           |
+| `predicate/isIn`                  | `ts-extras`' `objectHasIn` with `(key, object)` argument order (reads like `key in object`); narrows the object                        |
+| `predicate/isKeyIn`               | `ts-extras`' `keyIn` with `(key, object)` argument order; narrows the key to those present in the object                               |
+| `value/cloneDeep`                 | Consolidates `cloneDeep`/`cloneDeepWith`; optional customizer                                                                          |
+| `value/cloneShallow`              | Consolidates `clone`/`cloneWith`; optional customizer                                                                                  |
+| `value/isEqual`                   | Consolidates `isEqual`/`isEqualWith`; optional customizer                                                                              |
+| `value/isObjectMatching`          | Consolidates `isMatch`/`isMatchWith`; deep partial match; optional customizer                                                          |
 
 ### `es-toolkit`
 
 | Original function group and name                                                           | Status | Our function group and name        | Notes                                                                                    |
 | ------------------------------------------------------------------------------------------ | ------ | ---------------------------------- | ---------------------------------------------------------------------------------------- |
-| [`array/at`](https://es-toolkit.dev/reference/array/at.html)                               | ✅     | `array/arrayAtMulti`               | Extended to support a single array index                                                 |
+| [`array/at`](https://es-toolkit.dev/reference/array/at.html)                               | ✅     | `array/arrayAt`                    | Extended to support a single array index (with precise tuple typing via `ts-extras`)     |
 | [`array/cartesianProduct`](https://es-toolkit.dev/reference/array/cartesianProduct.html)   | ✅     | `array/cartesianProduct` *(same)*  | -                                                                                        |
 | [`array/chunk`](https://es-toolkit.dev/reference/array/chunk.html)                         | ✅     | `array/arrayChunks`                | -                                                                                        |
 | [`array/combinations`](https://es-toolkit.dev/reference/array/combinations.html)           | ✅     | `array/arrayCombinations`          | -                                                                                        |
@@ -484,6 +486,46 @@ Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e
 | [`(default)`][safe-stable-stringify] | ✅     | `json/jsonStringifyStable`  | Renamed; deterministic output (recursively sorted keys); circular refs become `"[Circular]"`; supports `bigint` |
 | [`configure`][safe-stable-stringify] | ❓     | *(under consideration)*     | Escape hatch for custom comparator / circular handling — skipped to keep the surface minimal                    |
 
+### `ts-extras`
+
+Mostly thin, strongly-typed re-exports. `Unsafe` in a name flags that the stronger type relies on an unsound cast (e.g. `Object.keys` typed as `(keyof T)[]`).
+
+| Original function group and name | Status | Our function group and name            | Notes                                                                                            |
+| -------------------------------- | ------ | -------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| [`objectKeys`][ts-extras]        | ✅     | `object/objectKeysUnsafe`              | Renamed; `Unsafe` flags the unsound `(keyof T)[]` cast                                           |
+| [`objectValues`][ts-extras]      | ✅     | `object/objectValuesUnsafe`            | Renamed                                                                                          |
+| [`objectEntries`][ts-extras]     | ✅     | `object/objectEntriesUnsafe`           | Renamed                                                                                          |
+| [`objectFromEntries`][ts-extras] | ✅     | `object/objectFromEntriesUnsafe`       | Renamed; shallow, distinct from `object/objectFromEntriesDeep`                                   |
+| [`objectHasOwn`][ts-extras]      | ✅     | `object/objectHasOwn` *(same)*         | -                                                                                                |
+| [`objectHasIn`][ts-extras]       | ✅     | `predicate/isIn`                       | Renamed; `(key, object)` order (reads like `key in object`); narrows the object                  |
+| [`keyIn`][ts-extras]             | ✅     | `predicate/isKeyIn`                    | Renamed; `(key, object)` order; narrows the key to those present in the object                   |
+| [`arrayAt`][ts-extras]           | ✅     | `array/arrayAt`                        | Consolidated with es-toolkit's `at` (also accepts a list of indices)                             |
+| [`arrayConcat`][ts-extras]       | ✅     | `array/arrayConcat` *(same)*           | -                                                                                                |
+| [`arrayFirst`][ts-extras]        | ✅     | `array/arrayFirst` *(same)*            | -                                                                                                |
+| [`arrayLast`][ts-extras]         | ✅     | `array/arrayLast` *(same)*             | -                                                                                                |
+| [`arrayIncludes`][ts-extras]     | ✅     | `array/arrayIncludes` *(same)*         | -                                                                                                |
+| [`arrayJoin`][ts-extras]         | ✅     | `array/arrayJoin` *(same)*             | -                                                                                                |
+| [`setHas`][ts-extras]            | ✅     | `set/setHas` *(same)*                  | -                                                                                                |
+| [`stringSplit`][ts-extras]       | ✅     | `string/stringSplit` *(same)*          | -                                                                                                |
+| [`isFinite`][ts-extras]          | ✅     | `predicate/isFiniteNumber`             | Renamed to avoid clashing with the global `isFinite`                                             |
+| [`isInfinite`][ts-extras]        | ✅     | `predicate/isInfinite` *(same)*        | -                                                                                                |
+| [`isInteger`][ts-extras]         | ✅     | `predicate/isInteger` *(same)*         | -                                                                                                |
+| [`isSafeInteger`][ts-extras]     | ✅     | `predicate/isSafeInteger` *(same)*     | -                                                                                                |
+| [`isPropertyDefined`][ts-extras] | ✅     | `predicate/isPropertyDefined` *(same)* | -                                                                                                |
+| [`isPropertyPresent`][ts-extras] | ✅     | `predicate/isPropertyNotNullish`       | Renamed for clarity (neither `null` nor `undefined`)                                             |
+| [`not`][ts-extras]               | ✅     | `function/negatePredicate`             | Renamed; inverts a type-guard predicate                                                          |
+| [`safeCastTo`][ts-extras]        | ✅     | `ts/castToSafe`                        | Renamed                                                                                          |
+| [`asWritable`][ts-extras]        | ✅     | `ts/castToWritableUnsafe`              | Renamed; `Unsafe` flags the identity-at-runtime cast                                             |
+| [`isDefined`][ts-extras]         | ❌     | *(not added)*                          | Modern TS (5.5+) infers type predicates, so `.filter((x) => x !== undefined)` narrows on its own |
+| [`isPresent`][ts-extras]         | ❌     | *(not added)*                          | Same: `.filter((x) => x != null)` narrows on its own                                             |
+| [`isEmpty`][ts-extras]           | ❌     | *(not added)*                          | Covered by `predicate/isEmptyValue` (es-toolkit)                                                 |
+| [`objectMapValues`][ts-extras]   | ❌     | *(not added)*                          | Covered by `object/mapValues` (es-toolkit)                                                       |
+| [`isEqualType`][ts-extras]       | ❌     | *(not added)*                          | Compile-time-only test helper; use `expectTypeOf` instead                                        |
+| [`assertDefined`][ts-extras]     | ❌     | *(not added)*                          | Use `misc/invariant`                                                                             |
+| [`assertPresent`][ts-extras]     | ❌     | *(not added)*                          | Use `misc/invariant`                                                                             |
+| [`assertError`][ts-extras]       | ❌     | *(not added)*                          | Use the native `Error.isError`                                                                   |
+| [`assertNever`][ts-extras]       | ❌     | *(not added)*                          | Use a `satisfies never` assertion                                                                |
+
 ### `yieldable-json`
 
 | Original function group and name   | Status | Our function group and name | Notes                                                                                             |
@@ -538,6 +580,8 @@ Candidate libraries on the radar. These cover JSON *manipulation* axes (repair, 
 [lossless-json]: https://github.com/josdejong/lossless-json
 
 [safe-stable-stringify]: https://github.com/BridgeAR/safe-stable-stringify
+
+[ts-extras]: https://github.com/sindresorhus/ts-extras
 
 [yieldable-json]: https://github.com/ibmruntimes/yieldable-json
 
