@@ -12,7 +12,6 @@ export default eslintConfig({
 
     // False positives:
     rxjs: false,
-    youDontNeedLodashUnderscore: false, // cspell:disable-line
     zod: false,
   },
 });
