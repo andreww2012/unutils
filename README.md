@@ -1,3 +1,5 @@
+<!-- cspell:ignore jsonrepair jsondiffpatch hyperjump unpatch -->
+
 # Readme
 
 ## Functions
@@ -491,6 +493,21 @@ Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e
 
 > **Note:** `yieldable-json`'s own argument parser mishandles `stringifyAsync`'s `space`/`intensity` when both are passed; the wrapper works around it. Its `ParseError`/`StringifyError` do not extend `Error`, so rejections carry those objects as-is.
 
+### Under consideration
+
+Candidate libraries on the radar. These cover JSON *manipulation* axes (repair, partial parsing, diff, pointer/patch) not yet provided — adding them would expand `unutils` beyond parsing and serialization.
+
+| Library                                             | Axis                            | Status | Notes                                                                                            |
+| --------------------------------------------------- | ------------------------------- | ------ | ------------------------------------------------------------------------------------------------ |
+| [`jsonrepair`][jsonrepair]                          | Repair malformed JSON           | ❓     | Fixes unquoted keys, trailing commas, comments, fenced blocks, etc.; complements `jsonParseSafe` |
+| [`partial-json`][partial-json]                      | Parse incomplete/truncated JSON | ❓     | Best-effort value from a partial buffer (e.g. streaming LLM output); configurable `Allow` mask   |
+| [`jsondiffpatch`][jsondiffpatch]                    | Document diff/patch             | ❓     | `diff`/`patch`/`unpatch`/`reverse` with array-move detection; core has no runtime dependency     |
+| [`@hyperjump/json-pointer`][hyperjump-json-pointer] | JSON Pointer (RFC 6901)         | ❓     | Get/set/remove a value by `/a/b/0` path                                                          |
+| [`immutable-json-patch`][immutable-json-patch]      | JSON Patch (RFC 6902)           | ❓     | Immutable apply/compare/revert; pairs with JSON Pointer                                          |
+| JSON Merge Patch (RFC 7386)                         | Merge patch                     | ❓     | No well-maintained typed library exists; a custom implementation would be the likely route       |
+
+> JSONPath (querying) was considered and **set aside**: the dominant `jsonpath-plus` has a history of RCE advisories, and the axis is broad/lower-demand. Relaxed syntax (JSON5/JSONC), canonical/RFC 8785 output, and `bigint`-safe stringify are already covered by existing entries or native features.
+
 ## Contributors
 
 <!-- eslint-disable markdown-preferences/padding-line-between-blocks, markdown/require-alt-text -->
@@ -523,6 +540,16 @@ Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e
 [safe-stable-stringify]: https://github.com/BridgeAR/safe-stable-stringify
 
 [yieldable-json]: https://github.com/ibmruntimes/yieldable-json
+
+[jsonrepair]: https://www.npmjs.com/package/jsonrepair
+
+[partial-json]: https://www.npmjs.com/package/partial-json
+
+[jsondiffpatch]: https://www.npmjs.com/package/jsondiffpatch
+
+[hyperjump-json-pointer]: https://www.npmjs.com/package/@hyperjump/json-pointer
+
+[immutable-json-patch]: https://www.npmjs.com/package/immutable-json-patch
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->

@@ -67,3 +67,8 @@ Prefer running on the *all* changed files (not only source files!) unless not po
 - **Vitest**: `nr test:vitest:cov --coverage.reporter=text changed.spec.ts files.spec.js`
 - Other project-wide tests: `nr knip && nr spellcheck && build:test`
 - If the lockfile was modified: `nr deps:check`
+
+<!-- eslint-disable-next-line markdown-preferences/heading-casing -->
+### CSpell
+
+Prefer ignoring words only encountered in a single file in that file itself with the top-level CSpell comment `cspell:ignore words to disable`.
