@@ -254,6 +254,9 @@ importers:
       cspell:
         specifier: 10.0.0
         version: 10.0.0
+      destr:
+        specifier: 2.0.5
+        version: 2.0.5
       es-toolkit:
         specifier: 1.47.0
         version: 1.47.0

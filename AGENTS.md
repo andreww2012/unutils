@@ -59,7 +59,7 @@ Names target a reader who has never used the source library: we rename whenever 
 
 ## Testing tools
 
-Prefer running on the changed files unless not possible or instructed otherwise.
+Prefer running on the *all* changed files (not only source files!) unless not possible or instructed otherwise.
 
 - **Types**: `nr lint:types:go`
 - **ESLint**: `pnpm exec eslint list.ext1 of.ext2 changed.ext3 files.ext4`

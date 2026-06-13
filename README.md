@@ -44,6 +44,8 @@
 | `iterable/reduce`                 | Generalized from `set/reduce`; simple `(acc, value) => acc` callback                               |
 | `iterable/slidingWindow`          | -                                                                                                  |
 | `iterable/some`                   | Generalized from `set/some`; simple `(value) => boolean` callback                                  |
+| `json/jsonParse`                  | Strict, throwing `JSON.parse` upgrade; decodes standalone tokens; blocks prototype pollution       |
+| `json/jsonParseSafe`              | Forgiving parse that never throws; falls back to the original input when it cannot be parsed       |
 | `math/max`                        | Single-pass over any iterable; returns `undefined` for an empty input                              |
 | `math/mean`                       | Generalized to any iterable (single-pass); optional `(item) => number` selector                    |
 | `math/median`                     | Generalized to any iterable (materialized + sorted); optional `(item) => number` selector          |
@@ -444,6 +446,13 @@ Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e
 | [`util/toSafeInteger`](https://es-toolkit.dev/compat/reference/util/toSafeInteger.html)                   | ❌     | *(native)*                        | Coercion — rarely needed                                                                                                          |
 | [`util/toString`](https://es-toolkit.dev/compat/reference/util/toString.html)                             | ❌     | *(native)*                        | Use `String(x)`                                                                                                                   |
 | [`util/uniqueId`](https://es-toolkit.dev/compat/reference/util/uniqueId.html)                             | ❌     | *(native)*                        | Module-global mutable state (SSR-unsafe); use `crypto.randomUUID()` or your own scoped counter                                    |
+
+### `destr`
+
+| Original function group and name             | Status | Our function group and name | Notes                                                      |
+| -------------------------------------------- | ------ | --------------------------- | ---------------------------------------------------------- |
+| [`destr`](https://github.com/unjs/destr)     | ✅     | `json/jsonParseSafe`        | Renamed; forgiving parse that returns the input on failure |
+| [`safeDestr`](https://github.com/unjs/destr) | ✅     | `json/jsonParse`            | Renamed; strict parse that throws (mirrors `JSON.parse`)   |
 
 ## Contributors
 

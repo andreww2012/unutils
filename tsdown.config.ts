@@ -15,8 +15,8 @@ export default defineConfig({
   deps: {
     // Must be in sync with `eslint.config.ts`'s `extraneousDependenciesWhitelist`:
     alwaysBundle: [
-      // eslint-disable-next-line regexp/no-useless-non-capturing-group, security/detect-unsafe-regex
-      /^(?:es-toolkit)(?:\/.+)?$/,
+      // eslint-disable-next-line security/detect-unsafe-regex
+      /^(?:es-toolkit|destr)(?:\/.+)?$/,
     ],
   },
   // Without this, problems from attw and publint are not causing non-zero exit code
