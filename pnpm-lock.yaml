@@ -257,6 +257,9 @@ importers:
       destr:
         specifier: 2.0.5
         version: 2.0.5
+      devalue:
+        specifier: 5.8.1
+        version: 5.8.1
       es-toolkit:
         specifier: 1.47.0
         version: 1.47.0
@@ -275,6 +278,9 @@ importers:
       lefthook:
         specifier: 2.1.8
         version: 2.1.8
+      lossless-json:
+        specifier: 4.3.0
+        version: 4.3.0
       npm-check-updates:
         specifier: 22.2.1
         version: 22.2.1
@@ -284,6 +290,9 @@ importers:
       publint:
         specifier: 0.3.21
         version: 0.3.21
+      safe-stable-stringify:
+        specifier: 2.5.0
+        version: 2.5.0
       semver:
         specifier: 7.8.1
         version: 7.8.1
@@ -2549,6 +2558,9 @@ packages:
     resolution: {integrity: sha512-qE3Veg1YXzGHQhlA6jzebZN2qVf6NX+A7m7qlhCGG30dJixrAQhYOsJjsnBjJkCSmuOPpCk30145fr8FV0bzog==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
+  devalue@5.8.1:
+    resolution: {integrity: sha512-4CXDYRBGqN+57wVJkuXBYmpAVUSg3L6JAQa/DFqm238G73E1wuyc/JhGQJzN7vUf/CMphYau2zXbfWzDR5aTEw==}
+
   devframe@0.2.3:
     resolution: {integrity: sha512-wQjB78wPADHtm7Gt6Atd5qHAsRpXGjJKhrebz2SncnybK6k+M9Lccu8ERtD+1+3a6Bp2JevNywei5BCHqYoHLw==}
     peerDependencies:
@@ -4063,6 +4075,9 @@ packages:
   longest-streak@3.1.0:
     resolution: {integrity: sha512-9Ri+o0JYgehTaVBBDoMqIl8GXtbWg711O3srftcHhZ0dqnETqLaoIK0x17fUw9rFSlK/0NlsKe0Ahhyl5pXE2g==}
 
+  lossless-json@4.3.0:
+    resolution: {integrity: sha512-ToxOC+SsduRmdSuoLZLYAr5zy1Qu7l5XhmPWM3zefCZ5IcrzW/h108qbJUKfOlDlhvhjUK84+8PSVX0kxnit0g==}
+
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
 
@@ -4851,6 +4866,10 @@ packages:
 
   safe-regex@2.1.1:
     resolution: {integrity: sha512-rx+x8AMzKb5Q5lQ95Zoi6ZbJqwCLkqi3XuJXp5P3rT8OEc6sZCJG5AE5dU3lsgRr/F4Bs31jSlVN+j5KrsGu9A==}
+
+  safe-stable-stringify@2.5.0:
+    resolution: {integrity: sha512-b3rppTKm9T+PsVCBEOUR46GWI7fdOs00VKZ1+9c1EWDaDMvjQc6tUwuFyIprgGgTcWoVHSKrU8H31ZHA2e0RHA==}
+    engines: {node: '>=10'}
 
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
@@ -7817,6 +7836,8 @@ snapshots:
 
   detect-newline@4.0.1: {}
 
+  devalue@5.8.1: {}
+
   devframe@0.2.3(typescript@6.0.3):
     dependencies:
       '@valibot/to-json-schema': 1.7.0(valibot@1.4.0)
@@ -9185,6 +9206,8 @@ snapshots:
 
   longest-streak@3.1.0: {}
 
+  lossless-json@4.3.0: {}
+
   lru-cache@10.4.3: {}
 
   lru-cache@11.5.0: {}
@@ -10340,6 +10363,8 @@ snapshots:
   safe-regex@2.1.1:
     dependencies:
       regexp-tree: 0.1.27
+
+  safe-stable-stringify@2.5.0: {}
 
   safer-buffer@2.1.2: {}
 

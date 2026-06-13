@@ -454,6 +454,32 @@ Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e
 | [`destr`](https://github.com/unjs/destr)     | ✅     | `json/jsonParseSafe`        | Renamed; forgiving parse that returns the input on failure |
 | [`safeDestr`](https://github.com/unjs/destr) | ✅     | `json/jsonParse`            | Renamed; strict parse that throws (mirrors `JSON.parse`)   |
 
+### `devalue`
+
+| Original function group and name | Status | Our function group and name | Notes                                                                                                |
+| -------------------------------- | ------ | --------------------------- | ---------------------------------------------------------------------------------------------------- |
+| [`stringify`][devalue]           | ✅     | `json/structuredStringify`  | Renamed; serializes `Date`/`Map`/`Set`/`BigInt`/etc. and circular refs. Output is **NOT** valid JSON |
+| [`parse`][devalue]               | ✅     | `json/structuredParse`      | Renamed; revives a string produced by `structuredStringify` (paired, closed format)                  |
+| [`uneval`][devalue]              | ❌     | *(not added)*               | Emits evaluatable JS source; needs `eval`/inlining to consume — niche and easy to misuse             |
+| [`stringifyAsync`][devalue]      | ❓     | *(under consideration)*     | Awaits `Promise`s in the graph; narrow use case                                                      |
+
+### `lossless-json`
+
+| Original function group and name  | Status | Our function group and name  | Notes                                                                                                                |
+| --------------------------------- | ------ | ---------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| [`parse`][lossless-json]          | ✅     | `json/jsonParseLossless`     | Renamed; preserves numeric precision (big ints **and** decimals) as `NumberLossless`. See note below                 |
+| [`stringify`][lossless-json]      | ✅     | `json/jsonStringifyLossless` | Renamed; lossless serialize, incl. `bigint` and `NumberLossless` as bare numeric literals                            |
+| [`LosslessNumber`][lossless-json] | ✅     | `json/NumberLossless`        | Renamed (words swapped); precision-preserving number wrapper; `.valueOf()` returns `number`/`bigint`, throws on loss |
+
+> **Note on `jsonParseLossless`:** parsing losslessly is now achievable natively — since Node 21, `JSON.parse` revivers receive the raw `context.source` text. This util is the ergonomic, tested packaging of that (plus the matching lossless `stringify`, which native `JSON.stringify` cannot do — it throws on `bigint`).
+
+### `safe-stable-stringify`
+
+| Original function group and name     | Status | Our function group and name | Notes                                                                                                           |
+| ------------------------------------ | ------ | --------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| [`(default)`][safe-stable-stringify] | ✅     | `json/jsonStringifyStable`  | Renamed; deterministic output (recursively sorted keys); circular refs become `"[Circular]"`; supports `bigint` |
+| [`configure`][safe-stable-stringify] | ❓     | *(under consideration)*     | Escape hatch for custom comparator / circular handling — skipped to keep the surface minimal                    |
+
 ## Contributors
 
 <!-- eslint-disable markdown-preferences/padding-line-between-blocks, markdown/require-alt-text -->
@@ -478,6 +504,12 @@ Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e
     </tr>
   </tfoot>
 </table>
+
+[devalue]: https://github.com/Rich-Harris/devalue
+
+[lossless-json]: https://github.com/josdejong/lossless-json
+
+[safe-stable-stringify]: https://github.com/BridgeAR/safe-stable-stringify
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
