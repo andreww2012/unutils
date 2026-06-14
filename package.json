@@ -164,6 +164,7 @@
     "semver": "7.8.4",
     "ts-extras": "1.0.0",
     "tsdown": "0.22.2",
+    "type-fest": "5.7.0",
     "typescript": "6.0.3",
     "vitest": "4.1.8",
     "yieldable-json": "2.1.0"
