@@ -13,6 +13,7 @@ export {isKeyIn} from './is-key-in.ts';
 export {isPlainObject} from './is-plain-object.ts';
 export {isPrimitive} from './is-primitive.ts';
 export {isPropertyDefined} from './is-property-defined.ts';
+export {isTruthy} from './is-truthy.ts';
 export {isPropertyNotNullish} from './is-property-not-nullish.ts';
 export {isSafeInteger} from './is-safe-integer.ts';
 export {isTypedArray} from './is-typed-array.ts';

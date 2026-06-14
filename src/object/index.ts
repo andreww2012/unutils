@@ -7,6 +7,7 @@ export {flattenObject} from './flatten-object.ts';
 export {getByPath} from './get-by-path.ts';
 export {getByPaths} from './get-by-paths.ts';
 export {hasPath} from './has-path.ts';
+export {mapEntries} from './map-entries.ts';
 export {mapKeys} from './map-keys.ts';
 export {mapValues} from './map-values.ts';
 export {mergeDeep} from './merge-deep.ts';

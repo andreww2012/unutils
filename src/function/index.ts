@@ -19,6 +19,7 @@ export {rest} from './rest.ts';
 export {retry} from './retry.ts';
 export {somePredicate} from './some-predicate.ts';
 export {spread} from './spread.ts';
+export {tap} from './tap.ts';
 export {throttle} from './throttle.ts';
 export {untilNthCall} from './until-nth-call.ts';
 export {withMaxArity} from './with-max-arity.ts';

@@ -56,4 +56,29 @@ describe('array/arraySample', () => {
       expect(() => arraySample([], 1)).toThrow();
     });
   });
+
+  describe('with replacement', () => {
+    it('returns the requested number of elements, all drawn from the source', () => {
+      const source = [1, 2, 3];
+      const result = arraySample(source, 5, {withReplacement: true});
+
+      expect(result).toHaveLength(5);
+
+      for (const item of result) {
+        expect(source).toContain(item);
+      }
+    });
+
+    it('allows the size to exceed the source length', () => {
+      expect(arraySample([7], 4, {withReplacement: true})).toStrictEqual([7, 7, 7, 7]);
+    });
+
+    it('returns an empty array when size is 0', () => {
+      expect(arraySample([1, 2, 3], 0, {withReplacement: true})).toStrictEqual([]);
+    });
+
+    it('returns an empty array when sampling from an empty source', () => {
+      expect(arraySample([], 3, {withReplacement: true})).toStrictEqual([]);
+    });
+  });
 });

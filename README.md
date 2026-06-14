@@ -1,4 +1,4 @@
-<!-- cspell:ignore jsonrepair jsondiffpatch hyperjump unpatch -->
+<!-- cspell:ignore jsonrepair jsondiffpatch hyperjump unpatch lerp arrayable -->
 
 # Readme
 
@@ -23,8 +23,9 @@
 | `array/arrayify`                  | Wraps non-arrays (tuple-preserving); nullish input returns `[]` (or `[value]` with `wrapNullish`)                                      |
 | `array/arrayIntersection`         | Consolidates `intersection`/`intersectionBy`/`intersectionWith`; optional mapper or comparator                                         |
 | `array/arrayIsSubset`             | Consolidates `isSubset`/`isSubsetWith`; optional mapper or comparator                                                                  |
+| `array/arrayPartition`            | Single predicate gives a binary `[matched, unmatched]` (guard-narrowing); multiple predicates give an n-way partition                  |
 | `array/arrayPurgeValues`          | Consolidates `pull`/`pullAllBy`/`pullAllWith`; mutating; optional mapper or comparator                                                 |
-| `array/arraySample`               | Consolidates `sample`/`sampleSize`; pass a size for multiple elements                                                                  |
+| `array/arraySample`               | Consolidates `sample`/`sampleSize`; pass a size for multiple elements, `{withReplacement: true}` to allow repeats                      |
 | `array/arraySymmetricDifference`  | Consolidates `xor`/`xorBy`/`xorWith`; renamed to the set-theory term                                                                   |
 | `array/arrayTakeWhile`            | Consolidates `takeWhile`/`takeRightWhile`; pass `true` to walk from the end                                                            |
 | `array/arrayTranspose`            | Consolidates `zip`/`unzip`/`zipWith`/`unzipWith`; optional `(...column) => value` iteratee                                             |
@@ -50,6 +51,8 @@
 | `json/jsonParseAsync`             | Promisified non-blocking `JSON.parse` (yields to the event loop); `yieldable-json` wrapper                                             |
 | `json/jsonParseSafe`              | Forgiving parse that never throws; falls back to the original input when it cannot be parsed                                           |
 | `json/jsonStringifyAsync`         | Promisified non-blocking `JSON.stringify` (yields to the event loop); `yieldable-json` wrapper                                         |
+| `math/interpolate`                | Renamed `lerp`; `(min, max, t, clamp = false)`; extrapolates unless `clamp` is `true`                                                  |
+| `math/mapRange`                   | Renamed `remap`; `(value, inputRange, outputRange, clamp = false)`; affine range remap, extrapolates unless `clamp`                    |
 | `math/max`                        | Single-pass over any iterable; returns `undefined` for an empty input                                                                  |
 | `math/mean`                       | Generalized to any iterable (single-pass); optional `(item) => number` selector                                                        |
 | `math/median`                     | Generalized to any iterable (materialized + sorted); optional `(item) => number` selector                                              |
@@ -68,10 +71,14 @@
 | `predicate/isBuffer`              | Enhanced with a `value is Buffer` type guard                                                                                           |
 | `predicate/isIn`                  | `ts-extras`' `objectHasIn` with `(key, object)` argument order (reads like `key in object`); narrows the object                        |
 | `predicate/isKeyIn`               | `ts-extras`' `keyIn` with `(key, object)` argument order; narrows the key to those present in the object                               |
+| `predicate/isTruthy`              | Truthy type guard whose narrowing subtracts the falsy members (unlike `.filter(Boolean)`, which keeps the type)                        |
+| `string/ensurePrefix`             | `(value, prefix)` (subject-first); prepends `prefix` only when missing                                                                 |
+| `string/ensureSuffix`             | `(value, suffix)` (subject-first); appends `suffix` only when missing                                                                  |
 | `value/cloneDeep`                 | Consolidates `cloneDeep`/`cloneDeepWith`; optional customizer                                                                          |
 | `value/cloneShallow`              | Consolidates `clone`/`cloneWith`; optional customizer                                                                                  |
 | `value/isEqual`                   | Consolidates `isEqual`/`isEqualWith`; optional customizer                                                                              |
 | `value/isObjectMatching`          | Consolidates `isMatch`/`isMatchWith`; deep partial match; optional customizer                                                          |
+| `value/typeOf`                    | Enhanced `typeof`: lowercase for primitives and `null`, the `Symbol.toStringTag` class tag for objects (`Array`, `Date`, …)            |
 
 ### `es-toolkit`
 
@@ -114,13 +121,13 @@
 | [`array/maxBy`](https://es-toolkit.dev/reference/array/maxBy.html)                         | ✅     | `array/maxBy` *(same)*             | -                                                                                        |
 | [`array/minBy`](https://es-toolkit.dev/reference/array/minBy.html)                         | ✅     | `array/minBy` *(same)*             | -                                                                                        |
 | [`array/orderBy`](https://es-toolkit.dev/reference/array/orderBy.html)                     | ✅     | `array/orderBy` *(same)*           | -                                                                                        |
-| [`array/partition`](https://es-toolkit.dev/reference/array/partition.html)                 | ✅     | `array/arrayPartition`             | -                                                                                        |
+| [`array/partition`](https://es-toolkit.dev/reference/array/partition.html)                 | ✅     | `array/arrayPartition`             | Single predicate stays binary; pass multiple predicates for an n-way partition           |
 | [`array/pullAt`](https://es-toolkit.dev/reference/array/pullAt.html)                       | ✅     | `array/arrayPurgeIndexes`          | Renamed for clarity — mutates the input, removing elements at the given indices          |
 | [`array/pull`](https://es-toolkit.dev/reference/array/pull.html)                           | ✅     | `array/arrayPurgeValues`           | Renamed for clarity — mutates the input, removing every occurrence of the given values   |
 | [`array/reduceAsync`](https://es-toolkit.dev/reference/array/reduceAsync.html)             | ✅     | `array/reduceAsync` *(same)*       | -                                                                                        |
 | [`array/remove`](https://es-toolkit.dev/reference/array/remove.html)                       | ✅     | `array/arrayPurgeBy`               | Renamed for clarity — mutates the input, removing elements matching the predicate        |
 | [`array/sampleSize`](https://es-toolkit.dev/reference/array/sampleSize.html)               | ✅     | `array/arraySample`                | Pass the desired sample size as second arg                                               |
-| [`array/sample`](https://es-toolkit.dev/reference/array/sample.html)                       | ✅     | `array/arraySample`                | Consolidated with `sampleSize`                                                           |
+| [`array/sample`](https://es-toolkit.dev/reference/array/sample.html)                       | ✅     | `array/arraySample`                | Consolidated with `sampleSize`; `{withReplacement: true}` allows repeats                 |
 | [`array/shuffle`](https://es-toolkit.dev/reference/array/shuffle.html)                     | ✅     | `array/arrayShuffle`               | -                                                                                        |
 | [`array/sortBy`](https://es-toolkit.dev/reference/array/sortBy.html)                       | ✅     | `array/sortBy` *(same)*            | -                                                                                        |
 | [`array/tail`](https://es-toolkit.dev/reference/array/tail.html)                           | ❌     | *(native)*                         | Use `array.slice(1)` — mirror of `initial`                                               |
@@ -452,6 +459,83 @@ Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e
 | [`util/toSafeInteger`](https://es-toolkit.dev/compat/reference/util/toSafeInteger.html)                   | ❌     | *(native)*                        | Coercion — rarely needed                                                                                                          |
 | [`util/toString`](https://es-toolkit.dev/compat/reference/util/toString.html)                             | ❌     | *(native)*                        | Use `String(x)`                                                                                                                   |
 | [`util/uniqueId`](https://es-toolkit.dev/compat/reference/util/uniqueId.html)                             | ❌     | *(native)*                        | Module-global mutable state (SSR-unsafe); use `crypto.randomUUID()` or your own scoped counter                                    |
+
+### `@antfu/utils`
+
+A general-purpose grab-bag that overlaps heavily with `es-toolkit` and our existing utilities, so most entries are already covered. Only its **non-type** (runtime) exports are audited here; the type-level utilities are out of scope.
+
+| Original function         | Status | Our function group and name    | Notes                                                                                            |
+| ------------------------- | ------ | ------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `assert`                  | ❌     | `misc/invariant`               | es-toolkit's `invariant` is identical                                                            |
+| `at`                      | ❌     | `array/arrayAt`                | Covered (also accepts a list of indices)                                                         |
+| `batchInvoke`             | ❌     | *(not added)*                  | Trivial `fns.forEach((fn) => fn?.())`                                                            |
+| `capitalize`              | ❌     | `string/capitalize`            | es-toolkit equivalent (also lowercases the tail)                                                 |
+| `clamp`                   | ❌     | `math/clamp`                   | Covered                                                                                          |
+| `clampArrayRange`         | ❌     | *(not added)*                  | Trivial `clamp(n, 0, arr.length - 1)`; degenerate on empty arrays                                |
+| `clearUndefined`          | ❓     | *(under consideration)*        | Mutating strip of `undefined`; `omit(obj, (v) => v === undefined)` covers the copy case          |
+| `createControlledPromise` | ❌     | *(native)*                     | Use `Promise.withResolvers()`                                                                    |
+| `createPromiseLock`       | ❓     | *(under consideration)*        | A dynamic wait-group (await all in-flight); would need a rename                                  |
+| `createSingletonPromise`  | ✅     | `async/createSingletonPromise` | -                                                                                                |
+| `debounce`                | ❌     | `function/debounce`            | Covered (es-toolkit)                                                                             |
+| `deepMerge`               | ❌     | `object/mergeDeep`             | Covered                                                                                          |
+| `deepMergeWithArray`      | ❌     | `object/mergeDeep`             | Array-concat merge expressible via the `mergeValues` customizer                                  |
+| `ensurePrefix`            | ✅     | `string/ensurePrefix`          | Renamed args to `(value, prefix)` (subject-first)                                                |
+| `ensureSuffix`            | ✅     | `string/ensureSuffix`          | Renamed args to `(value, suffix)` (subject-first)                                                |
+| `filterInPlace`           | ❌     | `array/arrayPurgeBy`           | Mutating remove-by-predicate                                                                     |
+| `flattenArrayable`        | ❌     | *(not added)*                  | Trivial `arrayify(x).flat(1)`                                                                    |
+| `getTypeName`             | ✅     | `value/typeOf`                 | Renamed; no longer lowercases object class tags                                                  |
+| `hasOwnProperty`          | ❌     | `object/objectHasOwn`          | Covered                                                                                          |
+| `invoke`                  | ❌     | *(not added)*                  | Trivial; call `fn()` directly                                                                    |
+| `isBoolean`               | ❌     | *(native)*                     | `typeof x === 'boolean'`                                                                         |
+| `isBrowser`               | ❌     | `runtime/isBrowser`            | Covered                                                                                          |
+| `isDate`                  | ❌     | *(native)*                     | `x instanceof Date`                                                                              |
+| `isDeepEqual`             | ❌     | `value/isEqual`                | Covered                                                                                          |
+| `isDef`                   | ❌     | *(native)*                     | `x !== undefined`; TS 5.5+ infers the narrowing in `.filter`                                     |
+| `isFunction`              | ❌     | *(native)*                     | `typeof x === 'function'`                                                                        |
+| `isKeyOf`                 | ❌     | `predicate/isKeyIn`            | Same `key in object` guard                                                                       |
+| `isNull`                  | ❌     | *(native)*                     | `x === null`                                                                                     |
+| `isNumber`                | ❌     | *(native)*                     | `typeof x === 'number'`                                                                          |
+| `isObject`                | ❌     | `predicate/isPlainObject`      | antfu's `isObject` is plain-object detection                                                     |
+| `isPrimitive`             | ❌     | `predicate/isPrimitive`        | Covered                                                                                          |
+| `isRegExp`                | ❌     | *(native)*                     | `x instanceof RegExp`                                                                            |
+| `isString`                | ❌     | *(native)*                     | `typeof x === 'string'`                                                                          |
+| `isTruthy`                | ✅     | `predicate/isTruthy`           | Reimplemented with a precise `Truthy<T>` narrowing                                               |
+| `isUndefined`             | ❌     | *(native)*                     | `x === undefined`                                                                                |
+| `isWindow`                | ❌     | *(not added)*                  | DOM-only; off-target for a node-first library                                                    |
+| `last`                    | ❌     | `array/arrayLast`              | Covered                                                                                          |
+| `lerp`                    | ✅     | `math/interpolate`             | Renamed; unclamped by default (opt-in `clamp`)                                                   |
+| `mergeArrayable`          | ❌     | *(not added)*                  | Trivial `args.flatMap(arrayify)`                                                                 |
+| `move`                    | ✅     | `array/arrayMove`              | Renamed (group prefix); mutating                                                                 |
+| `noNull`                  | ❌     | *(native)*                     | `x !== null`                                                                                     |
+| `noop`                    | ❌     | `function/noop`                | Covered                                                                                          |
+| `notNullish`              | ❌     | *(native)*                     | `x != null`; TS 5.5+ infers the narrowing in `.filter`                                           |
+| `notUndefined`            | ❌     | *(native)*                     | `x !== undefined`; TS 5.5+ infers the narrowing                                                  |
+| `objectEntries`           | ❌     | `object/objectEntriesUnsafe`   | Covered                                                                                          |
+| `objectId`                | ❌     | *(not added)*                  | Niche; `Math.random` ids + primitive passthrough; would need a counter-based rewrite             |
+| `objectKeys`              | ❌     | `object/objectKeysUnsafe`      | Covered                                                                                          |
+| `objectMap`               | ✅     | `object/mapEntries`            | Renamed; entry transform with `undefined`-drop                                                   |
+| `objectOmit`              | ❌     | `object/omit`                  | Covered (incl. `omitUndefined` via predicate)                                                    |
+| `objectPick`              | ❌     | `object/pick`                  | Covered (incl. `omitUndefined` via predicate)                                                    |
+| `p`                       | ❌     | `async/withConcurrencyLimit`   | Promise-pool API; niche, overlaps existing concurrency control                                   |
+| `partition`               | ✅     | `array/arrayPartition`         | n-way partition folded into the existing util                                                    |
+| `randomStr`               | ❓     | *(under consideration)*        | `Math.random`-based; a crypto-secure variant is preferable                                       |
+| `range`                   | ❌     | `math/range`                   | Covered (incl. `rangeRight`)                                                                     |
+| `remap`                   | ✅     | `math/mapRange`                | Renamed; tuple ranges, unclamped by default                                                      |
+| `remove`                  | ❌     | `array/arrayPurgeBy`           | Covered (mutating)                                                                               |
+| `sample`                  | ✅     | `array/arraySample`            | With-replacement sampling folded in (unbiased)                                                   |
+| `shuffle`                 | ❌     | `array/arrayShuffle`           | Covered                                                                                          |
+| `slash`                   | ✅     | `string/toForwardSlashes`      | Renamed for clarity                                                                              |
+| `sleep`                   | ❌     | `async/sleep`                  | Covered (es-toolkit `delay`)                                                                     |
+| `sum`                     | ❌     | `math/sum`                     | Covered                                                                                          |
+| `tap`                     | ✅     | `function/tap`                 | -                                                                                                |
+| `template`                | ❓     | *(under consideration)*        | Falsy values wrongly hit the fallback (`\|\|`); missing indexed args emit `"undefined"`          |
+| `throttle`                | ❌     | `function/throttle`            | Covered (es-toolkit)                                                                             |
+| `timestamp`               | ❌     | *(native)*                     | `Date.now()`                                                                                     |
+| `toArray`                 | ❌     | `array/arrayify`               | Covered                                                                                          |
+| `toString`                | ❌     | *(not added)*                  | Internal helper (`Object.prototype.toString.call`)                                               |
+| `unindent`                | ❌     | *(not added)*                  | Broken with interpolations (reads only `strings[0]`); the `dedent` package is a future candidate |
+| `uniq`                    | ❌     | `array/arrayUnique`            | Covered                                                                                          |
+| `uniqueBy`                | ❌     | `array/arrayUnique`            | Covered (comparator form)                                                                        |
 
 ### `destr`
 

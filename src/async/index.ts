@@ -1,4 +1,5 @@
 export {allKeyed} from './all-keyed.ts';
+export {createSingletonPromise} from './create-singleton-promise.ts';
 export {Mutex} from './mutex.ts';
 export {rejectAfter} from './reject-after.ts';
 export {Semaphore} from './semaphore.ts';

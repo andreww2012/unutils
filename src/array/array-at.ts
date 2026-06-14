@@ -3,7 +3,7 @@ import {arrayAt as arrayAtSingle} from 'ts-extras';
 
 /** The own positional index keys of a tuple, excluding inherited array members. */
 type TupleOwnIndexKey<ArrayType extends readonly unknown[]> = Extract<
-  Exclude<keyof ArrayType, keyof readonly unknown[]>,
+  Exclude<keyof ArrayType, keyof (readonly unknown[])>,
   string | number
 >;
 
@@ -14,7 +14,10 @@ type TupleOwnIndexKey<ArrayType extends readonly unknown[]> = Extract<
  * arrays, non-literal indices and out-of-bounds literal indices keep
  * `| undefined`. A literal `-1` resolves to the tuple's last element.
  */
-type ArrayElementAt<ArrayType extends readonly unknown[], Index extends number> = number extends Index
+type ArrayElementAt<
+  ArrayType extends readonly unknown[],
+  Index extends number,
+> = number extends Index
   ? ArrayType[number] | undefined
   : number extends ArrayType['length']
     ? ArrayType[number] | undefined
