@@ -73,6 +73,7 @@
 | `predicate/isIn`                  | `ts-extras`' `objectHasIn` with `(key, object)` argument order (reads like `key in object`); narrows the object                        |
 | `predicate/isKeyIn`               | `ts-extras`' `keyIn` with `(key, object)` argument order; narrows the key to those present in the object                               |
 | `predicate/isTruthy`              | Truthy type guard whose narrowing subtracts the falsy members (unlike `.filter(Boolean)`, which keeps the type)                        |
+| `server/readFileSafe`             | Reads a file, returning `null` on a missing file (`ENOENT`) but rethrowing other errors; `asBinary` for a raw `Buffer`                 |
 | `string/ensurePrefix`             | `(value, prefix)` (subject-first); prepends `prefix` only when missing                                                                 |
 | `string/ensureSuffix`             | `(value, suffix)` (subject-first); appends `suffix` only when missing                                                                  |
 | `value/cloneDeep`                 | Consolidates `cloneDeep`/`cloneDeepWith`; optional customizer                                                                          |
