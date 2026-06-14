@@ -1,5 +1,6 @@
 export {capitalize} from './capitalize.ts';
 export {deburr} from './deburr.ts';
+export {dedent} from './dedent.ts';
 export {ensurePrefix} from './ensure-prefix.ts';
 export {ensureSuffix} from './ensure-suffix.ts';
 export {escapeHtml} from './escape-html.ts';
