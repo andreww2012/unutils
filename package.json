@@ -160,6 +160,7 @@
     "npm-check-updates": "22.2.3",
     "prettier": "3.8.4",
     "publint": "0.3.21",
+    "remeda": "2.39.0",
     "safe-stable-stringify": "2.5.0",
     "semver": "7.8.4",
     "ts-extras": "1.0.0",
