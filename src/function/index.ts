@@ -8,6 +8,7 @@ export {flow} from './flow.ts';
 export {fromNthCall} from './from-nth-call.ts';
 export {identity} from './identity.ts';
 export {mapTimes} from './map-times.ts';
+export {maybeCall, type MaybeFn} from './maybe-call.ts';
 export {memoize} from './memoize.ts';
 export {negate} from './negate.ts';
 export {negatePredicate} from './negate-predicate.ts';

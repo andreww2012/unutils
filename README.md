@@ -38,6 +38,7 @@
 | `function/curry`                  | Consolidates `curry`/`curryRight`; pass `true` to collect arguments right-to-left                                                      |
 | `function/flow`                   | Consolidates `flow`/`flowRight`; functions as an array; pass `true` for right-to-left                                                  |
 | `function/mapTimes`               | Renamed `times`; iteratee required; clearer than `Array.from({length}, ...)`                                                           |
+| `function/maybeCall`              | Resolves a `MaybeFn` (value or getter); calls it with forwarded args when it is a function, else returns it as-is                      |
 | `function/partial`                | Consolidates `partial`/`partialRight`; args as an array; pass `true` to pre-apply trailing                                             |
 | `iterable/countBy`                | -                                                                                                                                      |
 | `iterable/every`                  | Generalized from `set/every`; simple `(value) => boolean` callback                                                                     |

@@ -62,6 +62,15 @@ Names target a reader who has never used the source library: we rename whenever 
 Don't ask whether or not should we bundle it - we almost certainly should.
 The dependency won't be in prod dependencies, and re-exporting utilities instead of re-implementing them does not have any effect on bundle size (tree shaking usually work great) and reduces maintenance burden.
 
+### Adding hand-written utility
+
+Please challenge & healthy criticize that *at least* along the following axes:
+
+- Functionality should not be covered by already existing utilities;
+- There shouldn't be public npm packages that do the same job at least as good;
+- Review implementation for issues (general code review, performance, maintenance cost, etc.);
+- Implementation should re-use existing utilities if possible.
+
 ## Testing tools
 
 Prefer running on the *all* changed files (not only source files!) unless not possible or instructed otherwise.
