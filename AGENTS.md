@@ -33,7 +33,7 @@ All without zero dependencies because the external dependencies are bundled.
   Don't over-engineer or over-optimize things though.
 
 <!-- eslint-disable-next-line markdown-preferences/heading-casing -->
-### Adding an Utility
+### Adding an Utility from a package
 
 - When you're asked to add an array utility, ask yourself: would it make sense and work for any kind of iterable (example: `src/iterable/count-by.ts`).
   If you think it is, ask user whether he/she would like to create a more generalized version of the current function.
@@ -42,6 +42,8 @@ All without zero dependencies because the external dependencies are bundled.
   - Only if the utility is in the form (1), there should only be one test called `basic test`, testing the basic function usage.
 - The name of the added utility must exactly match the name of the function that it mirrors or based on - unless there are multiple candidates for the form (2).
   If the name wasn't provided and it is not inferable, explicitly ask user about it.
+- Always prefer re-using the utility code instead of writing our own to reduce maintenance cost.
+  - If the situation requiring re-implementation would be solved if some symbols were exported, created a pnpm patch for the library exporting them.
 
 #### Detailed naming guideline
 
