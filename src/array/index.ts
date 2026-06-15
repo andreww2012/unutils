@@ -38,6 +38,7 @@ export {arrayUnique} from './array-unique.ts';
 export {arraySample} from './array-sample.ts';
 export {arrayShuffle} from './array-shuffle.ts';
 export {arraySplit} from './array-split.ts';
+export {arraySwapIndices} from './array-swap-indices.ts';
 export {arrayWithoutFalsy} from './array-without-falsy.ts';
 export {arrayify} from './arrayify.ts';
 export {cartesianProduct} from './cartesian-product.ts';

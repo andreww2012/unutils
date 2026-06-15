@@ -28,6 +28,7 @@
 | `array/arrayPurgeValues`          | Consolidates `pull`/`pullAllBy`/`pullAllWith`; mutating; optional mapper or comparator                                                                 |
 | `array/arraySample`               | Consolidates `sample`/`sampleSize`; pass a size for multiple elements, `{withReplacement: true}` to allow repeats                                      |
 | `array/arraySplit`                | Consolidates remeda's `splitAt`/`splitWhen` into `[before, after]`; pass a predicate to split at the first match; tuple-preserving for literal indices |
+| `array/arraySwapIndices`          | Swaps the elements at two indices (tuple-preserving via `remeda`); negative indices count from the end; out-of-bounds/`NaN` returns an unchanged copy  |
 | `array/arraySymmetricDifference`  | Consolidates `xor`/`xorBy`/`xorWith`; renamed to the set-theory term                                                                                   |
 | `array/arrayTakeWhile`            | Consolidates `takeWhile`/`takeRightWhile`; pass `true` to walk from the end                                                                            |
 | `array/arrayTranspose`            | Consolidates `zip`/`unzip`/`zipWith`/`unzipWith`; optional `(...column) => value` iteratee                                                             |
