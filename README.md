@@ -1,4 +1,4 @@
-<!-- cspell:ignore jsonrepair jsondiffpatch hyperjump unpatch lerp arrayable -->
+<!-- cspell:ignore jsonrepair jsondiffpatch hyperjump unpatch lerp arrayable purry uncapitalize emptyish -->
 
 # Readme
 
@@ -8,7 +8,7 @@
 
 - ✅ - implemented
 - ⌛ - to be implemented
-- ❓ - under consideration
+- 🚧 - under consideration
 - ❌ - won't be added (see notes)
 
 ### Custom functions
@@ -468,6 +468,176 @@ Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e
 | [`util/toString`](https://es-toolkit.dev/compat/reference/util/toString.html)                             | ❌     | *(native)*                        | Use `String(x)`                                                                                                                   |
 | [`util/uniqueId`](https://es-toolkit.dev/compat/reference/util/uniqueId.html)                             | ❌     | *(native)*                        | Module-global mutable state (SSR-unsafe); use `crypto.randomUUID()` or your own scoped counter                                    |
 
+### `remeda`
+
+Only remeda's standalone, data-first functions are considered; the `pipe`/`purry`/lazy machinery and every data-last (curried) form are intentionally excluded. remeda overlaps `es-toolkit` heavily — those duplicated operations are marked *via `es-toolkit`* and documented in full in the `es-toolkit` table above. Non-array categories are still being triaged group-by-group, so many remeda-unique functions there are `🚧` for now.
+
+| Original function name                                              | Status | Our function group and name           | Notes                                                             |
+| ------------------------------------------------------------------- | ------ | ------------------------------------- | ----------------------------------------------------------------- |
+| [`add`](https://remedajs.com/docs/#add)                             | ❌     | *(native)*                            | Use `+`                                                           |
+| [`addProp`](https://remedajs.com/docs/#addProp)                     | 🚧     | —                                     | `object` group, pending triage                                    |
+| [`allPass`](https://remedajs.com/docs/#allPass)                     | 🚧     | —                                     | Predicate combinator, pending triage                              |
+| [`anyPass`](https://remedajs.com/docs/#anyPass)                     | 🚧     | —                                     | Predicate combinator, pending triage                              |
+| [`capitalize`](https://remedajs.com/docs/#capitalize)               | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`ceil`](https://remedajs.com/docs/#ceil)                           | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`chunk`](https://remedajs.com/docs/#chunk)                         | ✅     | `array/arrayChunks`                   | -                                                                 |
+| [`clamp`](https://remedajs.com/docs/#clamp)                         | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`clone`](https://remedajs.com/docs/#clone)                         | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`concat`](https://remedajs.com/docs/#concat)                       | ✅     | `array/arrayConcat`                   | -                                                                 |
+| [`conditional`](https://remedajs.com/docs/#conditional)             | 🚧     | —                                     | Branching helper, `function` group, pending triage                |
+| [`constant`](https://remedajs.com/docs/#constant)                   | ❌     | *(native)*                            | Use `() => value`                                                 |
+| [`countBy`](https://remedajs.com/docs/#countBy)                     | ✅     | `iterable/countBy`                    | -                                                                 |
+| [`debounce`](https://remedajs.com/docs/#debounce)                   | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`defaultTo`](https://remedajs.com/docs/#defaultTo)                 | ❌     | *(native)*                            | Use `??`                                                          |
+| [`difference`](https://remedajs.com/docs/#difference)               | ✅     | `array/arrayDifference`               | -                                                                 |
+| [`differenceWith`](https://remedajs.com/docs/#differenceWith)       | ✅     | `array/arrayDifference`               | Pass a comparator                                                 |
+| [`divide`](https://remedajs.com/docs/#divide)                       | ❌     | *(native)*                            | Use `/`                                                           |
+| [`doNothing`](https://remedajs.com/docs/#doNothing)                 | 🚧     | —                                     | `function` group, pending triage                                  |
+| [`drop`](https://remedajs.com/docs/#drop)                           | ✅     | `array/arrayDrop`                     | -                                                                 |
+| [`dropFirstBy`](https://remedajs.com/docs/#dropFirstBy)             | ⌛     | `array/arrayDropFirstBy`              | Order-rules cluster                                               |
+| [`dropLast`](https://remedajs.com/docs/#dropLast)                   | ✅     | `array/arrayDropRight`                | -                                                                 |
+| [`dropLastWhile`](https://remedajs.com/docs/#dropLastWhile)         | ✅     | `array/arrayDropRight`                | Pass a predicate                                                  |
+| [`dropWhile`](https://remedajs.com/docs/#dropWhile)                 | ✅     | `array/arrayDrop`                     | Pass a predicate                                                  |
+| [`endsWith`](https://remedajs.com/docs/#endsWith)                   | ❌     | *(native)*                            | `String#endsWith`                                                 |
+| [`entries`](https://remedajs.com/docs/#entries)                     | ❌     | *(native)*                            | `Object.entries`                                                  |
+| [`evolve`](https://remedajs.com/docs/#evolve)                       | 🚧     | —                                     | `object` group, pending triage                                    |
+| [`filter`](https://remedajs.com/docs/#filter)                       | 🚧     | —                                     | Native; type-narrowing variant under consideration                |
+| [`find`](https://remedajs.com/docs/#find)                           | ❌     | *(native)*                            | `Array#find`                                                      |
+| [`findIndex`](https://remedajs.com/docs/#findIndex)                 | ❌     | *(native)*                            | `Array#findIndex`                                                 |
+| [`findLast`](https://remedajs.com/docs/#findLast)                   | ❌     | *(native)*                            | `Array#findLast`                                                  |
+| [`findLastIndex`](https://remedajs.com/docs/#findLastIndex)         | ❌     | *(native)*                            | `Array#findLastIndex`                                             |
+| [`first`](https://remedajs.com/docs/#first)                         | ✅     | `array/arrayFirst`                    | -                                                                 |
+| [`firstBy`](https://remedajs.com/docs/#firstBy)                     | ⌛     | `array/arrayFirstBy`                  | Order-rules cluster; may replace `minBy`/`maxBy`                  |
+| [`flat`](https://remedajs.com/docs/#flat)                           | ✅     | `array/flatten`                       | -                                                                 |
+| [`flatMap`](https://remedajs.com/docs/#flatMap)                     | ✅     | `array/flatMap`                       | -                                                                 |
+| [`floor`](https://remedajs.com/docs/#floor)                         | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`forEach`](https://remedajs.com/docs/#forEach)                     | ❌     | *(native)*                            | `Array#forEach`                                                   |
+| [`forEachObj`](https://remedajs.com/docs/#forEachObj)               | 🚧     | —                                     | `object` group, pending triage                                    |
+| [`fromEntries`](https://remedajs.com/docs/#fromEntries)             | ❌     | *(native)*                            | `Object.fromEntries`                                              |
+| [`fromKeys`](https://remedajs.com/docs/#fromKeys)                   | 🚧     | —                                     | `object` group, pending triage                                    |
+| [`funnel`](https://remedajs.com/docs/#funnel)                       | ❌     | —                                     | Scheduling/`pipe` machinery, out of scope                         |
+| [`groupBy`](https://remedajs.com/docs/#groupBy)                     | ❌     | *(native)*                            | `Object.groupBy`                                                  |
+| [`groupByProp`](https://remedajs.com/docs/#groupByProp)             | 🚧     | —                                     | `object` group, pending triage                                    |
+| [`hasAtLeast`](https://remedajs.com/docs/#hasAtLeast)               | ✅     | `array/arrayHasMinElements`           | -                                                                 |
+| [`hasProp`](https://remedajs.com/docs/#hasProp)                     | 🚧     | —                                     | `object`/guard group, pending triage                              |
+| [`hasSubObject`](https://remedajs.com/docs/#hasSubObject)           | 🚧     | —                                     | `object`/guard group, pending triage                              |
+| [`identity`](https://remedajs.com/docs/#identity)                   | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`indexBy`](https://remedajs.com/docs/#indexBy)                     | 🚧     | —                                     | `object` group, pending triage                                    |
+| [`intersection`](https://remedajs.com/docs/#intersection)           | ✅     | `array/arrayIntersection`             | -                                                                 |
+| [`intersectionWith`](https://remedajs.com/docs/#intersectionWith)   | ✅     | `array/arrayIntersection`             | Pass a comparator                                                 |
+| [`invert`](https://remedajs.com/docs/#invert)                       | ✅     | `object/swapObjectKeysValues`         | -                                                                 |
+| [`isArray`](https://remedajs.com/docs/#isArray)                     | ❌     | *(native)*                            | `Array.isArray`                                                   |
+| [`isBigInt`](https://remedajs.com/docs/#isBigInt)                   | 🚧     | —                                     | `predicate` group, pending triage                                 |
+| [`isBoolean`](https://remedajs.com/docs/#isBoolean)                 | 🚧     | —                                     | `predicate` group, pending triage                                 |
+| [`isDate`](https://remedajs.com/docs/#isDate)                       | 🚧     | —                                     | `predicate` group, pending triage                                 |
+| [`isDeepEqual`](https://remedajs.com/docs/#isDeepEqual)             | 🚧     | —                                     | `value` group, pending triage (cf. `value/isEqual`)               |
+| [`isDefined`](https://remedajs.com/docs/#isDefined)                 | 🚧     | —                                     | `predicate` group, pending triage                                 |
+| [`isEmpty`](https://remedajs.com/docs/#isEmpty)                     | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`isEmptyish`](https://remedajs.com/docs/#isEmptyish)               | 🚧     | —                                     | `predicate` group, pending triage                                 |
+| [`isError`](https://remedajs.com/docs/#isError)                     | ❌     | *(native)*                            | `x instanceof Error`                                              |
+| [`isFunction`](https://remedajs.com/docs/#isFunction)               | 🚧     | —                                     | `predicate` group, pending triage                                 |
+| [`isIncludedIn`](https://remedajs.com/docs/#isIncludedIn)           | 🚧     | —                                     | `predicate` group, pending triage                                 |
+| [`isNonNull`](https://remedajs.com/docs/#isNonNull)                 | 🚧     | —                                     | `predicate` group, pending triage                                 |
+| [`isNonNullish`](https://remedajs.com/docs/#isNonNullish)           | 🚧     | —                                     | `predicate` group, pending triage                                 |
+| [`isNot`](https://remedajs.com/docs/#isNot)                         | 🚧     | —                                     | `function`/predicate, pending triage                              |
+| [`isNullish`](https://remedajs.com/docs/#isNullish)                 | 🚧     | —                                     | `predicate` group, pending triage                                 |
+| [`isNumber`](https://remedajs.com/docs/#isNumber)                   | 🚧     | —                                     | `predicate` group, pending triage                                 |
+| [`isObjectType`](https://remedajs.com/docs/#isObjectType)           | 🚧     | —                                     | `predicate` group, pending triage                                 |
+| [`isPlainObject`](https://remedajs.com/docs/#isPlainObject)         | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`isPromise`](https://remedajs.com/docs/#isPromise)                 | 🚧     | —                                     | `predicate` group, pending triage                                 |
+| [`isShallowEqual`](https://remedajs.com/docs/#isShallowEqual)       | 🚧     | —                                     | `value` group, pending triage                                     |
+| [`isStrictEqual`](https://remedajs.com/docs/#isStrictEqual)         | ❌     | *(native)*                            | `Object.is` / `===`                                               |
+| [`isString`](https://remedajs.com/docs/#isString)                   | 🚧     | —                                     | `predicate` group, pending triage                                 |
+| [`isSymbol`](https://remedajs.com/docs/#isSymbol)                   | 🚧     | —                                     | `predicate` group, pending triage                                 |
+| [`isTruthy`](https://remedajs.com/docs/#isTruthy)                   | ✅     | `predicate/isTruthy`                  | -                                                                 |
+| [`join`](https://remedajs.com/docs/#join)                           | ✅     | `array/arrayJoin`                     | -                                                                 |
+| [`keys`](https://remedajs.com/docs/#keys)                           | ❌     | *(native)*                            | `Object.keys`                                                     |
+| [`last`](https://remedajs.com/docs/#last)                           | ✅     | `array/arrayLast`                     | -                                                                 |
+| [`length`](https://remedajs.com/docs/#length)                       | ❌     | *(native)*                            | `.length`                                                         |
+| [`map`](https://remedajs.com/docs/#map)                             | ✅     | `array/arrayMap`                      | Tuple-preserving                                                  |
+| [`mapKeys`](https://remedajs.com/docs/#mapKeys)                     | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`mapToObj`](https://remedajs.com/docs/#mapToObj)                   | 🚧     | —                                     | `object` group, pending triage                                    |
+| [`mapValues`](https://remedajs.com/docs/#mapValues)                 | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`mapWithFeedback`](https://remedajs.com/docs/#mapWithFeedback)     | ✅     | `array/arrayMapWithAccumulator`       | Prefix scan                                                       |
+| [`mean`](https://remedajs.com/docs/#mean)                           | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`meanBy`](https://remedajs.com/docs/#meanBy)                       | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`median`](https://remedajs.com/docs/#median)                       | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`merge`](https://remedajs.com/docs/#merge)                         | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`mergeAll`](https://remedajs.com/docs/#mergeAll)                   | 🚧     | —                                     | `object` group, pending triage                                    |
+| [`mergeDeep`](https://remedajs.com/docs/#mergeDeep)                 | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`multiply`](https://remedajs.com/docs/#multiply)                   | ❌     | *(native)*                            | Use `*`                                                           |
+| [`nthBy`](https://remedajs.com/docs/#nthBy)                         | ⌛     | `array/arrayNthBy`                    | Order-rules cluster                                               |
+| [`objOf`](https://remedajs.com/docs/#objOf)                         | 🚧     | —                                     | `object` group, pending triage                                    |
+| [`omit`](https://remedajs.com/docs/#omit)                           | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`omitBy`](https://remedajs.com/docs/#omitBy)                       | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`once`](https://remedajs.com/docs/#once)                           | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`only`](https://remedajs.com/docs/#only)                           | ❌     | —                                     | Niche; use `array.length === 1 ? array[0] : undefined`            |
+| [`partialBind`](https://remedajs.com/docs/#partialBind)             | ✅     | `function/partial`                    | -                                                                 |
+| [`partialLastBind`](https://remedajs.com/docs/#partialLastBind)     | ✅     | `function/partial`                    | Pass `true`                                                       |
+| [`partition`](https://remedajs.com/docs/#partition)                 | ✅     | `array/arrayPartition`                | -                                                                 |
+| [`pathOr`](https://remedajs.com/docs/#pathOr)                       | 🚧     | —                                     | `object` group, pending triage                                    |
+| [`pick`](https://remedajs.com/docs/#pick)                           | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`pickBy`](https://remedajs.com/docs/#pickBy)                       | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`pipe`](https://remedajs.com/docs/#pipe)                           | ❌     | —                                     | `pipe` machinery, out of scope                                    |
+| [`piped`](https://remedajs.com/docs/#piped)                         | ❌     | —                                     | `pipe` machinery, out of scope                                    |
+| [`product`](https://remedajs.com/docs/#product)                     | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`prop`](https://remedajs.com/docs/#prop)                           | 🚧     | —                                     | `object` group, pending triage                                    |
+| [`pullObject`](https://remedajs.com/docs/#pullObject)               | 🚧     | —                                     | `object` group, pending triage                                    |
+| [`purry`](https://remedajs.com/docs/#purry)                         | ❌     | —                                     | Currying machinery, out of scope                                  |
+| [`randomBigInt`](https://remedajs.com/docs/#randomBigInt)           | 🚧     | —                                     | `math` group, pending triage                                      |
+| [`randomInteger`](https://remedajs.com/docs/#randomInteger)         | 🚧     | —                                     | `math` group, pending triage                                      |
+| [`randomString`](https://remedajs.com/docs/#randomString)           | 🚧     | —                                     | `string` group, pending triage                                    |
+| [`range`](https://remedajs.com/docs/#range)                         | 🚧     | —                                     | `math` group, pending triage                                      |
+| [`rankBy`](https://remedajs.com/docs/#rankBy)                       | ⌛     | `array/arrayRankBy`                   | Order-rules cluster                                               |
+| [`reduce`](https://remedajs.com/docs/#reduce)                       | ❌     | *(native)*                            | `Array#reduce`                                                    |
+| [`reverse`](https://remedajs.com/docs/#reverse)                     | 🚧     | —                                     | Native `toReversed`; tuple-preserving variant under consideration |
+| [`round`](https://remedajs.com/docs/#round)                         | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`sample`](https://remedajs.com/docs/#sample)                       | ✅     | `array/arraySample`                   | -                                                                 |
+| [`set`](https://remedajs.com/docs/#set)                             | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`setPath`](https://remedajs.com/docs/#setPath)                     | 🚧     | —                                     | `object` group, pending triage (cf. `object/setByPath`)           |
+| [`shuffle`](https://remedajs.com/docs/#shuffle)                     | ✅     | `array/arrayShuffle`                  | -                                                                 |
+| [`sliceString`](https://remedajs.com/docs/#sliceString)             | 🚧     | —                                     | `string` group, pending triage                                    |
+| [`sort`](https://remedajs.com/docs/#sort)                           | 🚧     | —                                     | Native `toSorted`; under consideration                            |
+| [`sortBy`](https://remedajs.com/docs/#sortBy)                       | ✅     | `array/sortBy`                        | -                                                                 |
+| [`sortedIndex`](https://remedajs.com/docs/#sortedIndex)             | ✅     | `array/sortedArrayInsertionIndex`     | -                                                                 |
+| [`sortedIndexBy`](https://remedajs.com/docs/#sortedIndexBy)         | ✅     | `array/sortedArrayInsertionIndex`     | Pass an `iteratee`                                                |
+| [`sortedIndexWith`](https://remedajs.com/docs/#sortedIndexWith)     | ⌛     | `array/sortedArrayInsertionIndexWith` | Predicate binary-search                                           |
+| [`sortedLastIndex`](https://remedajs.com/docs/#sortedLastIndex)     | ✅     | `array/sortedArrayInsertionIndex`     | Pass `{rightmost: true}`                                          |
+| [`sortedLastIndexBy`](https://remedajs.com/docs/#sortedLastIndexBy) | ✅     | `array/sortedArrayInsertionIndex`     | `{rightmost: true}` + `iteratee`                                  |
+| [`splice`](https://remedajs.com/docs/#splice)                       | ❌     | *(native)*                            | `Array#toSpliced`                                                 |
+| [`split`](https://remedajs.com/docs/#split)                         | ❌     | *(native)*                            | `String#split`                                                    |
+| [`splitAt`](https://remedajs.com/docs/#splitAt)                     | ✅     | `array/arraySplit`                    | -                                                                 |
+| [`splitWhen`](https://remedajs.com/docs/#splitWhen)                 | ✅     | `array/arraySplit`                    | Pass a predicate                                                  |
+| [`startsWith`](https://remedajs.com/docs/#startsWith)               | ❌     | *(native)*                            | `String#startsWith`                                               |
+| [`stringToPath`](https://remedajs.com/docs/#stringToPath)           | 🚧     | —                                     | `string`/`object` group, pending triage                           |
+| [`subtract`](https://remedajs.com/docs/#subtract)                   | ❌     | *(native)*                            | Use `-`                                                           |
+| [`sum`](https://remedajs.com/docs/#sum)                             | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`sumBy`](https://remedajs.com/docs/#sumBy)                         | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`swapIndices`](https://remedajs.com/docs/#swapIndices)             | ✅     | `array/arraySwapIndices`              | -                                                                 |
+| [`swapProps`](https://remedajs.com/docs/#swapProps)                 | 🚧     | —                                     | `object` group, pending triage                                    |
+| [`take`](https://remedajs.com/docs/#take)                           | ❌     | *(native)*                            | `array.slice(0, n)`                                               |
+| [`takeFirstBy`](https://remedajs.com/docs/#takeFirstBy)             | ⌛     | `array/arrayTakeFirstBy`              | Order-rules cluster                                               |
+| [`takeLast`](https://remedajs.com/docs/#takeLast)                   | ❌     | *(native)*                            | `array.slice(-n)`                                                 |
+| [`takeLastWhile`](https://remedajs.com/docs/#takeLastWhile)         | ✅     | `array/arrayTakeWhile`                | Pass `true` to walk from the end                                  |
+| [`takeWhile`](https://remedajs.com/docs/#takeWhile)                 | ✅     | `array/arrayTakeWhile`                | -                                                                 |
+| [`tap`](https://remedajs.com/docs/#tap)                             | ✅     | `function/tap`                        | -                                                                 |
+| [`times`](https://remedajs.com/docs/#times)                         | ✅     | `function/mapTimes`                   | -                                                                 |
+| [`toCamelCase`](https://remedajs.com/docs/#toCamelCase)             | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`toKebabCase`](https://remedajs.com/docs/#toKebabCase)             | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`toLowerCase`](https://remedajs.com/docs/#toLowerCase)             | ❌     | *(native)*                            | `String#toLowerCase`                                              |
+| [`toSnakeCase`](https://remedajs.com/docs/#toSnakeCase)             | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`toTitleCase`](https://remedajs.com/docs/#toTitleCase)             | 🚧     | —                                     | `string` group, pending triage                                    |
+| [`toUpperCase`](https://remedajs.com/docs/#toUpperCase)             | ❌     | *(native)*                            | `String#toUpperCase`                                              |
+| [`truncate`](https://remedajs.com/docs/#truncate)                   | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
+| [`uncapitalize`](https://remedajs.com/docs/#uncapitalize)           | 🚧     | —                                     | `string` group, pending triage                                    |
+| [`unique`](https://remedajs.com/docs/#unique)                       | ✅     | `array/arrayUnique`                   | -                                                                 |
+| [`uniqueBy`](https://remedajs.com/docs/#uniqueBy)                   | ✅     | `array/arrayUnique`                   | Pass a mapper                                                     |
+| [`uniqueWith`](https://remedajs.com/docs/#uniqueWith)               | ✅     | `array/arrayUnique`                   | Pass a comparator                                                 |
+| [`values`](https://remedajs.com/docs/#values)                       | ❌     | *(native)*                            | `Object.values`                                                   |
+| [`when`](https://remedajs.com/docs/#when)                           | 🚧     | —                                     | `function` group, pending triage                                  |
+| [`zip`](https://remedajs.com/docs/#zip)                             | ✅     | `array/arrayTranspose`                | -                                                                 |
+| [`zipWith`](https://remedajs.com/docs/#zipWith)                     | ✅     | `array/arrayTranspose`                | Pass an iteratee                                                  |
+
 ### `@antfu/utils`
 
 A general-purpose grab-bag that overlaps heavily with `es-toolkit` and our existing utilities, so most entries are already covered. Only its **non-type** (runtime) exports are audited here; the type-level utilities are out of scope.
@@ -480,9 +650,9 @@ A general-purpose grab-bag that overlaps heavily with `es-toolkit` and our exist
 | `capitalize`              | ❌     | `string/capitalize`            | es-toolkit equivalent (also lowercases the tail)                                         |
 | `clamp`                   | ❌     | `math/clamp`                   | Covered                                                                                  |
 | `clampArrayRange`         | ❌     | *(not added)*                  | Trivial `clamp(n, 0, arr.length - 1)`; degenerate on empty arrays                        |
-| `clearUndefined`          | ❓     | *(under consideration)*        | Mutating strip of `undefined`; `omit(obj, (v) => v === undefined)` covers the copy case  |
+| `clearUndefined`          | 🚧     | *(under consideration)*        | Mutating strip of `undefined`; `omit(obj, (v) => v === undefined)` covers the copy case  |
 | `createControlledPromise` | ❌     | *(native)*                     | Use `Promise.withResolvers()`                                                            |
-| `createPromiseLock`       | ❓     | *(under consideration)*        | A dynamic wait-group (await all in-flight); would need a rename                          |
+| `createPromiseLock`       | 🚧     | *(under consideration)*        | A dynamic wait-group (await all in-flight); would need a rename                          |
 | `createSingletonPromise`  | ✅     | `async/createSingletonPromise` | -                                                                                        |
 | `debounce`                | ❌     | `function/debounce`            | Covered (es-toolkit)                                                                     |
 | `deepMerge`               | ❌     | `object/mergeDeep`             | Covered                                                                                  |
@@ -526,7 +696,7 @@ A general-purpose grab-bag that overlaps heavily with `es-toolkit` and our exist
 | `objectPick`              | ❌     | `object/pick`                  | Covered (incl. `omitUndefined` via predicate)                                            |
 | `p`                       | ❌     | `async/withConcurrencyLimit`   | Promise-pool API; niche, overlaps existing concurrency control                           |
 | `partition`               | ✅     | `array/arrayPartition`         | n-way partition folded into the existing util                                            |
-| `randomStr`               | ❓     | *(under consideration)*        | `Math.random`-based; a crypto-secure variant is preferable                               |
+| `randomStr`               | 🚧     | *(under consideration)*        | `Math.random`-based; a crypto-secure variant is preferable                               |
 | `range`                   | ❌     | `math/range`                   | Covered (incl. `rangeRight`)                                                             |
 | `remap`                   | ✅     | `math/mapRange`                | Renamed; tuple ranges, unclamped by default                                              |
 | `remove`                  | ❌     | `array/arrayPurgeBy`           | Covered (mutating)                                                                       |
@@ -536,7 +706,7 @@ A general-purpose grab-bag that overlaps heavily with `es-toolkit` and our exist
 | `sleep`                   | ❌     | `async/sleep`                  | Covered (es-toolkit `delay`)                                                             |
 | `sum`                     | ❌     | `math/sum`                     | Covered                                                                                  |
 | `tap`                     | ✅     | `function/tap`                 | -                                                                                        |
-| `template`                | ❓     | *(under consideration)*        | Falsy values wrongly hit the fallback (`\|\|`); missing indexed args emit `"undefined"`  |
+| `template`                | 🚧     | *(under consideration)*        | Falsy values wrongly hit the fallback (`\|\|`); missing indexed args emit `"undefined"`  |
 | `throttle`                | ❌     | `function/throttle`            | Covered (es-toolkit)                                                                     |
 | `timestamp`               | ❌     | *(native)*                     | `Date.now()`                                                                             |
 | `toArray`                 | ❌     | `array/arrayify`               | Covered                                                                                  |
@@ -565,7 +735,7 @@ A general-purpose grab-bag that overlaps heavily with `es-toolkit` and our exist
 | [`stringify`][devalue]           | ✅     | `json/structuredStringify`  | Renamed; serializes `Date`/`Map`/`Set`/`BigInt`/etc. and circular refs. Output is **NOT** valid JSON |
 | [`parse`][devalue]               | ✅     | `json/structuredParse`      | Renamed; revives a string produced by `structuredStringify` (paired, closed format)                  |
 | [`uneval`][devalue]              | ❌     | *(not added)*               | Emits evaluatable JS source; needs `eval`/inlining to consume — niche and easy to misuse             |
-| [`stringifyAsync`][devalue]      | ❓     | *(under consideration)*     | Awaits `Promise`s in the graph; narrow use case                                                      |
+| [`stringifyAsync`][devalue]      | 🚧     | *(under consideration)*     | Awaits `Promise`s in the graph; narrow use case                                                      |
 
 ### `lossless-json`
 
@@ -582,7 +752,7 @@ A general-purpose grab-bag that overlaps heavily with `es-toolkit` and our exist
 | Original function group and name     | Status | Our function group and name | Notes                                                                                                           |
 | ------------------------------------ | ------ | --------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | [`(default)`][safe-stable-stringify] | ✅     | `json/jsonStringifyStable`  | Renamed; deterministic output (recursively sorted keys); circular refs become `"[Circular]"`; supports `bigint` |
-| [`configure`][safe-stable-stringify] | ❓     | *(under consideration)*     | Escape hatch for custom comparator / circular handling — skipped to keep the surface minimal                    |
+| [`configure`][safe-stable-stringify] | 🚧     | *(under consideration)*     | Escape hatch for custom comparator / circular handling — skipped to keep the surface minimal                    |
 
 ### `ts-extras`
 
@@ -639,12 +809,12 @@ Candidate libraries on the radar. These cover JSON *manipulation* axes (repair, 
 
 | Library                                             | Axis                            | Status | Notes                                                                                            |
 | --------------------------------------------------- | ------------------------------- | ------ | ------------------------------------------------------------------------------------------------ |
-| [`jsonrepair`][jsonrepair]                          | Repair malformed JSON           | ❓     | Fixes unquoted keys, trailing commas, comments, fenced blocks, etc.; complements `jsonParseSafe` |
-| [`partial-json`][partial-json]                      | Parse incomplete/truncated JSON | ❓     | Best-effort value from a partial buffer (e.g. streaming LLM output); configurable `Allow` mask   |
-| [`jsondiffpatch`][jsondiffpatch]                    | Document diff/patch             | ❓     | `diff`/`patch`/`unpatch`/`reverse` with array-move detection; core has no runtime dependency     |
-| [`@hyperjump/json-pointer`][hyperjump-json-pointer] | JSON Pointer (RFC 6901)         | ❓     | Get/set/remove a value by `/a/b/0` path                                                          |
-| [`immutable-json-patch`][immutable-json-patch]      | JSON Patch (RFC 6902)           | ❓     | Immutable apply/compare/revert; pairs with JSON Pointer                                          |
-| JSON Merge Patch (RFC 7386)                         | Merge patch                     | ❓     | No well-maintained typed library exists; a custom implementation would be the likely route       |
+| [`jsonrepair`][jsonrepair]                          | Repair malformed JSON           | 🚧     | Fixes unquoted keys, trailing commas, comments, fenced blocks, etc.; complements `jsonParseSafe` |
+| [`partial-json`][partial-json]                      | Parse incomplete/truncated JSON | 🚧     | Best-effort value from a partial buffer (e.g. streaming LLM output); configurable `Allow` mask   |
+| [`jsondiffpatch`][jsondiffpatch]                    | Document diff/patch             | 🚧     | `diff`/`patch`/`unpatch`/`reverse` with array-move detection; core has no runtime dependency     |
+| [`@hyperjump/json-pointer`][hyperjump-json-pointer] | JSON Pointer (RFC 6901)         | 🚧     | Get/set/remove a value by `/a/b/0` path                                                          |
+| [`immutable-json-patch`][immutable-json-patch]      | JSON Patch (RFC 6902)           | 🚧     | Immutable apply/compare/revert; pairs with JSON Pointer                                          |
+| JSON Merge Patch (RFC 7386)                         | Merge patch                     | 🚧     | No well-maintained typed library exists; a custom implementation would be the likely route       |
 
 > JSONPath (querying) was considered and **set aside**: the dominant `jsonpath-plus` has a history of RCE advisories, and the axis is broad/lower-demand. Relaxed syntax (JSON5/JSONC), canonical/RFC 8785 output, and `bigint`-safe stringify are already covered by existing entries or native features.
 
