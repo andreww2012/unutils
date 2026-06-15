@@ -13,81 +13,89 @@
 
 ### Custom functions
 
-| Our function group and name       | Notes                                                                                                                                                       |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `array/arrayAt`                   | Consolidates `ts-extras`' `arrayAt` (precise tuple typing for literal indices) with es-toolkit's `at` (also accepts a list of indices)                      |
-| `array/arrayDifference`           | Consolidates `difference`/`differenceBy`/`differenceWith`; optional mapper or comparator                                                                    |
-| `array/arrayDrop`                 | Consolidates `drop`/`dropWhile`; pass a predicate to drop while it holds                                                                                    |
-| `array/arrayDropRight`            | Consolidates `dropRight`/`dropRightWhile`; pass a predicate to drop while it holds                                                                          |
-| `array/arrayFill`                 | Consolidates `fill`/`toFilled`; pass `{copy: true}` to return a new array                                                                                   |
-| `array/arrayFirstBy`              | First element by one or more `OrderRule`s (via `remeda`'s `firstBy`), O(n) without sorting; min/max + tie-breakers; non-empty tuples never give `undefined` |
-| `array/arrayHasMinElements`       | Type-guard (via `remeda`'s `hasAtLeast`): a literal minimum narrows to a known-minimum tuple; non-literal returns a plain `boolean`                         |
-| `array/arrayify`                  | Wraps non-arrays (tuple-preserving); nullish input returns `[]` (or `[value]` with `wrapNullish`)                                                           |
-| `array/arrayIntersection`         | Consolidates `intersection`/`intersectionBy`/`intersectionWith`; optional mapper or comparator                                                              |
-| `array/arrayIsSubset`             | Consolidates `isSubset`/`isSubsetWith`; optional mapper or comparator                                                                                       |
-| `array/arrayMap`                  | Tuple-preserving `Array#map` (via `remeda`); a fixed-length tuple maps to a same-length tuple instead of widening to `U[]`                                  |
-| `array/arrayMapWithAccumulator`   | Prefix scan (via `remeda`'s `mapWithFeedback`): threads an accumulator, returning every intermediate state (same length, tuple-preserving)                  |
-| `array/arrayPartition`            | Single predicate gives a binary `[matched, unmatched]` (guard-narrowing); multiple predicates give an n-way partition                                       |
-| `array/arrayPurgeValues`          | Consolidates `pull`/`pullAllBy`/`pullAllWith`; mutating; optional mapper or comparator                                                                      |
-| `array/arraySample`               | Consolidates `sample`/`sampleSize`; pass a size for multiple elements, `{withReplacement: true}` to allow repeats                                           |
-| `array/arraySplit`                | Consolidates remeda's `splitAt`/`splitWhen` into `[before, after]`; pass a predicate to split at the first match; tuple-preserving for literal indices      |
-| `array/arraySwapIndices`          | Swaps the elements at two indices (tuple-preserving via `remeda`); negative indices count from the end; out-of-bounds/`NaN` returns an unchanged copy       |
-| `array/arraySymmetricDifference`  | Consolidates `xor`/`xorBy`/`xorWith`; renamed to the set-theory term                                                                                        |
-| `array/arrayTakeWhile`            | Consolidates `takeWhile`/`takeRightWhile`; pass `true` to walk from the end                                                                                 |
-| `array/arrayTranspose`            | Consolidates `zip`/`unzip`/`zipWith`/`unzipWith`; optional `(...column) => value` iteratee                                                                  |
-| `array/arrayUnion`                | Consolidates `union`/`unionBy`/`unionWith`; optional mapper or comparator                                                                                   |
-| `array/arrayUnique`               | Consolidates `uniq`/`uniqBy`/`uniqWith`; optional mapper or comparator                                                                                      |
-| `array/flatMap`                   | Defaults to deep flattening; pass a finite `depth` for a specific level                                                                                     |
-| `array/flatten`                   | Defaults to deep flattening; pass a finite `depth` for a specific level                                                                                     |
-| `array/sortedArrayIndexOf`        | Binary search for an existing value in a sorted array; returns its index or `-1`; `{rightmost?}`                                                            |
-| `array/sortedArrayInsertionIndex` | Binary-search insertion point into a sorted array; `{iteratee?, rightmost?}`                                                                                |
-| `function/curry`                  | Consolidates `curry`/`curryRight`; pass `true` to collect arguments right-to-left                                                                           |
-| `function/flow`                   | Consolidates `flow`/`flowRight`; functions as an array; pass `true` for right-to-left                                                                       |
-| `function/mapTimes`               | Renamed `times`; iteratee required; clearer than `Array.from({length}, ...)`                                                                                |
-| `function/maybeCall`              | Resolves a `MaybeFn` (value or getter); calls it with forwarded args when it is a function, else returns it as-is                                           |
-| `function/partial`                | Consolidates `partial`/`partialRight`; args as an array; pass `true` to pre-apply trailing                                                                  |
-| `iterable/countBy`                | -                                                                                                                                                           |
-| `iterable/every`                  | Generalized from `set/every`; simple `(value) => boolean` callback                                                                                          |
-| `iterable/find`                   | Generalized from `set/find`; simple `(value) => boolean` callback                                                                                           |
-| `iterable/forEach`                | Generalized from `set/forEach`; simple `(value) => void` callback                                                                                           |
-| `iterable/keyedBy`                | -                                                                                                                                                           |
-| `iterable/reduce`                 | Generalized from `set/reduce`; simple `(acc, value) => acc` callback                                                                                        |
-| `iterable/slidingWindow`          | -                                                                                                                                                           |
-| `iterable/some`                   | Generalized from `set/some`; simple `(value) => boolean` callback                                                                                           |
-| `json/jsonParse`                  | Strict, throwing `JSON.parse` upgrade; decodes standalone tokens; blocks prototype pollution                                                                |
-| `json/jsonParseAsync`             | Promisified non-blocking `JSON.parse` (yields to the event loop); `yieldable-json` wrapper                                                                  |
-| `json/jsonParseSafe`              | Forgiving parse that never throws; falls back to the original input when it cannot be parsed                                                                |
-| `json/jsonStringifyAsync`         | Promisified non-blocking `JSON.stringify` (yields to the event loop); `yieldable-json` wrapper                                                              |
-| `math/interpolate`                | Renamed `lerp`; `(min, max, t, clamp = false)`; extrapolates unless `clamp` is `true`                                                                       |
-| `math/mapRange`                   | Renamed `remap`; `(value, inputRange, outputRange, clamp = false)`; affine range remap, extrapolates unless `clamp`                                         |
-| `math/max`                        | Single-pass over any iterable; returns `undefined` for an empty input                                                                                       |
-| `math/mean`                       | Generalized to any iterable (single-pass); optional `(item) => number` selector                                                                             |
-| `math/median`                     | Generalized to any iterable (materialized + sorted); optional `(item) => number` selector                                                                   |
-| `math/min`                        | Single-pass over any iterable; returns `undefined` for an empty input                                                                                       |
-| `math/sum`                        | Generalized to any iterable (single-pass); optional `(item, index) => number` selector                                                                      |
-| `object/assignDefaults`           | Consolidates `defaults`/`defaultsDeep`/`toDefaulted`; single source or array, `{deep, copy}` modes                                                          |
-| `object/findObjectKey`            | Consolidates `findKey`/`findLastKey`; pass `true` to scan from the end                                                                                      |
-| `object/hasPath`                  | Deep-path existence check; pass `{inherited: true}` to include the prototype chain                                                                          |
-| `object/mergeDeep`                | Consolidates `merge`/`mergeWith`/`toMerged`; optional `mergeValues` customizer and `{copy}` mode                                                            |
-| `object/objectFromEntriesDeep`    | Deep-path `Object.fromEntries`; builds nested objects/arrays from `[path, value]` entries                                                                   |
-| `object/omit`                     | Consolidates `omit`/`omitBy`; top-level keys, deep paths, or a predicate                                                                                    |
-| `object/pick`                     | Consolidates `pick`/`pickBy`; top-level keys, deep paths, or a predicate                                                                                    |
-| `object/setByPath`                | Consolidates `set`/`setWith`; mutating deep-path write with optional container customizer                                                                   |
-| `object/swapObjectKeysValues`     | Consolidates `invert`/`invertBy`; pass an iteratee to group colliding keys into arrays                                                                      |
-| `object/updateByPath`             | Consolidates `update`/`updateWith`; mutating deep-path update with optional container customizer                                                            |
-| `predicate/isBuffer`              | Enhanced with a `value is Buffer` type guard                                                                                                                |
-| `predicate/isIn`                  | `ts-extras`' `objectHasIn` with `(key, object)` argument order (reads like `key in object`); narrows the object                                             |
-| `predicate/isKeyIn`               | `ts-extras`' `keyIn` with `(key, object)` argument order; narrows the key to those present in the object                                                    |
-| `predicate/isTruthy`              | Truthy type guard whose narrowing subtracts the falsy members (unlike `.filter(Boolean)`, which keeps the type)                                             |
-| `server/readFileSafe`             | Reads a file, returning `null` on a missing file (`ENOENT`) but rethrowing other errors; `asBinary` for a raw `Buffer`                                      |
-| `string/ensurePrefix`             | `(value, prefix)` (subject-first); prepends `prefix` only when missing                                                                                      |
-| `string/ensureSuffix`             | `(value, suffix)` (subject-first); appends `suffix` only when missing                                                                                       |
-| `ts/allUnionMembers`              | Compile-time guard that a tuple lists every member of a union exactly once (no missing, extra or duplicate); `{readonly}` keeps the tuple readonly          |
-| `value/cloneDeep`                 | Consolidates `cloneDeep`/`cloneDeepWith`; optional customizer                                                                                               |
-| `value/cloneShallow`              | Consolidates `clone`/`cloneWith`; optional customizer                                                                                                       |
-| `value/isEqual`                   | Consolidates `isEqual`/`isEqualWith`; optional customizer                                                                                                   |
-| `value/isObjectMatching`          | Consolidates `isMatch`/`isMatchWith`; deep partial match; optional customizer                                                                               |
-| `value/typeOf`                    | Enhanced `typeof`: lowercase for primitives and `null`, the `Symbol.toStringTag` class tag for objects (`Array`, `Date`, …)                                 |
+| Our function group and name           | Notes                                                                                                                                                             |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `array/arrayAt`                       | Consolidates `ts-extras`' `arrayAt` (precise tuple typing for literal indices) with es-toolkit's `at` (also accepts a list of indices)                            |
+| `array/arrayDifference`               | Consolidates `difference`/`differenceBy`/`differenceWith`; optional mapper or comparator                                                                          |
+| `array/arrayDrop`                     | Consolidates `drop`/`dropWhile`; pass a predicate to drop while it holds                                                                                          |
+| `array/arrayDropFirstBy`              | Drops the `count` "smallest" elements by one or more `OrderRule`s (via `remeda`'s `dropFirstBy`), O(n) without sorting; kept elements keep their order            |
+| `array/arrayDropRight`                | Consolidates `dropRight`/`dropRightWhile`; pass a predicate to drop while it holds                                                                                |
+| `array/arrayFill`                     | Consolidates `fill`/`toFilled`; pass `{copy: true}` to return a new array                                                                                         |
+| `array/arrayFilter`                   | Tuple-aware `Array#filter` (via `remeda`); a tuple + (inferred) type guard yields the refined tuple (`[1, 2, 3]` filtered by `!== 2` → `[1, 3]`) not `(1 \| 3)[]` |
+| `array/arrayFirstBy`                  | First element by one or more `OrderRule`s (via `remeda`'s `firstBy`), O(n) without sorting; min/max + tie-breakers; non-empty tuples never give `undefined`       |
+| `array/arrayHasMinElements`           | Type-guard (via `remeda`'s `hasAtLeast`): a literal minimum narrows to a known-minimum tuple; non-literal returns a plain `boolean`                               |
+| `array/arrayify`                      | Wraps non-arrays (tuple-preserving); nullish input returns `[]` (or `[value]` with `wrapNullish`)                                                                 |
+| `array/arrayIntersection`             | Consolidates `intersection`/`intersectionBy`/`intersectionWith`; optional mapper or comparator                                                                    |
+| `array/arrayIsSubset`                 | Consolidates `isSubset`/`isSubsetWith`; optional mapper or comparator                                                                                             |
+| `array/arrayMap`                      | Tuple-preserving `Array#map` (via `remeda`); a fixed-length tuple maps to a same-length tuple instead of widening to `U[]`                                        |
+| `array/arrayMapWithAccumulator`       | Prefix scan (via `remeda`'s `mapWithFeedback`): threads an accumulator, returning every intermediate state (same length, tuple-preserving)                        |
+| `array/arrayNthBy`                    | Element at the `index`-th position in the order defined by `OrderRule`s (via `remeda`'s `nthBy`), O(n) without sorting; out-of-bounds → `undefined`               |
+| `array/arrayPartition`                | Single predicate gives a binary `[matched, unmatched]` (guard-narrowing); multiple predicates give an n-way partition                                             |
+| `array/arrayPurgeValues`              | Consolidates `pull`/`pullAllBy`/`pullAllWith`; mutating; optional mapper or comparator                                                                            |
+| `array/arrayRankBy`                   | Rank an item would have by one or more `OrderRule`s — count of elements sorting before it (via `remeda`'s `rankBy`), O(n); item need not be present               |
+| `array/arrayReverse`                  | Tuple-preserving reverse (via `remeda` + type-fest's `ArrayReverse`); a fixed-length tuple reverses to a same-length tuple instead of widening to a union array   |
+| `array/arraySample`                   | Consolidates `sample`/`sampleSize`; pass a size for multiple elements, `{withReplacement: true}` to allow repeats                                                 |
+| `array/arraySort`                     | Length-preserving non-mutating sort by comparator (via `remeda`); a fixed-length tuple keeps its length (slots widen to the element union)                        |
+| `array/arraySplit`                    | Consolidates remeda's `splitAt`/`splitWhen` into `[before, after]`; pass a predicate to split at the first match; tuple-preserving for literal indices            |
+| `array/arraySwapIndices`              | Swaps the elements at two indices (tuple-preserving via `remeda`); negative indices count from the end; out-of-bounds/`NaN` returns an unchanged copy             |
+| `array/arraySymmetricDifference`      | Consolidates `xor`/`xorBy`/`xorWith`; renamed to the set-theory term                                                                                              |
+| `array/arrayTakeFirstBy`              | The `count` "smallest" elements by one or more `OrderRule`s (via `remeda`'s `takeFirstBy`), O(n) without sorting                                                  |
+| `array/arrayTakeWhile`                | Consolidates `takeWhile`/`takeRightWhile`; pass `true` to walk from the end                                                                                       |
+| `array/arrayTranspose`                | Consolidates `zip`/`unzip`/`zipWith`/`unzipWith`; optional `(...column) => value` iteratee                                                                        |
+| `array/arrayUnion`                    | Consolidates `union`/`unionBy`/`unionWith`; optional mapper or comparator                                                                                         |
+| `array/arrayUnique`                   | Consolidates `uniq`/`uniqBy`/`uniqWith`; optional mapper or comparator                                                                                            |
+| `array/flatMap`                       | Defaults to deep flattening; pass a finite `depth` for a specific level                                                                                           |
+| `array/flatten`                       | Defaults to deep flattening; pass a finite `depth` for a specific level                                                                                           |
+| `array/sortedArrayIndexOf`            | Binary search for an existing value in a sorted array; returns its index or `-1`; `{rightmost?}`                                                                  |
+| `array/sortedArrayInsertionIndex`     | Binary-search insertion point into a sorted array; `{iteratee?, rightmost?}`                                                                                      |
+| `array/sortedArrayInsertionIndexWith` | Binary-search insertion index via a monotonic `predicate` (via `remeda`'s `sortedIndexWith`); any comparable condition, not just `number`/`string` keys           |
+| `function/curry`                      | Consolidates `curry`/`curryRight`; pass `true` to collect arguments right-to-left                                                                                 |
+| `function/flow`                       | Consolidates `flow`/`flowRight`; functions as an array; pass `true` for right-to-left                                                                             |
+| `function/mapTimes`                   | Renamed `times`; iteratee required; clearer than `Array.from({length}, ...)`                                                                                      |
+| `function/maybeCall`                  | Resolves a `MaybeFn` (value or getter); calls it with forwarded args when it is a function, else returns it as-is                                                 |
+| `function/partial`                    | Consolidates `partial`/`partialRight`; args as an array; pass `true` to pre-apply trailing                                                                        |
+| `iterable/countBy`                    | -                                                                                                                                                                 |
+| `iterable/every`                      | Generalized from `set/every`; simple `(value) => boolean` callback                                                                                                |
+| `iterable/find`                       | Generalized from `set/find`; simple `(value) => boolean` callback                                                                                                 |
+| `iterable/forEach`                    | Generalized from `set/forEach`; simple `(value) => void` callback                                                                                                 |
+| `iterable/keyedBy`                    | -                                                                                                                                                                 |
+| `iterable/reduce`                     | Generalized from `set/reduce`; simple `(acc, value) => acc` callback                                                                                              |
+| `iterable/slidingWindow`              | -                                                                                                                                                                 |
+| `iterable/some`                       | Generalized from `set/some`; simple `(value) => boolean` callback                                                                                                 |
+| `json/jsonParse`                      | Strict, throwing `JSON.parse` upgrade; decodes standalone tokens; blocks prototype pollution                                                                      |
+| `json/jsonParseAsync`                 | Promisified non-blocking `JSON.parse` (yields to the event loop); `yieldable-json` wrapper                                                                        |
+| `json/jsonParseSafe`                  | Forgiving parse that never throws; falls back to the original input when it cannot be parsed                                                                      |
+| `json/jsonStringifyAsync`             | Promisified non-blocking `JSON.stringify` (yields to the event loop); `yieldable-json` wrapper                                                                    |
+| `math/interpolate`                    | Renamed `lerp`; `(min, max, t, clamp = false)`; extrapolates unless `clamp` is `true`                                                                             |
+| `math/mapRange`                       | Renamed `remap`; `(value, inputRange, outputRange, clamp = false)`; affine range remap, extrapolates unless `clamp`                                               |
+| `math/max`                            | Single-pass over any iterable; returns `undefined` for an empty input                                                                                             |
+| `math/mean`                           | Generalized to any iterable (single-pass); optional `(item) => number` selector                                                                                   |
+| `math/median`                         | Generalized to any iterable (materialized + sorted); optional `(item) => number` selector                                                                         |
+| `math/min`                            | Single-pass over any iterable; returns `undefined` for an empty input                                                                                             |
+| `math/sum`                            | Generalized to any iterable (single-pass); optional `(item, index) => number` selector                                                                            |
+| `object/assignDefaults`               | Consolidates `defaults`/`defaultsDeep`/`toDefaulted`; single source or array, `{deep, copy}` modes                                                                |
+| `object/findObjectKey`                | Consolidates `findKey`/`findLastKey`; pass `true` to scan from the end                                                                                            |
+| `object/hasPath`                      | Deep-path existence check; pass `{inherited: true}` to include the prototype chain                                                                                |
+| `object/mergeDeep`                    | Consolidates `merge`/`mergeWith`/`toMerged`; optional `mergeValues` customizer and `{copy}` mode                                                                  |
+| `object/objectFromEntriesDeep`        | Deep-path `Object.fromEntries`; builds nested objects/arrays from `[path, value]` entries                                                                         |
+| `object/omit`                         | Consolidates `omit`/`omitBy`; top-level keys, deep paths, or a predicate                                                                                          |
+| `object/pick`                         | Consolidates `pick`/`pickBy`; top-level keys, deep paths, or a predicate                                                                                          |
+| `object/setByPath`                    | Consolidates `set`/`setWith`; mutating deep-path write with optional container customizer                                                                         |
+| `object/swapObjectKeysValues`         | Consolidates `invert`/`invertBy`; pass an iteratee to group colliding keys into arrays                                                                            |
+| `object/updateByPath`                 | Consolidates `update`/`updateWith`; mutating deep-path update with optional container customizer                                                                  |
+| `predicate/isBuffer`                  | Enhanced with a `value is Buffer` type guard                                                                                                                      |
+| `predicate/isIn`                      | `ts-extras`' `objectHasIn` with `(key, object)` argument order (reads like `key in object`); narrows the object                                                   |
+| `predicate/isKeyIn`                   | `ts-extras`' `keyIn` with `(key, object)` argument order; narrows the key to those present in the object                                                          |
+| `predicate/isTruthy`                  | Truthy type guard whose narrowing subtracts the falsy members (unlike `.filter(Boolean)`, which keeps the type)                                                   |
+| `server/readFileSafe`                 | Reads a file, returning `null` on a missing file (`ENOENT`) but rethrowing other errors; `asBinary` for a raw `Buffer`                                            |
+| `string/ensurePrefix`                 | `(value, prefix)` (subject-first); prepends `prefix` only when missing                                                                                            |
+| `string/ensureSuffix`                 | `(value, suffix)` (subject-first); appends `suffix` only when missing                                                                                             |
+| `ts/allUnionMembers`                  | Compile-time guard that a tuple lists every member of a union exactly once (no missing, extra or duplicate); `{readonly}` keeps the tuple readonly                |
+| `value/cloneDeep`                     | Consolidates `cloneDeep`/`cloneDeepWith`; optional customizer                                                                                                     |
+| `value/cloneShallow`                  | Consolidates `clone`/`cloneWith`; optional customizer                                                                                                             |
+| `value/isEqual`                       | Consolidates `isEqual`/`isEqualWith`; optional customizer                                                                                                         |
+| `value/isObjectMatching`              | Consolidates `isMatch`/`isMatchWith`; deep partial match; optional customizer                                                                                     |
+| `value/typeOf`                        | Enhanced `typeof`: lowercase for primitives and `null`, the `Symbol.toStringTag` class tag for objects (`Array`, `Date`, …)                                       |
 
 ### `es-toolkit`
 
@@ -473,171 +481,171 @@ Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e
 
 Only remeda's standalone, data-first functions are considered; the `pipe`/`purry`/lazy machinery and every data-last (curried) form are intentionally excluded. remeda overlaps `es-toolkit` heavily — those duplicated operations are marked *via `es-toolkit`* and documented in full in the `es-toolkit` table above. Non-array categories are still being triaged group-by-group, so many remeda-unique functions there are `🚧` for now.
 
-| Original function name                                              | Status | Our function group and name           | Notes                                                             |
-| ------------------------------------------------------------------- | ------ | ------------------------------------- | ----------------------------------------------------------------- |
-| [`add`](https://remedajs.com/docs/#add)                             | ❌     | *(native)*                            | Use `+`                                                           |
-| [`addProp`](https://remedajs.com/docs/#addProp)                     | 🚧     | —                                     | `object` group, pending triage                                    |
-| [`allPass`](https://remedajs.com/docs/#allPass)                     | 🚧     | —                                     | Predicate combinator, pending triage                              |
-| [`anyPass`](https://remedajs.com/docs/#anyPass)                     | 🚧     | —                                     | Predicate combinator, pending triage                              |
-| [`capitalize`](https://remedajs.com/docs/#capitalize)               | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`ceil`](https://remedajs.com/docs/#ceil)                           | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`chunk`](https://remedajs.com/docs/#chunk)                         | ✅     | `array/arrayChunks`                   | -                                                                 |
-| [`clamp`](https://remedajs.com/docs/#clamp)                         | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`clone`](https://remedajs.com/docs/#clone)                         | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`concat`](https://remedajs.com/docs/#concat)                       | ✅     | `array/arrayConcat`                   | -                                                                 |
-| [`conditional`](https://remedajs.com/docs/#conditional)             | 🚧     | —                                     | Branching helper, `function` group, pending triage                |
-| [`constant`](https://remedajs.com/docs/#constant)                   | ❌     | *(native)*                            | Use `() => value`                                                 |
-| [`countBy`](https://remedajs.com/docs/#countBy)                     | ✅     | `iterable/countBy`                    | -                                                                 |
-| [`debounce`](https://remedajs.com/docs/#debounce)                   | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`defaultTo`](https://remedajs.com/docs/#defaultTo)                 | ❌     | *(native)*                            | Use `??`                                                          |
-| [`difference`](https://remedajs.com/docs/#difference)               | ✅     | `array/arrayDifference`               | -                                                                 |
-| [`differenceWith`](https://remedajs.com/docs/#differenceWith)       | ✅     | `array/arrayDifference`               | Pass a comparator                                                 |
-| [`divide`](https://remedajs.com/docs/#divide)                       | ❌     | *(native)*                            | Use `/`                                                           |
-| [`doNothing`](https://remedajs.com/docs/#doNothing)                 | 🚧     | —                                     | `function` group, pending triage                                  |
-| [`drop`](https://remedajs.com/docs/#drop)                           | ✅     | `array/arrayDrop`                     | -                                                                 |
-| [`dropFirstBy`](https://remedajs.com/docs/#dropFirstBy)             | ⌛     | `array/arrayDropFirstBy`              | Order-rules cluster                                               |
-| [`dropLast`](https://remedajs.com/docs/#dropLast)                   | ✅     | `array/arrayDropRight`                | -                                                                 |
-| [`dropLastWhile`](https://remedajs.com/docs/#dropLastWhile)         | ✅     | `array/arrayDropRight`                | Pass a predicate                                                  |
-| [`dropWhile`](https://remedajs.com/docs/#dropWhile)                 | ✅     | `array/arrayDrop`                     | Pass a predicate                                                  |
-| [`endsWith`](https://remedajs.com/docs/#endsWith)                   | ❌     | *(native)*                            | `String#endsWith`                                                 |
-| [`entries`](https://remedajs.com/docs/#entries)                     | ❌     | *(native)*                            | `Object.entries`                                                  |
-| [`evolve`](https://remedajs.com/docs/#evolve)                       | 🚧     | —                                     | `object` group, pending triage                                    |
-| [`filter`](https://remedajs.com/docs/#filter)                       | 🚧     | —                                     | Native; type-narrowing variant under consideration                |
-| [`find`](https://remedajs.com/docs/#find)                           | ❌     | *(native)*                            | `Array#find`                                                      |
-| [`findIndex`](https://remedajs.com/docs/#findIndex)                 | ❌     | *(native)*                            | `Array#findIndex`                                                 |
-| [`findLast`](https://remedajs.com/docs/#findLast)                   | ❌     | *(native)*                            | `Array#findLast`                                                  |
-| [`findLastIndex`](https://remedajs.com/docs/#findLastIndex)         | ❌     | *(native)*                            | `Array#findLastIndex`                                             |
-| [`first`](https://remedajs.com/docs/#first)                         | ✅     | `array/arrayFirst`                    | -                                                                 |
-| [`firstBy`](https://remedajs.com/docs/#firstBy)                     | ✅     | `array/arrayFirstBy`                  | Order-rules cluster; may replace `minBy`/`maxBy`                  |
-| [`flat`](https://remedajs.com/docs/#flat)                           | ✅     | `array/flatten`                       | -                                                                 |
-| [`flatMap`](https://remedajs.com/docs/#flatMap)                     | ✅     | `array/flatMap`                       | -                                                                 |
-| [`floor`](https://remedajs.com/docs/#floor)                         | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`forEach`](https://remedajs.com/docs/#forEach)                     | ❌     | *(native)*                            | `Array#forEach`                                                   |
-| [`forEachObj`](https://remedajs.com/docs/#forEachObj)               | 🚧     | —                                     | `object` group, pending triage                                    |
-| [`fromEntries`](https://remedajs.com/docs/#fromEntries)             | ❌     | *(native)*                            | `Object.fromEntries`                                              |
-| [`fromKeys`](https://remedajs.com/docs/#fromKeys)                   | 🚧     | —                                     | `object` group, pending triage                                    |
-| [`funnel`](https://remedajs.com/docs/#funnel)                       | ❌     | —                                     | Scheduling/`pipe` machinery, out of scope                         |
-| [`groupBy`](https://remedajs.com/docs/#groupBy)                     | ❌     | *(native)*                            | `Object.groupBy`                                                  |
-| [`groupByProp`](https://remedajs.com/docs/#groupByProp)             | 🚧     | —                                     | `object` group, pending triage                                    |
-| [`hasAtLeast`](https://remedajs.com/docs/#hasAtLeast)               | ✅     | `array/arrayHasMinElements`           | -                                                                 |
-| [`hasProp`](https://remedajs.com/docs/#hasProp)                     | 🚧     | —                                     | `object`/guard group, pending triage                              |
-| [`hasSubObject`](https://remedajs.com/docs/#hasSubObject)           | 🚧     | —                                     | `object`/guard group, pending triage                              |
-| [`identity`](https://remedajs.com/docs/#identity)                   | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`indexBy`](https://remedajs.com/docs/#indexBy)                     | 🚧     | —                                     | `object` group, pending triage                                    |
-| [`intersection`](https://remedajs.com/docs/#intersection)           | ✅     | `array/arrayIntersection`             | -                                                                 |
-| [`intersectionWith`](https://remedajs.com/docs/#intersectionWith)   | ✅     | `array/arrayIntersection`             | Pass a comparator                                                 |
-| [`invert`](https://remedajs.com/docs/#invert)                       | ✅     | `object/swapObjectKeysValues`         | -                                                                 |
-| [`isArray`](https://remedajs.com/docs/#isArray)                     | ❌     | *(native)*                            | `Array.isArray`                                                   |
-| [`isBigInt`](https://remedajs.com/docs/#isBigInt)                   | 🚧     | —                                     | `predicate` group, pending triage                                 |
-| [`isBoolean`](https://remedajs.com/docs/#isBoolean)                 | 🚧     | —                                     | `predicate` group, pending triage                                 |
-| [`isDate`](https://remedajs.com/docs/#isDate)                       | 🚧     | —                                     | `predicate` group, pending triage                                 |
-| [`isDeepEqual`](https://remedajs.com/docs/#isDeepEqual)             | 🚧     | —                                     | `value` group, pending triage (cf. `value/isEqual`)               |
-| [`isDefined`](https://remedajs.com/docs/#isDefined)                 | 🚧     | —                                     | `predicate` group, pending triage                                 |
-| [`isEmpty`](https://remedajs.com/docs/#isEmpty)                     | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`isEmptyish`](https://remedajs.com/docs/#isEmptyish)               | 🚧     | —                                     | `predicate` group, pending triage                                 |
-| [`isError`](https://remedajs.com/docs/#isError)                     | ❌     | *(native)*                            | `x instanceof Error`                                              |
-| [`isFunction`](https://remedajs.com/docs/#isFunction)               | 🚧     | —                                     | `predicate` group, pending triage                                 |
-| [`isIncludedIn`](https://remedajs.com/docs/#isIncludedIn)           | 🚧     | —                                     | `predicate` group, pending triage                                 |
-| [`isNonNull`](https://remedajs.com/docs/#isNonNull)                 | 🚧     | —                                     | `predicate` group, pending triage                                 |
-| [`isNonNullish`](https://remedajs.com/docs/#isNonNullish)           | 🚧     | —                                     | `predicate` group, pending triage                                 |
-| [`isNot`](https://remedajs.com/docs/#isNot)                         | 🚧     | —                                     | `function`/predicate, pending triage                              |
-| [`isNullish`](https://remedajs.com/docs/#isNullish)                 | 🚧     | —                                     | `predicate` group, pending triage                                 |
-| [`isNumber`](https://remedajs.com/docs/#isNumber)                   | 🚧     | —                                     | `predicate` group, pending triage                                 |
-| [`isObjectType`](https://remedajs.com/docs/#isObjectType)           | 🚧     | —                                     | `predicate` group, pending triage                                 |
-| [`isPlainObject`](https://remedajs.com/docs/#isPlainObject)         | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`isPromise`](https://remedajs.com/docs/#isPromise)                 | 🚧     | —                                     | `predicate` group, pending triage                                 |
-| [`isShallowEqual`](https://remedajs.com/docs/#isShallowEqual)       | 🚧     | —                                     | `value` group, pending triage                                     |
-| [`isStrictEqual`](https://remedajs.com/docs/#isStrictEqual)         | ❌     | *(native)*                            | `Object.is` / `===`                                               |
-| [`isString`](https://remedajs.com/docs/#isString)                   | 🚧     | —                                     | `predicate` group, pending triage                                 |
-| [`isSymbol`](https://remedajs.com/docs/#isSymbol)                   | 🚧     | —                                     | `predicate` group, pending triage                                 |
-| [`isTruthy`](https://remedajs.com/docs/#isTruthy)                   | ✅     | `predicate/isTruthy`                  | -                                                                 |
-| [`join`](https://remedajs.com/docs/#join)                           | ✅     | `array/arrayJoin`                     | -                                                                 |
-| [`keys`](https://remedajs.com/docs/#keys)                           | ❌     | *(native)*                            | `Object.keys`                                                     |
-| [`last`](https://remedajs.com/docs/#last)                           | ✅     | `array/arrayLast`                     | -                                                                 |
-| [`length`](https://remedajs.com/docs/#length)                       | ❌     | *(native)*                            | `.length`                                                         |
-| [`map`](https://remedajs.com/docs/#map)                             | ✅     | `array/arrayMap`                      | Tuple-preserving                                                  |
-| [`mapKeys`](https://remedajs.com/docs/#mapKeys)                     | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`mapToObj`](https://remedajs.com/docs/#mapToObj)                   | 🚧     | —                                     | `object` group, pending triage                                    |
-| [`mapValues`](https://remedajs.com/docs/#mapValues)                 | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`mapWithFeedback`](https://remedajs.com/docs/#mapWithFeedback)     | ✅     | `array/arrayMapWithAccumulator`       | Prefix scan                                                       |
-| [`mean`](https://remedajs.com/docs/#mean)                           | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`meanBy`](https://remedajs.com/docs/#meanBy)                       | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`median`](https://remedajs.com/docs/#median)                       | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`merge`](https://remedajs.com/docs/#merge)                         | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`mergeAll`](https://remedajs.com/docs/#mergeAll)                   | 🚧     | —                                     | `object` group, pending triage                                    |
-| [`mergeDeep`](https://remedajs.com/docs/#mergeDeep)                 | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`multiply`](https://remedajs.com/docs/#multiply)                   | ❌     | *(native)*                            | Use `*`                                                           |
-| [`nthBy`](https://remedajs.com/docs/#nthBy)                         | ⌛     | `array/arrayNthBy`                    | Order-rules cluster                                               |
-| [`objOf`](https://remedajs.com/docs/#objOf)                         | 🚧     | —                                     | `object` group, pending triage                                    |
-| [`omit`](https://remedajs.com/docs/#omit)                           | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`omitBy`](https://remedajs.com/docs/#omitBy)                       | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`once`](https://remedajs.com/docs/#once)                           | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`only`](https://remedajs.com/docs/#only)                           | ❌     | —                                     | Niche; use `array.length === 1 ? array[0] : undefined`            |
-| [`partialBind`](https://remedajs.com/docs/#partialBind)             | ✅     | `function/partial`                    | -                                                                 |
-| [`partialLastBind`](https://remedajs.com/docs/#partialLastBind)     | ✅     | `function/partial`                    | Pass `true`                                                       |
-| [`partition`](https://remedajs.com/docs/#partition)                 | ✅     | `array/arrayPartition`                | -                                                                 |
-| [`pathOr`](https://remedajs.com/docs/#pathOr)                       | 🚧     | —                                     | `object` group, pending triage                                    |
-| [`pick`](https://remedajs.com/docs/#pick)                           | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`pickBy`](https://remedajs.com/docs/#pickBy)                       | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`pipe`](https://remedajs.com/docs/#pipe)                           | ❌     | —                                     | `pipe` machinery, out of scope                                    |
-| [`piped`](https://remedajs.com/docs/#piped)                         | ❌     | —                                     | `pipe` machinery, out of scope                                    |
-| [`product`](https://remedajs.com/docs/#product)                     | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`prop`](https://remedajs.com/docs/#prop)                           | 🚧     | —                                     | `object` group, pending triage                                    |
-| [`pullObject`](https://remedajs.com/docs/#pullObject)               | 🚧     | —                                     | `object` group, pending triage                                    |
-| [`purry`](https://remedajs.com/docs/#purry)                         | ❌     | —                                     | Currying machinery, out of scope                                  |
-| [`randomBigInt`](https://remedajs.com/docs/#randomBigInt)           | 🚧     | —                                     | `math` group, pending triage                                      |
-| [`randomInteger`](https://remedajs.com/docs/#randomInteger)         | 🚧     | —                                     | `math` group, pending triage                                      |
-| [`randomString`](https://remedajs.com/docs/#randomString)           | 🚧     | —                                     | `string` group, pending triage                                    |
-| [`range`](https://remedajs.com/docs/#range)                         | 🚧     | —                                     | `math` group, pending triage                                      |
-| [`rankBy`](https://remedajs.com/docs/#rankBy)                       | ⌛     | `array/arrayRankBy`                   | Order-rules cluster                                               |
-| [`reduce`](https://remedajs.com/docs/#reduce)                       | ❌     | *(native)*                            | `Array#reduce`                                                    |
-| [`reverse`](https://remedajs.com/docs/#reverse)                     | 🚧     | —                                     | Native `toReversed`; tuple-preserving variant under consideration |
-| [`round`](https://remedajs.com/docs/#round)                         | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`sample`](https://remedajs.com/docs/#sample)                       | ✅     | `array/arraySample`                   | -                                                                 |
-| [`set`](https://remedajs.com/docs/#set)                             | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`setPath`](https://remedajs.com/docs/#setPath)                     | 🚧     | —                                     | `object` group, pending triage (cf. `object/setByPath`)           |
-| [`shuffle`](https://remedajs.com/docs/#shuffle)                     | ✅     | `array/arrayShuffle`                  | -                                                                 |
-| [`sliceString`](https://remedajs.com/docs/#sliceString)             | 🚧     | —                                     | `string` group, pending triage                                    |
-| [`sort`](https://remedajs.com/docs/#sort)                           | 🚧     | —                                     | Native `toSorted`; under consideration                            |
-| [`sortBy`](https://remedajs.com/docs/#sortBy)                       | ✅     | `array/sortBy`                        | -                                                                 |
-| [`sortedIndex`](https://remedajs.com/docs/#sortedIndex)             | ✅     | `array/sortedArrayInsertionIndex`     | -                                                                 |
-| [`sortedIndexBy`](https://remedajs.com/docs/#sortedIndexBy)         | ✅     | `array/sortedArrayInsertionIndex`     | Pass an `iteratee`                                                |
-| [`sortedIndexWith`](https://remedajs.com/docs/#sortedIndexWith)     | ⌛     | `array/sortedArrayInsertionIndexWith` | Predicate binary-search                                           |
-| [`sortedLastIndex`](https://remedajs.com/docs/#sortedLastIndex)     | ✅     | `array/sortedArrayInsertionIndex`     | Pass `{rightmost: true}`                                          |
-| [`sortedLastIndexBy`](https://remedajs.com/docs/#sortedLastIndexBy) | ✅     | `array/sortedArrayInsertionIndex`     | `{rightmost: true}` + `iteratee`                                  |
-| [`splice`](https://remedajs.com/docs/#splice)                       | ❌     | *(native)*                            | `Array#toSpliced`                                                 |
-| [`split`](https://remedajs.com/docs/#split)                         | ❌     | *(native)*                            | `String#split`                                                    |
-| [`splitAt`](https://remedajs.com/docs/#splitAt)                     | ✅     | `array/arraySplit`                    | -                                                                 |
-| [`splitWhen`](https://remedajs.com/docs/#splitWhen)                 | ✅     | `array/arraySplit`                    | Pass a predicate                                                  |
-| [`startsWith`](https://remedajs.com/docs/#startsWith)               | ❌     | *(native)*                            | `String#startsWith`                                               |
-| [`stringToPath`](https://remedajs.com/docs/#stringToPath)           | 🚧     | —                                     | `string`/`object` group, pending triage                           |
-| [`subtract`](https://remedajs.com/docs/#subtract)                   | ❌     | *(native)*                            | Use `-`                                                           |
-| [`sum`](https://remedajs.com/docs/#sum)                             | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`sumBy`](https://remedajs.com/docs/#sumBy)                         | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`swapIndices`](https://remedajs.com/docs/#swapIndices)             | ✅     | `array/arraySwapIndices`              | -                                                                 |
-| [`swapProps`](https://remedajs.com/docs/#swapProps)                 | 🚧     | —                                     | `object` group, pending triage                                    |
-| [`take`](https://remedajs.com/docs/#take)                           | ❌     | *(native)*                            | `array.slice(0, n)`                                               |
-| [`takeFirstBy`](https://remedajs.com/docs/#takeFirstBy)             | ⌛     | `array/arrayTakeFirstBy`              | Order-rules cluster                                               |
-| [`takeLast`](https://remedajs.com/docs/#takeLast)                   | ❌     | *(native)*                            | `array.slice(-n)`                                                 |
-| [`takeLastWhile`](https://remedajs.com/docs/#takeLastWhile)         | ✅     | `array/arrayTakeWhile`                | Pass `true` to walk from the end                                  |
-| [`takeWhile`](https://remedajs.com/docs/#takeWhile)                 | ✅     | `array/arrayTakeWhile`                | -                                                                 |
-| [`tap`](https://remedajs.com/docs/#tap)                             | ✅     | `function/tap`                        | -                                                                 |
-| [`times`](https://remedajs.com/docs/#times)                         | ✅     | `function/mapTimes`                   | -                                                                 |
-| [`toCamelCase`](https://remedajs.com/docs/#toCamelCase)             | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`toKebabCase`](https://remedajs.com/docs/#toKebabCase)             | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`toLowerCase`](https://remedajs.com/docs/#toLowerCase)             | ❌     | *(native)*                            | `String#toLowerCase`                                              |
-| [`toSnakeCase`](https://remedajs.com/docs/#toSnakeCase)             | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`toTitleCase`](https://remedajs.com/docs/#toTitleCase)             | 🚧     | —                                     | `string` group, pending triage                                    |
-| [`toUpperCase`](https://remedajs.com/docs/#toUpperCase)             | ❌     | *(native)*                            | `String#toUpperCase`                                              |
-| [`truncate`](https://remedajs.com/docs/#truncate)                   | ✅     | *(via `es-toolkit`)*                  | -                                                                 |
-| [`uncapitalize`](https://remedajs.com/docs/#uncapitalize)           | 🚧     | —                                     | `string` group, pending triage                                    |
-| [`unique`](https://remedajs.com/docs/#unique)                       | ✅     | `array/arrayUnique`                   | -                                                                 |
-| [`uniqueBy`](https://remedajs.com/docs/#uniqueBy)                   | ✅     | `array/arrayUnique`                   | Pass a mapper                                                     |
-| [`uniqueWith`](https://remedajs.com/docs/#uniqueWith)               | ✅     | `array/arrayUnique`                   | Pass a comparator                                                 |
-| [`values`](https://remedajs.com/docs/#values)                       | ❌     | *(native)*                            | `Object.values`                                                   |
-| [`when`](https://remedajs.com/docs/#when)                           | 🚧     | —                                     | `function` group, pending triage                                  |
-| [`zip`](https://remedajs.com/docs/#zip)                             | ✅     | `array/arrayTranspose`                | -                                                                 |
-| [`zipWith`](https://remedajs.com/docs/#zipWith)                     | ✅     | `array/arrayTranspose`                | Pass an iteratee                                                  |
+| Original function name                                              | Status | Our function group and name           | Notes                                                               |
+| ------------------------------------------------------------------- | ------ | ------------------------------------- | ------------------------------------------------------------------- |
+| [`add`](https://remedajs.com/docs/#add)                             | ❌     | *(native)*                            | Use `+`                                                             |
+| [`addProp`](https://remedajs.com/docs/#addProp)                     | 🚧     | —                                     | `object` group, pending triage                                      |
+| [`allPass`](https://remedajs.com/docs/#allPass)                     | 🚧     | —                                     | Predicate combinator, pending triage                                |
+| [`anyPass`](https://remedajs.com/docs/#anyPass)                     | 🚧     | —                                     | Predicate combinator, pending triage                                |
+| [`capitalize`](https://remedajs.com/docs/#capitalize)               | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`ceil`](https://remedajs.com/docs/#ceil)                           | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`chunk`](https://remedajs.com/docs/#chunk)                         | ✅     | `array/arrayChunks`                   | -                                                                   |
+| [`clamp`](https://remedajs.com/docs/#clamp)                         | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`clone`](https://remedajs.com/docs/#clone)                         | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`concat`](https://remedajs.com/docs/#concat)                       | ✅     | `array/arrayConcat`                   | -                                                                   |
+| [`conditional`](https://remedajs.com/docs/#conditional)             | 🚧     | —                                     | Branching helper, `function` group, pending triage                  |
+| [`constant`](https://remedajs.com/docs/#constant)                   | ❌     | *(native)*                            | Use `() => value`                                                   |
+| [`countBy`](https://remedajs.com/docs/#countBy)                     | ✅     | `iterable/countBy`                    | -                                                                   |
+| [`debounce`](https://remedajs.com/docs/#debounce)                   | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`defaultTo`](https://remedajs.com/docs/#defaultTo)                 | ❌     | *(native)*                            | Use `??`                                                            |
+| [`difference`](https://remedajs.com/docs/#difference)               | ✅     | `array/arrayDifference`               | -                                                                   |
+| [`differenceWith`](https://remedajs.com/docs/#differenceWith)       | ✅     | `array/arrayDifference`               | Pass a comparator                                                   |
+| [`divide`](https://remedajs.com/docs/#divide)                       | ❌     | *(native)*                            | Use `/`                                                             |
+| [`doNothing`](https://remedajs.com/docs/#doNothing)                 | 🚧     | —                                     | `function` group, pending triage                                    |
+| [`drop`](https://remedajs.com/docs/#drop)                           | ✅     | `array/arrayDrop`                     | -                                                                   |
+| [`dropFirstBy`](https://remedajs.com/docs/#dropFirstBy)             | ✅     | `array/arrayDropFirstBy`              | Order-rules cluster                                                 |
+| [`dropLast`](https://remedajs.com/docs/#dropLast)                   | ✅     | `array/arrayDropRight`                | -                                                                   |
+| [`dropLastWhile`](https://remedajs.com/docs/#dropLastWhile)         | ✅     | `array/arrayDropRight`                | Pass a predicate                                                    |
+| [`dropWhile`](https://remedajs.com/docs/#dropWhile)                 | ✅     | `array/arrayDrop`                     | Pass a predicate                                                    |
+| [`endsWith`](https://remedajs.com/docs/#endsWith)                   | ❌     | *(native)*                            | `String#endsWith`                                                   |
+| [`entries`](https://remedajs.com/docs/#entries)                     | ❌     | *(native)*                            | `Object.entries`                                                    |
+| [`evolve`](https://remedajs.com/docs/#evolve)                       | 🚧     | —                                     | `object` group, pending triage                                      |
+| [`filter`](https://remedajs.com/docs/#filter)                       | ✅     | `array/arrayFilter`                   | Tuple-aware: refines a tuple to a tuple (native widens to an array) |
+| [`find`](https://remedajs.com/docs/#find)                           | ❌     | *(native)*                            | `Array#find`                                                        |
+| [`findIndex`](https://remedajs.com/docs/#findIndex)                 | ❌     | *(native)*                            | `Array#findIndex`                                                   |
+| [`findLast`](https://remedajs.com/docs/#findLast)                   | ❌     | *(native)*                            | `Array#findLast`                                                    |
+| [`findLastIndex`](https://remedajs.com/docs/#findLastIndex)         | ❌     | *(native)*                            | `Array#findLastIndex`                                               |
+| [`first`](https://remedajs.com/docs/#first)                         | ✅     | `array/arrayFirst`                    | -                                                                   |
+| [`firstBy`](https://remedajs.com/docs/#firstBy)                     | ✅     | `array/arrayFirstBy`                  | Order-rules cluster; complements `minBy`/`maxBy` (multi-key)        |
+| [`flat`](https://remedajs.com/docs/#flat)                           | ✅     | `array/flatten`                       | -                                                                   |
+| [`flatMap`](https://remedajs.com/docs/#flatMap)                     | ✅     | `array/flatMap`                       | -                                                                   |
+| [`floor`](https://remedajs.com/docs/#floor)                         | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`forEach`](https://remedajs.com/docs/#forEach)                     | ❌     | *(native)*                            | `Array#forEach`                                                     |
+| [`forEachObj`](https://remedajs.com/docs/#forEachObj)               | 🚧     | —                                     | `object` group, pending triage                                      |
+| [`fromEntries`](https://remedajs.com/docs/#fromEntries)             | ❌     | *(native)*                            | `Object.fromEntries`                                                |
+| [`fromKeys`](https://remedajs.com/docs/#fromKeys)                   | 🚧     | —                                     | `object` group, pending triage                                      |
+| [`funnel`](https://remedajs.com/docs/#funnel)                       | ❌     | —                                     | Scheduling/`pipe` machinery, out of scope                           |
+| [`groupBy`](https://remedajs.com/docs/#groupBy)                     | ❌     | *(native)*                            | `Object.groupBy`                                                    |
+| [`groupByProp`](https://remedajs.com/docs/#groupByProp)             | 🚧     | —                                     | `object` group, pending triage                                      |
+| [`hasAtLeast`](https://remedajs.com/docs/#hasAtLeast)               | ✅     | `array/arrayHasMinElements`           | -                                                                   |
+| [`hasProp`](https://remedajs.com/docs/#hasProp)                     | 🚧     | —                                     | `object`/guard group, pending triage                                |
+| [`hasSubObject`](https://remedajs.com/docs/#hasSubObject)           | 🚧     | —                                     | `object`/guard group, pending triage                                |
+| [`identity`](https://remedajs.com/docs/#identity)                   | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`indexBy`](https://remedajs.com/docs/#indexBy)                     | 🚧     | —                                     | `object` group, pending triage                                      |
+| [`intersection`](https://remedajs.com/docs/#intersection)           | ✅     | `array/arrayIntersection`             | -                                                                   |
+| [`intersectionWith`](https://remedajs.com/docs/#intersectionWith)   | ✅     | `array/arrayIntersection`             | Pass a comparator                                                   |
+| [`invert`](https://remedajs.com/docs/#invert)                       | ✅     | `object/swapObjectKeysValues`         | -                                                                   |
+| [`isArray`](https://remedajs.com/docs/#isArray)                     | ❌     | *(native)*                            | `Array.isArray`                                                     |
+| [`isBigInt`](https://remedajs.com/docs/#isBigInt)                   | 🚧     | —                                     | `predicate` group, pending triage                                   |
+| [`isBoolean`](https://remedajs.com/docs/#isBoolean)                 | 🚧     | —                                     | `predicate` group, pending triage                                   |
+| [`isDate`](https://remedajs.com/docs/#isDate)                       | 🚧     | —                                     | `predicate` group, pending triage                                   |
+| [`isDeepEqual`](https://remedajs.com/docs/#isDeepEqual)             | 🚧     | —                                     | `value` group, pending triage (cf. `value/isEqual`)                 |
+| [`isDefined`](https://remedajs.com/docs/#isDefined)                 | 🚧     | —                                     | `predicate` group, pending triage                                   |
+| [`isEmpty`](https://remedajs.com/docs/#isEmpty)                     | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`isEmptyish`](https://remedajs.com/docs/#isEmptyish)               | 🚧     | —                                     | `predicate` group, pending triage                                   |
+| [`isError`](https://remedajs.com/docs/#isError)                     | ❌     | *(native)*                            | `x instanceof Error`                                                |
+| [`isFunction`](https://remedajs.com/docs/#isFunction)               | 🚧     | —                                     | `predicate` group, pending triage                                   |
+| [`isIncludedIn`](https://remedajs.com/docs/#isIncludedIn)           | 🚧     | —                                     | `predicate` group, pending triage                                   |
+| [`isNonNull`](https://remedajs.com/docs/#isNonNull)                 | 🚧     | —                                     | `predicate` group, pending triage                                   |
+| [`isNonNullish`](https://remedajs.com/docs/#isNonNullish)           | 🚧     | —                                     | `predicate` group, pending triage                                   |
+| [`isNot`](https://remedajs.com/docs/#isNot)                         | 🚧     | —                                     | `function`/predicate, pending triage                                |
+| [`isNullish`](https://remedajs.com/docs/#isNullish)                 | 🚧     | —                                     | `predicate` group, pending triage                                   |
+| [`isNumber`](https://remedajs.com/docs/#isNumber)                   | 🚧     | —                                     | `predicate` group, pending triage                                   |
+| [`isObjectType`](https://remedajs.com/docs/#isObjectType)           | 🚧     | —                                     | `predicate` group, pending triage                                   |
+| [`isPlainObject`](https://remedajs.com/docs/#isPlainObject)         | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`isPromise`](https://remedajs.com/docs/#isPromise)                 | 🚧     | —                                     | `predicate` group, pending triage                                   |
+| [`isShallowEqual`](https://remedajs.com/docs/#isShallowEqual)       | 🚧     | —                                     | `value` group, pending triage                                       |
+| [`isStrictEqual`](https://remedajs.com/docs/#isStrictEqual)         | ❌     | *(native)*                            | `Object.is` / `===`                                                 |
+| [`isString`](https://remedajs.com/docs/#isString)                   | 🚧     | —                                     | `predicate` group, pending triage                                   |
+| [`isSymbol`](https://remedajs.com/docs/#isSymbol)                   | 🚧     | —                                     | `predicate` group, pending triage                                   |
+| [`isTruthy`](https://remedajs.com/docs/#isTruthy)                   | ✅     | `predicate/isTruthy`                  | -                                                                   |
+| [`join`](https://remedajs.com/docs/#join)                           | ✅     | `array/arrayJoin`                     | -                                                                   |
+| [`keys`](https://remedajs.com/docs/#keys)                           | ❌     | *(native)*                            | `Object.keys`                                                       |
+| [`last`](https://remedajs.com/docs/#last)                           | ✅     | `array/arrayLast`                     | -                                                                   |
+| [`length`](https://remedajs.com/docs/#length)                       | ❌     | *(native)*                            | `.length`                                                           |
+| [`map`](https://remedajs.com/docs/#map)                             | ✅     | `array/arrayMap`                      | Tuple-preserving                                                    |
+| [`mapKeys`](https://remedajs.com/docs/#mapKeys)                     | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`mapToObj`](https://remedajs.com/docs/#mapToObj)                   | 🚧     | —                                     | `object` group, pending triage                                      |
+| [`mapValues`](https://remedajs.com/docs/#mapValues)                 | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`mapWithFeedback`](https://remedajs.com/docs/#mapWithFeedback)     | ✅     | `array/arrayMapWithAccumulator`       | Prefix scan                                                         |
+| [`mean`](https://remedajs.com/docs/#mean)                           | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`meanBy`](https://remedajs.com/docs/#meanBy)                       | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`median`](https://remedajs.com/docs/#median)                       | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`merge`](https://remedajs.com/docs/#merge)                         | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`mergeAll`](https://remedajs.com/docs/#mergeAll)                   | 🚧     | —                                     | `object` group, pending triage                                      |
+| [`mergeDeep`](https://remedajs.com/docs/#mergeDeep)                 | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`multiply`](https://remedajs.com/docs/#multiply)                   | ❌     | *(native)*                            | Use `*`                                                             |
+| [`nthBy`](https://remedajs.com/docs/#nthBy)                         | ✅     | `array/arrayNthBy`                    | Order-rules cluster                                                 |
+| [`objOf`](https://remedajs.com/docs/#objOf)                         | 🚧     | —                                     | `object` group, pending triage                                      |
+| [`omit`](https://remedajs.com/docs/#omit)                           | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`omitBy`](https://remedajs.com/docs/#omitBy)                       | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`once`](https://remedajs.com/docs/#once)                           | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`only`](https://remedajs.com/docs/#only)                           | ❌     | —                                     | Niche; use `array.length === 1 ? array[0] : undefined`              |
+| [`partialBind`](https://remedajs.com/docs/#partialBind)             | ✅     | `function/partial`                    | -                                                                   |
+| [`partialLastBind`](https://remedajs.com/docs/#partialLastBind)     | ✅     | `function/partial`                    | Pass `true`                                                         |
+| [`partition`](https://remedajs.com/docs/#partition)                 | ✅     | `array/arrayPartition`                | -                                                                   |
+| [`pathOr`](https://remedajs.com/docs/#pathOr)                       | 🚧     | —                                     | `object` group, pending triage                                      |
+| [`pick`](https://remedajs.com/docs/#pick)                           | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`pickBy`](https://remedajs.com/docs/#pickBy)                       | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`pipe`](https://remedajs.com/docs/#pipe)                           | ❌     | —                                     | `pipe` machinery, out of scope                                      |
+| [`piped`](https://remedajs.com/docs/#piped)                         | ❌     | —                                     | `pipe` machinery, out of scope                                      |
+| [`product`](https://remedajs.com/docs/#product)                     | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`prop`](https://remedajs.com/docs/#prop)                           | 🚧     | —                                     | `object` group, pending triage                                      |
+| [`pullObject`](https://remedajs.com/docs/#pullObject)               | 🚧     | —                                     | `object` group, pending triage                                      |
+| [`purry`](https://remedajs.com/docs/#purry)                         | ❌     | —                                     | Currying machinery, out of scope                                    |
+| [`randomBigInt`](https://remedajs.com/docs/#randomBigInt)           | 🚧     | —                                     | `math` group, pending triage                                        |
+| [`randomInteger`](https://remedajs.com/docs/#randomInteger)         | 🚧     | —                                     | `math` group, pending triage                                        |
+| [`randomString`](https://remedajs.com/docs/#randomString)           | 🚧     | —                                     | `string` group, pending triage                                      |
+| [`range`](https://remedajs.com/docs/#range)                         | 🚧     | —                                     | `math` group, pending triage                                        |
+| [`rankBy`](https://remedajs.com/docs/#rankBy)                       | ✅     | `array/arrayRankBy`                   | Order-rules cluster                                                 |
+| [`reduce`](https://remedajs.com/docs/#reduce)                       | ❌     | *(native)*                            | `Array#reduce`                                                      |
+| [`reverse`](https://remedajs.com/docs/#reverse)                     | ✅     | `array/arrayReverse`                  | Tuple-preserving (native `toReversed` widens to a union)            |
+| [`round`](https://remedajs.com/docs/#round)                         | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`sample`](https://remedajs.com/docs/#sample)                       | ✅     | `array/arraySample`                   | -                                                                   |
+| [`set`](https://remedajs.com/docs/#set)                             | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`setPath`](https://remedajs.com/docs/#setPath)                     | 🚧     | —                                     | `object` group, pending triage (cf. `object/setByPath`)             |
+| [`shuffle`](https://remedajs.com/docs/#shuffle)                     | ✅     | `array/arrayShuffle`                  | -                                                                   |
+| [`sliceString`](https://remedajs.com/docs/#sliceString)             | 🚧     | —                                     | `string` group, pending triage                                      |
+| [`sort`](https://remedajs.com/docs/#sort)                           | ✅     | `array/arraySort`                     | Length-preserving (native `toSorted` widens to `T[]`)               |
+| [`sortBy`](https://remedajs.com/docs/#sortBy)                       | ✅     | `array/sortBy`                        | -                                                                   |
+| [`sortedIndex`](https://remedajs.com/docs/#sortedIndex)             | ✅     | `array/sortedArrayInsertionIndex`     | -                                                                   |
+| [`sortedIndexBy`](https://remedajs.com/docs/#sortedIndexBy)         | ✅     | `array/sortedArrayInsertionIndex`     | Pass an `iteratee`                                                  |
+| [`sortedIndexWith`](https://remedajs.com/docs/#sortedIndexWith)     | ✅     | `array/sortedArrayInsertionIndexWith` | Predicate binary-search                                             |
+| [`sortedLastIndex`](https://remedajs.com/docs/#sortedLastIndex)     | ✅     | `array/sortedArrayInsertionIndex`     | Pass `{rightmost: true}`                                            |
+| [`sortedLastIndexBy`](https://remedajs.com/docs/#sortedLastIndexBy) | ✅     | `array/sortedArrayInsertionIndex`     | `{rightmost: true}` + `iteratee`                                    |
+| [`splice`](https://remedajs.com/docs/#splice)                       | ❌     | *(native)*                            | `Array#toSpliced`                                                   |
+| [`split`](https://remedajs.com/docs/#split)                         | ❌     | *(native)*                            | `String#split`                                                      |
+| [`splitAt`](https://remedajs.com/docs/#splitAt)                     | ✅     | `array/arraySplit`                    | -                                                                   |
+| [`splitWhen`](https://remedajs.com/docs/#splitWhen)                 | ✅     | `array/arraySplit`                    | Pass a predicate                                                    |
+| [`startsWith`](https://remedajs.com/docs/#startsWith)               | ❌     | *(native)*                            | `String#startsWith`                                                 |
+| [`stringToPath`](https://remedajs.com/docs/#stringToPath)           | 🚧     | —                                     | `string`/`object` group, pending triage                             |
+| [`subtract`](https://remedajs.com/docs/#subtract)                   | ❌     | *(native)*                            | Use `-`                                                             |
+| [`sum`](https://remedajs.com/docs/#sum)                             | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`sumBy`](https://remedajs.com/docs/#sumBy)                         | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`swapIndices`](https://remedajs.com/docs/#swapIndices)             | ✅     | `array/arraySwapIndices`              | -                                                                   |
+| [`swapProps`](https://remedajs.com/docs/#swapProps)                 | 🚧     | —                                     | `object` group, pending triage                                      |
+| [`take`](https://remedajs.com/docs/#take)                           | ❌     | *(native)*                            | `array.slice(0, n)`                                                 |
+| [`takeFirstBy`](https://remedajs.com/docs/#takeFirstBy)             | ✅     | `array/arrayTakeFirstBy`              | Order-rules cluster                                                 |
+| [`takeLast`](https://remedajs.com/docs/#takeLast)                   | ❌     | *(native)*                            | `array.slice(-n)`                                                   |
+| [`takeLastWhile`](https://remedajs.com/docs/#takeLastWhile)         | ✅     | `array/arrayTakeWhile`                | Pass `true` to walk from the end                                    |
+| [`takeWhile`](https://remedajs.com/docs/#takeWhile)                 | ✅     | `array/arrayTakeWhile`                | -                                                                   |
+| [`tap`](https://remedajs.com/docs/#tap)                             | ✅     | `function/tap`                        | -                                                                   |
+| [`times`](https://remedajs.com/docs/#times)                         | ✅     | `function/mapTimes`                   | -                                                                   |
+| [`toCamelCase`](https://remedajs.com/docs/#toCamelCase)             | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`toKebabCase`](https://remedajs.com/docs/#toKebabCase)             | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`toLowerCase`](https://remedajs.com/docs/#toLowerCase)             | ❌     | *(native)*                            | `String#toLowerCase`                                                |
+| [`toSnakeCase`](https://remedajs.com/docs/#toSnakeCase)             | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`toTitleCase`](https://remedajs.com/docs/#toTitleCase)             | 🚧     | —                                     | `string` group, pending triage                                      |
+| [`toUpperCase`](https://remedajs.com/docs/#toUpperCase)             | ❌     | *(native)*                            | `String#toUpperCase`                                                |
+| [`truncate`](https://remedajs.com/docs/#truncate)                   | ✅     | *(via `es-toolkit`)*                  | -                                                                   |
+| [`uncapitalize`](https://remedajs.com/docs/#uncapitalize)           | 🚧     | —                                     | `string` group, pending triage                                      |
+| [`unique`](https://remedajs.com/docs/#unique)                       | ✅     | `array/arrayUnique`                   | -                                                                   |
+| [`uniqueBy`](https://remedajs.com/docs/#uniqueBy)                   | ✅     | `array/arrayUnique`                   | Pass a mapper                                                       |
+| [`uniqueWith`](https://remedajs.com/docs/#uniqueWith)               | ✅     | `array/arrayUnique`                   | Pass a comparator                                                   |
+| [`values`](https://remedajs.com/docs/#values)                       | ❌     | *(native)*                            | `Object.values`                                                     |
+| [`when`](https://remedajs.com/docs/#when)                           | 🚧     | —                                     | `function` group, pending triage                                    |
+| [`zip`](https://remedajs.com/docs/#zip)                             | ✅     | `array/arrayTranspose`                | -                                                                   |
+| [`zipWith`](https://remedajs.com/docs/#zipWith)                     | ✅     | `array/arrayTranspose`                | Pass an iteratee                                                    |
 
 ### `@antfu/utils`
 
