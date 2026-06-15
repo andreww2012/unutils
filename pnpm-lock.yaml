@@ -209,7 +209,7 @@ overrides:
   eslint-plugin-jsx-a11y-x@0.1.1: 0.2.0
 
 patchedDependencies:
-  remeda: d92b15b7ae6132b477f8e9f2afa77cd4acb20d9688fded6a137d3b562747c0f2
+  remeda: 26a2bc0431054da3b39b3459b3734ee446e49a78a49036998e470c23646c7670
 
 importers:
 
@@ -304,7 +304,7 @@ importers:
         version: 0.3.21
       remeda:
         specifier: 2.39.0
-        version: 2.39.0(patch_hash=d92b15b7ae6132b477f8e9f2afa77cd4acb20d9688fded6a137d3b562747c0f2)
+        version: 2.39.0(patch_hash=26a2bc0431054da3b39b3459b3734ee446e49a78a49036998e470c23646c7670)
       safe-stable-stringify:
         specifier: 2.5.0
         version: 2.5.0
@@ -10401,7 +10401,7 @@ snapshots:
       mdast-util-to-markdown: 2.1.2
       unified: 11.0.5
 
-  remeda@2.39.0(patch_hash=d92b15b7ae6132b477f8e9f2afa77cd4acb20d9688fded6a137d3b562747c0f2): {}
+  remeda@2.39.0(patch_hash=26a2bc0431054da3b39b3459b3734ee446e49a78a49036998e470c23646c7670): {}
 
   require-from-string@2.0.2: {}
 

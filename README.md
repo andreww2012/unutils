@@ -20,6 +20,7 @@
 | `array/arrayDrop`                 | Consolidates `drop`/`dropWhile`; pass a predicate to drop while it holds                                                                               |
 | `array/arrayDropRight`            | Consolidates `dropRight`/`dropRightWhile`; pass a predicate to drop while it holds                                                                     |
 | `array/arrayFill`                 | Consolidates `fill`/`toFilled`; pass `{copy: true}` to return a new array                                                                              |
+| `array/arrayHasMinElements`       | Type-guard (via `remeda`'s `hasAtLeast`): a literal minimum narrows to a known-minimum tuple; non-literal returns a plain `boolean`                    |
 | `array/arrayify`                  | Wraps non-arrays (tuple-preserving); nullish input returns `[]` (or `[value]` with `wrapNullish`)                                                      |
 | `array/arrayIntersection`         | Consolidates `intersection`/`intersectionBy`/`intersectionWith`; optional mapper or comparator                                                         |
 | `array/arrayIsSubset`             | Consolidates `isSubset`/`isSubsetWith`; optional mapper or comparator                                                                                  |

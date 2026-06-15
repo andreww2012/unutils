@@ -2,6 +2,7 @@ export {arrayAt} from './array-at.ts';
 export {arrayChunks} from './array-chunks.ts';
 export {arrayConcat} from './array-concat.ts';
 export {arrayFirst} from './array-first.ts';
+export {arrayHasMinElements} from './array-has-min-elements.ts';
 export {arrayIncludes} from './array-includes.ts';
 export {arrayJoin} from './array-join.ts';
 export {arrayLast} from './array-last.ts';
