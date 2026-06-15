@@ -6,6 +6,7 @@ export {arrayIncludes} from './array-includes.ts';
 export {arrayJoin} from './array-join.ts';
 export {arrayLast} from './array-last.ts';
 export {arrayMap} from './array-map.ts';
+export {arrayMapWithAccumulator} from './array-map-with-accumulator.ts';
 export {arrayMove} from './array-move.ts';
 export {arrayDifference} from './array-difference.ts';
 export {arrayDrop} from './array-drop.ts';

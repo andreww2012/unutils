@@ -24,6 +24,7 @@
 | `array/arrayIntersection`         | Consolidates `intersection`/`intersectionBy`/`intersectionWith`; optional mapper or comparator                                                         |
 | `array/arrayIsSubset`             | Consolidates `isSubset`/`isSubsetWith`; optional mapper or comparator                                                                                  |
 | `array/arrayMap`                  | Tuple-preserving `Array#map` (via `remeda`); a fixed-length tuple maps to a same-length tuple instead of widening to `U[]`                             |
+| `array/arrayMapWithAccumulator`   | Prefix scan (via `remeda`'s `mapWithFeedback`): threads an accumulator, returning every intermediate state (same length, tuple-preserving)             |
 | `array/arrayPartition`            | Single predicate gives a binary `[matched, unmatched]` (guard-narrowing); multiple predicates give an n-way partition                                  |
 | `array/arrayPurgeValues`          | Consolidates `pull`/`pullAllBy`/`pullAllWith`; mutating; optional mapper or comparator                                                                 |
 | `array/arraySample`               | Consolidates `sample`/`sampleSize`; pass a size for multiple elements, `{withReplacement: true}` to allow repeats                                      |
