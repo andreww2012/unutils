@@ -88,6 +88,7 @@
 | `object/setByPathImmutable`           | Immutable, statically-typed deep set (via `remeda`'s `setPath`); path & value type-checked against the object, no container creation                              |
 | `object/swapObjectKeysValues`         | Consolidates `invert`/`invertBy`; pass an iteratee to group colliding keys into arrays                                                                            |
 | `object/swapObjectProperties`         | Swaps the values (and types) of two properties (via `remeda`'s `swapProps`); object analog of `arraySwapIndices`                                                  |
+| `object/toPathSegments`               | Parses a path string into segments (via `remeda`'s `stringToPath`); a literal string yields a precisely-typed tuple, numeric segments as numbers                  |
 | `object/updateByPath`                 | Consolidates `update`/`updateWith`; mutating deep-path update with optional container customizer                                                                  |
 | `predicate/isBuffer`                  | Enhanced with a `value is Buffer` type guard                                                                                                                      |
 | `predicate/isIn`                      | `ts-extras`' `objectHasIn` with `(key, object)` argument order (reads like `key in object`); narrows the object                                                   |
