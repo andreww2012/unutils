@@ -1,0 +1,39 @@
+import {type RandomInteger, randomInteger} from 'remeda';
+import type {Subtract} from 'type-fest';
+
+/**
+ * Returns a pseudo-random integer in the **exclusive** range `[minimum, maximum)`.
+ * Called with a single argument the range is `[0, maximum)` — the form used for
+ * random array indexing (`array[randomIntExclusive(array.length)]`). When both
+ * bounds are small numeric literals the return type narrows to the precise literal
+ * union of possible results (via `remeda`'s `RandomInteger`); otherwise `number`.
+ *
+ * The upper bound is excluded, matching array indexing and the `nextInt(n)`
+ * convention of Java/Go/Ruby. For an inclusive upper bound use `randomIntInclusive`.
+ * Internally the exclusive `[a, b)` integer range is the inclusive `[a, b - 1]`
+ * range, delegated to `remeda`'s `randomInteger` (uses `Math.random`; not
+ * cryptographically secure). The range must be non-empty (`maximum` greater than
+ * `minimum`, or `maximum` greater than `0` for the single-argument form).
+ * @param minimum - The inclusive lower bound. When called with a single argument this slot is the exclusive upper bound instead and the lower bound defaults to `0`.
+ * @param maximum - The exclusive upper bound.
+ * @returns A random integer within the exclusive range.
+ * @example
+ * randomIntExclusive(1, 4);
+ * // 1 | 2 | 3 (e.g. 2)
+ * @example
+ * // Single argument — range is [0, maximum); ideal for array indexing
+ * randomIntExclusive(3);
+ * // 0 | 1 | 2 (e.g. 1)
+ */
+export function randomIntExclusive<Minimum extends number, Maximum extends number>(
+  minimum: Minimum,
+  maximum: Maximum,
+): RandomInteger<Minimum, Subtract<Maximum, 1>>;
+export function randomIntExclusive<Maximum extends number>(
+  maximum: Maximum,
+): RandomInteger<0, Subtract<Maximum, 1>>;
+export function randomIntExclusive(minimumOrMaximum: number, maximum?: number) {
+  return maximum == null
+    ? randomInteger(0, minimumOrMaximum - 1)
+    : randomInteger(minimumOrMaximum, maximum - 1);
+}

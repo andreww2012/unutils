@@ -3,6 +3,7 @@ export {isEmptyObject} from './is-empty-object.ts';
 export {isEmptyValue} from './is-empty-value.ts';
 export {isFiniteNumber} from './is-finite-number.ts';
 export {isIn} from './is-in.ts';
+export {isIncludedIn} from './is-included-in.ts';
 export {isInfinite} from './is-infinite.ts';
 export {isInteger} from './is-integer.ts';
 export {isJson} from './is-json.ts';
