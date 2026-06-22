@@ -8,6 +8,7 @@ export * from './math';
 export * from './misc';
 export * from './object';
 export * from './predicate';
+export * from './regex';
 export * from './runtime';
 export * from './set';
 export * from './string';

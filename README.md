@@ -300,7 +300,7 @@
 | [`string/constantCase`](https://es-toolkit.dev/reference/string/constantCase.html)         | ✅     | `string/toConstantCase`            | -                                                                                                      |
 | [`string/deburr`](https://es-toolkit.dev/reference/string/deburr.html)                     | ✅     | `string/deburr` *(same)*           | -                                                                                                      |
 | [`string/escape`](https://es-toolkit.dev/reference/string/escape.html)                     | ✅     | `string/escapeHtml`                | Renamed for clarity — handles HTML entities specifically                                               |
-| [`string/escapeRegExp`](https://es-toolkit.dev/reference/string/escapeRegExp.html)         | ✅     | `string/escapeRegExp` *(same)*     | -                                                                                                      |
+| [`string/escapeRegExp`](https://es-toolkit.dev/reference/string/escapeRegExp.html)         | ✅     | `regex/regexEscape`                | Moved to the `regex` group and renamed                                                                 |
 | [`string/kebabCase`](https://es-toolkit.dev/reference/string/kebabCase.html)               | ✅     | `string/toKebabCase`               | -                                                                                                      |
 | [`string/lowerCase`](https://es-toolkit.dev/reference/string/lowerCase.html)               | ✅     | `string/toLowerCase`               | -                                                                                                      |
 | [`string/lowerFirst`](https://es-toolkit.dev/reference/string/lowerFirst.html)             | ✅     | `string/lowerFirst` *(same)*       | -                                                                                                      |
@@ -733,6 +733,12 @@ A general-purpose grab-bag that overlaps heavily with `es-toolkit` and our exist
 | `unindent`                | ❌     | `string/dedent`                | Broken with interpolations (reads only `strings[0]`); superseded by the `dedent` package |
 | `uniq`                    | ❌     | `array/arrayUnique`            | Covered                                                                                  |
 | `uniqueBy`                | ❌     | `array/arrayUnique`            | Covered (comparator form)                                                                |
+
+### `arkregex`
+
+| Original function group and name                  | Status | Our function group and name | Notes                                                                                                                                  |
+| ------------------------------------------------- | ------ | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| [`regex`](https://www.npmjs.com/package/arkregex) | ✅     | `regex/regexTyped`          | Renamed; a typed drop-in for `new RegExp()` that infers the matched string and positional/named captures from a string literal pattern |
 
 ### `dedent`
 

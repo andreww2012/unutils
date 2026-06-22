@@ -4,7 +4,6 @@ export {dedent} from './dedent.ts';
 export {ensurePrefix} from './ensure-prefix.ts';
 export {ensureSuffix} from './ensure-suffix.ts';
 export {escapeHtml} from './escape-html.ts';
-export {escapeRegExp} from './escape-regexp.ts';
 export {lowerFirst} from './lower-first.ts';
 export {toForwardSlashes} from './to-forward-slashes.ts';
 export {stringPad} from './string-pad.ts';

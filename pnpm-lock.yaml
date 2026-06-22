@@ -209,6 +209,7 @@ overrides:
   eslint-plugin-jsx-a11y-x@0.1.1: 0.2.0
 
 patchedDependencies:
+  arkregex@0.0.6: eb807e01313172dc3b1538f41a8ad4619eee7983fe212c8ffca3da41c49df16f
   remeda: e9e98c19bf4c5844450bf78de4493bf242de2fdb7c7ecf7ee2313945578d9b68
 
 importers:
@@ -260,6 +261,9 @@ importers:
       all-contributors-cli:
         specifier: 6.27.0-rc.1
         version: 6.27.0-rc.1(@types/node@22.19.17)
+      arkregex:
+        specifier: 0.0.6
+        version: 0.0.6(patch_hash=eb807e01313172dc3b1538f41a8ad4619eee7983fe212c8ffca3da41c49df16f)
       cspell:
         specifier: 10.0.1
         version: 10.0.1
@@ -349,6 +353,9 @@ packages:
   '@arethetypeswrong/core@0.18.3':
     resolution: {integrity: sha512-sWBB/tdIktaT5xMq0Dz6CJyqcf6oMNdmiKiuPU1lWoJLTL6gjRSsksBuSgqot21hylkklBQY1wiSu+PkZhW7sw==}
     engines: {node: '>=20'}
+
+  '@ark/util@0.56.0':
+    resolution: {integrity: sha512-BghfRC8b9pNs3vBoDJhcta0/c1J1rsoS1+HgVUreMFPdhz/CRAKReAu57YEllNaSy98rWAdY1gE+gFup7OXpgA==}
 
   '@babel/code-frame@7.29.7':
     resolution: {integrity: sha512-Aup7aUOfpbAUg2ROOJN6Iw5f9DMBlzu0mIkm/malLQFN/YQgO48wCj0Kxa3sEHJvPVFg7siR+qRInwXd2qhQKw==}
@@ -2369,6 +2376,9 @@ packages:
   aria-query@5.3.2:
     resolution: {integrity: sha512-COROpnaoap1E2F000S62r6A60uHZnmlvomhfyT2DlTcrY1OrBKn2UhH7qn5wTC9zMvD0AY7csdPSNwKP+7WiQw==}
     engines: {node: '>= 0.4'}
+
+  arkregex@0.0.6:
+    resolution: {integrity: sha512-9mvuMKQuibfWhBrsNYhsKhNb6k9oEHoAJ/FvDiqe8h+E9Siwe0/cro1WVOGgpajXQ9ZHd24yCOf2k35Q/QqUQw==}
 
   array-ify@1.0.0:
     resolution: {integrity: sha512-c5AMf34bKdvPhQ7tBGhqkgKNUzMr4WUs+WDtC2ZUGOUncbxKMTvqxYctiseW3+L4bA8ec+GcZ6/A/FW4m8ukng==}
@@ -5680,6 +5690,8 @@ snapshots:
       typescript: 5.6.1-rc
       validate-npm-package-name: 5.0.1
 
+  '@ark/util@0.56.0': {}
+
   '@babel/code-frame@7.29.7':
     dependencies:
       '@babel/helper-validator-identifier': 7.29.7
@@ -7653,6 +7665,10 @@ snapshots:
   argparse@2.0.1: {}
 
   aria-query@5.3.2: {}
+
+  arkregex@0.0.6(patch_hash=eb807e01313172dc3b1538f41a8ad4619eee7983fe212c8ffca3da41c49df16f):
+    dependencies:
+      '@ark/util': 0.56.0
 
   array-ify@1.0.0: {}
 

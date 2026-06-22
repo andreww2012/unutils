@@ -1,0 +1,140 @@
+diff --git a/out/charset.d.ts b/out/charset.d.ts
+index 6d99b3ccd39af38f99605bbfda4b275a586f7a6c..13f9ee43a34cf7b52f44744681f5a5b1fb45e9c9 100644
+--- a/out/charset.d.ts
++++ b/out/charset.d.ts
+@@ -1,9 +1,9 @@
+ import type { Backslash, ErrorMessage, noSuggest, Scanner, writeUnclosedGroupMessage } from "@ark/util";
+ import type { parseEscapedChar, StringDigit } from "./escape.ts";
+-import type { s, State } from "./state.ts";
+-export type parseCharset<s extends State, unscanned extends string> = Scanner.shiftUntilEscapable<unscanned, "]", Backslash> extends (Scanner.shiftResult<infer scanned, infer nextUnscanned>) ? nextUnscanned extends `]${infer remaining}` ? scanned extends Scanner.shift<"^", string> ? s.shiftQuantifiable<s, string, remaining> : parseNonNegatedCharset<scanned, never, null> extends (infer result extends string) ? [
++import type { sOps, State } from "./state.ts";
++export type parseCharset<s extends State, unscanned extends string> = Scanner.shiftUntilEscapable<unscanned, "]", Backslash> extends (Scanner.shiftResult<infer scanned, infer nextUnscanned>) ? nextUnscanned extends `]${infer remaining}` ? scanned extends Scanner.shift<"^", string> ? sOps.shiftQuantifiable<s, string, remaining> : parseNonNegatedCharset<scanned, never, null> extends (infer result extends string) ? [
+     result
+-] extends [never] ? s.error<emptyCharacterSetMessage> : s.shiftQuantifiable<s, result, remaining> : never : s.error<writeUnclosedGroupMessage<"]">> : never;
++] extends [never] ? sOps.error<emptyCharacterSetMessage> : sOps.shiftQuantifiable<s, result, remaining> : never : sOps.error<writeUnclosedGroupMessage<"]">> : never;
+ type parseNonNegatedCharset<chars extends string, set extends string, lastChar extends string | null> = parseChar<chars> extends Scanner.shiftResult<infer result, infer unscanned> ? result extends UnescapedDashMarker ? parseDash<unscanned, set, lastChar> : result extends ErrorMessage ? result : parseNonNegatedCharset<unscanned, set | result, result> : set;
+ type parseDash<unscanned extends string, set extends string, lastChar extends string | null> = lastChar extends string ? parseChar<unscanned> extends (Scanner.shiftResult<infer rangeEnd, infer next>) ? parseNonNegatedCharset<next, set | inferRange<lastChar, rangeEnd>, null> : // trailing -, treat as literal
+ set | "-" : parseNonNegatedCharset<unscanned, set | "-", "-">;
+diff --git a/out/escape.d.ts b/out/escape.d.ts
+index 2d3f3ad42745569174b89db467ff4c9ceb4956c5..b847bb4ef304c77fc8ccd90850768ed6037ade6d 100644
+--- a/out/escape.d.ts
++++ b/out/escape.d.ts
+@@ -1,10 +1,10 @@
+ import type { ErrorMessage, Scanner, WhitespaceChar } from "@ark/util";
+-import type { Control, ReferenceNode, s, State } from "./state.ts";
+-export type parseEscape<s extends State, unscanned extends string> = unscanned extends Scanner.shift<infer char, infer nextUnscanned> ? char extends NonZeroDigit ? parseNumericBackreference<s, unscanned> : char extends "k" ? parseNamedBackreference<s, nextUnscanned> : char extends UnicodePropertyChar ? parseUnicodeProperty<s, char, nextUnscanned> : parseSingleEscapedCharacter<s, char, nextUnscanned> : s.error<trailingBackslashMessage>;
+-type parseNumericBackreference<s extends State, fullUnscanned extends string> = Scanner.shiftUntilNot<fullUnscanned, StringDigit> extends (Scanner.shiftResult<infer ref, infer remaining>) ? s.shiftQuantifiable<s, ReferenceNode<ref>, remaining> : never;
+-type parseNamedBackreference<s extends State, unscanned extends string> = unscanned extends `<${infer ref}>${infer following}` ? s.shiftQuantifiable<s, ReferenceNode<ref>, following> : s.error<missingBackreferenceNameMessage>;
+-type parseUnicodeProperty<s extends State, char extends UnicodePropertyChar, unscanned extends string> = unscanned extends `{${string}}${infer following}` ? s.shiftQuantifiable<s, string, following> : s.error<writeInvalidUnicodePropertyMessage<char>>;
+-type parseSingleEscapedCharacter<s extends State, char extends string, remaining extends string> = parseEscapedChar<char> extends infer result extends string ? result extends ErrorMessage ? s.error<result> : s.shiftQuantifiable<s, result, remaining> : never;
++import type { Control, ReferenceNode, sOps, State } from "./state.ts";
++export type parseEscape<s extends State, unscanned extends string> = unscanned extends Scanner.shift<infer char, infer nextUnscanned> ? char extends NonZeroDigit ? parseNumericBackreference<s, unscanned> : char extends "k" ? parseNamedBackreference<s, nextUnscanned> : char extends UnicodePropertyChar ? parseUnicodeProperty<s, char, nextUnscanned> : parseSingleEscapedCharacter<s, char, nextUnscanned> : sOps.error<trailingBackslashMessage>;
++type parseNumericBackreference<s extends State, fullUnscanned extends string> = Scanner.shiftUntilNot<fullUnscanned, StringDigit> extends (Scanner.shiftResult<infer ref, infer remaining>) ? sOps.shiftQuantifiable<s, ReferenceNode<ref>, remaining> : never;
++type parseNamedBackreference<s extends State, unscanned extends string> = unscanned extends `<${infer ref}>${infer following}` ? sOps.shiftQuantifiable<s, ReferenceNode<ref>, following> : sOps.error<missingBackreferenceNameMessage>;
++type parseUnicodeProperty<s extends State, char extends UnicodePropertyChar, unscanned extends string> = unscanned extends `{${string}}${infer following}` ? sOps.shiftQuantifiable<s, string, following> : sOps.error<writeInvalidUnicodePropertyMessage<char>>;
++type parseSingleEscapedCharacter<s extends State, char extends string, remaining extends string> = parseEscapedChar<char> extends infer result extends string ? result extends ErrorMessage ? sOps.error<result> : sOps.shiftQuantifiable<s, result, remaining> : never;
+ export type parseEscapedChar<char extends string> = char extends RegexClassChar ? string : char extends "d" ? `${number}` : char extends "s" ? WhitespaceChar : char extends BoundaryChar ? "" : char extends Control ? char : char extends "c" ? ErrorMessage<caretNotationMessage> : char extends StringEscapableChar ? ErrorMessage<writeStringEscapableMessage<char>> : ErrorMessage<writeUnnecessaryEscapeMessage<char>>;
+ export declare const trailingBackslashMessage = "A regex cannot end with \\";
+ export type trailingBackslashMessage = typeof trailingBackslashMessage;
+diff --git a/out/group.d.ts b/out/group.d.ts
+index 57bc36d08e8655d8651e2f40852f0830a18f7125..718c35380139803499cc36be9a5b2ace2fb2c633 100644
+--- a/out/group.d.ts
++++ b/out/group.d.ts
+@@ -1,9 +1,9 @@
+ import type { ErrorMessage, Scanner, writeUnclosedGroupMessage } from "@ark/util";
+-import type { State, s } from "./state.ts";
++import type { State, sOps } from "./state.ts";
+ type LookaroundChar = "=" | "!";
+ export type ModifiableFlag = "i" | "m" | "s";
+-export type parseGroup<s extends State, unscanned extends string> = unscanned extends Scanner.shift<infer lookahead, infer next> ? lookahead extends "?" ? parseNonCapturingGroup<s, next> : s.pushGroup<s, State.UnnamedCaptureKind.indexed, unscanned, undefined> : s.error<writeUnclosedGroupMessage<")">>;
+-type parseNonCapturingGroup<s extends State, unscanned extends string> = unscanned extends Scanner.shift<infer lookahead, infer next> ? lookahead extends ":" ? s.pushGroup<s, State.UnnamedCaptureKind.noncapturing, next, undefined> : lookahead extends LookaroundChar ? s.pushGroup<s, State.UnnamedCaptureKind.lookaround, next, undefined> : lookahead extends "<" ? parseNamedGroupOrLookbehind<s, next> : shiftModifiers<unscanned> extends (ShiftedModifiers<infer flags, infer negated, infer following>) ? following extends ErrorMessage<infer message> ? s.error<message> : s.pushGroup<s, State.UnnamedCaptureKind.noncapturing, following, "i" extends flags ? true : "i" extends negated ? false : undefined> : never : s.error<writeUnclosedGroupMessage<")">>;
++export type parseGroup<s extends State, unscanned extends string> = unscanned extends Scanner.shift<infer lookahead, infer next> ? lookahead extends "?" ? parseNonCapturingGroup<s, next> : sOps.pushGroup<s, State.UnnamedCaptureKind.indexed, unscanned, undefined> : sOps.error<writeUnclosedGroupMessage<")">>;
++type parseNonCapturingGroup<s extends State, unscanned extends string> = unscanned extends Scanner.shift<infer lookahead, infer next> ? lookahead extends ":" ? sOps.pushGroup<s, State.UnnamedCaptureKind.noncapturing, next, undefined> : lookahead extends LookaroundChar ? sOps.pushGroup<s, State.UnnamedCaptureKind.lookaround, next, undefined> : lookahead extends "<" ? parseNamedGroupOrLookbehind<s, next> : shiftModifiers<unscanned> extends (ShiftedModifiers<infer flags, infer negated, infer following>) ? following extends ErrorMessage<infer message> ? sOps.error<message> : sOps.pushGroup<s, State.UnnamedCaptureKind.noncapturing, following, "i" extends flags ? true : "i" extends negated ? false : undefined> : never : sOps.error<writeUnclosedGroupMessage<")">>;
+ type ShiftedModifiers<flags extends ModifiableFlag = ModifiableFlag, negated extends ModifiableFlag = ModifiableFlag, unscanned extends string = string> = [ParsedModifiers<flags, negated>, unscanned];
+ type ParsedModifiers<flags extends ModifiableFlag = ModifiableFlag, negated extends ModifiableFlag = ModifiableFlag> = {
+     flags: flags;
+@@ -24,7 +24,7 @@ export declare const missingNegatedModifierMessage = "- must be followed by the
+ type missingNegatedModifierMessage = typeof missingNegatedModifierMessage;
+ export declare const writeInvalidModifierMessage: <char extends string>(char: char) => writeInvalidModifierMessage<char>;
+ type writeInvalidModifierMessage<char extends string> = `Modifier flag ${char} must be 'i', 'm' or 's'`;
+-type parseNamedGroupOrLookbehind<s extends State, unscanned extends string> = unscanned extends Scanner.shift<LookaroundChar, infer next> ? s.pushGroup<s, State.UnnamedCaptureKind.lookaround, next, undefined> : shiftNamedGroup<unscanned> extends (Scanner.shiftResult<infer name, infer following>) ? s.pushGroup<s, name, following, undefined> : s.error<writeUnclosedGroupMessage<")">>;
++type parseNamedGroupOrLookbehind<s extends State, unscanned extends string> = unscanned extends Scanner.shift<LookaroundChar, infer next> ? sOps.pushGroup<s, State.UnnamedCaptureKind.lookaround, next, undefined> : shiftNamedGroup<unscanned> extends (Scanner.shiftResult<infer name, infer following>) ? sOps.pushGroup<s, name, following, undefined> : sOps.error<writeUnclosedGroupMessage<")">>;
+ type shiftNamedGroup<unscanned extends string> = unscanned extends `${infer name}>${infer next}` ? name extends "" ? Scanner.shiftResult<"", ErrorMessage<unnamedCaptureGroupMessage>> : Scanner.shiftResult<name, next> : Scanner.shiftResult<"", ErrorMessage<writeUnclosedGroupMessage<">">>>;
+ export declare const unnamedCaptureGroupMessage = "Capture group <> requires a name";
+ export type unnamedCaptureGroupMessage = typeof unnamedCaptureGroupMessage;
+diff --git a/out/parse.d.ts b/out/parse.d.ts
+index 0b62c72c034c3a92b608516d9c760a1decc8fbe8..190b826ead5f8a203969dcac7f8af317b16ed3a7 100644
+--- a/out/parse.d.ts
++++ b/out/parse.d.ts
+@@ -3,8 +3,8 @@ import type { parseCharset } from "./charset.ts";
+ import type { parseEscape } from "./escape.ts";
+ import type { parseGroup } from "./group.ts";
+ import type { parseBuiltinQuantifier, parsePossibleRange, QuantifyingChar } from "./quantify.ts";
+-import type { Anchor, AnchorMarker, s, State, UnionTree } from "./state.ts";
+-export type parseState<s extends State> = s["unscanned"] extends ErrorMessage ? s["unscanned"] : s["unscanned"] extends "" ? s.finalize<s> : parseState<next<s>>;
+-export type next<s extends State> = s["unscanned"] extends Scanner.shift<infer lookahead, infer unscanned> ? lookahead extends "." ? s.shiftQuantifiable<s, string, unscanned> : lookahead extends Backslash ? parseEscape<s, unscanned> : lookahead extends "|" ? s.finalizeBranch<s, unscanned> : lookahead extends Anchor ? s.anchor<s, AnchorMarker<lookahead>, unscanned> : lookahead extends "(" ? parseGroup<s, unscanned> : lookahead extends ")" ? s.popGroup<s, unscanned> : lookahead extends QuantifyingChar ? parseBuiltinQuantifier<s, lookahead, unscanned> : lookahead extends "{" ? parsePossibleRange<s, unscanned> : lookahead extends "[" ? parseCharset<s, unscanned> : s.shiftQuantifiable<s, maybeSplitCasing<s["caseInsensitive"], lookahead>, unscanned> : never;
++import type { Anchor, AnchorMarker, sOps, State, UnionTree } from "./state.ts";
++export type parseState<s extends State> = s["unscanned"] extends ErrorMessage ? s["unscanned"] : s["unscanned"] extends "" ? sOps.finalize<s> : parseState<next<s>>;
++export type next<s extends State> = s["unscanned"] extends Scanner.shift<infer lookahead, infer unscanned> ? lookahead extends "." ? sOps.shiftQuantifiable<s, string, unscanned> : lookahead extends Backslash ? parseEscape<s, unscanned> : lookahead extends "|" ? sOps.finalizeBranch<s, unscanned> : lookahead extends Anchor ? sOps.anchor<s, AnchorMarker<lookahead>, unscanned> : lookahead extends "(" ? parseGroup<s, unscanned> : lookahead extends ")" ? sOps.popGroup<s, unscanned> : lookahead extends QuantifyingChar ? parseBuiltinQuantifier<s, lookahead, unscanned> : lookahead extends "{" ? parsePossibleRange<s, unscanned> : lookahead extends "[" ? parseCharset<s, unscanned> : sOps.shiftQuantifiable<s, maybeSplitCasing<s["caseInsensitive"], lookahead>, unscanned> : never;
+ type maybeSplitCasing<caseInsensitive extends boolean, char extends string> = caseInsensitive extends false ? char : Lowercase<char> extends Uppercase<char> ? char : UnionTree<[Lowercase<char>, Capitalize<char>]>;
+ export {};
+diff --git a/out/quantify.d.ts b/out/quantify.d.ts
+index a167d59053e430b93dcff9df6aca842af7839ce9..cce074cb58bc126c79c3119b14bb09b35024897c 100644
+--- a/out/quantify.d.ts
++++ b/out/quantify.d.ts
+@@ -1,7 +1,7 @@
+ import type { parseNonNegativeInteger, Scanner } from "@ark/util";
+-import type { s, State } from "./state.ts";
+-export type parseBuiltinQuantifier<s extends State, quantifier extends QuantifyingChar, unscanned extends string> = s["root"] extends "" ? s.error<writeUnmatchedQuantifierError<quantifier>> : quantifyBuiltin<s, quantifier, unscanned extends Scanner.shift<"?", infer lazyUnscanned> ? lazyUnscanned : unscanned>;
+-type quantifyBuiltin<s extends State, quantifier extends QuantifyingChar, unscanned extends string> = quantifier extends "?" ? s.pushQuantifier<s, 0, 1, unscanned> : quantifier extends "+" ? s.pushQuantifier<s, 1, null, unscanned> : quantifier extends "*" ? s.pushQuantifier<s, 0, null, unscanned> : never;
++import type { sOps, State } from "./state.ts";
++export type parseBuiltinQuantifier<s extends State, quantifier extends QuantifyingChar, unscanned extends string> = s["root"] extends "" ? sOps.error<writeUnmatchedQuantifierError<quantifier>> : quantifyBuiltin<s, quantifier, unscanned extends Scanner.shift<"?", infer lazyUnscanned> ? lazyUnscanned : unscanned>;
++type quantifyBuiltin<s extends State, quantifier extends QuantifyingChar, unscanned extends string> = quantifier extends "?" ? sOps.pushQuantifier<s, 0, 1, unscanned> : quantifier extends "+" ? sOps.pushQuantifier<s, 1, null, unscanned> : quantifier extends "*" ? sOps.pushQuantifier<s, 0, null, unscanned> : never;
+ type ParsedRange = {
+     min: number;
+     max: number | null;
+@@ -25,10 +25,10 @@ type parsePossibleRangeString<unscanned extends string> = unscanned extends (`${
+     unscanned: skipPossibleQuestionMark<next>;
+ }> : null;
+ type parseQuantifier<unscanned extends string, parsed extends ParsedRange> = unscanned extends `${infer range}${parsed["unscanned"]}` ? `{${range}` : never;
+-export type parsePossibleRange<s extends State, unscanned extends string, parsed extends ParsedRange | null = parsePossibleRangeString<unscanned>> = parsed extends ParsedRange ? s["root"] extends "" ? s.error<writeUnmatchedQuantifierError<parseQuantifier<unscanned, parsed>>> : [parsed["min"], parsed["max"]] extends ([
++export type parsePossibleRange<s extends State, unscanned extends string, parsed extends ParsedRange | null = parsePossibleRangeString<unscanned>> = parsed extends ParsedRange ? s["root"] extends "" ? sOps.error<writeUnmatchedQuantifierError<parseQuantifier<unscanned, parsed>>> : [parsed["min"], parsed["max"]] extends ([
+     never,
+     unknown
+-] | [unknown, never]) ? s.error<writeUnnaturalNumberQuantifierError<parseQuantifier<unscanned, parsed>>> : s.pushQuantifier<s, parsed["min"], parsed["max"], parsed["unscanned"] extends Scanner.shift<"?", infer lazyUnscanned> ? lazyUnscanned : parsed["unscanned"]> : s.shiftQuantifiable<s, "{", unscanned>;
++] | [unknown, never]) ? sOps.error<writeUnnaturalNumberQuantifierError<parseQuantifier<unscanned, parsed>>> : sOps.pushQuantifier<s, parsed["min"], parsed["max"], parsed["unscanned"] extends Scanner.shift<"?", infer lazyUnscanned> ? lazyUnscanned : parsed["unscanned"]> : sOps.shiftQuantifiable<s, "{", unscanned>;
+ export type quantify<pattern extends string, min extends number, max extends number | null> = tryFastPath<pattern, min, max>;
+ type tryFastPath<pattern extends string, min extends number, max extends number | null> = max extends 0 ? "" : string extends pattern ? string : `${number}` extends pattern ? min extends 0 ? "" | `${number}` : `${number}` : min extends 0 ? max extends 1 ? "" | pattern : max extends number ? loopFromZero<pattern, max, "", []> : // max is null, all we can do is append ${string}
+ "" | `${pattern}${string}` : loopUntilMin<pattern, min, max, "", []>;
+diff --git a/out/state.d.ts b/out/state.d.ts
+index 024a0edff4024ec540abb0651094bea0b2c7ff74..518fc4a4757add0c73f299cb989ab86ac286d127 100644
+--- a/out/state.d.ts
++++ b/out/state.d.ts
+@@ -50,7 +50,17 @@ export type Control = QuantifyingChar | Boundary | "|" | "." | "{" | "-" | "\\";
+ export type AnchorMarker<inner extends Anchor = Anchor> = `<${ZeroWidthSpace}${inner}${ZeroWidthSpace}>`;
+ export type StartAnchorMarker = AnchorMarker<"^">;
+ export type EndAnchorMarker = AnchorMarker<"$">;
+-export declare namespace s {
++// [unutils patch] This namespace (and all `sOps.` references + its import
++// specifiers across out/*.d.ts) was renamed from `s` to `sOps`. arkregex uses
++// `s` as BOTH a type-only namespace AND a type-parameter name (`<s extends State>`).
++// That dual declaration-space usage is valid TypeScript, but when tsdown's
++// rolldown-plugin-dts bundles these declarations (it models them as "fake JS",
++// where `s` is a single binding) it conflates the two and DROPS the namespace,
++// emitting invalid `.d.ts` — consumers then get `TS2702: 's' only refers to a
++// type, but is being used as a namespace here`, and inference silently breaks.
++// attw/publint false-pass it. Renaming removes the collision. No dts backend
++// (tsc/tsgo/oxc) avoids it; see repro `rolldown-dts-drops-shadowed-namespace`.
++export declare namespace sOps {
+     type error<message extends string> = State.from<{
+         unscanned: ErrorMessage<message>;
+         groups: [];
+@@ -135,7 +145,7 @@ export declare namespace s {
+         root: s["capture"] extends CapturedGroupKind ? GroupTree<State.Group.finalize<s>, s["capture"]> : s["capture"] extends State.UnnamedCaptureKind.lookaround ? "" : State.Group.finalize<s>;
+         caseInsensitive: last["caseInsensitive"];
+         flags: s["flags"];
+-    }> : s.error<writeUnmatchedGroupCloseMessage<")", unscanned>>;
++    }> : sOps.error<writeUnmatchedGroupCloseMessage<")", unscanned>>;
+     type finalize<s extends State> = s["groups"] extends [unknown, ...unknown[]] ? ErrorMessage<writeUnclosedGroupMessage<")">> : finalizeRegexOrError<finalizeTree<State.Group.finalize<s>, {
+         captures: EmptyCaptures;
+         names: {};
