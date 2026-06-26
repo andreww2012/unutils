@@ -20,7 +20,7 @@ describe('array/arrayFirstBy', () => {
   });
 
   it('returns undefined for an empty array', () => {
-    expect(arrayFirstBy([], (value) => value)).toBeUndefined();
+    expect(arrayFirstBy([] as string[], (value) => value)).toBeUndefined();
   });
 
   it('does not mutate the input', () => {
