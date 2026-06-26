@@ -66,6 +66,7 @@ Names target a reader who has never used the source library: we rename whenever 
 
 Don't ask whether or not should we bundle it - we almost certainly should.
 The dependency won't be in prod dependencies, and re-exporting utilities instead of re-implementing them does not have any effect on bundle size (tree shaking usually work great) and reduces maintenance burden.
+Bundled dependencies must be included in `meta.js` (keep items sorted by alphabet).
 
 ### Adding hand-written utility
 

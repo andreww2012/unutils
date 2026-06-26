@@ -2,6 +2,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const semver = require('semver');
+const {BUNDLED_PACKAGES} = require('./meta.js');
 const packageJson = require('./package.json');
 
 const CACHE_DIRECTORY = path.join(__dirname, 'node_modules/.cache/npm-check-updates');
@@ -20,7 +21,7 @@ const PACKAGE_GROUPS = Object.entries({
   'Package manager': {
     packages: ['pnpm'],
     icon: '📦',
-    priority: 0,
+    priority: 1,
   },
   '@eslint': {
     packages: ['eslint', 'eslint-config-un'],
@@ -28,6 +29,11 @@ const PACKAGE_GROUPS = Object.entries({
   },
   '@cspell': {
     packages: ['cspell'],
+  },
+  'Bundled utilities': {
+    packages: BUNDLED_PACKAGES,
+    icon: '🧩',
+    priority: 0,
   },
   // '@commitlint': {packages: []},
 }).reduce((result, [groupName, {packages: packagesInGroup, ...groupMeta}]) => {
@@ -83,11 +89,11 @@ module.exports = {
 
     if (knownGroup) {
       const {groupName, icon, priority} = knownGroup;
-      return `${priority === null ? '' : `${priority ?? 3}. `}${icon || '📁'} ${groupName}`;
+      return `${priority === null ? '' : `${priority ?? 4}. `}${icon || '📁'} ${groupName}`;
     }
 
     return fullName in packageJson.devDependencies
-      ? '2. 🧑‍💻 Dev dependencies'
-      : '1. 📦 Direct dependencies';
+      ? '3. 🧑‍💻 Dev dependencies'
+      : '2. 📦 Direct dependencies';
   },
 };

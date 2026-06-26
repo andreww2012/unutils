@@ -1,11 +1,17 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {defineConfig} from 'tsdown';
+import {BUNDLED_PACKAGES} from './meta.js';
+import {regexEscape} from './src/regex/regex-escape.ts';
 
 const utilityGroups = fs
   .readdirSync(path.join(import.meta.dirname, 'src'), {withFileTypes: true})
   .filter((entry) => entry.isDirectory() && !entry.name.startsWith('_'))
   .map((entry) => entry.name);
+
+const bundledPackagesPattern = new RegExp(
+  `^(?:${BUNDLED_PACKAGES.map(regexEscape).join('|')})(?:/.+)?$`,
+);
 
 export default defineConfig({
   entry: ['src/index.ts', ...utilityGroups.map((groupName) => `src/${groupName}/index.ts`)],
@@ -13,11 +19,7 @@ export default defineConfig({
   unbundle: true,
   dts: true,
   deps: {
-    // Must be in sync with `eslint.config.ts`'s `extraneousDependenciesWhitelist`:
-    alwaysBundle: [
-      // eslint-disable-next-line security/detect-unsafe-regex
-      /^(?:@ark\/util|arkregex|es-toolkit|destr|devalue|lossless-json|remeda|safe-stable-stringify|type-fest|yieldable-json)(?:\/.+)?$/,
-    ],
+    alwaysBundle: [bundledPackagesPattern],
   },
   // Without this, problems from attw and publint are not causing non-zero exit code
   failOnWarn: true,
