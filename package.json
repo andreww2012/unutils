@@ -90,6 +90,10 @@
       "types": "./dist/ts/index.d.mts",
       "default": "./dist/ts/index.mjs"
     },
+    "./types": {
+      "types": "./dist/types/index.d.mts",
+      "default": "./dist/types/index.mjs"
+    },
     "./value": {
       "types": "./dist/value/index.d.mts",
       "default": "./dist/value/index.mjs"

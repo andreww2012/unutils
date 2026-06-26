@@ -47,6 +47,8 @@ All without zero dependencies because the external dependencies are bundled.
 
 #### Detailed naming guideline
 
+> **The main good name test:** an average JavaScript developer should be able to well enough understand what the function does *only by its name*.
+
 Names target a reader who has never used the source library: we rename whenever the original is unclear, and keep it only when it already explains itself (`debounce`, `memoize`, `clamp`, `flatMap`).
 
 - **Spell out the operation; drop terse or cryptic names.** `ary` → `withMaxArity`, `after` → `fromNthCall`, `sortedIndex` → `sortedArrayInsertionIndex`.
@@ -56,8 +58,9 @@ Names target a reader who has never used the source library: we rename whenever 
 - **Prefix by group to disambiguate and signal the operand**, where it helps: `map*` (`filter` → `mapFilter`), `set*` (`filter` → `setFilter`), and `array*` for many array utilities; likewise encode a precondition when it matters (`sortedArray…`). Not mandatory when the name is already unambiguous (`flatMap`, `sortBy`).
 - **Predicates read as a question (`is*`)** — `inRange` → `isInRange`, `isLength` → `isValidLength`; converters use `to*` — `camelCase` → `toCamelCase`.
 - **Strict camelCase, acronyms included.** `isJSON` → `isJson`.
-
-> **The main good name test:** an average JavaScript developer should be able to well enough understand what the function does *only by its name*.
+- **Spelling preferences:**
+  - ❌ indices ✅ indexes
+- All the above applies to type utility naming.
 
 ### Adding utilities in bulk from a new library
 

@@ -13,4 +13,5 @@ export * from './runtime';
 export * from './set';
 export * from './string';
 export * from './ts';
+export type * from './types';
 export * from './value';
