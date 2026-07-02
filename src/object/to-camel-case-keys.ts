@@ -1,1 +1,1 @@
-export {toCamelCaseKeys} from 'es-toolkit/object';
+export {camelKeys as toCamelCaseKeys} from 'string-ts';

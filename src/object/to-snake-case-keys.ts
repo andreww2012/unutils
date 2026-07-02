@@ -1,1 +1,1 @@
-export {toSnakeCaseKeys} from 'es-toolkit/object';
+export {snakeKeys as toSnakeCaseKeys} from 'string-ts';

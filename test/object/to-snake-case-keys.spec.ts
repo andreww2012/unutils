@@ -1,7 +1,7 @@
 import {toSnakeCaseKeys} from '../../src/object/to-snake-case-keys.ts';
 
 describe('object/toSnakeCaseKeys', () => {
-  it('basic test', () => {
-    expect(toSnakeCaseKeys({fooBar: 1})).toStrictEqual({foo_bar: 1});
+  it('snake-cases only the top-level keys', () => {
+    expect(toSnakeCaseKeys({fooBar: {bazQux: 1}})).toStrictEqual({foo_bar: {bazQux: 1}});
   });
 });

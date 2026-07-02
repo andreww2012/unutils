@@ -7,6 +7,7 @@ export const BUNDLED_PACKAGES = [
   'lossless-json',
   'remeda',
   'safe-stable-stringify',
+  'string-ts',
   'type-fest',
   'yieldable-json',
 ];

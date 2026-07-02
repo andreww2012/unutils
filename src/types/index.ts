@@ -185,6 +185,8 @@ export type {ToCamelCase, ToCamelCaseOptions} from './to-camel-case.ts';
 export type {ToCamelCaseKeys} from './to-camel-case-keys.ts';
 export type {ToCamelCaseKeysDeep} from './to-camel-case-keys-deep.ts';
 export type {ToConstantCase} from './to-constant-case.ts';
+export type {ToConstantCaseKeys} from './to-constant-case-keys.ts';
+export type {ToConstantCaseKeysDeep} from './to-constant-case-keys-deep.ts';
 export type {ToDelimiterCase} from './to-delimiter-case.ts';
 export type {ToDelimiterCaseKeys} from './to-delimiter-case-keys.ts';
 export type {ToDelimiterCaseKeysDeep} from './to-delimiter-case-keys-deep.ts';
