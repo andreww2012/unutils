@@ -2,8 +2,22 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const semver = require('semver');
-const {BUNDLED_PACKAGES} = require('./meta.js');
 const packageJson = require('./package.json');
+
+const BUNDLED_PACKAGES = [
+  '@ark/util',
+  'arkregex',
+  'destr',
+  'devalue',
+  'es-toolkit',
+  'lossless-json',
+  'remeda',
+  'safe-stable-stringify',
+  'string-ts',
+  'ts-extras',
+  'type-fest',
+  'yieldable-json',
+];
 
 const CACHE_DIRECTORY = path.join(__dirname, 'node_modules/.cache/npm-check-updates');
 fs.mkdirSync(CACHE_DIRECTORY, {recursive: true});
