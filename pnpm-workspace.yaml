@@ -10,6 +10,7 @@ trustPolicyExclude: []
 
 allowBuilds:
   lefthook@2.1.9: true
+  unrs-resolver@1.12.2: false
 
 dedupePeers: true
 strictPeerDependencies: false
