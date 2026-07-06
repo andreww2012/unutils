@@ -2,7 +2,10 @@ import {eslintConfig} from 'eslint-config-un';
 
 export default eslintConfig({
   defaultConfigsStatus: 'misc-enabled',
-  ignores: ['test/published-dts/scenarios/**'],
+  ignores: [
+    'CHANGELOG.md', // Auto-generated
+    'test/published-dts/scenarios/**',
+  ],
   extraConfigs: [
     {
       // The package docs intentionally use a `Package:` prefix in their title.
