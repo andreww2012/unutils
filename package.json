@@ -1,6 +1,6 @@
 {
   "name": "unutils",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A big collection of utilities coming from different utility libraries and us, targeting modern environments.",
   "keywords": [
     "utils",
