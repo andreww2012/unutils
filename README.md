@@ -13,7 +13,7 @@ A growing collection of general-purpose utilities and TypeScript types, mostly c
 
 Minimum supported runtimes:
 
-- NodeJS: `^22.18.0 || >=24`
+- NodeJS: `^22.23.1 || >=24`
 - Browsers: all [Baseline widely available](https://web-platform-dx.github.io/baseline) features are implemented (see [the corresponding `browserslist` browsers list](https://browsersl.ist/#q=baseline+widely+available))
 
 ```sh
