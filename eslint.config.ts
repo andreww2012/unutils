@@ -17,6 +17,10 @@ export default eslintConfig({
       allowDefaultProject: ['*.config.*ts'],
     },
 
+    import: {
+      requireModuleExtensions: true,
+    },
+
     // Not working with ESLint 10:
     arrowReturnStyle: false,
 
