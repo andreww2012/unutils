@@ -1,8 +1,70 @@
 <!-- cspell:ignore jsonrepair jsondiffpatch hyperjump unpatch lerp -->
 
-# Readme
+# `unutils`
 
-## Functions
+A growing collection of general-purpose utilities and TypeScript types, mostly consolidated from existing popular packages with improved UX/DX, bug fixes and improvements in functionality.
+
+## Features
+
+- 🌱 **Zero dependencies**: everything is bundled;
+- ✨ **More than 250** utilities and **200** types.
+
+## Installation
+
+Minimum supported runtimes:
+
+- NodeJS: `^22.18.0 || >=24`
+- Browsers: all [Baseline widely available](https://web-platform-dx.github.io/baseline) features are implemented (see [the corresponding `browserslist` browsers list](https://browsersl.ist/#q=baseline+widely+available))
+
+```sh
+pnpm i -D unutils
+npm i -D unutils
+yarn add -D unutils
+```
+
+## Usage
+
+Import any function or type from the main entrypoint (except for runtime-specific utilities):
+
+```ts
+import {mapKeys} from 'unutils';
+```
+
+or from a specific entrypoint:
+
+```ts
+import {every} from 'unutils/iterable';
+```
+
+See individual symbols' JSDoc for detailed documentation.
+
+<details>
+<summary>List of entrypoints</summary>
+
+| Entrypoint  | Description                                            | Available in main? |
+| ----------- | ------------------------------------------------------ | ------------------ |
+| `array`     | Array and tuple manipulation                           | ✅                 |
+| `async`     | Promises, mutexes, timeouts and concurrency            | ✅                 |
+| `function`  | Function composition, currying and partial application | ✅                 |
+| `iterable`  | Generic iterable traversal and aggregation             | ✅                 |
+| `json`      | JSON parsing and serialization                         | ✅                 |
+| `map`       | `Map` querying and transformation                      | ✅                 |
+| `math`      | Numeric aggregation, interpolation and randomness      | ✅                 |
+| `misc`      | Miscellaneous helpers that fit no other group          | ✅                 |
+| `object`    | Object merging, picking and deep-path access           | ✅                 |
+| `predicate` | Type guards and value predicates                       | ✅                 |
+| `regex`     | Type-safe `RegExp` and pattern escaping                | ✅                 |
+| `runtime`   | Runtime environment detection                          | ✅                 |
+| `server`    | Node-only helpers (filesystem, process, terminal)      | ❌                 |
+| `set`       | `Set` querying and transformation                      | ✅                 |
+| `string`    | String casing, splitting and affixing                  | ✅                 |
+| `ts`        | TypeScript runtime and compile-time assertions         | ✅                 |
+| `types`     | Type-only utility types                                | ✅                 |
+| `value`     | Cloning, equality and type inspection for any value    | ✅                 |
+
+</details>
+
+## Functions & types
 
 ### Packages
 
@@ -25,7 +87,8 @@ utility it provides and how it maps into `unutils` (renames, consolidations, and
 | [`type-fest`](docs/packages/type-fest.md)                         | Type-only utility types (the `types` group / `unutils/types`)                                                                                  |
 | [`yieldable-json`](docs/packages/yieldable-json.md)               | Non-blocking async JSON parse/stringify                                                                                                        |
 
-#### Under consideration
+<details>
+<summary>Under consideration</summary>
 
 Candidate libraries on the radar. These cover JSON *manipulation* axes (repair, partial parsing, diff, pointer/patch) not yet provided — adding them would expand `unutils` beyond parsing and serialization.
 
@@ -39,6 +102,8 @@ Candidate libraries on the radar. These cover JSON *manipulation* axes (repair, 
 | JSON Merge Patch (RFC 7386)                         | Merge patch                     | 🚧     | No well-maintained typed library exists; a custom implementation would be the likely route       |
 
 > JSONPath (querying) was considered and **set aside**: the dominant `jsonpath-plus` has a history of RCE advisories, and the axis is broad/lower-demand. Relaxed syntax (JSON5/JSONC), canonical/RFC 8785 output, and `bigint`-safe stringify are already covered by existing entries or native features.
+
+</details>
 
 ### Custom functions
 
