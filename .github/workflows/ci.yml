@@ -84,6 +84,9 @@ jobs:
       - uses: ./.github/actions/prepare
         with:
           node-version: ${{ matrix.node-version }}
+      # `test/tsconfig.json` references the composite `src` project; vitest's
+      # typecheck needs its declarations built first or `@/*` imports resolve to `any`.
+      - run: pnpm lint:types:go
       - run: pnpm test:vitest
 
   build:
