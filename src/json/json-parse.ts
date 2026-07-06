@@ -16,7 +16,7 @@ import {destr} from 'destr';
  * Unlike {@link jsonParseSafe}, invalid JSON, non-JSON strings, and suspected
  * prototype pollution all throw rather than falling back.
  * @param value - The value to parse. Strings are parsed; anything else is returned as-is.
- * @returns The parsed value as `unknown` — assert or validate the shape at the call site.
+ * @returns The parsed value, typed as the `T` type argument (`unknown` by default; a purely type-level assertion) — assert or validate the shape at the call site.
  * @throws {SyntaxError | Error} A `SyntaxError` for malformed or non-JSON strings, or an `Error` on suspected prototype pollution.
  * @example
  * // Parsing JSON
@@ -35,4 +35,5 @@ import {destr} from 'destr';
  * jsonParse('{a: 1}');
  * // SyntaxError: [destr] Invalid JSON
  */
-export const jsonParse = (value: unknown) => destr(value, {strict: true});
+// eslint-disable-next-line ts/no-unnecessary-type-parameters -- `T` is a deliberate output-only assertion, mirroring `destr`'s own signature.
+export const jsonParse = <T = unknown>(value: unknown): T => destr<T>(value, {strict: true});
