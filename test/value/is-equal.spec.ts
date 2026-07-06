@@ -26,6 +26,7 @@ describe('value/isEqual', () => {
 
   describe('with a customizer', () => {
     it('uses the customizer return value when defined', () => {
+      // eslint-disable-next-line unicorn/consistent-boolean-name
       const result = isEqual('Hello', 'hello', (x, y) =>
         typeof x === 'string' && typeof y === 'string'
           ? x.toLowerCase() === y.toLowerCase()
@@ -36,12 +37,14 @@ describe('value/isEqual', () => {
     });
 
     it('falls back to the default strategy when the customizer returns undefined', () => {
+      // eslint-disable-next-line unicorn/consistent-boolean-name
       const result = isEqual({a: 1}, {a: 1}, () => undefined);
 
       expect(result).toBe(true);
     });
 
     it('uses the customizer to override an otherwise-equal comparison', () => {
+      // eslint-disable-next-line unicorn/consistent-boolean-name
       const result = isEqual({a: 1}, {a: 1}, () => false);
 
       expect(result).toBe(false);

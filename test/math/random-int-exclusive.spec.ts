@@ -9,7 +9,7 @@ describe('math/randomIntExclusive', () => {
     for (let run = 0; run < 1000; run += 1) {
       const result = randomIntExclusive(1, 4);
 
-      expect(Number.isInteger(result)).toBe(true);
+      expect(Number.isSafeInteger(result)).toBe(true);
       expect(result).toBeGreaterThanOrEqual(1);
       expect(result).toBeLessThan(4);
     }

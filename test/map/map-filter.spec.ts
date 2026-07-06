@@ -9,7 +9,7 @@ describe('map/mapFilter', () => {
     ]);
     const result = mapFilter(sample, (value) => value > 1);
 
-    expect([...result.entries()]).toStrictEqual([
+    expect([...result]).toStrictEqual([
       ['b', 2],
       ['c', 3],
     ]);

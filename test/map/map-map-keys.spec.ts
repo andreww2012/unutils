@@ -10,7 +10,7 @@ describe('map/mapMapKeys', () => {
       (_value, key) => key.toUpperCase(),
     );
 
-    expect([...result.entries()]).toStrictEqual([
+    expect([...result]).toStrictEqual([
       ['A', 1],
       ['B', 2],
     ]);

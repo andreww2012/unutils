@@ -6,11 +6,11 @@ import {interpolate} from './interpolate.ts';
  * example, `5` within `[0, 10]` maps to `50` within `[0, 100]`.
  *
  * By default values outside the input range extrapolate past the output range.
- * Pass `clamp = true` to constrain the result to the output range.
+ * Pass `shouldClamp = true` to constrain the result to the output range.
  * @param value - The number to re-map.
  * @param inputRange - The `[min, max]` range `value` is currently expressed in.
  * @param outputRange - The `[min, max]` range to map `value` into.
- * @param clamp - When `true`, the result is constrained to `outputRange`.
+ * @param shouldClamp - When `true`, the result is constrained to `outputRange`.
  * Defaults to `false` (allows extrapolation).
  * @returns `value` expressed within `outputRange`.
  * @example
@@ -30,10 +30,10 @@ export const mapRange = (
   value: number,
   inputRange: readonly [number, number],
   outputRange: readonly [number, number],
-  clamp = false,
+  shouldClamp = false,
 ): number => {
   const [inputMin, inputMax] = inputRange;
   const [outputMin, outputMax] = outputRange;
 
-  return interpolate(outputMin, outputMax, (value - inputMin) / (inputMax - inputMin), clamp);
+  return interpolate(outputMin, outputMax, (value - inputMin) / (inputMax - inputMin), shouldClamp);
 };

@@ -8,13 +8,13 @@
  * Based on `castArray` from `es-toolkit/compat`, but with two enhancements:
  * sharper typing (an existing array — including a tuple — keeps its exact type,
  * any other value widens to `value[]`), and nullish values collapse to `[]`
- * instead of `castArray`'s `[null]` / `[undefined]`. Pass `wrapNullish: true` to
+ * instead of `castArray`'s `[null]` / `[undefined]`. Pass `shouldWrapNullish: true` to
  * opt back into wrapping nullish values like any other value.
  * @param value - The value to ensure is an array.
- * @param wrapNullish - When `true`, a nullish `value` is wrapped (`[value]`)
+ * @param shouldWrapNullish - When `true`, a nullish `value` is wrapped (`[value]`)
  * like any other value instead of collapsing to `[]`. Defaults to `false`.
  * @returns The original array, a new single-element array wrapping `value`, or
- * an empty array when `value` is nullish and `wrapNullish` is `false`.
+ * an empty array when `value` is nullish and `shouldWrapNullish` is `false`.
  * @example
  * // Wraps a non-array
  * arrayify(1);
@@ -34,24 +34,27 @@
  * arrayify(null);
  * // []
  * @example
- * // ...unless `wrapNullish` opts into treating it like any other value
+ * // ...unless `shouldWrapNullish` opts into treating it like any other value
  * arrayify(null, true);
  * // [null]
  * arrayify(undefined, true);
  * // [undefined]
  */
-export function arrayify<T extends null | undefined>(value: T, wrapNullish: true): [T];
-export function arrayify<T extends readonly unknown[]>(value: T, wrapNullish: true): T;
-export function arrayify<T>(value: T, wrapNullish: true): NonNullable<T>[];
-export function arrayify(value: null | undefined, wrapNullish?: boolean): [];
+export function arrayify<T extends null | undefined>(value: T, shouldWrapNullish: true): [T];
+export function arrayify<T extends readonly unknown[]>(value: T, shouldWrapNullish: true): T;
+export function arrayify<T>(value: T, shouldWrapNullish: true): NonNullable<T>[];
+export function arrayify(value: null | undefined, shouldWrapNullish?: boolean): [];
 export function arrayify<T extends readonly unknown[]>(
   value: T | null | undefined,
-  wrapNullish?: boolean,
+  shouldWrapNullish?: boolean,
 ): T;
-export function arrayify<T>(value: T | null | undefined, wrapNullish?: boolean): NonNullable<T>[];
-export function arrayify(value: unknown, wrapNullish = false): unknown {
+export function arrayify<T>(
+  value: T | null | undefined,
+  shouldWrapNullish?: boolean,
+): NonNullable<T>[];
+export function arrayify(value: unknown, shouldWrapNullish = false): unknown {
   if (value == null) {
-    return wrapNullish ? [value] : [];
+    return shouldWrapNullish ? [value] : [];
   }
 
   return Array.isArray(value) ? (value as unknown[]) : [value];

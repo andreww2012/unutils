@@ -15,12 +15,12 @@ type CurryRight<Params extends readonly unknown[], Result> = Params extends read
 interface CurryFn {
   <F extends (...args: never[]) => unknown>(
     func: F,
-    fromRight?: false,
+    isFromRight?: false,
   ): Curry<Parameters<F>, ReturnType<F>>;
 
   <F extends (...args: never[]) => unknown>(
     func: F,
-    fromRight: true,
+    isFromRight: true,
   ): CurryRight<Parameters<F>, ReturnType<F>>;
 }
 
@@ -30,7 +30,7 @@ interface CurryFn {
  * has been supplied.
  * @param func - The function to curry. Its arity determines how many calls
  * the returned chain expects.
- * @param fromRight - When `true`, arguments are collected from the rightmost
+ * @param isFromRight - When `true`, arguments are collected from the rightmost
  * parameter inward, so `f(c)(b)(a)` reaches the original `fn(a, b, c)`.
  * Defaults to `false` (left-to-right collection).
  * @returns A curried function that accepts one argument per call until the
@@ -53,8 +53,8 @@ interface CurryFn {
  * curry(greet)();
  * // 'hi'
  */
-export const curry = ((func: (...args: never[]) => unknown, fromRight = false) => {
-  if (fromRight) {
+export const curry = ((func: (...args: never[]) => unknown, isFromRight = false) => {
+  if (isFromRight) {
     return esCurryRight(func);
   }
 

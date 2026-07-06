@@ -2,27 +2,23 @@ saveExact: true
 
 minimumReleaseAge: 960 # 16 hours in minutes
 minimumReleaseAgeExclude:
-  - es-toolkit@1.47.0
-  - eslint-config-un@1.0.0-beta.12
+  - eslint-config-un@1.0.0-beta.14
 
 trustPolicy: no-downgrade
 trustPolicyIgnoreAfter: 43200 # 30 days in minutes
-trustPolicyExclude:
-  # []
-  - tinyexec@1.2.2 # Uses staged publishing instead of trusted publishing
+trustPolicyExclude: []
 
 allowBuilds:
-  # core-js: false # Donation message
-  esbuild: false # Not a direct dependency
-  lefthook: true
-  unrs-resolver: false # cspell:disable-line
+  lefthook@2.1.9: true
 
 dedupePeers: true
 strictPeerDependencies: false
 
 overrides:
   '@arethetypeswrong/core@0.18.2>fflate': 0.8.2 # TODO https://github.com/arethetypeswrong/arethetypeswrong.github.io/issues/258 cspell:disable-line
-  eslint-plugin-jsx-a11y-x@0.1.1: 0.2.0
+  # GHSA-fx2h-pf6j-xcff cspell:disable-line
+  # Can't use range like `^8.0.16` as pnpm won't re-resolve the already-locked vite for a range replacement, only for an exact one
+  vite@>=8.0.0 <8.0.16: 8.0.16
 
 peerDependencyRules:
   allowedVersions:

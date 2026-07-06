@@ -10,7 +10,7 @@ describe('map/mapMapValues', () => {
       (value) => value * 10,
     );
 
-    expect([...result.entries()]).toStrictEqual([
+    expect([...result]).toStrictEqual([
       ['a', 10],
       ['b', 20],
     ]);

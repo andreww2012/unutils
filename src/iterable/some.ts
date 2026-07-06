@@ -24,6 +24,7 @@
  * some(new Set([1, 2, 3]), (value) => value > 2);
  * // true
  */
+// eslint-disable-next-line unicorn/consistent-boolean-name
 export const some = <T>(iterable: Iterable<T>, predicate: (value: T) => boolean): boolean => {
   for (const item of iterable) {
     if (predicate(item)) {

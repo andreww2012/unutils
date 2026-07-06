@@ -54,11 +54,11 @@ export function* slidingWindow<T>(
   step = 1,
   {partialWindows = false}: {partialWindows?: boolean} = {},
 ): Generator<T[], void, unknown> {
-  if (!Number.isInteger(size) || size < 1) {
+  if (!Number.isSafeInteger(size) || size < 1) {
     throw new Error('`size` must be a positive integer.');
   }
 
-  if (!Number.isInteger(step) || step < 1) {
+  if (!Number.isSafeInteger(step) || step < 1) {
     throw new Error('`step` must be a positive integer.');
   }
 

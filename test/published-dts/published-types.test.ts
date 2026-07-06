@@ -1,4 +1,3 @@
-/* eslint-disable sonarjs/os-command -- a local test running fixed commands (pnpm pack, tar, tsc) on controlled, internal paths */
 import {execFileSync, execSync} from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -90,6 +89,7 @@ beforeAll(() => {
     output = (error as {stdout?: string}).stdout || '';
   }
 
+  // eslint-disable-next-line unicorn/no-duplicate-loops
   for (const line of output.split('\n').filter(Boolean)) {
     const file = ERROR_LINE_PATTERN.exec(line)?.[1];
     if (file) {

@@ -3,9 +3,9 @@ import {partial as esPartial, partialRight as esPartialRight} from 'es-toolkit/f
 const callPartial = (
   func: (...args: never[]) => unknown,
   args: readonly unknown[],
-  fromRight: boolean,
+  isFromRight: boolean,
 ) => {
-  if (fromRight) {
+  if (isFromRight) {
     const remapped = args.map((arg) =>
       arg === esPartial.placeholder ? esPartialRight.placeholder : arg,
     );
@@ -20,7 +20,7 @@ interface PartialFn {
   <F extends (...args: never[]) => unknown>(
     func: F,
     args: readonly unknown[],
-    fromRight?: boolean,
+    isFromRight?: boolean,
   ): (...remaining: unknown[]) => ReturnType<F>;
 
   placeholder: typeof esPartial.placeholder;
@@ -33,7 +33,7 @@ interface PartialFn {
  * @param args - An array of arguments to pre-apply. Use `partial.placeholder`
  * inside the array to skip a position so the caller supplies it. The same
  * placeholder symbol works for both left and right modes.
- * @param fromRight - When `true`, `args` are applied to the rightmost
+ * @param isFromRight - When `true`, `args` are applied to the rightmost
  * parameters of `func` and the returned function fills the leading ones.
  * Defaults to `false`.
  * @returns A function awaiting the remaining arguments.
@@ -56,7 +56,7 @@ interface PartialFn {
  * // 'start-mid-end'
  */
 export const partial: PartialFn = Object.assign(
-  ((func: never, args: readonly unknown[], fromRight = false) =>
-    callPartial(func, args, fromRight)) as PartialFn,
+  ((func: never, args: readonly unknown[], isFromRight = false) =>
+    callPartial(func, args, isFromRight)) as PartialFn,
   {placeholder: esPartial.placeholder},
 );

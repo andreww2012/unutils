@@ -23,6 +23,7 @@ import type {IsNumericLiteral} from 'type-fest';
  * // Plain boolean for a non-literal minimum
  * arrayHasMinElements([1, 2, 3], someCount);
  */
+// eslint-disable-next-line unicorn/consistent-boolean-name
 export function arrayHasMinElements<T extends readonly unknown[], N extends number>(
   // The `| readonly unknown[]` makes the predicate (always some array) assignable
   // to the parameter while `T` still infers from the argument — as remeda does.

@@ -11,18 +11,34 @@ export default eslintConfig({
         'markdown-preferences/no-heading-trailing-punctuation': 'off',
       },
     },
+    // Fixes "The following rules do not support the language "jsonc/x""
+    {
+      files: ['**/*.json'],
+      rules: {
+        'unicorn/no-process-exit': 0,
+        'unicorn/prefer-import-meta-properties': 0,
+      },
+    },
   ],
   configs: {
-    ts: {
-      allowDefaultProject: ['*.config.*ts'],
-    },
-
+    fileProgress: true,
     import: {
       requireModuleExtensions: true,
     },
-
-    // Not working with ESLint 10:
-    arrowReturnStyle: false,
+    ts: {
+      allowDefaultProject: ['*.config.*ts'],
+    },
+    unicorn: {
+      ignores: [
+        '**/*.json', // Fixes "The following rules do not support the language "jsonc/x""
+      ],
+      overrides: {
+        'unicorn/consistent-boolean-name': (severity, options) => ({
+          severity,
+          options: [{...options?.[0], ignore: ['^predicate$']}],
+        }),
+      },
+    },
 
     // False positives:
     rxjs: false,

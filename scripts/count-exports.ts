@@ -124,9 +124,10 @@ const classifyExport = (symbol: ts.Symbol, checker: ts.TypeChecker): CountType =
   }
 
   const type = checker.getTypeOfSymbolAtLocation(resolved, declaration);
-  const callable = type.getCallSignatures().length > 0 || type.getConstructSignatures().length > 0;
+  const isCallable =
+    type.getCallSignatures().length > 0 || type.getConstructSignatures().length > 0;
 
-  return callable ? 'functions' : 'constants';
+  return isCallable ? 'functions' : 'constants';
 };
 
 type Counts = Record<CountType, number>;

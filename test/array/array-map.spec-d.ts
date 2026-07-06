@@ -8,7 +8,7 @@ describe('array/arrayMap', () => {
   });
 
   it('widens a regular array to `U[]`', () => {
-    expectTypeOf(arrayMap([1, 2, 3], (value) => `${value}`)).toEqualTypeOf<string[]>();
+    expectTypeOf(arrayMap([1, 2, 3], String)).toEqualTypeOf<string[]>();
   });
 
   it('types the callback value as the element type', () => {

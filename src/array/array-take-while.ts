@@ -7,7 +7,7 @@ import {takeRightWhile, takeWhile} from 'es-toolkit/array';
  * @param array - The array to take elements from. Not mutated.
  * @param predicate - `(item, index, array) => boolean`. Elements are taken
  * while it returns `true`; the first `false` result stops the taking.
- * @param fromRight - When `true`, the predicate walks the array from the last
+ * @param isFromRight - When `true`, the predicate walks the array from the last
  * element backwards and trailing matches are returned in their original order.
  * Defaults to `false` (walks from the first element).
  * @returns A new array containing the matching edge run.
@@ -39,9 +39,9 @@ import {takeRightWhile, takeWhile} from 'es-toolkit/array';
 export const arrayTakeWhile = <T>(
   array: readonly T[],
   predicate: (item: T, index: number, array: readonly T[]) => boolean,
-  fromRight = false,
+  isFromRight = false,
 ): T[] => {
-  if (fromRight) {
+  if (isFromRight) {
     return takeRightWhile(array, predicate);
   }
 

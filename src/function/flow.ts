@@ -3,13 +3,13 @@ import {flow as esFlow, flowRight as esFlowRight} from 'es-toolkit/function';
 /**
  * Composes a list of functions into a single function. By default the first
  * function in the list receives the call arguments and each subsequent
- * function takes the previous result. With `fromRight = true`, composition
+ * function takes the previous result. With `isFromRight = true`, composition
  * runs in reverse order (the last function in the list is invoked first),
  * mirroring mathematical function composition.
  * @param functions - The functions to compose. Must contain at least one
  * function; the first one may accept any signature, every following one is
  * called with a single argument (the previous return value).
- * @param fromRight - When `true`, runs the list right-to-left (compose).
+ * @param isFromRight - When `true`, runs the list right-to-left (compose).
  * Defaults to `false` (pipe).
  * @returns A function that, when invoked, threads its input through the
  * composed list and returns the final result.
@@ -42,9 +42,9 @@ import {flow as esFlow, flowRight as esFlowRight} from 'es-toolkit/function';
  */
 export const flow = (
   functions: readonly ((...args: never[]) => unknown)[],
-  fromRight = false,
+  isFromRight = false,
 ): ((...args: never[]) => unknown) => {
-  if (fromRight) {
+  if (isFromRight) {
     return esFlowRight(...(functions as Parameters<typeof esFlowRight>));
   }
 

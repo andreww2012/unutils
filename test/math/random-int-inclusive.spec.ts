@@ -9,7 +9,7 @@ describe('math/randomIntInclusive', () => {
     for (let run = 0; run < 1000; run += 1) {
       const result = randomIntInclusive(2, 5);
 
-      expect(Number.isInteger(result)).toBe(true);
+      expect(Number.isSafeInteger(result)).toBe(true);
       expect(result).toBeGreaterThanOrEqual(2);
       expect(result).toBeLessThanOrEqual(5);
     }

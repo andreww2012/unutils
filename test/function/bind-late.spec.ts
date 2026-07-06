@@ -3,9 +3,7 @@ import {bindLate} from '../../src/function/bind-late.ts';
 describe('function/bindLate', () => {
   it('basic test', () => {
     const object = {
-      greet(greeting: string, name: string) {
-        return `${greeting}, ${name}`;
-      },
+      greet: (greeting: string, name: string) => `${greeting}, ${name}`,
     };
     const greet = bindLate(object, 'greet', 'Hi');
 

@@ -5,8 +5,7 @@
  * a function.
  */
 export type MaybeFn<Return, Params extends readonly unknown[] = []> =
-  | ((...args: Params) => Return)
-  | Return;
+  ((...args: Params) => Return) | Return;
 
 /**
  * Resolves a {@link MaybeFn}: if `fnOrValue` is a function, calls it with the

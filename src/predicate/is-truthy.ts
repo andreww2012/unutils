@@ -23,5 +23,4 @@
  */
 export const isTruthy = <T>(
   value: T,
-  // eslint-disable-next-line unicorn/prefer-native-coercion-functions -- the wrapper exists to attach a type-guard signature that `Boolean` lacks
 ): value is Exclude<T, false | 0 | 0n | '' | null | undefined> => Boolean(value);

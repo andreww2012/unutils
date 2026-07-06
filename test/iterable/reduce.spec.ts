@@ -23,7 +23,7 @@ describe('iterable/reduce', () => {
         new Map<string, number>(),
       );
 
-      expect([...result.entries()]).toStrictEqual([
+      expect([...result]).toStrictEqual([
         ['a', 1],
         ['bb', 2],
         ['ccc', 3],

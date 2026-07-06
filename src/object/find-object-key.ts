@@ -11,7 +11,7 @@ import {findKey} from 'es-toolkit/object';
  * @param object - The object to search.
  * @param predicate - Invoked as `(value, key, object)`; the first key for which
  * it returns `true` is returned.
- * @param fromRight - When `true`, scans keys from last to first. Defaults to `false`.
+ * @param isFromRight - When `true`, scans keys from last to first. Defaults to `false`.
  * @returns The matching key, or `undefined` if none matches.
  * @example
  * // First key whose value passes the predicate
@@ -29,9 +29,9 @@ import {findKey} from 'es-toolkit/object';
 export const findObjectKey = <T extends Record<PropertyKey, unknown>>(
   object: T,
   predicate: (value: T[keyof T], key: keyof T, object: T) => boolean,
-  fromRight?: boolean,
+  isFromRight?: boolean,
 ): keyof T | undefined => {
-  if (fromRight) {
+  if (isFromRight) {
     return findLastKey(object, predicate);
   }
 

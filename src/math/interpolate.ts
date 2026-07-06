@@ -4,12 +4,12 @@
  * is `max`, and `t = 0.5` is the midpoint.
  *
  * By default `t` is **not** constrained, so values outside `[0, 1]` extrapolate
- * beyond the `min`/`max` endpoints (the standard behavior). Pass `clamp = true`
+ * beyond the `min`/`max` endpoints (the standard behavior). Pass `shouldClamp = true`
  * to constrain `t` to `[0, 1]`, capping the result at the endpoints.
  * @param min - The value returned when `t` is `0`.
  * @param max - The value returned when `t` is `1`.
- * @param t - The interpolation factor. Not constrained unless `clamp` is `true`.
- * @param clamp - When `true`, `t` is clamped to `[0, 1]` so the result never
+ * @param t - The interpolation factor. Not constrained unless `shouldClamp` is `true`.
+ * @param shouldClamp - When `true`, `t` is clamped to `[0, 1]` so the result never
  * goes past `min`/`max`. Defaults to `false` (allows extrapolation).
  * @returns The interpolated value.
  * @example
@@ -25,7 +25,7 @@
  * interpolate(0, 10, 1.5, true);
  * // 10
  */
-export const interpolate = (min: number, max: number, t: number, clamp = false): number => {
-  const factor = clamp ? Math.min(Math.max(t, 0), 1) : t;
+export const interpolate = (min: number, max: number, t: number, shouldClamp = false): number => {
+  const factor = shouldClamp ? Math.min(Math.max(t, 0), 1) : t;
   return min + (max - min) * factor;
 };
