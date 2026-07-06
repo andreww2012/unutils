@@ -258,6 +258,9 @@ importers:
       '@vitest/ui':
         specifier: 4.1.9
         version: 4.1.9(vitest@4.1.9)
+      actions-up:
+        specifier: 1.16.0
+        version: 1.16.0
       all-contributors-cli:
         specifier: 6.27.0-rc.1
         version: 6.27.0-rc.1(@types/node@22.19.17)
@@ -287,7 +290,10 @@ importers:
         version: 10.6.0(jiti@2.7.0)
       eslint-config-un:
         specifier: 1.0.0-beta.14
-        version: 1.0.0-beta.14(@eslint/css-tree@4.0.4)(@types/estree@1.0.9)(@typescript-eslint/utils@8.62.1)(@vitest/eslint-plugin@1.6.21)(browserslist@4.28.4)(eslint@10.6.0)(typescript@6.0.3)
+        version: 1.0.0-beta.14(@eslint/css-tree@4.0.4)(@types/estree@1.0.9)(@typescript-eslint/utils@8.62.1)(@vitest/eslint-plugin@1.6.21)(browserslist@4.28.4)(eslint-plugin-github-action@0.3.0)(eslint@10.6.0)(typescript@6.0.3)
+      eslint-plugin-github-action:
+        specifier: 0.3.0
+        version: 0.3.0(eslint@10.6.0)
       jest-extended:
         specifier: 7.0.0
         version: 7.0.0(typescript@6.0.3)
@@ -1260,6 +1266,10 @@ packages:
   '@npmcli/run-script@10.0.4':
     resolution: {integrity: sha512-mGUWr1uMnf0le2TwfOZY4SFxZGXGfm4Jtay/nwAa2FLNAKXUoUwaGwBMNH36UHPtinWfTSJ3nqFQr0091CxVGg==}
     engines: {node: ^20.17.0 || >=22.9.0}
+
+  '@ntnyq/utils@0.15.0':
+    resolution: {integrity: sha512-/V+wlKysA73OD5R+KlA+C1GhzZst7HiRUCAm1l7ebNiG/rGZ0ysYHEO/qcidKvAQoJ5H/KgahKDfzcAGccQHCA==}
+    engines: {node: ^22.13.0 || >=24}
 
   '@ota-meshi/ast-token-store@0.3.0':
     resolution: {integrity: sha512-XRO0zi2NIUKq2lUk3T1ecFSld1fMWRKE6naRFGkgkdeosx7IslyUKNv5Dcb5PJTja9tHJoFu0v/7yEpAkrkrTg==}
@@ -2343,6 +2353,11 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
+  actions-up@1.16.0:
+    resolution: {integrity: sha512-i/2cDk8Z5YUatx1atmxmZx5jCe0z6nwpDvBiqf4FB7cTuKXnEvpwLbwDGlvKkwA7n+SOHxlosGgOhBJXtHW3IA==}
+    engines: {node: ^18.3.0 || >=20.0.0}
+    hasBin: true
+
   agent-base@7.1.4:
     resolution: {integrity: sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ==}
     engines: {node: '>= 14'}
@@ -3305,6 +3320,12 @@ packages:
     engines: {node: ^20.19.0 || ^22.13.0 || >=24.0.0}
     peerDependencies:
       eslint: ^10.0.0
+
+  eslint-plugin-github-action@0.3.0:
+    resolution: {integrity: sha512-o61vth6qynHGFUu1xa2wxcSn9nxHT4HUBzv6BOze5m5mHuwJmq6C2kgMru4tW7FqVtCB2UvyciXRq2YfBaYGUA==}
+    engines: {node: ^22.13.0 || >=24}
+    peerDependencies:
+      eslint: ^9.5.0 || ^10.0.0
 
   eslint-plugin-html@8.1.4:
     resolution: {integrity: sha512-Eno3oPEj3s6AhvDJ5zHhnHPDvXp6LNFXuy3w51fNebOKYuTrfjOHUGwP+mOrGFpR6eOJkO1xkB8ivtbfMjbMjg==}
@@ -5436,6 +5457,9 @@ packages:
     resolution: {integrity: sha512-8gwNZ29+0/3zmXw7ToIHZtg6wK37xnniRUdBt7B27xZxaxfgR5tGMaGHT0t0dLtBV9fXE7zurh0s6Z1DHVjfWg==}
     engines: {node: '>=14'}
 
+  uncase@0.2.0:
+    resolution: {integrity: sha512-Y87FEnnNw6TNUMVx0kpatPwg1E4ya4rzRWUgb75PKCfUWk7nf14/fai5ASXa1g0sP6+RGylTXMLfnsYleeWKqA==}
+
   unconfig-core@7.5.0:
     resolution: {integrity: sha512-Su3FauozOGP44ZmKdHy2oE6LPjk51M/TRRjHv2HNCWiDvfvCoxC2lno6jevMA91MYAdCdwP05QnWdWpSbncX/w==}
 
@@ -6919,6 +6943,8 @@ snapshots:
       node-gyp: 12.4.0
       proc-log: 6.1.0
 
+  '@ntnyq/utils@0.15.0': {}
+
   '@ota-meshi/ast-token-store@0.3.0': {}
 
   '@oxc-parser/binding-android-arm-eabi@0.132.0':
@@ -7716,6 +7742,14 @@ snapshots:
 
   acorn@8.17.0: {}
 
+  actions-up@1.16.0:
+    dependencies:
+      enquirer: 2.4.1
+      nanospinner: 1.2.2
+      picocolors: 1.1.1
+      semver: 7.8.5
+      yaml: 2.9.0
+
   agent-base@7.1.4: {}
 
   ajv@6.15.0:
@@ -8258,7 +8292,7 @@ snapshots:
     dependencies:
       eslint: 10.6.0(jiti@2.7.0)
 
-  eslint-config-un@1.0.0-beta.14(@eslint/css-tree@4.0.4)(@types/estree@1.0.9)(@typescript-eslint/utils@8.62.1)(@vitest/eslint-plugin@1.6.21)(browserslist@4.28.4)(eslint@10.6.0)(typescript@6.0.3):
+  eslint-config-un@1.0.0-beta.14(@eslint/css-tree@4.0.4)(@types/estree@1.0.9)(@typescript-eslint/utils@8.62.1)(@vitest/eslint-plugin@1.6.21)(browserslist@4.28.4)(eslint-plugin-github-action@0.3.0)(eslint@10.6.0)(typescript@6.0.3):
     dependencies:
       '@antfu/utils': 9.3.0
       '@e18e/eslint-plugin': 0.5.1(eslint@10.6.0)
@@ -8333,6 +8367,7 @@ snapshots:
       '@eslint/css-tree': 4.0.4
       '@vitest/eslint-plugin': 1.6.21(@typescript-eslint/eslint-plugin@8.62.1)(eslint@10.6.0)(typescript@6.0.3)(vitest@4.1.9)
       browserslist: 4.28.4
+      eslint-plugin-github-action: 0.3.0(eslint@10.6.0)
     transitivePeerDependencies:
       - '@types/estree'
       - '@typescript-eslint/utils'
@@ -8438,6 +8473,15 @@ snapshots:
       eslint: 10.6.0(jiti@2.7.0)
       nanospinner: 1.2.2
       picocolors: 1.1.1
+
+  eslint-plugin-github-action@0.3.0(eslint@10.6.0):
+    dependencies:
+      '@eslint/core': 1.2.1
+      '@ntnyq/utils': 0.15.0
+      '@types/json-schema': 7.0.15
+      eslint: 10.6.0(jiti@2.7.0)
+      uncase: 0.2.0
+      yaml-eslint-parser: 2.0.0
 
   eslint-plugin-html@8.1.4:
     dependencies:
@@ -10977,6 +11021,10 @@ snapshots:
   uc.micro@2.1.0: {}
 
   unbash@4.0.2: {}
+
+  uncase@0.2.0:
+    dependencies:
+      change-case: 5.4.4
 
   unconfig-core@7.5.0:
     dependencies:
