@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - feat/scoped-package-publishing # Publishes the scoped package
 
 permissions:
   contents: write
@@ -101,7 +102,7 @@ jobs:
       - run: pnpm build
       - run: pnpm test:types:consumer
 
-  release-main:
+  release:
     name: Create release PR _OR_ Publish on merge
     needs: [knip, spellcheck, formatting, typecheck, eslint, test, build]
     if: github.event_name == 'push'
@@ -123,7 +124,9 @@ jobs:
         id: changesets
         uses: changesets/action@a45c4d594aa4e2c509dc14a9f2b3b67ba3780d0d # v1.9.0
         with:
-          publish: pnpm release
+          # Chooses the scoped vs. unscoped name by branch, without touching
+          # `package.json`; see `scripts/publish.ts` for why.
+          publish: node scripts/publish.ts
           commitMode: github-api
           title: 'chore: release v${{ env.NEW_VERSION }}'
           commit: 'chore: release v${{ env.NEW_VERSION }}'
