@@ -17,7 +17,7 @@ import {destr} from 'destr';
  * original string is returned unchanged, making this convenient when the input
  * may or may not be JSON.
  * @param value - The value to parse. Strings are parsed; anything else is returned as-is.
- * @returns The parsed value as `unknown`, or the original input when it cannot be parsed — assert or validate the shape at the call site.
+ * @returns The parsed value, typed as the `T` type argument (`unknown` by default; a purely type-level assertion), or the original input when it cannot be parsed — assert or validate the shape at the call site.
  * @example
  * // Parsing JSON
  * jsonParseSafe('{"a": 1, "b": [2, 3]}');
@@ -35,4 +35,5 @@ import {destr} from 'destr';
  * jsonParseSafe('NaN');
  * // NaN
  */
-export const jsonParseSafe = (value: unknown) => destr(value);
+// eslint-disable-next-line ts/no-unnecessary-type-parameters -- `T` is a deliberate output-only assertion, mirroring `destr`'s own signature.
+export const jsonParseSafe = <T = unknown>(value: unknown): T => destr<T>(value);
