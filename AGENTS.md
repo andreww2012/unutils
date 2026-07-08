@@ -29,7 +29,7 @@ All without zero dependencies because all external dependencies are bundled.
 
 Prefer running on the *all* changed files (not only source files!) unless not possible or instructed otherwise.
 
-- **Types**: `nr lint:types:go`
+- **Types**: `nr lint:types`
 - **ESLint**: `pnpm exec eslint list.ext1 of.ext2 changed.ext3 files.ext4`
 - **Prettier**: `pnpm exec prettier --write --log-level warn changed.ts files.js`
 - **Vitest**: `nr test:vitest:cov --coverage.reporter=text changed.spec.ts files.spec.js`
