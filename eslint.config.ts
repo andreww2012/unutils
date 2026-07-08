@@ -27,6 +27,9 @@ export default eslintConfig({
     fileProgress: true,
     import: {
       requireModuleExtensions: true,
+      overrides: {
+        'import/no-cycle': 0, // Replaced by knip
+      },
     },
     ts: {
       allowDefaultProject: ['*.config.*ts'],

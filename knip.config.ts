@@ -9,4 +9,5 @@ export default {
   ignore: ['test/published-dts/scenarios/**'],
   tags: ['-knipignore'],
   treatConfigHintsAsErrors: true,
+  include: ['cycles'],
 } satisfies KnipConfig;
