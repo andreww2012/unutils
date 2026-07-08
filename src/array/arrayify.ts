@@ -42,6 +42,8 @@
  */
 export function arrayify<T extends null | undefined>(value: T, shouldWrapNullish: true): [T];
 export function arrayify<T extends readonly unknown[]>(value: T, shouldWrapNullish: true): T;
+export function arrayify<T>(value: T | readonly T[], shouldWrapNullish: true): NonNullable<T>[];
+// eslint-disable-next-line ts/unified-signatures -- kept separate so the `T | readonly T[]` overload above normalizes homogeneous unions first, falling through to this permissive one for heterogeneous unions
 export function arrayify<T>(value: T, shouldWrapNullish: true): NonNullable<T>[];
 export function arrayify(value: null | undefined, shouldWrapNullish?: boolean): [];
 export function arrayify<T extends readonly unknown[]>(
@@ -49,6 +51,11 @@ export function arrayify<T extends readonly unknown[]>(
   shouldWrapNullish?: boolean,
 ): T;
 export function arrayify<T>(
+  value: T | readonly T[] | null | undefined,
+  shouldWrapNullish?: boolean,
+): NonNullable<T>[];
+export function arrayify<T>(
+  // eslint-disable-next-line ts/unified-signatures -- same as above
   value: T | null | undefined,
   shouldWrapNullish?: boolean,
 ): NonNullable<T>[];
