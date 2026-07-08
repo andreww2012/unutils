@@ -114,6 +114,7 @@ export type {NonEmptyObject} from './non-empty-object.ts';
 export type {NonEmptyString} from './non-empty-string.ts';
 export type {NonEmptyTuple} from './non-empty-tuple.ts';
 export type {NonNullableDeep} from './non-nullable-deep.ts';
+export type {Nullable} from './nullable.ts';
 export type {ObjectValues} from './object-values.ts';
 export type {OmitConditional} from './omit-conditional.ts';
 export type {OmitDeep} from './omit-deep.ts';

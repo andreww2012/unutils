@@ -78,3 +78,9 @@ A general-purpose grab-bag that overlaps heavily with `es-toolkit` and our exist
 | `unindent`                | ❌     | `string/dedent`                | Broken with interpolations (reads only `strings[0]`); superseded by the `dedent` package |
 | `uniq`                    | ❌     | `array/arrayUnique`            | Covered                                                                                  |
 | `uniqueBy`                | ❌     | `array/arrayUnique`            | Covered (comparator form)                                                                |
+
+## Types
+
+| Original type | Status | Our type group and name | Notes                                     |
+| ------------- | ------ | ----------------------- | ----------------------------------------- |
+| `Nullable`    | ✅     | `types/Nullable`        | Widens a type with `null` and `undefined` |
