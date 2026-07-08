@@ -211,6 +211,13 @@ Candidate libraries on the radar. These cover JSON *manipulation* axes (repair, 
 | `value/isObjectMatching`              | Consolidates `isMatch`/`isMatchWith`; deep partial match; optional customizer                                                                                           |
 | `value/typeOf`                        | Enhanced `typeof`: lowercase for primitives and `null`, the `Symbol.toStringTag` class tag for objects (`Array`, `Date`, …)                                             |
 
+### Custom types
+
+| Our type group and name | Notes                                                                                                                             |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `types/Falsy`           | Union of the literal-representable falsy values (`false`, `0`, `0n`, `''`, `null`, `undefined`); `NaN` excluded (no literal type) |
+| `types/Truthy`          | Complement of `Falsy`: removes the literal falsy members from a type (`Truthy<0 \| 1>` is `1`)                                    |
+
 ## Contributors
 
 <!-- eslint-disable markdown-preferences/padding-line-between-blocks, markdown/require-alt-text -->

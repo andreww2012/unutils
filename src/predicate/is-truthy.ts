@@ -1,3 +1,5 @@
+import type {Truthy} from '../types/truthy.ts';
+
 /**
  * Checks whether `value` is truthy and acts as a type guard that subtracts the
  * falsy members (`false`, `0`, `0n`, `''`, `null`, `undefined`) from its type.
@@ -21,6 +23,4 @@
  *   flag; // 1
  * }
  */
-export const isTruthy = <T>(
-  value: T,
-): value is Exclude<T, false | 0 | 0n | '' | null | undefined> => Boolean(value);
+export const isTruthy = <T>(value: T): value is Truthy<T> => Boolean(value);
