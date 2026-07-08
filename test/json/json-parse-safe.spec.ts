@@ -26,7 +26,7 @@ describe('json/jsonParseSafe', () => {
   it('drops prototype-polluting keys instead of throwing', () => {
     const warn = vi.spyOn(console, 'warn').mockReturnValue(undefined);
 
-    const parsed = jsonParseSafe('{"__proto__": {"polluted": true}}') as Record<string, unknown>;
+    const parsed = jsonParseSafe<Record<string, unknown>>('{"__proto__": {"polluted": true}}');
 
     expect(parsed.polluted).toBeUndefined();
     expect(({} as Record<string, unknown>).polluted).toBeUndefined();
