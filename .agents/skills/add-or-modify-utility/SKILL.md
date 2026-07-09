@@ -17,6 +17,7 @@ Utility should conform to one of the following forms:
       Example: `src/array/array-combinations.ts`.
    2. *Re-export with documentation improvements or very minor improvements of other kind(s)*
       If the original documentation does not satisfy the criteria, it should be rewritten to satisfy them.
+      IMPORTANT: such rewrites must not be considered custom implementation (form 3).
 
       Example: `src/types/nullable.ts`.
 2. *Enhanced version of an external package's utility(-ies).*
@@ -26,7 +27,7 @@ Utility should conform to one of the following forms:
 3. *Fully custom implementation*, which still might depend on other utilities.
 
 The latter two forms require the utility to have a comprehensive JSDoc documentation describing its purpose and including parameter and return value descriptions, as well as a block of examples.
-Any documentation, but it JSDoc, `*.md` files, or in any other form, must never include implementation details, such as used package names (the list if not exhaustive), unless it is absolutely necessary.
+Any documentation, but it JSDoc, `*.md` files, or in any other form, must never include implementation details, such as used package names (the list if not exhaustive), unless it is necessary.
 
 ## Adding utilities
 
@@ -61,6 +62,7 @@ Names target a reader who has never used the source library: we rename whenever 
 
 Then pick the right group for the utility.
 If there isn't a group that fits, create a new one.
+The new group must be added to the "List of entrypoints" in `README.md`.
 All groups' symbols should be re-exported in `src/index.ts`, unless the group targets specific JS runtime environments like browsers or Node.js.
 All groups automatically get their own entrypoint (`/<group-name>`) which should be declared in `package.json`'s `exports` field.
 

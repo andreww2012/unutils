@@ -1,4 +1,4 @@
-<!-- cspell:ignore behaviour -->
+<!-- cspell:ignore behaviour organisation -->
 
 # `unutils`
 
@@ -13,17 +13,21 @@ All without zero dependencies because all external dependencies are bundled.
 - Use `const` instead of `let` whenever possible.
 - Prefer arrow functions whenever possible.
 - Avoid common shorthands like `str`, `arr`, `cls`, `brk`, `err`, etc. Use full words. Exceptions: `dict`, `ctx`, `acc`.
-- Don't add any comments unless they explain the non-obvious "why" behind the code. Avoid verbosity but not sacrifice clarity.
+- Don't add any comments unless they explain the non-obvious "why" behind the code. Avoid verbosity as much as possible but not sacrifice clarity.
 - Never omit curly braces around blocks (like `if`, `else`, etc.)
-- Let the type system infer types whenever possible, i.e. avoid specifying types as much as possible.
+- Let the type system infer types whenever possible, i.e. avoid specifying types as much as possible. Most important concrete cases:
+  - Do not specify explicit return types for functions if it's the same as the return type;
+  - Do not have both explicit return type and the unsafe case of the return value in the same function.
 - Do not `export` symbols not used outside the current file and not provided publicly.
-- Hoist symbols and literals (like regexes, functions, constants) as much as possible.
+- Hoist symbols and literals (like regexes, functions, constants) as high as possible.
+- Sort export symbols alphabetically, unless is makes sense to do something else (likely group exports, but they must be exported within each group too).
+- If you encounter an ESLint error that has multiple ways of fixing, always weigh all options INCLUDING disabling the rule for this line (or, much more rarely, for the entire file) before fixing.
 
 ### Misc
 
 - The project targets modern JavaScript execution environments (Node.js 22+ and "Baseline Widely Available" web features).
 - All FS names are written in `kebab-case`.
-- Avoid British variants of words like behaviour.
+- Avoid British variants of words like *behaviour* or *organisation*.
 
 ## Testing tools
 
