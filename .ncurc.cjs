@@ -11,6 +11,7 @@ const BUNDLED_PACKAGES = [
   'devalue',
   'es-toolkit',
   'lossless-json',
+  'neotraverse',
   'remeda',
   'safe-stable-stringify',
   'string-ts',

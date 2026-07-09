@@ -58,6 +58,7 @@ See individual symbols' JSDoc for detailed documentation.
 | `server`    | Node-only helpers (filesystem, process, terminal)      | ❌                 |
 | `set`       | `Set` querying and transformation                      | ✅                 |
 | `string`    | String casing, splitting and affixing                  | ✅                 |
+| `traverse`  | Recursive visitor traversal of nested values           | ✅                 |
 | `ts`        | TypeScript runtime and compile-time assertions         | ✅                 |
 | `types`     | Type-only utility types                                | ✅                 |
 | `value`     | Cloning, equality and type inspection for any value    | ✅                 |
@@ -81,6 +82,7 @@ utility it provides and how it maps into `unutils` (renames, consolidations, and
 | [`destr`](docs/packages/destr.md)                                 | Forgiving and strict JSON parsing (`jsonParseSafe` / `jsonParse`)                                                                              |
 | [`devalue`](docs/packages/devalue.md)                             | Serialize/revive `Date`/`Map`/`Set`/`BigInt` and circular refs (non-JSON)                                                                      |
 | [`lossless-json`](docs/packages/lossless-json.md)                 | Precision-preserving JSON parse/stringify (`bigint` and decimals)                                                                              |
+| [`neotraverse`](docs/packages/neotraverse.md)                     | Recursive visitor traversal of nested values — the `traverse` group / `unutils/traverse`                                                       |
 | [`safe-stable-stringify`](docs/packages/safe-stable-stringify.md) | Deterministic, circular-safe `JSON.stringify`                                                                                                  |
 | [`string-ts`](docs/packages/string-ts.md)                         | Type-level-aware string helpers — literal-preserving case conversion, native-method wrappers and object-key transforms                         |
 | [`ts-extras`](docs/packages/ts-extras.md)                         | Thin, strongly-typed wrappers over native methods                                                                                              |

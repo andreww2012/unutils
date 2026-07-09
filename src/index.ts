@@ -12,6 +12,7 @@ export * from './regex/index.ts';
 export * from './runtime/index.ts';
 export * from './set/index.ts';
 export * from './string/index.ts';
+export * from './traverse/index.ts';
 export * from './ts/index.ts';
 export type * from './types/index.ts';
 export * from './value/index.ts';

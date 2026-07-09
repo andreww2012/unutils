@@ -307,6 +307,9 @@ importers:
       lossless-json:
         specifier: 4.3.0
         version: 4.3.0
+      neotraverse:
+        specifier: 1.0.1
+        version: 1.0.1
       npm-check-updates:
         specifier: 22.2.9
         version: 22.2.9
