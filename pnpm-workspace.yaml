@@ -1,35 +1,14 @@
 saveExact: true
 
 minimumReleaseAge: 960 # 16 hours in minutes
-minimumReleaseAgeExclude: # []
-  - typescript@7.0.2
-  - '@typescript/typescript-aix-ppc64@7.0.2'
-  - '@typescript/typescript-darwin-arm64@7.0.2'
-  - '@typescript/typescript-darwin-x64@7.0.2'
-  - '@typescript/typescript-freebsd-arm64@7.0.2'
-  - '@typescript/typescript-freebsd-x64@7.0.2'
-  - '@typescript/typescript-linux-arm@7.0.2'
-  - '@typescript/typescript-linux-arm64@7.0.2'
-  - '@typescript/typescript-linux-loong64@7.0.2'
-  - '@typescript/typescript-linux-mips64el@7.0.2'
-  - '@typescript/typescript-linux-ppc64@7.0.2'
-  - '@typescript/typescript-linux-riscv64@7.0.2'
-  - '@typescript/typescript-linux-s390x@7.0.2'
-  - '@typescript/typescript-linux-x64@7.0.2'
-  - '@typescript/typescript-netbsd-arm64@7.0.2'
-  - '@typescript/typescript-netbsd-x64@7.0.2'
-  - '@typescript/typescript-openbsd-arm64@7.0.2'
-  - '@typescript/typescript-openbsd-x64@7.0.2'
-  - '@typescript/typescript-sunos-x64@7.0.2'
-  - '@typescript/typescript-win32-arm64@7.0.2'
-  - '@typescript/typescript-win32-x64@7.0.2'
+minimumReleaseAgeExclude: []
 
 trustPolicy: no-downgrade
 trustPolicyIgnoreAfter: 43200 # 30 days in minutes
 trustPolicyExclude: []
 
 allowBuilds:
-  lefthook@2.1.9: true
+  lefthook@2.1.10: true
   unrs-resolver@1.12.2: false
 
 dedupePeers: true
@@ -38,7 +17,6 @@ strictPeerDependencies: false
 overrides:
   # The `typescript-7` alias pulls the real `typescript@7` that does not expose the API yet
   eslint-plugin-sonarjs>typescript: 'npm:@typescript/typescript6@6.0.2'
-  '@arethetypeswrong/core@0.18.2>fflate': 0.8.2 # TODO https://github.com/arethetypeswrong/arethetypeswrong.github.io/issues/258 cspell:disable-line
   # GHSA-fx2h-pf6j-xcff cspell:disable-line
   # Can't use range like `^8.0.16` as pnpm won't re-resolve the already-locked vite for a range replacement, only for an exact one
   vite@>=8.0.0 <8.0.16: 8.0.16
