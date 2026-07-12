@@ -23,6 +23,14 @@ const stringifyWithSpaceAndIntensity = stringifyAsync as unknown as (
  * @param space - Optional indentation (number of spaces or a string), as in `JSON.stringify`.
  * @param intensity - Work done per iteration before yielding, `1`–`32` (default `1`); higher trades responsiveness for throughput.
  * @returns A promise resolving to the JSON string.
+ * @example
+ * // Serialize a large payload without blocking the event loop
+ * await jsonStringifyAsync({a: 1, b: [2, 3]});
+ * // '{"a":1,"b":[2,3]}'
+ * @example
+ * // Pretty-print with 2-space indentation
+ * await jsonStringifyAsync({a: 1}, null, 2);
+ * // '{\n  "a": 1\n}'
  */
 export const jsonStringifyAsync = (
   value: object,

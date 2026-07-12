@@ -20,6 +20,13 @@ const parse = parseAsync as unknown as {
  * @param reviver - Optional `JSON.parse` reviver function.
  * @param intensity - Work done per iteration before yielding, `1`–`32` (default `1`); higher trades responsiveness for throughput.
  * @returns A promise resolving to the parsed value as `unknown` — assert or validate the shape at the call site.
+ * @example
+ * // Parse a large payload without blocking the event loop
+ * await jsonParseAsync('{"a": 1, "b": [2, 3]}');
+ * // {a: 1, b: [2, 3]}
+ * @example
+ * // A higher intensity does more work per tick (less yielding)
+ * await jsonParseAsync(hugeJsonString, undefined, 8);
  */
 export const jsonParseAsync = (
   text: string,
