@@ -2,6 +2,7 @@ import {execFileSync} from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import {jsonParse} from '../src/json/json-parse.ts';
+import {regexEscape} from '../src/regex/regex-escape.ts';
 import {ensurePrefix} from '../src/string/ensure-prefix.ts';
 
 const MAIN_BRANCH = 'main';
@@ -9,6 +10,7 @@ const SCOPED_PUBLISH_BRANCH = 'feat/scoped-package-publishing';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 const PACKAGE_JSON_PATH = path.join(ROOT, 'package.json');
+const README_PATH = path.join(ROOT, 'README.md');
 
 const getCurrentBranch = () => {
   const {GITHUB_REF_NAME: githubRefNameEnv} = process.env;
@@ -44,15 +46,28 @@ const run = () => {
 
   const packageJsonText = fs.readFileSync(PACKAGE_JSON_PATH, 'utf8');
   const packageJson = jsonParse<{name: string; author: string}>(packageJsonText);
+  const {author: packageAuthor, name: packageUnscopedName} = packageJson;
+  const scopedName = `${ensurePrefix(packageAuthor, '@')}/${packageUnscopedName}`;
 
-  packageJson.name = `${ensurePrefix(packageJson.author, '@')}/${packageJson.name}`;
-
+  packageJson.name = scopedName;
   fs.writeFileSync(PACKAGE_JSON_PATH, `${JSON.stringify(packageJson, null, 2)}\n`);
+
+  const readmeText = fs.readFileSync(README_PATH, 'utf8');
+  // The lookbehind spares `<author>/<name>` occurrences, i.e. GitHub repository URLs.
+  const unscopedNameRegex = new RegExp(
+    String.raw`(?<!${regexEscape(packageAuthor)}/)\b${regexEscape(packageUnscopedName)}\b`,
+    'g',
+  );
+  fs.writeFileSync(
+    README_PATH,
+    readmeText.replaceAll(unscopedNameRegex, () => scopedName),
+  );
 
   try {
     publish();
   } finally {
     fs.writeFileSync(PACKAGE_JSON_PATH, packageJsonText);
+    fs.writeFileSync(README_PATH, readmeText);
   }
 };
 
