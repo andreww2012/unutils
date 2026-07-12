@@ -162,7 +162,7 @@
     "@vitest/ui": "4.1.10",
     "actions-up": "1.16.0",
     "all-contributors-cli": "6.27.0-rc.1",
-    "arkregex": "0.0.6",
+    "arkregex": "0.0.8",
     "cleye": "2.6.0",
     "cross-env": "10.1.0",
     "cspell": "10.0.1",

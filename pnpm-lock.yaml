@@ -209,7 +209,7 @@ overrides:
   vite@>=8.0.0 <8.0.16: 8.0.16
 
 patchedDependencies:
-  arkregex@0.0.6: 3f67bd7e43eee25c719bf062c781074cdc10fd2636c0bfe0e1d332a7d32f7dcd
+  arkregex@0.0.8: 3f67bd7e43eee25c719bf062c781074cdc10fd2636c0bfe0e1d332a7d32f7dcd
   remeda: e9e98c19bf4c5844450bf78de4493bf242de2fdb7c7ecf7ee2313945578d9b68
 
 importers:
@@ -262,8 +262,8 @@ importers:
         specifier: 6.27.0-rc.1
         version: 6.27.0-rc.1(@types/node@22.19.17)
       arkregex:
-        specifier: 0.0.6
-        version: 0.0.6(patch_hash=3f67bd7e43eee25c719bf062c781074cdc10fd2636c0bfe0e1d332a7d32f7dcd)
+        specifier: 0.0.8
+        version: 0.0.8(patch_hash=3f67bd7e43eee25c719bf062c781074cdc10fd2636c0bfe0e1d332a7d32f7dcd)
       cleye:
         specifier: 2.6.0
         version: 2.6.0
@@ -375,8 +375,8 @@ packages:
     resolution: {integrity: sha512-9ytjzGwxjm9Uz7I9avfbt5vlQt6uk9uRRESzJjqrznl6WKvI6dwYTo+vJ3U02Wrq/mR3iql/PzhvHhKdJIAjDQ==}
     engines: {node: '>=20'}
 
-  '@ark/util@0.56.0':
-    resolution: {integrity: sha512-BghfRC8b9pNs3vBoDJhcta0/c1J1rsoS1+HgVUreMFPdhz/CRAKReAu57YEllNaSy98rWAdY1gE+gFup7OXpgA==}
+  '@ark/util@0.56.2':
+    resolution: {integrity: sha512-9kU2sUE38FZEGG7l3hamYMBieLYEJh2L1mrYD2eXpT+78EnQSV1bhjxJhnxGBMSTbtwpBSDNSK+K60WvaI/DTQ==}
 
   '@babel/code-frame@7.29.7':
     resolution: {integrity: sha512-Aup7aUOfpbAUg2ROOJN6Iw5f9DMBlzu0mIkm/malLQFN/YQgO48wCj0Kxa3sEHJvPVFg7siR+qRInwXd2qhQKw==}
@@ -2516,8 +2516,8 @@ packages:
     resolution: {integrity: sha512-COROpnaoap1E2F000S62r6A60uHZnmlvomhfyT2DlTcrY1OrBKn2UhH7qn5wTC9zMvD0AY7csdPSNwKP+7WiQw==}
     engines: {node: '>= 0.4'}
 
-  arkregex@0.0.6:
-    resolution: {integrity: sha512-9mvuMKQuibfWhBrsNYhsKhNb6k9oEHoAJ/FvDiqe8h+E9Siwe0/cro1WVOGgpajXQ9ZHd24yCOf2k35Q/QqUQw==}
+  arkregex@0.0.8:
+    resolution: {integrity: sha512-PJcx6G1kQTgLKPUbeYlYecDRaKq15AMSGVajlKFYWlPeJRQL+j3dKE6tyMs40HZ99djS1l9Vhl3ezAHy9JBIqQ==}
 
   array-timsort@1.0.3:
     resolution: {integrity: sha512-/+3GRL7dDAGEfM6TseQk/U+mi18TU2Ms9I3UlLdUMhz2hbvGNTKdj9xniwXfUqgYhHxRx0+8UnKkvlNwVU+cWQ==}
@@ -5890,7 +5890,7 @@ snapshots:
       typescript: 5.6.1-rc
       validate-npm-package-name: 5.0.1
 
-  '@ark/util@0.56.0': {}
+  '@ark/util@0.56.2': {}
 
   '@babel/code-frame@7.29.7':
     dependencies:
@@ -7932,9 +7932,9 @@ snapshots:
 
   aria-query@5.3.2: {}
 
-  arkregex@0.0.6(patch_hash=3f67bd7e43eee25c719bf062c781074cdc10fd2636c0bfe0e1d332a7d32f7dcd):
+  arkregex@0.0.8(patch_hash=3f67bd7e43eee25c719bf062c781074cdc10fd2636c0bfe0e1d332a7d32f7dcd):
     dependencies:
-      '@ark/util': 0.56.0
+      '@ark/util': 0.56.2
 
   array-timsort@1.0.3: {}
 

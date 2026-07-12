@@ -26,5 +26,5 @@ peerDependencyRules:
     eslint-config-un@1.0.0-beta.11>@e18e/eslint-plugin: '^0.4.1 || ^0.5.0'
 
 patchedDependencies:
-  arkregex@0.0.6: patches/arkregex@0.0.6.patch
+  arkregex@0.0.8: patches/arkregex@0.0.8.patch
   remeda: patches/remeda.patch
