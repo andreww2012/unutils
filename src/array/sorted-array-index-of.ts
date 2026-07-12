@@ -5,9 +5,8 @@ import {sortedIndexOf as sortedIndexOfFirst, sortedLastIndexOf} from 'es-toolkit
  * binary search, returning `-1` when it is not present. By default the *first*
  * matching index is returned; pass `rightmost: true` to get the *last* one.
  *
- * Consolidates `sortedIndexOf`/`sortedLastIndexOf` from `es-toolkit/compat`
- * behind a single options argument (the underlying binary search is theirs).
- * Unlike {@link sortedArrayInsertionIndex}, this searches for an existing value
+ * Consolidates the first-match and last-match variants behind a single options
+ * argument. Unlike {@link sortedArrayInsertionIndex}, this searches for an existing value
  * rather than an insertion point, so it only accepts directly comparable
  * elements.
  * @param sortedArray - The already-sorted array to search. Not mutated.

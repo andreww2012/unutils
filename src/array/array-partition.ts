@@ -15,9 +15,8 @@ type ArrayPredicate<T> = (value: T, index: number, array: readonly T[]) => boole
  * group collects the elements that matched none. The result therefore has one
  * more group than the number of predicates.
  *
- * Delegates to `@antfu/utils`' variadic `partition`; the type-guard narrowing
- * and the unbounded predicate count are added on top via the signatures below
- * (`@antfu/utils` types it as `any`-based, fixed-arity overloads).
+ * The type-guard narrowing and the unbounded predicate count are added on top
+ * via the signatures below.
  * @param array - The array to partition. Not mutated.
  * @param predicate - A predicate `(value, index, array) => boolean`. Pass
  * further predicates as additional arguments to switch to an n-way partition.

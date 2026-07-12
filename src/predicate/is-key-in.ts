@@ -6,8 +6,7 @@ import {keyIn} from 'ts-extras';
  * those that actually exist in the object. This is useful for validating a
  * union of candidate keys: on a positive result, the key is narrowed to the
  * subset present in the object. The argument order mirrors the native
- * `key in object` expression. A thin, argument-reordered wrapper around
- * `ts-extras`' `keyIn`, which also guards against prototype-pollution keys
+ * `key in object` expression. It also guards against prototype-pollution keys
  * (`__proto__`, `constructor`).
  *
  * To narrow the **object** instead of the key, use {@link isIn}.

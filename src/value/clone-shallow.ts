@@ -14,10 +14,9 @@ type CloneShallowCustomizer<T> = (
  * and the common built-in types (`Date`, `RegExp`, `Map`, `Set`, etc.).
  *
  * When the second argument is omitted, the value is cloned with the default
- * strategy (delegates to `clone` from `es-toolkit`). When a `cloneValue`
- * function is provided, it is invoked for every visited value and may return a
- * replacement — returning `undefined` falls back to the default strategy
- * (delegates to `cloneWith`).
+ * strategy. When a `cloneValue` function is provided, it is invoked for every
+ * visited value and may return a replacement — returning `undefined` falls back
+ * to the default strategy.
  * @param value - The value to clone. Not mutated.
  * @param cloneValue - Optional customizer invoked as
  * `(value, key, object, stack)` for each visited value.

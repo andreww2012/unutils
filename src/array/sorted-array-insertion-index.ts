@@ -10,9 +10,8 @@ import {
  * `sortedArray` to keep it sorted, using a binary search. The return value is
  * always in the range `0..sortedArray.length`.
  *
- * Consolidates the `sortedIndex`/`sortedIndexBy`/`sortedLastIndex`/
- * `sortedLastIndexBy` family from `es-toolkit/compat` behind a single options
- * argument (the underlying binary search is theirs):
+ * Consolidates the leftmost/rightmost and compare-by-key variants behind a
+ * single options argument:
  *
  * - Pass an `iteratee` to compare by a derived numeric/string key instead of
  *   the values themselves.

@@ -3,7 +3,7 @@ import {destr} from 'destr';
 /**
  * Parses a JSON string into a value, throwing on anything malformed — the
  * stricter, fail-fast counterpart of {@link jsonParseSafe}. A faster, safer
- * drop-in for `JSON.parse` (delegates to `destr` in `strict` mode).
+ * drop-in for `JSON.parse`.
  *
  * Beyond plain `JSON.parse`:
  * - Non-string input is returned untouched (e.g. an already-parsed object).
@@ -33,7 +33,7 @@ import {destr} from 'destr';
  * @example
  * // Malformed input throws
  * jsonParse('{a: 1}');
- * // SyntaxError: [destr] Invalid JSON
+ * // throws a SyntaxError
  */
-// eslint-disable-next-line ts/no-unnecessary-type-parameters -- `T` is a deliberate output-only assertion, mirroring `destr`'s own signature.
+// eslint-disable-next-line ts/no-unnecessary-type-parameters -- `T` is a deliberate output-only assertion, mirroring the underlying parser's own signature.
 export const jsonParse = <T = unknown>(value: unknown): T => destr<T>(value, {strict: true});

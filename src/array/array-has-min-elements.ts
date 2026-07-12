@@ -7,9 +7,6 @@ import type {IsNumericLiteral} from 'type-fest';
  * one with that many guaranteed (required) leading elements — so indexing the
  * first `minimum` positions afterwards is type-safe. A non-literal `minimum`
  * simply returns a `boolean`.
- *
- * The runtime is delegated to remeda's `hasAtLeast`; `ArrayRequiredPrefix` is
- * its narrowing type, re-exported via `patches/remeda.patch`.
  * @param array - The array (or tuple) to check. Not mutated.
  * @param minimum - The minimum number of elements. Pass a literal for the type-guard narrowing.
  * @returns `true` when `array.length >= minimum`; narrows the array type when `minimum` is a literal.

@@ -7,7 +7,7 @@ import {has, hasIn} from 'es-toolkit/compat';
  *
  * By default only the object's own (and nested own) properties are considered.
  * Pass `{inherited: true}` to also count properties found on the prototype
- * chain (delegates to `hasIn` from `es-toolkit/compat` instead of `has`).
+ * chain.
  * @param object - The object to query.
  * @param path - The path to check, as a key, a path string, or an array of segments.
  * @param options - Optional behavior flags.

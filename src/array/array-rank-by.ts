@@ -7,8 +7,7 @@ import {type OrderRule, rankBy} from 'remeda';
  * `item` itself does not need to be present in `array`.
  *
  * Each rule is either a projection `(item) => comparable` (ascending) or a
- * `[projection, 'asc' | 'desc']` pair; later rules break ties. The runtime is
- * delegated to remeda's `rankBy`.
+ * `[projection, 'asc' | 'desc']` pair; later rules break ties.
  * @param array - The array to rank against. Not mutated.
  * @param item - The item whose rank is computed (need not be in `array`).
  * @param rules - One or more ordering rules; later rules break ties of earlier ones.

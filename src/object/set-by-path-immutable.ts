@@ -8,8 +8,7 @@ import {type Paths, type ValueAtPath, setPath} from 'remeda';
  * a compile error), and `value` must match the type at that path.
  *
  * Because the path must already exist, this does not build missing containers —
- * use the mutable `setByPath` for dynamic, build-from-scratch writes. The
- * runtime is delegated to `remeda`'s `setPath`.
+ * use the mutable `setByPath` for dynamic, build-from-scratch writes.
  * @param object - The source object. Not mutated.
  * @param path - An array of keys identifying an existing location, e.g. `['a', 'b']`.
  * @param value - The replacement value; must match the type currently at `path`.

@@ -5,7 +5,7 @@ import {isBuffer as isBufferFromEsToolkit} from 'es-toolkit/predicate';
  * type guard, narrowing the value to `Buffer`.
  *
  * Returns `false` outside Node-like environments where `Buffer` is not
- * available (delegates to `isBuffer` from `es-toolkit`).
+ * available.
  * @param value - The value to check.
  * @returns `true` if `value` is a `Buffer`, otherwise `false`.
  * @example

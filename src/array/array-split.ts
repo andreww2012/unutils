@@ -10,15 +10,13 @@ type SplitAt<T extends readonly unknown[], Index extends number> = number extend
  * index, or determined by a predicate matching the first element that should
  * begin the second part.
  *
- * Consolidates remeda's `splitAt`/`splitWhen` (which back the runtime) behind a
- * single second argument — pass a predicate to split at the first match instead
- * of a fixed index.
+ * A single second argument selects the split mode — pass a predicate to split at
+ * the first match instead of a fixed index.
  *
- * Unlike remeda's `splitAt` (which always returns `[T[], T[]]`), the index form
- * is **tuple-preserving**: splitting a fixed-length tuple at a literal index
- * yields the exact sub-tuples (via `type-fest`'s `ArraySlice`, so a negative
- * index counts from the end, just like `Array#slice`). A non-literal index or a
- * predicate falls back to `[T[number][], T[number][]]`.
+ * The index form is **tuple-preserving**: splitting a fixed-length tuple at a
+ * literal index yields the exact sub-tuples (a negative index counts from the
+ * end, just like `Array#slice`), rather than the widened `[T[], T[]]`. A
+ * non-literal index or a predicate falls back to `[T[number][], T[number][]]`.
  * @param array - The array (or tuple) to split. Not mutated.
  * @param index - The index at which to split (negative counts from the end).
  * Alternatively, pass a predicate `(value, index, array) => boolean` to split at

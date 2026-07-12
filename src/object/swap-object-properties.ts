@@ -8,8 +8,7 @@ import {type SwappedProps, swapProps} from 'remeda';
  * `{...object, [key1]: object[key2], [key2]: object[key1]}` cannot express (it
  * widens both to a union).
  *
- * This is the object counterpart of `arraySwapIndices`. The runtime is delegated
- * to `remeda`'s `swapProps`.
+ * This is the object counterpart of `arraySwapIndexes`.
  * @param object - The source object. Not mutated.
  * @param key1 - The first property key.
  * @param key2 - The second property key.

@@ -2,7 +2,7 @@ import {destr} from 'destr';
 
 /**
  * Parses a JSON string into a value, never throwing — the forgiving
- * counterpart of {@link jsonParse}. Delegates to `destr`.
+ * counterpart of {@link jsonParse}.
  *
  * Beyond plain `JSON.parse`:
  * - Non-string input is returned untouched (e.g. an already-parsed object).
@@ -35,5 +35,5 @@ import {destr} from 'destr';
  * jsonParseSafe('NaN');
  * // NaN
  */
-// eslint-disable-next-line ts/no-unnecessary-type-parameters -- `T` is a deliberate output-only assertion, mirroring `destr`'s own signature.
+// eslint-disable-next-line ts/no-unnecessary-type-parameters -- `T` is a deliberate output-only assertion, mirroring the underlying parser's own signature.
 export const jsonParseSafe = <T = unknown>(value: unknown): T => destr<T>(value);

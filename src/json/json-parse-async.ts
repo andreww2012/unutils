@@ -14,8 +14,8 @@ const parse = parseAsync as unknown as {
 
 /**
  * Asynchronous, non-blocking `JSON.parse`: parses `text` while periodically
- * yielding to the event loop, so large inputs don't starve it. Promisified,
- * typed wrapper around `yieldable-json`.
+ * yielding to the event loop, so large inputs don't starve it. Promisified and
+ * typed.
  * @param text - The JSON string to parse.
  * @param reviver - Optional `JSON.parse` reviver function.
  * @param intensity - Work done per iteration before yielding, `1`–`32` (default `1`); higher trades responsiveness for throughput.

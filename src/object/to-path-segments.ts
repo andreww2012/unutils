@@ -6,8 +6,7 @@ import {type StringToPath, stringToPath} from 'remeda';
  * with numeric bracket/dot segments narrowed to `number`; an array of segments
  * is returned as a shallow copy unchanged.
  *
- * The typed string parse is delegated to `remeda`'s `stringToPath`. (Note:
- * numeric segments come back as `number`s — e.g. `[0]` → `0`, not `'0'`.)
+ * Note: numeric segments come back as `number`s — e.g. `[0]` → `0`, not `'0'`.
  * @param path - A path string (`'a.b[0].c'`) or an array of segments.
  * @returns The array of path segments — a typed tuple for a literal string input.
  * @example

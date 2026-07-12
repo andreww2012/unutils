@@ -4,9 +4,8 @@ import {objectHasIn} from 'ts-extras';
  * Checks whether `key` exists in `object` — including inherited properties, as
  * the `in` operator does — and acts as a type guard that narrows the **object**
  * to include that property, so it can be accessed safely afterwards. The
- * argument order mirrors the native `key in object` expression. A thin,
- * argument-reordered wrapper around `ts-extras`' `objectHasIn`, which also
- * guards against prototype-pollution keys (`__proto__`, `constructor`).
+ * argument order mirrors the native `key in object` expression. It also guards
+ * against prototype-pollution keys (`__proto__`, `constructor`).
  *
  * To narrow the **key** instead of the object (e.g. when validating a union of
  * candidate keys), use {@link isKeyIn}.

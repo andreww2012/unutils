@@ -13,7 +13,7 @@ interface MergeDeepOptions<T, S> {
    * Custom resolver invoked for every property as
    * `(targetValue, sourceValue, key, target, source)`. Returning a value uses
    * it for that property; returning `undefined` falls back to the default deep
-   * merge (delegates to `mergeWith`).
+   * merge.
    */
   mergeValues?: MergeValues<T, S>;
 
@@ -29,11 +29,9 @@ interface MergeDeepOptions<T, S> {
  * and arrays are merged deeply; a `source` property of `undefined` never
  * overwrites a defined `target` property.
  *
- * By default the `target` is **mutated** in place (delegates to `merge` from
- * `es-toolkit`). Pass `{copy: true}` to leave the `target` untouched and get a
- * new object back (delegates to `toMerged`). Pass `{mergeValues}` to control
- * how individual properties are combined (delegates to `mergeWith`); the two
- * options compose.
+ * By default the `target` is **mutated** in place. Pass `{copy: true}` to leave
+ * the `target` untouched and get a new object back. Pass `{mergeValues}` to
+ * control how individual properties are combined; the two options compose.
  * @param target - The object merged into. Mutated unless `{copy: true}` is set.
  * @param source - The object whose properties are merged into `target`.
  * @param options - Optional behavior flags.

@@ -7,7 +7,7 @@ import {map} from 'remeda';
  * length (rather than a widened `U[]`). Regular arrays still map to `U[]`.
  *
  * This is the one thing native `array.map` cannot express at the type level,
- * and the only reason this util exists — the runtime is delegated to `remeda`.
+ * and the only reason this util exists.
  * @param array - The array (or tuple) to map. Not mutated.
  * @param callback - Produces each output element. Receives the value, its index, and the source array.
  * @returns A new array of mapped elements, tuple-preserving when the input is a tuple.

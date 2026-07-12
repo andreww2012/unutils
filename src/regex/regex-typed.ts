@@ -7,7 +7,7 @@ type RegexFlags = NonNullable<Parameters<typeof regex>[1]>;
 /* eslint-disable ts/naming-convention, ts/no-namespace, ts/no-redeclare, import/export -- value+namespace declaration merge attaching arkregex's lowercase type-level helpers to `regexTyped` */
 
 /**
- * A typed drop-in for `new RegExp()` (via `arkregex`). At runtime it is exactly
+ * A typed drop-in for `new RegExp()`. At runtime it is exactly
  * `new RegExp(source, flags)`; all of its value is in the types — the source is
  * parsed at the type level to infer the matched string, positional captures and
  * named captures, and `.test()` narrows its argument to the inferred pattern.

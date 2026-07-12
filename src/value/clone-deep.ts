@@ -13,10 +13,9 @@ type CloneDeepCustomizer<T> = (
  * `DataView`, `Error`, `File`, `Blob`, and circular references.
  *
  * When the second argument is omitted, the value is cloned with the default
- * strategy (delegates to `cloneDeep` from `es-toolkit`). When a `cloneValue`
- * function is provided, it is invoked for every visited value and may return
- * a replacement — returning `undefined` falls back to the default strategy
- * (delegates to `cloneDeepWith`).
+ * strategy. When a `cloneValue` function is provided, it is invoked for every
+ * visited value and may return a replacement — returning `undefined` falls back
+ * to the default strategy.
  * @param value - The value to clone. Not mutated.
  * @param cloneValue - Optional customizer invoked as
  * `(value, key, root, stack)` for each visited value.

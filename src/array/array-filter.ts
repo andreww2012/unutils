@@ -11,8 +11,7 @@ import {type FilteredArray, type NonRefinedFilteredArray, filter} from 'remeda';
  *
  * Regular arrays still narrow to the guarded element type (e.g. `number[]`), and
  * a non-narrowing boolean predicate yields the element array type. This
- * tuple-level refinement is the reason this util exists; the runtime is
- * delegated to `remeda`'s `filter`.
+ * tuple-level refinement is the reason this util exists.
  * @param array - The array (or tuple) to filter. Not mutated.
  * @param predicate - Keeps each element it returns `true` for; a type guard refines the result type.
  * @returns A new array (or refined tuple) of the elements that passed.

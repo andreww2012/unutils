@@ -7,10 +7,9 @@ import {type OrderRule, firstBy} from 'remeda';
  * rules act as tie-breakers, applied left to right.
  *
  * Each rule is either a projection `(item) => comparable` (ascending), or a
- * `[projection, 'asc' | 'desc']` pair to choose the direction. The runtime is
- * delegated to remeda's `firstBy`; the return type is the element type, plus
- * `undefined` only when the input could be empty (a non-empty tuple never
- * yields `undefined`).
+ * `[projection, 'asc' | 'desc']` pair to choose the direction. The return type
+ * is the element type, plus `undefined` only when the input could be empty (a
+ * non-empty tuple never yields `undefined`).
  * @param array - The array (or tuple) to search. Not mutated.
  * @param rules - One or more ordering rules; later rules break ties of earlier ones.
  * @returns The first element by the given ordering, or `undefined` when the array is empty.

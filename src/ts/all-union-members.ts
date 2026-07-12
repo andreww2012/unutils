@@ -9,7 +9,7 @@ type Duplicates<Members extends readonly unknown[], Seen = never> = Members exte
   : never;
 
 /**
- * An unsatisfiable error-branch value: `type-fest`'s `Tagged` brands `Reason`
+ * An unsatisfiable error-branch value: it brands `Reason`
  * with a module-private `unique symbol`, so a caller cannot hand-craft a value
  * of this type to slip past the check (short of an explicit cast, which defeats
  * any type anyway). `Reason` carries the offending members so they still show up

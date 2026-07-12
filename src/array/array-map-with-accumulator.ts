@@ -6,8 +6,6 @@ import {mapWithFeedback} from 'remeda';
  * input element (a prefix scan). Unlike a `reduce`, which yields only the final
  * accumulator, this returns every intermediate state, so the result has the same
  * length as the input (and is tuple-preserving for tuples).
- *
- * The runtime is delegated to remeda's `mapWithFeedback`.
  * @param array - The array (or tuple) to scan. Not mutated.
  * @param callback - Computes the next accumulator from the current one and the element. Receives the accumulator, the value, its index, and the source array.
  * @param initialValue - The accumulator seed used before the first element.

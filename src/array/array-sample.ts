@@ -2,13 +2,12 @@ import {sample, sampleSize} from 'es-toolkit/array';
 
 /**
  * Returns one or more elements drawn uniformly at random from `array`. Without
- * the second argument, a single element is returned directly (delegates to
- * `sample` from `es-toolkit`).
+ * the second argument, a single element is returned directly.
  *
  * When `size` is provided, a new array of that many elements is returned. By
  * default elements are sampled **without replacement** — each can appear at
- * most once, so `size` may not exceed `array.length` (delegates to `sampleSize`
- * via Floyd's algorithm). Pass `{withReplacement: true}` to sample **with
+ * most once, so `size` may not exceed `array.length` (via Floyd's algorithm).
+ * Pass `{withReplacement: true}` to sample **with
  * replacement** instead: each draw is independent, elements may repeat, and
  * `size` may exceed `array.length`.
  * @param array - The array to sample from. Not mutated.

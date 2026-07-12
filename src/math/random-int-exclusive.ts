@@ -6,13 +6,13 @@ import type {Subtract} from 'type-fest';
  * Called with a single argument the range is `[0, maximum)` — the form used for
  * random array indexing (`array[randomIntExclusive(array.length)]`). When both
  * bounds are small numeric literals the return type narrows to the precise literal
- * union of possible results (via `remeda`'s `RandomInteger`); otherwise `number`.
+ * union of possible results; otherwise `number`.
  *
  * The upper bound is excluded, matching array indexing and the `nextInt(n)`
  * convention of Java/Go/Ruby. For an inclusive upper bound use `randomIntInclusive`.
  * Internally the exclusive `[a, b)` integer range is the inclusive `[a, b - 1]`
- * range, delegated to `remeda`'s `randomInteger` (uses `Math.random`; not
- * cryptographically secure). The range must be non-empty (`maximum` greater than
+ * range (uses `Math.random`; not cryptographically secure). The range must be
+ * non-empty (`maximum` greater than
  * `minimum`, or `maximum` greater than `0` for the single-argument form).
  * @param minimum - The inclusive lower bound. When called with a single argument this slot is the exclusive upper bound instead and the lower bound defaults to `0`.
  * @param maximum - The exclusive upper bound.

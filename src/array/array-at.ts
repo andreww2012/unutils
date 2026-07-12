@@ -32,11 +32,10 @@ type ArrayElementAt<
 /**
  * Reads one or more elements from an array by index. Combines two improved
  * versions of `Array.prototype.at`: passing a single index returns the element
- * itself (delegating to `ts-extras`' `arrayAt`, which yields a precise type for
- * literal indices into tuples), while passing an array of indices returns a
- * same-length array of elements (delegating to `at` from `es-toolkit`). Negative
- * indices count from the end of the array, and out-of-bounds indices yield
- * `undefined` in the corresponding slot.
+ * itself (with a precise type for literal indices into tuples), while passing an
+ * array of indices returns a same-length array of elements. Negative indices
+ * count from the end of the array, and out-of-bounds indices yield `undefined`
+ * in the corresponding slot.
  * @param array - The array to read from. Not mutated.
  * @param indices - Either a single index, or an array of indices. Negative
  * values are counted from the end of the array.

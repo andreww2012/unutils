@@ -2,9 +2,8 @@ import {fill, toFilled} from 'es-toolkit/array';
 
 /**
  * Replaces a contiguous slice of an array with a given value. By default this mutates
- * the input array (consolidating `fill` from `es-toolkit`); pass `{copy: true}` as the
- * fifth argument to instead get a new array back, leaving the input untouched
- * (consolidating `toFilled`).
+ * the input array; pass `{copy: true}` as the fifth argument to instead get a new array
+ * back, leaving the input untouched.
  * @param array - The array to fill.
  * @param value - The value to place into every slot in the `[start, end)` range.
  * @param start - The start index (inclusive). Defaults to `0`. Negative indices are

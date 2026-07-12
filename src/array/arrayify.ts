@@ -5,11 +5,11 @@
  * rather than *converts* — passing an iterable like a `Set` yields `[set]`, not
  * its spread contents (use `Array.from` for that).
  *
- * Based on `castArray` from `es-toolkit/compat`, but with two enhancements:
- * sharper typing (an existing array — including a tuple — keeps its exact type,
- * any other value widens to `value[]`), and nullish values collapse to `[]`
- * instead of `castArray`'s `[null]` / `[undefined]`. Pass `shouldWrapNullish: true` to
- * opt back into wrapping nullish values like any other value.
+ * Two things make it sharper than a plain cast: precise typing (an existing
+ * array — including a tuple — keeps its exact type, any other value widens to
+ * `value[]`), and nullish values collapse to `[]` rather than being wrapped as
+ * `[null]` / `[undefined]`. Pass `shouldWrapNullish: true` to opt back into
+ * wrapping nullish values like any other value.
  * @param value - The value to ensure is an array.
  * @param shouldWrapNullish - When `true`, a nullish `value` is wrapped (`[value]`)
  * like any other value instead of collapsing to `[]`. Defaults to `false`.

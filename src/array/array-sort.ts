@@ -9,10 +9,9 @@ import {sort} from 'remeda';
  * Regular arrays still sort to `T[]`.
  *
  * The length is the one thing native `array.toSorted()` cannot preserve at the
- * type level, and the reason this util exists. The runtime is delegated to
- * `remeda`'s `sort`, which (unlike `Array.prototype.sort`) does not mutate the
- * input. For key-based ordering use `sortBy`; for ordering rules without a full
- * sort see `arrayFirstBy` and friends.
+ * type level, and the reason this util exists. Unlike `Array.prototype.sort`, it
+ * does not mutate the input. For key-based ordering use `sortBy`; for ordering
+ * rules without a full sort see `arrayFirstBy` and friends.
  * @param array - The array (or tuple) to sort. Not mutated.
  * @param comparator - Returns a negative number if `a` should come before `b`, positive if after, `0` if equal.
  * @returns A new sorted array, length-preserving when the input is a tuple.

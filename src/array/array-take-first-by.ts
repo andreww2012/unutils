@@ -7,8 +7,7 @@ import {type OrderRule, takeFirstBy} from 'remeda';
  * guaranteed** — only their set is.
  *
  * Each rule is either a projection `(item) => comparable` (ascending) or a
- * `[projection, 'asc' | 'desc']` pair; later rules break ties. The runtime is
- * delegated to remeda's `takeFirstBy`.
+ * `[projection, 'asc' | 'desc']` pair; later rules break ties.
  * @param array - The array to select from. Not mutated.
  * @param count - How many of the "smallest" elements (by the ordering) to take.
  * @param rules - One or more ordering rules; later rules break ties of earlier ones.

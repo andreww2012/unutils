@@ -7,8 +7,7 @@ import {type OrderRule, nthBy} from 'remeda';
  * indices yield `undefined`.
  *
  * Each rule is either a projection `(item) => comparable` (ascending) or a
- * `[projection, 'asc' | 'desc']` pair; later rules break ties. The runtime is
- * delegated to remeda's `nthBy`.
+ * `[projection, 'asc' | 'desc']` pair; later rules break ties.
  * @param array - The array to search. Not mutated.
  * @param index - The 0-based position in the (virtually) sorted order.
  * @param rules - One or more ordering rules; later rules break ties of earlier ones.

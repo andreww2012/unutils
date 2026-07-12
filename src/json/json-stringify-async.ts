@@ -17,7 +17,7 @@ const stringifyWithSpaceAndIntensity = stringifyAsync as unknown as (
 /**
  * Asynchronous, non-blocking `JSON.stringify`: serializes `value` while
  * periodically yielding to the event loop, so large payloads don't starve it.
- * Promisified, typed wrapper around `yieldable-json`.
+ * Promisified and typed.
  * @param value - The value to serialize.
  * @param replacer - Optional `JSON.stringify` replacer function or allow-list array.
  * @param space - Optional indentation (number of spaces or a string), as in `JSON.stringify`.

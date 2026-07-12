@@ -6,8 +6,8 @@ import type {ExtractNestedArrayType} from '../_internal/types.ts';
  * the optional `depth` (third argument) is omitted — or explicitly set to
  * `Number.POSITIVE_INFINITY` — the result is *fully* flattened. This deviates
  * from `Array.prototype.flatMap`, whose default depth is `1`. Passing a finite
- * `depth` flattens to exactly that level (delegates to `flatMap` from
- * `es-toolkit`); omitting it or passing `Infinity` delegates to `flatMapDeep`.
+ * `depth` flattens to exactly that level; omitting it or passing `Infinity`
+ * flattens fully.
  *
  * Negative, `NaN`, and non-integer `depth` values follow
  * `Array.prototype.flat` semantics (negative/`NaN` → no flattening, non-integer

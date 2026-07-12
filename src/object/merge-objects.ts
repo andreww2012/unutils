@@ -3,12 +3,11 @@ import {type MergeAll, mergeAll} from 'remeda';
 /**
  * Shallow-merges a non-empty array of objects into a single object, with later
  * objects overriding earlier ones (like `Object.assign({}, ...objects)`). The
- * result type is the precise positional merge of the element types (via
- * `MergeAll`), which a plain `Object.assign` over a spread array cannot produce.
+ * result type is the precise positional merge of the element types, which a
+ * plain `Object.assign` over a spread array cannot produce.
  *
  * For a deep merge of two objects use `mergeDeep`; for a statically-known set of
- * objects the spread `{...a, ...b}` is simpler. The runtime is delegated to
- * `remeda`'s `mergeAll`.
+ * objects the spread `{...a, ...b}` is simpler.
  * @param objects - A non-empty array of objects to merge, left to right.
  * @returns A new object with the merged properties.
  * @example

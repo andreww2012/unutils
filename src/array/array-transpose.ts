@@ -11,7 +11,7 @@ type Transpose<K extends unknown[]> = {[I in keyof K]: K[I][]};
  * the longest row; positions with no source value receive `undefined`.
  *
  * A second-argument iteratee can be passed to fold each resulting column
- * into a single value (mirrors es-toolkit's `unzipWith`).
+ * into a single value.
  * @param rows - The matrix to transpose. Not mutated.
  * @returns A new matrix where rows and columns have been swapped (or, with
  * an iteratee, an array of folded column values).

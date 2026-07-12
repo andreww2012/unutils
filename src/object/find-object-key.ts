@@ -6,8 +6,7 @@ import {findKey} from 'es-toolkit/object';
  * the object analog of `Array.prototype.find`, returning the key instead of the
  * value. Returns `undefined` when no property matches.
  *
- * Pass `true` as the third argument to scan from the last key to the first
- * (delegates to `findLastKey` from `es-toolkit/compat`).
+ * Pass `true` as the third argument to scan from the last key to the first.
  * @param object - The object to search.
  * @param predicate - Invoked as `(value, key, object)`; the first key for which
  * it returns `true` is returned.

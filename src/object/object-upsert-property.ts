@@ -7,7 +7,7 @@ import {type UpsertProp, addProp} from 'remeda';
  *
  * The result type is computed precisely: adding a new literal key widens the
  * type to include it, and overwriting an existing key updates that key's type to
- * `value`'s type. The runtime is delegated to `remeda`'s `addProp`.
+ * `value`'s type.
  * @param object - The source object. Not mutated.
  * @param key - The property key to insert or overwrite.
  * @param value - The value to set at `key`.

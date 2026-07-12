@@ -8,7 +8,6 @@ import {fromKeys} from 'remeda';
  *
  * When `keys` is a tuple of literal keys the result is precisely typed (a record
  * with exactly those keys); a general `PropertyKey[]` yields a partial record.
- * The runtime is delegated to `remeda`'s `fromKeys`.
  * @param keys - The keys to build the object from.
  * @param mapper - Computes each key's value. Receives the key, its index, and the source array.
  * @returns A new object mapping every key to its computed value.

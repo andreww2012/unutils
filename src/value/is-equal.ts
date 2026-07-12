@@ -14,10 +14,9 @@ type IsEqualCustomizer = (
  * `RegExp`, nested objects, arrays, `Map`, `Set`, and circular references.
  *
  * When the third argument is omitted, the values are compared with the default
- * strategy (delegates to `isEqual` from `es-toolkit`). When a `customizer` is
- * provided, it is invoked for every visited value-pair and may return `true`
- * or `false` to override the default — returning `undefined` falls back to the
- * default strategy (delegates to `isEqualWith`).
+ * strategy. When a `customizer` is provided, it is invoked for every visited
+ * value-pair and may return `true` or `false` to override the default —
+ * returning `undefined` falls back to the default strategy.
  * @param a - The first value to compare.
  * @param b - The second value to compare.
  * @param customizer - Optional comparator invoked as

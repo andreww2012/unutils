@@ -15,10 +15,9 @@ type IsObjectMatchingCustomizer = (
  * full-equality `isEqual`.
  *
  * When the third argument is omitted, values are compared with the default
- * strategy (delegates to `isMatch` from `es-toolkit`). When a `customizer` is
- * provided, it is invoked for every visited value-pair and may return `true` or
- * `false` to override the default — returning `undefined` falls back to the
- * default strategy (delegates to `isMatchWith`).
+ * strategy. When a `customizer` is provided, it is invoked for every visited
+ * value-pair and may return `true` or `false` to override the default —
+ * returning `undefined` falls back to the default strategy.
  * @param object - The object to inspect.
  * @param pattern - The partial pattern whose properties must be present in `object`.
  * @param customizer - Optional comparator invoked as

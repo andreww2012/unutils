@@ -8,7 +8,7 @@ import {type Evolver, evolve} from 'remeda';
  * transform values within nested objects.
  *
  * The result type reflects each transformer's return type, so the shape stays
- * precisely typed. The runtime is delegated to `remeda`'s `evolve`.
+ * precisely typed.
  * @param object - The source object. Not mutated.
  * @param evolver - A (possibly nested) structure mapping keys to transform functions; only the listed keys are changed.
  * @returns A new object with the matching values transformed and the rest preserved.

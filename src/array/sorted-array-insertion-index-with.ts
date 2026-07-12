@@ -11,7 +11,7 @@ import {sortedIndexWith} from 'remeda';
  * This is the most general member of the `sortedArrayInsertionIndex*` family:
  * unlike {@link sortedArrayInsertionIndex} it takes no search value and is not
  * limited to `number`/`string` keys, so it can locate a boundary for any
- * comparable condition. The runtime is delegated to remeda's `sortedIndexWith`.
+ * comparable condition.
  * @param sortedArray - The already-sorted array to search. Not mutated.
  * @param predicate - Returns `true` for elements before the insertion point. Receives the value, its index, and the array.
  * @returns The first index at which `predicate` returns `false`, in `0..sortedArray.length`.
