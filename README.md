@@ -1,6 +1,7 @@
 <!-- cspell:ignore jsonrepair jsondiffpatch hyperjump unpatch lerp -->
 
-# `unutils`
+<!-- eslint-disable-next-line markdown-preferences/heading-casing, markdown-links/no-dead-urls -->
+# unutils [![npm](https://img.shields.io/npm/v/unutils)](https://npmx.dev/unutils)
 
 A growing collection of general-purpose utilities and TypeScript types, mostly consolidated from existing popular packages with improved UX/DX, bug fixes and improvements in functionality.
 
