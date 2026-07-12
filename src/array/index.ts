@@ -49,7 +49,7 @@ export {arrayShuffle} from './array-shuffle.ts';
 export {arrayReverse} from './array-reverse.ts';
 export {arraySort} from './array-sort.ts';
 export {arraySplit} from './array-split.ts';
-export {arraySwapIndices} from './array-swap-indices.ts';
+export {arraySwapIndexes} from './array-swap-indexes.ts';
 export {arrayWithoutFalsy} from './array-without-falsy.ts';
 export {arrayify} from './arrayify.ts';
 export {cartesianProduct} from './cartesian-product.ts';
