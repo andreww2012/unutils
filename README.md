@@ -221,6 +221,12 @@ Candidate libraries on the radar. These cover JSON *manipulation* axes (repair, 
 | `types/Falsy`           | Union of the literal-representable falsy values (`false`, `0`, `0n`, `''`, `null`, `undefined`); `NaN` excluded (no literal type) |
 | `types/Truthy`          | Complement of `Falsy`: removes the literal falsy members from a type (`Truthy<0 \| 1>` is `1`)                                    |
 
+## License
+
+MIT (See [`LICENSE`](./LICENSE) file for the full license text).
+
+Bundled packages are licensed under their own terms — see [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
+
 ## Contributors
 
 <!-- eslint-disable markdown-preferences/padding-line-between-blocks, markdown/require-alt-text -->

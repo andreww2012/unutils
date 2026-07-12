@@ -4,6 +4,7 @@ export default eslintConfig({
   defaultConfigsStatus: 'misc-enabled',
   ignores: [
     'CHANGELOG.md', // Auto-generated
+    'LICENSE.md',
     'test/published-dts/scenarios/**',
   ],
   extraConfigs: [

@@ -11,6 +11,7 @@ const GLOBALLY_IGNORED_WORDS = {
     'arktype',
     'cleye',
     'neotraverse',
+    'andreww',
   ],
   misc: ['knipignore', 'rearg', 'GHSA'],
   englishIshWords: ['arrayify', 'customizer', 'deburr', 'iteratees', 'nullary', 'stringifiers'],
