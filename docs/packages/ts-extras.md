@@ -11,6 +11,8 @@ Mostly thin, strongly-typed re-exports. `Unsafe` in a name flags that the strong
 | [`objectEntries`][ts-extras]     | ✅     | `object/objectEntriesUnsafe`           | Renamed                                                                                          |
 | [`objectFromEntries`][ts-extras] | ✅     | `object/objectFromEntriesUnsafe`       | Renamed; shallow, distinct from `object/objectFromEntriesDeep`                                   |
 | [`objectHasOwn`][ts-extras]      | ✅     | `object/objectHasOwn` *(same)*         | -                                                                                                |
+| [`objectAssign`][ts-extras]      | ✅     | `object/objectAssign` *(same)*         | -                                                                                                |
+| [`objectUpdate`][ts-extras]      | ✅     | `object/objectUpdate` *(same)*         | -                                                                                                |
 | [`objectHasIn`][ts-extras]       | ✅     | `predicate/isIn`                       | Renamed; `(key, object)` order (reads like `key in object`); narrows the object                  |
 | [`keyIn`][ts-extras]             | ✅     | `predicate/isKeyIn`                    | Renamed; `(key, object)` order; narrows the key to those present in the object                   |
 | [`arrayAt`][ts-extras]           | ✅     | `array/arrayAt`                        | Consolidated with es-toolkit's `at` (also accepts a list of indices)                             |

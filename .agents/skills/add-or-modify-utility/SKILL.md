@@ -20,6 +20,8 @@ Utility should conform to one of the following forms:
       IMPORTANT: such rewrites must not be considered custom implementation (form 3).
 
       Example: `src/types/nullable.ts`.
+
+      If you're only enhancing JSDoc and exporting the original implementation by directly assigning it (example: `src/object/object-assign.ts`), you'd probably need to disable `unicorn/prefer-export-from` rule for line with the export.
 2. *Enhanced version of an external package's utility(-ies).*
    Preferably a thin wrapper that delegates the real work to the external function(s) while customizing/improving the UX.
 
