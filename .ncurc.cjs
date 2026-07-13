@@ -4,22 +4,6 @@ const path = require('node:path');
 const semver = require('semver');
 const packageJson = require('./package.json');
 
-const BUNDLED_PACKAGES = [
-  '@ark/util',
-  'arkregex',
-  'destr',
-  'devalue',
-  'es-toolkit',
-  'lossless-json',
-  'neotraverse',
-  'remeda',
-  'safe-stable-stringify',
-  'string-ts',
-  'ts-extras',
-  'type-fest',
-  'yieldable-json',
-];
-
 const CACHE_DIRECTORY = path.join(__dirname, 'node_modules/.cache/npm-check-updates');
 fs.mkdirSync(CACHE_DIRECTORY, {recursive: true});
 
@@ -43,6 +27,53 @@ const IGNORED_PACKAGE_RANGES_TO_UPDATE = {
 /** @type {Set<string>} */
 const IGNORED_MAJOR_VERSION_TRANSITIONS = new Set(['@types/node']);
 
+const SRC_DIRECTORY = path.join(__dirname, 'src');
+const EXTERNAL_IMPORT_REGEX = /(?<![\w.])(?:import\s*\(\s*|import\s+|from\s+)["']([^"']+)["']/g;
+
+/**
+ * The bundled set is emergent: `tsdown` runs with `unbundle: true` and no explicit bundle list,
+ * so every external package `src/` imports ends up bundled. Deriving it here (rather than hand-
+ * maintaining a list that drifts) keeps the "Bundled utilities" ncu group correct on its own.
+ * Reading `dist/` instead is not an option: ncu runs without a build, and its extra transitive
+ * packages are not in `package.json` for ncu to act on anyway.
+ */
+const collectBundledPackages = () => {
+  /** @type {Set<string>} */
+  const packageNames = new Set();
+
+  const addPackagesFromSource = (/** @type {string} */ source) => {
+    for (const [, specifier] of source.matchAll(EXTERNAL_IMPORT_REGEX)) {
+      if (specifier.startsWith('.') || specifier.startsWith('node:')) {
+        continue;
+      }
+
+      const segments = specifier.split('/');
+      packageNames.add(specifier.startsWith('@') ? `${segments[0]}/${segments[1]}` : segments[0]);
+    }
+  };
+
+  const walk = (/** @type {string} */ directory) => {
+    for (const entry of fs.readdirSync(directory, {withFileTypes: true})) {
+      const entryPath = path.join(directory, entry.name);
+      if (entry.isDirectory()) {
+        walk(entryPath);
+        continue;
+      }
+
+      if (entry.name.endsWith('.ts')) {
+        addPackagesFromSource(fs.readFileSync(entryPath, 'utf8'));
+      }
+    }
+  };
+
+  walk(SRC_DIRECTORY);
+
+  // eslint-disable-next-line unicorn/no-array-sort
+  return [...packageNames].sort();
+};
+
+const bundledPackages = collectBundledPackages();
+
 /**
  * @type {Record<string, {packages: string[]; groupName?: string; icon?: string; priority?: number | null}>}
  */
@@ -60,7 +91,7 @@ const PACKAGE_GROUPS = Object.entries({
     packages: ['cspell'],
   },
   'Bundled utilities': {
-    packages: BUNDLED_PACKAGES,
+    packages: bundledPackages,
     icon: '🧩',
     priority: 0,
   },

@@ -71,7 +71,7 @@ All groups automatically get their own entrypoint (`/<group-name>`) which should
 
 ### Adding from a package
 
-If the package is not in dependencies, it should be installed as a dev dependency and be added to `BUNDLED_PACKAGES` list in `.ncurc.cjs` in the alphabetical order.
+If the package is not in dependencies, it should be installed as a dev dependency.
 Its license text must be copied to `THIRD_PARTY_NOTICES.md`.
 
 If you're not asked about specific utilities, you should add all utilities that are supposed to be public, from all entrypoints.
