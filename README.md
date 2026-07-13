@@ -113,6 +113,7 @@ Candidate libraries on the radar. These cover JSON *manipulation* axes (repair, 
 | Our function group and name           | Notes                                                                                                                                                                   |
 | ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `array/arrayAt`                       | Consolidates `ts-extras`' `arrayAt` (precise tuple typing for literal indices) with es-toolkit's `at` (also accepts a list of indices)                                  |
+| `array/arrayChunks`                   | Consolidates fixed-size `chunk` with a by-key variant; pass an iteratee to group runs of consecutive same-key elements                                                  |
 | `array/arrayDifference`               | Consolidates `difference`/`differenceBy`/`differenceWith`; optional mapper or comparator                                                                                |
 | `array/arrayDrop`                     | Consolidates `drop`/`dropWhile`; pass a predicate to drop while it holds                                                                                                |
 | `array/arrayDropFirstBy`              | Drops the `count` "smallest" elements by one or more `OrderRule`s (via `remeda`'s `dropFirstBy`), O(n) without sorting; kept elements keep their order                  |

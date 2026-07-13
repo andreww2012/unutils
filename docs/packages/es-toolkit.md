@@ -6,7 +6,7 @@
 | ------------------------------------------------------------------------------------------ | ------ | ---------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | [`array/at`](https://es-toolkit.dev/reference/array/at.html)                               | ✅     | `array/arrayAt`                    | Extended to support a single array index (with precise tuple typing via `ts-extras`)                   |
 | [`array/cartesianProduct`](https://es-toolkit.dev/reference/array/cartesianProduct.html)   | ✅     | `array/cartesianProduct` *(same)*  | -                                                                                                      |
-| [`array/chunk`](https://es-toolkit.dev/reference/array/chunk.html)                         | ✅     | `array/arrayChunks`                | -                                                                                                      |
+| [`array/chunk`](https://es-toolkit.dev/reference/array/chunk.html)                         | ✅     | `array/arrayChunks`                | Consolidated with `fp/chunkBy` — pass an iteratee to chunk into consecutive same-key runs              |
 | [`array/combinations`](https://es-toolkit.dev/reference/array/combinations.html)           | ✅     | `array/arrayCombinations`          | -                                                                                                      |
 | [`array/compact`](https://es-toolkit.dev/reference/array/compact.html)                     | ✅     | `array/arrayWithoutFalsy`          | -                                                                                                      |
 | [`array/countBy`](https://es-toolkit.dev/reference/array/countBy.html)                     | ✅     | `iterable/countBy`                 | -                                                                                                      |
@@ -379,3 +379,83 @@ Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e
 | [`util/toSafeInteger`](https://es-toolkit.dev/compat/reference/util/toSafeInteger.html)                   | ❌     | *(native)*                        | Coercion — rarely needed                                                                                                          |
 | [`util/toString`](https://es-toolkit.dev/compat/reference/util/toString.html)                             | ❌     | *(native)*                        | Use `String(x)`                                                                                                                   |
 | [`util/uniqueId`](https://es-toolkit.dev/compat/reference/util/uniqueId.html)                             | ❌     | *(native)*                        | Module-global mutable state (SSR-unsafe); use `crypto.randomUUID()` or your own scoped counter                                    |
+
+## `es-toolkit/fp`
+
+Data-last, curried variants of utilities from the main entrypoints, meant for use with `pipe`. `unutils` is data-first by design, so this entire entrypoint is intentionally **not** re-exported — every function is a call-style restatement of a data-first utility already provided (or a native one-liner). Each row points to that equivalent so the decision isn't re-litigated on future updates. The sole exception is `chunkBy`, whose consecutive-run chunking has no data-first equivalent anywhere else; it is folded into `array/arrayChunks`.
+
+| Original function group and name | Status | Our function group and name      | Notes                                                                    |
+| -------------------------------- | ------ | -------------------------------- | ------------------------------------------------------------------------ |
+| `fp/add`                         | ❌     | *(native)*                       | Use `a + b`                                                              |
+| `fp/at`                          | ❌     | `array/arrayAt`                  | Data-last variant                                                        |
+| `fp/cartesianProduct`            | ❌     | `array/cartesianProduct`         | Data-last variant                                                        |
+| `fp/chunk`                       | ❌     | `array/arrayChunks`              | Data-last variant                                                        |
+| `fp/chunkBy`                     | ✅     | `array/arrayChunks`              | Consolidated — pass an iteratee to chunk into consecutive same-key runs  |
+| `fp/combinations`                | ❌     | `array/arrayCombinations`        | Data-last variant                                                        |
+| `fp/compact`                     | ❌     | `array/arrayWithoutFalsy`        | Data-last variant                                                        |
+| `fp/countBy`                     | ❌     | `iterable/countBy`               | Data-last variant                                                        |
+| `fp/difference`                  | ❌     | `array/arrayDifference`          | Data-last variant                                                        |
+| `fp/differenceBy`                | ❌     | `array/arrayDifference`          | Data-last variant                                                        |
+| `fp/differenceWith`              | ❌     | `array/arrayDifference`          | Data-last variant                                                        |
+| `fp/drop`                        | ❌     | `array/arrayDrop`                | Data-last variant                                                        |
+| `fp/dropRight`                   | ❌     | `array/arrayDropRight`           | Data-last variant                                                        |
+| `fp/dropRightWhile`              | ❌     | `array/arrayDropRight`           | Data-last variant                                                        |
+| `fp/dropWhile`                   | ❌     | `array/arrayDrop`                | Data-last variant                                                        |
+| `fp/filter`                      | ❌     | *(native)*                       | Use `array.filter(...)`                                                  |
+| `fp/find`                        | ❌     | `iterable/find`                  | Data-last variant                                                        |
+| `fp/findIndex`                   | ❌     | *(native)*                       | Use `array.findIndex(...)`                                               |
+| `fp/findLast`                    | ❌     | *(native)*                       | Use `array.findLast(...)`                                                |
+| `fp/findLastIndex`               | ❌     | *(native)*                       | Use `array.findLastIndex(...)`                                           |
+| `fp/flatMap`                     | ❌     | `array/flatMap`                  | Data-last variant                                                        |
+| `fp/flatMapDeep`                 | ❌     | `array/flatMap`                  | Data-last variant                                                        |
+| `fp/flatten`                     | ❌     | `array/flatten`                  | Data-last variant                                                        |
+| `fp/flattenDeep`                 | ❌     | `array/flatten`                  | Data-last variant                                                        |
+| `fp/forEach`                     | ❌     | `iterable/forEach`               | Data-last variant                                                        |
+| `fp/groupBy`                     | ❌     | *(native)*                       | Use `Object.groupBy` / `Map.groupBy`                                     |
+| `fp/head`                        | ❌     | *(native)*                       | Use `array[0]` / `array.at(0)`                                           |
+| `fp/initial`                     | ❌     | *(native)*                       | Use `array.slice(0, -1)`                                                 |
+| `fp/intersection`                | ❌     | `array/arrayIntersection`        | Data-last variant                                                        |
+| `fp/intersectionBy`              | ❌     | `array/arrayIntersection`        | Data-last variant                                                        |
+| `fp/intersectionWith`            | ❌     | `array/arrayIntersection`        | Data-last variant                                                        |
+| `fp/isSubset`                    | ❌     | `array/arrayIsSubset`            | Data-last variant                                                        |
+| `fp/isSubsetWith`                | ❌     | `array/arrayIsSubset`            | Data-last variant                                                        |
+| `fp/join`                        | ❌     | *(native)*                       | Use `array.join(...)`                                                    |
+| `fp/keyBy`                       | ❌     | `iterable/keyedBy`               | Data-last variant                                                        |
+| `fp/last`                        | ❌     | *(native)*                       | Use `array.at(-1)`                                                       |
+| `fp/length`                      | ❌     | *(native)*                       | Use `array.length`                                                       |
+| `fp/map`                         | ❌     | `array/arrayMap`                 | Data-last variant                                                        |
+| `fp/maxBy`                       | ❌     | `array/maxBy`                    | Data-last variant                                                        |
+| `fp/minBy`                       | ❌     | `array/minBy`                    | Data-last variant                                                        |
+| `fp/multiply`                    | ❌     | *(native)*                       | Use `a * b`                                                              |
+| `fp/omit`                        | ❌     | `object/omit`                    | Data-last variant                                                        |
+| `fp/orderBy`                     | ❌     | `array/orderBy`                  | Data-last variant                                                        |
+| `fp/partition`                   | ❌     | `array/arrayPartition`           | Data-last variant                                                        |
+| `fp/pick`                        | ❌     | `object/pick`                    | Data-last variant                                                        |
+| `fp/pipe`                        | ❌     | *(out of scope)*                 | Data-last composition primitive; `unutils` ships `function/flow` instead |
+| `fp/reverse`                     | ❌     | *(native)*                       | Use `array.toReversed()` / `array.reverse()`                             |
+| `fp/sample`                      | ❌     | `array/arraySample`              | Data-last variant                                                        |
+| `fp/sampleSize`                  | ❌     | `array/arraySample`              | Data-last variant                                                        |
+| `fp/shuffle`                     | ❌     | `array/arrayShuffle`             | Data-last variant                                                        |
+| `fp/sortBy`                      | ❌     | `array/sortBy`                   | Data-last variant                                                        |
+| `fp/tail`                        | ❌     | *(native)*                       | Use `array.slice(1)`                                                     |
+| `fp/take`                        | ❌     | *(native)*                       | Use `array.slice(0, n)`                                                  |
+| `fp/takeRight`                   | ❌     | *(native)*                       | Use `array.slice(-n)`                                                    |
+| `fp/takeRightWhile`              | ❌     | `array/arrayTakeWhile`           | Data-last variant                                                        |
+| `fp/takeWhile`                   | ❌     | `array/arrayTakeWhile`           | Data-last variant                                                        |
+| `fp/toFilled`                    | ❌     | `array/arrayFill`                | Data-last variant                                                        |
+| `fp/union`                       | ❌     | `array/arrayUnion`               | Data-last variant                                                        |
+| `fp/unionBy`                     | ❌     | `array/arrayUnion`               | Data-last variant                                                        |
+| `fp/unionWith`                   | ❌     | `array/arrayUnion`               | Data-last variant                                                        |
+| `fp/uniq`                        | ❌     | `array/arrayUnique`              | Data-last variant                                                        |
+| `fp/uniqBy`                      | ❌     | `array/arrayUnique`              | Data-last variant                                                        |
+| `fp/uniqWith`                    | ❌     | `array/arrayUnique`              | Data-last variant                                                        |
+| `fp/unzip`                       | ❌     | `array/arrayTranspose`           | Data-last variant                                                        |
+| `fp/unzipWith`                   | ❌     | `array/arrayTranspose`           | Data-last variant                                                        |
+| `fp/windowed`                    | ❌     | `iterable/slidingWindow`         | Data-last variant                                                        |
+| `fp/without`                     | ❌     | `array/arrayDifference`          | Data-last variant                                                        |
+| `fp/xor`                         | ❌     | `array/arraySymmetricDifference` | Data-last variant                                                        |
+| `fp/xorBy`                       | ❌     | `array/arraySymmetricDifference` | Data-last variant                                                        |
+| `fp/xorWith`                     | ❌     | `array/arraySymmetricDifference` | Data-last variant                                                        |
+| `fp/zip`                         | ❌     | `array/arrayTranspose`           | Data-last variant                                                        |
+| `fp/zipObject`                   | ❌     | *(native)*                       | Use `Object.fromEntries(keys.map((key, index) => [key, values[index]]))` |
+| `fp/zipWith`                     | ❌     | `array/arrayTranspose`           | Data-last variant                                                        |
