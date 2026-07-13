@@ -23,8 +23,22 @@ const BUNDLED_PACKAGES = [
 const CACHE_DIRECTORY = path.join(__dirname, 'node_modules/.cache/npm-check-updates');
 fs.mkdirSync(CACHE_DIRECTORY, {recursive: true});
 
-/** @type {Set<string>} */
-const IGNORED_PACKAGES = new Set();
+/**
+ * Blocks *updating to* any version matching the given semver range for a package
+ * (it does not restrict the version we update *from*). Use to skip a known-broken
+ * release until a fix ships. Each entry documents why it is blocked.
+ * @type {Record<string, string>}
+ */
+const IGNORED_PACKAGE_RANGES_TO_UPDATE = {
+  // Broken publish: its bundled dependency map references an unpublished package,
+  // so installs crash — including pnpm/action-setup's self-install step
+  // https://github.com/pnpm/pnpm/issues/12955
+  pnpm: '11.12.0',
+
+  // Pulls in rolldown-plugin-dts >=0.27, which false-errors on (or silently drops)
+  // forward-referenced type exports when bundling DTS
+  tsdown: '0.22.5',
+};
 
 /** @type {Set<string>} */
 const IGNORED_MAJOR_VERSION_TRANSITIONS = new Set(['@types/node']);
@@ -78,15 +92,15 @@ module.exports = {
     packageName,
     {currentVersion: currentVersionRaw, upgradedVersion: upgradedVersionRaw},
   ) => {
-    // cspell:disable-next-line
-    // eslint-disable-next-line sonarjs/no-empty-collection
-    if (IGNORED_PACKAGES.has(packageName)) {
-      return false;
-    }
-
     const [currentVersion, upgradedVersion] = [currentVersionRaw, upgradedVersionRaw].map((v) =>
       v.split('@').at(-1),
     );
+
+    const blockedVersionRange = IGNORED_PACKAGE_RANGES_TO_UPDATE[packageName];
+    if (blockedVersionRange && semver.satisfies(upgradedVersion || '', blockedVersionRange)) {
+      return false;
+    }
+
     const [currentVersionSemver, upgradedVersionSemver] = [currentVersion, upgradedVersion].map(
       (v) => semver.parse(v),
     );
