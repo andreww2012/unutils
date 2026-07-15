@@ -108,6 +108,7 @@ export type {MergeDeep, MergeDeepOptions} from './merge-deep.ts';
 export type {MergeExclusive} from './merge-exclusive.ts';
 export type {MergeObjects} from './merge-objects.ts';
 export type {MergeTypes} from './merge-types.ts';
+export type {Ms} from './ms.ts';
 export type {MultidimensionalArray} from './multidimensional-array.ts';
 export type {MultidimensionalReadonlyArray} from './multidimensional-readonly-array.ts';
 export type {MutuallyExclusiveUnion} from './mutually-exclusive-union.ts';

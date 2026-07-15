@@ -2,4 +2,4 @@
 'unutils': minor
 ---
 
-Added new `misc/generateMailtoLink` utility
+Added a new `misc/generateMailtoLink` utility

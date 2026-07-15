@@ -181,6 +181,7 @@
     "knip": "6.26.0",
     "lefthook": "2.1.10",
     "lossless-json": "4.3.0",
+    "ms-ts": "1.0.0",
     "nanoid": "6.0.0",
     "neotraverse": "1.0.1",
     "npm-check-updates": "22.2.9",
