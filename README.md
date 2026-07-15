@@ -175,6 +175,7 @@ Candidate libraries on the radar. These cover JSON *manipulation* axes (repair, 
 | `math/randomIntExclusive`             | Random integer in the **exclusive** range `[min, max)` (or `[0, max)`); strict literal-union return for small literal bounds (via `remeda`'s `randomInteger`)           |
 | `math/randomIntInclusive`             | Random integer in the **inclusive** range `[min, max]` (or `[0, max]`); strict literal-union return for small literal bounds (via `remeda`'s `randomInteger`)           |
 | `math/sum`                            | Generalized to any iterable (single-pass); optional `(item, index) => number` selector                                                                                  |
+| `misc/generateMailtoLink`             | Builds a percent-encoded `mailto:` link; recipients in the path by default (`{recipientsAsQueryParam}` for a `to` query param), `cc`/`bcc`/`subject`/`body` as params   |
 | `object/assignDefaults`               | Consolidates `defaults`/`defaultsDeep`/`toDefaulted`; single source or array, `{deep, copy}` modes                                                                      |
 | `object/findObjectKey`                | Consolidates `findKey`/`findLastKey`; pass `true` to scan from the end                                                                                                  |
 | `object/hasPath`                      | Deep-path existence check; pass `{inherited: true}` to include the prototype chain                                                                                      |
