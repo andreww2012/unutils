@@ -27,4 +27,5 @@ peerDependencyRules:
 
 patchedDependencies:
   arkregex@0.0.8: patches/arkregex@0.0.8.patch
+  nanoid@6.0.0: patches/nanoid@6.0.0.patch
   remeda: patches/remeda.patch

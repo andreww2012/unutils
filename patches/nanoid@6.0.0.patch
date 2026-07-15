@@ -1,0 +1,13 @@
+diff --git a/package.json b/package.json
+index 5244b49f8fae293d2341a44e48e43ac7876afa3b..ec956d165f916c98754b939bb6ba4c9531ab4eca 100644
+--- a/package.json
++++ b/package.json
+@@ -32,7 +32,7 @@
+       "types": "./index.d.ts",
+       "browser": "./index.browser.js",
+       "react-native": "./index.browser.js",
+-      "default": "./index.js"
++      "default": "./index.browser.js"
+     },
+     "./non-secure": {
+       "types": "./non-secure/index.d.ts",

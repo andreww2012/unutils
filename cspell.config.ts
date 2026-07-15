@@ -10,6 +10,7 @@ const GLOBALLY_IGNORED_WORDS = {
     'arkregex',
     'arktype',
     'cleye',
+    'nanoid',
     'neotraverse',
     'andreww',
   ],

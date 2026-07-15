@@ -47,6 +47,7 @@ See individual symbols' JSDoc for detailed documentation.
 | `array`     | Array and tuple manipulation                           | ✅                 |
 | `async`     | Promises, mutexes, timeouts and concurrency            | ✅                 |
 | `function`  | Function composition, currying and partial application | ✅                 |
+| `id`        | Unique ID generation                                   | ✅                 |
 | `iterable`  | Generic iterable traversal and aggregation             | ✅                 |
 | `json`      | JSON parsing and serialization                         | ✅                 |
 | `map`       | `Map` querying and transformation                      | ✅                 |
@@ -83,6 +84,7 @@ utility it provides and how it maps into `unutils` (renames, consolidations, and
 | [`destr`](docs/packages/destr.md)                                 | Forgiving and strict JSON parsing (`jsonParseSafe` / `jsonParse`)                                                                              |
 | [`devalue`](docs/packages/devalue.md)                             | Serialize/revive `Date`/`Map`/`Set`/`BigInt` and circular refs (non-JSON)                                                                      |
 | [`lossless-json`](docs/packages/lossless-json.md)                 | Precision-preserving JSON parse/stringify (`bigint` and decimals)                                                                              |
+| [`nanoid`](docs/packages/nanoid.md)                               | Secure, URL-safe unique ID generation — the `id` group / `unutils/id`                                                                          |
 | [`neotraverse`](docs/packages/neotraverse.md)                     | Recursive visitor traversal of nested values — the `traverse` group / `unutils/traverse`                                                       |
 | [`safe-stable-stringify`](docs/packages/safe-stable-stringify.md) | Deterministic, circular-safe `JSON.stringify`                                                                                                  |
 | [`string-ts`](docs/packages/string-ts.md)                         | Type-level-aware string helpers — literal-preserving case conversion, native-method wrappers and object-key transforms                         |

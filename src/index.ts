@@ -1,6 +1,7 @@
 export * from './array/index.ts';
 export * from './async/index.ts';
 export * from './function/index.ts';
+export * from './id/index.ts';
 export * from './iterable/index.ts';
 export * from './json/index.ts';
 export * from './map/index.ts';

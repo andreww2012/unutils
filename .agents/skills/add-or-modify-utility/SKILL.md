@@ -17,7 +17,7 @@ Utility should conform to one of the following forms:
       Example: `src/array/array-combinations.ts`.
    2. *Re-export with documentation improvements or very minor improvements of other kind(s)*
       If the original documentation does not satisfy the criteria, it should be rewritten to satisfy them.
-      IMPORTANT: such rewrites must not be considered custom implementation (form 3).
+      IMPORTANT: such rewrites must not be considered custom implementation (form 3): they may contain trivial-ish logic required for consolidation, added behavior/options, typing improvements.
 
       Example: `src/types/nullable.ts`.
 
@@ -27,9 +27,13 @@ Utility should conform to one of the following forms:
 
    Examples: `src/array/array-difference.ts`, `src/array/sorted-index.ts`.
 3. *Fully custom implementation*, which still might depend on other utilities.
+   IMPORTANT: there should be substrantial % of real custom logic to fall into this category; otherwise, the utility/type should probably be considered form 1-2.
 
 The latter two forms require the utility to have a comprehensive JSDoc documentation describing its purpose and including parameter and return value descriptions, as well as a block of examples.
 Any documentation, but it JSDoc, `*.md` files, or in any other form, must never include implementation details, such as used package names (the list if not exhaustive), unless it is necessary.
+If form 1-1 documentation does not satisfy the critera from this skill, it should probably become form 1-2.
+Note: only ever use `{@link X}` when `X` is imported or declared in the same file.
+For any cross-file reference use plain backticks `` `X` `` instead.
 
 ## Adding utilities
 
