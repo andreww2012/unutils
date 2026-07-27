@@ -28,6 +28,7 @@ export default {
     '**/pnpm-lock.yaml',
     'patches/**',
     '.all-contributorsrc',
+    '.agents/style-guide.md', // Copied from an external source
   ],
   dictionaries: ['npm', 'node', 'typescript', 'fullstack'],
   overrides: [

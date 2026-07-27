@@ -6,6 +6,7 @@ export default eslintConfig({
     'CHANGELOG.md', // Auto-generated
     'LICENSE.md',
     'test/published-dts/scenarios/**',
+    '.agents/style-guide.md', // Copied from an external source
   ],
   extraConfigs: [
     {
