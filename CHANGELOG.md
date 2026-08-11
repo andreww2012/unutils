@@ -1,5 +1,37 @@
 # unutils
 
+## 0.2.0
+
+### Minor Changes
+
+- 9fe6fdb: Added the following new utilities from [`ms-ts`](https://npmx.dev/ms-ts) package:
+
+  - `ms` (`misc` group)
+  - `Ms` (`types` group)
+
+- 2fecdaf: Added a new `misc/generateMailtoLink` utility
+- 280d41e: Added the following new utilities from [`typed-query-selector`](https://npmx.dev/typed-query-selector) package, belonging to the new `dom` group:
+
+  - `querySelectorTyped`
+  - `querySelectorAllTyped`
+  - `closestTyped`
+  - `ElementFromSelector` (type)
+  - `ElementFromSelectorStrict` (type)
+  - `ElementFromTagName` (type)
+
+  Added two opt-in side-effect entrypoints that type the _native_ DOM lookup methods from the selector:
+
+  - `unutils/dom/query-selector-typed.global`
+  - `unutils/dom/query-selector-typed-strict.global`
+
+  You should import at most one of the two.
+
+- 19ad83a: Added the following new utilities from [`nanoid`](https://npmx.dev/nanoid) package, belonging to the new `id` group:
+
+  - `nanoid`
+  - `nanoidFactory`
+  - `NANOID_URL_ALPHABET` (constant)
+
 ## 0.1.0
 
 ### Minor Changes
