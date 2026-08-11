@@ -21,30 +21,16 @@ export default eslintConfig({
         'ts/method-signature-style': [2, 'method'],
       },
     },
-    // Fixes "The following rules do not support the language "jsonc/x""
-    {
-      files: ['**/*.json'],
-      rules: {
-        'unicorn/no-process-exit': 0,
-        'unicorn/prefer-import-meta-properties': 0,
-      },
-    },
   ],
   configs: {
     fileProgress: true,
     import: {
       requireModuleExtensions: true,
-      overrides: {
-        'import/no-cycle': 0, // Replaced by knip
-      },
     },
     ts: {
       allowDefaultProject: ['*.config.*ts'],
     },
     unicorn: {
-      ignores: [
-        '**/*.json', // Fixes "The following rules do not support the language "jsonc/x""
-      ],
       overrides: {
         'unicorn/consistent-boolean-name': (severity, options) => ({
           severity,

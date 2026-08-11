@@ -20,10 +20,11 @@ overrides:
   # GHSA-fx2h-pf6j-xcff cspell:disable-line
   # Can't use range like `^8.0.16` as pnpm won't re-resolve the already-locked vite for a range replacement, only for an exact one
   vite@>=8.0.0 <8.0.16: 8.0.16
+  nanoid@>=3 <3.3.17: 3.3.18
+  postcss@>=8 <=8.5.17: 8.5.26
 
 peerDependencyRules:
-  allowedVersions:
-    eslint-config-un@1.0.0-beta.11>@e18e/eslint-plugin: '^0.4.1 || ^0.5.0'
+  allowedVersions: {}
 
 patchedDependencies:
   arkregex@0.0.8: patches/arkregex@0.0.8.patch
