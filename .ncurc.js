@@ -1,11 +1,16 @@
 // @ts-check
-const fs = require('node:fs');
-const path = require('node:path');
-const semver = require('semver');
-const packageJson = require('./package.json');
+import fs from 'node:fs';
+import path from 'node:path';
+import {defineConfig} from 'npm-check-updates';
+import semver from 'semver';
+import packageJson from './package.json' with {type: 'json'};
 
-const CACHE_DIRECTORY = path.join(__dirname, 'node_modules/.cache/npm-check-updates');
+const CACHE_DIRECTORY = path.join(import.meta.dirname, 'node_modules/.cache/npm-check-updates');
+// eslint-disable-next-line unicorn/no-top-level-side-effects
 fs.mkdirSync(CACHE_DIRECTORY, {recursive: true});
+
+/** @type {Set<string>} */
+const IGNORED_PACKAGES = new Set();
 
 /**
  * Blocks *updating to* any version matching the given semver range for a package
@@ -25,9 +30,12 @@ const IGNORED_PACKAGE_RANGES_TO_UPDATE = {
 };
 
 /** @type {Set<string>} */
-const IGNORED_MAJOR_VERSION_TRANSITIONS = new Set(['@types/node']);
+const PACKAGES_WITH_PINNED_MAJOR_VERSION = new Set(['@types/node']);
 
-const SRC_DIRECTORY = path.join(__dirname, 'src');
+/** Their `latest` dist-tag lags behind the prerelease channel we actually follow. */
+const PACKAGES_ON_PRERELEASE_CHANNEL = new Set(['eslint-config-un']);
+
+const SRC_DIRECTORY = path.join(import.meta.dirname, 'src');
 const EXTERNAL_IMPORT_REGEX = /(?<![\w.])(?:import\s*\(\s*|import\s+|from\s+)["']([^"']+)["']/g;
 
 /**
@@ -81,7 +89,7 @@ const PACKAGE_GROUPS = Object.entries({
   'Package manager': {
     packages: ['pnpm'],
     icon: '📦',
-    priority: 1,
+    priority: 0,
   },
   '@eslint': {
     packages: ['eslint', 'eslint-config-un'],
@@ -111,18 +119,28 @@ const PACKAGE_GROUPS = Object.entries({
   return Object.assign(result, packagesInCurrentGroup);
 }, {});
 
-/**
- * @type {import('npm-check-updates').RunOptions}
- */
-module.exports = {
+export default defineConfig({
   cache: true,
   cacheExpiration: 30,
   cacheFile: path.join(CACHE_DIRECTORY, 'cache.json'),
 
+  target: (packageName) => {
+    if (PACKAGES_WITH_PINNED_MAJOR_VERSION.has(packageName)) {
+      return 'minor';
+    }
+
+    return PACKAGES_ON_PRERELEASE_CHANNEL.has(packageName) ? 'greatest' : 'latest';
+  },
   filterResults: (
     packageName,
     {currentVersion: currentVersionRaw, upgradedVersion: upgradedVersionRaw},
   ) => {
+    // cspell:disable-next-line
+    // eslint-disable-next-line sonarjs/no-empty-collection
+    if (IGNORED_PACKAGES.has(packageName)) {
+      return false;
+    }
+
     const [currentVersion, upgradedVersion] = [currentVersionRaw, upgradedVersionRaw].map((v) =>
       v.split('@').at(-1),
     );
@@ -136,7 +154,7 @@ module.exports = {
       (v) => semver.parse(v),
     );
     return !(
-      IGNORED_MAJOR_VERSION_TRANSITIONS.has(packageName) &&
+      PACKAGES_WITH_PINNED_MAJOR_VERSION.has(packageName) &&
       currentVersionSemver?.major !== upgradedVersionSemver?.major
     );
   },
@@ -149,11 +167,11 @@ module.exports = {
 
     if (knownGroup) {
       const {groupName, icon, priority} = knownGroup;
-      return `${priority === null ? '' : `${priority ?? 4}. `}${icon || '📁'} ${groupName}`;
+      return `${priority === null ? '' : `${priority ?? 3}. `}${icon || '📁'} ${groupName}`;
     }
 
     return fullName in packageJson.devDependencies
-      ? '3. 🧑‍💻 Dev dependencies'
-      : '2. 📦 Direct dependencies';
+      ? '2. 🧑‍💻 Dev dependencies'
+      : '1. 📦 Direct dependencies';
   },
-};
+});
