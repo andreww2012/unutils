@@ -28,6 +28,6 @@
     "outDir": "./temp/tsbuild/src",
     "tsBuildInfoFile": "./temp/tsbuild/src.tsbuildinfo",
 
-    "lib": ["es2024"],
+    "lib": ["es2024", "dom", "dom.iterable"],
   },
 }

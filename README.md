@@ -1,6 +1,6 @@
 <!-- cspell:ignore jsonrepair jsondiffpatch hyperjump unpatch lerp -->
 
-<!-- eslint-disable-next-line markdown-preferences/heading-casing, markdown-links/no-dead-urls -->
+<!-- eslint-disable-next-line markdown-preferences/heading-casing -->
 # unutils [![npm](https://img.shields.io/npm/v/unutils)](https://npmx.dev/unutils)
 
 A growing collection of general-purpose utilities and TypeScript types, mostly consolidated from existing popular packages with improved UX/DX, bug fixes and improvements in functionality.
@@ -46,6 +46,7 @@ See individual symbols' JSDoc for detailed documentation.
 | ----------- | ------------------------------------------------------ | ------------------ |
 | `array`     | Array and tuple manipulation                           | ✅                 |
 | `async`     | Promises, mutexes, timeouts and concurrency            | ✅                 |
+| `dom`       | Selector-typed DOM lookups                             | ❌                 |
 | `function`  | Function composition, currying and partial application | ✅                 |
 | `id`        | Unique ID generation                                   | ✅                 |
 | `iterable`  | Generic iterable traversal and aggregation             | ✅                 |
@@ -64,6 +65,31 @@ See individual symbols' JSDoc for detailed documentation.
 | `ts`        | TypeScript runtime and compile-time assertions         | ✅                 |
 | `types`     | Type-only utility types                                | ✅                 |
 | `value`     | Cloning, equality and type inspection for any value    | ✅                 |
+
+</details>
+
+### Global augmentation entrypoints
+
+Entrypoints whose name ends in `.global` export nothing at all.
+They are imported for their effect instead: each one augments an existing *global* type, so the improvement reaches every call site in your project without a single one of them changing.
+
+```ts
+import 'unutils/dom/query-selector-typed.global';
+
+document.querySelector('button#submit'); // HTMLButtonElement | null
+```
+
+One import anywhere in your project is enough — a declaration file or an entry module is the usual place.
+They are strictly opt-in: no other entrypoint pulls them in, so nothing changes until you add the import yourself.
+Where several of them augment the same thing, import at most one, otherwise their declarations merge into each other.
+
+<details>
+<summary>List of global augmentation entrypoints</summary>
+
+| Entrypoint                               | Description                                                                                                                                                                                                                                                                                                                 |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dom/query-selector-typed.global`        | Types the native `querySelector`, `querySelectorAll` and `closest` from the CSS selector literal they are given, on every `ParentNode` and `Element`. An unknown tag or a malformed selector falls back to `Element`. The same typing is available as ordinary functions from `dom`, should you prefer not to touch globals |
+| `dom/query-selector-typed-strict.global` | As above, except a malformed selector resolves to `never` rather than falling back, turning a typo into a compile error instead of a runtime throw. Mutually exclusive with the entrypoint above                                                                                                                            |
 
 </details>
 
@@ -91,6 +117,7 @@ utility it provides and how it maps into `unutils` (renames, consolidations, and
 | [`string-ts`](docs/packages/string-ts.md)                         | Type-level-aware string helpers — literal-preserving case conversion, native-method wrappers and object-key transforms                         |
 | [`ts-extras`](docs/packages/ts-extras.md)                         | Thin, strongly-typed wrappers over native methods                                                                                              |
 | [`type-fest`](docs/packages/type-fest.md)                         | Type-only utility types (the `types` group / `unutils/types`)                                                                                  |
+| [`typed-query-selector`](docs/packages/typed-query-selector.md)   | Infers the element type from a CSS selector literal — the `dom` group / `unutils/dom`                                                          |
 | [`yieldable-json`](docs/packages/yieldable-json.md)               | Non-blocking async JSON parse/stringify                                                                                                        |
 
 <details>
@@ -150,6 +177,9 @@ Candidate libraries on the radar. These cover JSON *manipulation* axes (repair, 
 | `array/sortedArrayIndexOf`            | Binary search for an existing value in a sorted array; returns its index or `-1`; `{rightmost?}`                                                                        |
 | `array/sortedArrayInsertionIndex`     | Binary-search insertion point into a sorted array; `{iteratee?, rightmost?}`                                                                                            |
 | `array/sortedArrayInsertionIndexWith` | Binary-search insertion index via a monotonic `predicate` (via `remeda`'s `sortedIndexWith`); any comparable condition, not just `number`/`string` keys                 |
+| `dom/closestTyped`                    | Typed `closest`; the matched ancestor's type is inferred from the selector literal                                                                                      |
+| `dom/querySelectorAllTyped`           | Typed `querySelectorAll` returning a real array instead of a `NodeList`; optional search root                                                                           |
+| `dom/querySelectorTyped`              | Typed `querySelector`; optional search root defaulting to `document`; `.as<T>()` for custom elements                                                                    |
 | `function/curry`                      | Consolidates `curry`/`curryRight`; pass `true` to collect arguments right-to-left                                                                                       |
 | `function/flow`                       | Consolidates `flow`/`flowRight`; functions as an array; pass `true` for right-to-left                                                                                   |
 | `function/mapTimes`                   | Renamed `times`; iteratee required; clearer than `Array.from({length}, ...)`                                                                                            |

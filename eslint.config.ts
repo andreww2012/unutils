@@ -6,7 +6,6 @@ export default eslintConfig({
     'CHANGELOG.md', // Auto-generated
     'LICENSE.md',
     'test/published-dts/scenarios/**',
-    '.agents/style-guide.md', // Copied from an external source
   ],
   extraConfigs: [
     {
@@ -14,6 +13,12 @@ export default eslintConfig({
       files: ['docs/packages/*.md'],
       rules: {
         'markdown-preferences/no-heading-trailing-punctuation': 'off',
+      },
+    },
+    {
+      files: ['src/**/*.global.ts'],
+      rules: {
+        'ts/method-signature-style': [2, 'method'],
       },
     },
     // Fixes "The following rules do not support the language "jsonc/x""

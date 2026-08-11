@@ -34,6 +34,18 @@
       "types": "./dist/async/index.d.mts",
       "default": "./dist/async/index.mjs"
     },
+    "./dom": {
+      "types": "./dist/dom/index.d.mts",
+      "default": "./dist/dom/index.mjs"
+    },
+    "./dom/query-selector-typed.global": {
+      "types": "./dist/dom/query-selector-typed.global.d.mts",
+      "default": "./dist/dom/query-selector-typed.global.mjs"
+    },
+    "./dom/query-selector-typed-strict.global": {
+      "types": "./dist/dom/query-selector-typed-strict.global.d.mts",
+      "default": "./dist/dom/query-selector-typed-strict.global.mjs"
+    },
     "./function": {
       "types": "./dist/function/index.d.mts",
       "default": "./dist/function/index.mjs"
@@ -177,6 +189,7 @@
     "eslint": "10.7.0",
     "eslint-config-un": "1.0.0-beta.14",
     "eslint-plugin-github-action": "0.3.0",
+    "happy-dom": "20.11.1",
     "jest-extended": "7.0.0",
     "knip": "6.26.0",
     "lefthook": "2.1.10",
@@ -194,6 +207,7 @@
     "ts-extras": "1.2.0",
     "tsdown": "0.22.3",
     "type-fest": "5.8.0",
+    "typed-query-selector": "2.12.2",
     "typescript": "npm:@typescript/typescript6@6.0.2",
     "typescript-7": "npm:typescript@7.0.2",
     "valibot": "1.4.2",

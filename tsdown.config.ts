@@ -8,7 +8,11 @@ const utilityGroups = fs
   .map((entry) => entry.name);
 
 export default defineConfig({
-  entry: ['src/index.ts', ...utilityGroups.map((groupName) => `src/${groupName}/index.ts`)],
+  entry: [
+    'src/index.ts',
+    ...utilityGroups.map((groupName) => `src/${groupName}/index.ts`),
+    'src/*/*.global.ts', // Side-effect-only global augmentations not imported anywhere
+  ],
   format: 'esm',
   unbundle: true,
   dts: true,

@@ -35,6 +35,20 @@ If form 1-1 documentation does not satisfy the critera from this skill, it shoul
 Note: only ever use `{@link X}` when `X` is imported or declared in the same file.
 For any cross-file reference use plain backticks `` `X` `` instead.
 
+## Global augmentation modules
+
+A module whose only purpose is a global type augmentation (`declare global`, exports nothing) must be named `src/<group-name>/<utility-name>.global.ts`.
+
+Example: `src/dom/query-selector-typed.global.ts`.
+
+- It must NOT be re-exported from `src/<group-name>/index.ts`.
+- It needs its own `package.json` `exports` entry and a row in the "List of entrypoints" table in `README.md`.
+- Note that an external package's `declare global` cannot be re-exported.
+  `import type {} from 'the-package'` is erased from the declaration output, and a plain value import fails when the package ships no runtime code.
+  Re-declare the augmentation against our own types instead.
+- `declare global` applies to the entire TypeScript program regardless of which file imports it, so mutually exclusive augmentations can never be tested alongside each other — their overloads merge and none of them stays assertable.
+  So test it **only** from `test/published-dts/scenarios/<utility-name>.global/` (not from an in-repo `*.spec-d.ts`), matching the source file name - the harness gives every `*.global` scenario directory a `tsc` program of its own.
+
 ## Adding utilities
 
 You might be asked to add utility(-ies) from existing npm package(s), provided code, or to create a new one from free description.

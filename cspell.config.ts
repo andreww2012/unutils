@@ -15,7 +15,15 @@ const GLOBALLY_IGNORED_WORDS = {
     'andreww',
   ],
   misc: ['knipignore', 'rearg', 'GHSA'],
-  englishIshWords: ['arrayify', 'customizer', 'deburr', 'iteratees', 'nullary', 'stringifiers'],
+  englishIshWords: [
+    'arrayify',
+    'combinators',
+    'customizer',
+    'deburr',
+    'iteratees',
+    'nullary',
+    'stringifiers',
+  ],
   typeFest: ['jsonify', 'jsonifiable', 'arrayable', 'asyncify', 'optionalize'],
 } satisfies Record<string, string[]>;
 

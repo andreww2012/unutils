@@ -11,39 +11,84 @@ import path from 'node:path';
 // unused, which is itself a `tsc` error and fails that scenario).
 // Assumes `dist/` is already built (does NOT build); run after `nr build`.
 
-const HERE = import.meta.dirname;
-const ROOT = path.resolve(HERE, '../..');
-const SCENARIOS_DIRECTORY = path.join(HERE, 'scenarios');
-const TSC = path.join(ROOT, 'node_modules/.bin/tsc');
-const ERROR_LINE_PATTERN = /^([^(]+\.ts)\(\d+,\d+\): error/;
+const __dirname = import.meta.dirname;
+const rootPath = path.resolve(__dirname, '../..');
+const scenariosDirectoryPath = path.join(__dirname, 'scenarios');
+const tscBinPath = path.join(rootPath, 'node_modules/.bin/tsc');
 
-const CONSUMER_TSCONFIG = {
-  compilerOptions: {
-    strict: true,
-    module: 'nodenext',
-    moduleResolution: 'nodenext',
-    target: 'esnext',
-    noEmit: true,
-    // The assertions catch inference breakage on their own; we don't want to
-    // fail on unrelated internal declarations of bundled deps.
-    skipLibCheck: true,
-  },
-  include: ['**/*.ts'],
+const CONSUMER_COMPILER_OPTIONS = {
+  strict: true,
+  module: 'nodenext',
+  moduleResolution: 'nodenext',
+  target: 'esnext',
+  noEmit: true,
+  // The assertions catch inference breakage on their own; we don't want to
+  // fail on unrelated internal declarations of bundled deps.
+  skipLibCheck: true,
 };
 
 // Each subdirectory groups scenarios for one utility, e.g. `regexTyped/infer.ts`.
 const scenarioFiles = fs
-  .readdirSync(SCENARIOS_DIRECTORY, {recursive: true, encoding: 'utf8'})
+  .readdirSync(scenariosDirectoryPath, {recursive: true, encoding: 'utf8'})
   .filter((file) => file.endsWith('.ts'))
   .toSorted();
+
+const PATH_SEGMENT_SEPARATOR = /[/\\]/;
+const GLOBAL_SUFFIX = '.global';
+
+// A `declare global` augmentation takes effect across the whole program, so two mutually
+// exclusive ones must never be compiled together — their overloads merge and the assertions
+// quietly stop meaning anything. Every `*.global` scenario directory therefore gets a `tsc`
+// program to itself, and all remaining scenarios share one. This scales to any number of
+// augmentations: the run count grows with them, not with the scenario count
+const isolatedDirectories = [
+  ...new Set(
+    scenarioFiles
+      .map((file) => file.split(PATH_SEGMENT_SEPARATOR)[0] || '')
+      .filter((directory) => directory.endsWith(GLOBAL_SUFFIX)),
+  ),
+  // eslint-disable-next-line unicorn/no-array-sort
+].sort();
+
+const programs = [
+  {
+    name: 'shared',
+    include: ['**/*.ts'],
+    exclude: isolatedDirectories.map((directory) => `${directory}/**`),
+  },
+  ...isolatedDirectories.map((directory) => ({
+    name: directory,
+    include: [`${directory}/**/*.ts`],
+    exclude: [],
+  })),
+];
 
 let consumerDirectory: string;
 // Maps a scenario file name to the `tsc` error lines emitted for it.
 const errorsByScenario = new Map<string, string[]>();
 const unattributedErrors: string[] = [];
 
+const ERROR_LINE_PATTERN = /^([^(]+\.ts)\(\d+,\d+\): error/;
+
+const recordErrors = (output: string) => {
+  for (const line of output.split('\n')) {
+    if (!line) {
+      continue;
+    }
+
+    const file = ERROR_LINE_PATTERN.exec(line)?.[1];
+    if (file) {
+      const existing = errorsByScenario.get(file) || [];
+      existing.push(line);
+      errorsByScenario.set(file, existing);
+    } else {
+      unattributedErrors.push(line);
+    }
+  }
+};
+
 beforeAll(() => {
-  if (!fs.existsSync(path.join(ROOT, 'dist/regex/index.d.mts'))) {
+  if (!fs.existsSync(path.join(rootPath, 'dist/regex/index.d.mts'))) {
     throw new Error(
       'Built `dist/` not found. Run `nr build` before the published-DTS consumer check.',
     );
@@ -51,7 +96,7 @@ beforeAll(() => {
 
   consumerDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'unutils-dts-consumer-'));
   const packed = execSync(`pnpm pack --pack-destination ${JSON.stringify(consumerDirectory)}`, {
-    cwd: ROOT,
+    cwd: rootPath,
     encoding: 'utf8',
   })
     .trim()
@@ -72,33 +117,34 @@ beforeAll(() => {
   for (const file of scenarioFiles) {
     const destination = path.join(consumerDirectory, file);
     fs.mkdirSync(path.dirname(destination), {recursive: true});
-    fs.copyFileSync(path.join(SCENARIOS_DIRECTORY, file), destination);
+    fs.copyFileSync(path.join(scenariosDirectoryPath, file), destination);
   }
-  fs.writeFileSync(
-    path.join(consumerDirectory, 'tsconfig.json'),
-    JSON.stringify(CONSUMER_TSCONFIG, null, 2),
-  );
+  for (const program of programs) {
+    const tsconfigName = `tsconfig.${program.name}.json`;
+    fs.writeFileSync(
+      path.join(consumerDirectory, tsconfigName),
+      JSON.stringify(
+        {
+          compilerOptions: CONSUMER_COMPILER_OPTIONS,
+          include: program.include,
+          exclude: program.exclude,
+        },
+        null,
+        2,
+      ),
+    );
 
-  let output = '';
-  try {
-    execFileSync(TSC, ['--noEmit', '--pretty', 'false'], {
-      cwd: consumerDirectory,
-      encoding: 'utf8',
-    });
-  } catch (error) {
-    output = (error as {stdout?: string}).stdout || '';
-  }
-
-  // eslint-disable-next-line unicorn/no-duplicate-loops
-  for (const line of output.split('\n').filter(Boolean)) {
-    const file = ERROR_LINE_PATTERN.exec(line)?.[1];
-    if (file) {
-      const existing = errorsByScenario.get(file) || [];
-      existing.push(line);
-      errorsByScenario.set(file, existing);
-    } else {
-      unattributedErrors.push(line);
+    let output = '';
+    try {
+      execFileSync(tscBinPath, ['--project', tsconfigName, '--pretty', 'false'], {
+        cwd: consumerDirectory,
+        encoding: 'utf8',
+      });
+    } catch (error) {
+      output = (error as {stdout?: string}).stdout || '';
     }
+
+    recordErrors(output);
   }
 }, 120_000);
 
@@ -111,6 +157,22 @@ afterAll(() => {
 describe('published DTS consumer', () => {
   it('discovers scenario files', () => {
     expect(scenarioFiles.length).toBeGreaterThan(0);
+  });
+
+  // Importing a `*.global` entrypoint from a shared-program scenario would silently apply its
+  // augmentation to every other scenario, so the isolation is enforced rather than trusted
+  it('keeps global augmentation imports inside isolated directories', () => {
+    const leaked = scenarioFiles.filter((file) => {
+      const directory = file.split(PATH_SEGMENT_SEPARATOR)[0] || '';
+      return (
+        !directory.endsWith(GLOBAL_SUFFIX) &&
+        fs
+          .readFileSync(path.join(scenariosDirectoryPath, file), 'utf8')
+          .includes(`${GLOBAL_SUFFIX}'`)
+      );
+    });
+
+    expect(leaked).toStrictEqual([]);
   });
 
   it.each(scenarioFiles)('%s', (file) => {
