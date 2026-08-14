@@ -4,6 +4,7 @@ export {arrayConcat} from './array-concat.ts';
 export {arrayFirst} from './array-first.ts';
 export {arrayFirstBy} from './array-first-by.ts';
 export {arrayDropFirstBy} from './array-drop-first-by.ts';
+export {arrayHasMaxElements} from './array-has-max-elements.ts';
 export {arrayHasMinElements} from './array-has-min-elements.ts';
 export {arrayNthBy} from './array-nth-by.ts';
 export {arrayRankBy} from './array-rank-by.ts';

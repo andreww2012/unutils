@@ -22,6 +22,7 @@ export type {ArraySplice} from './array-splice.ts';
 export type {ArraySplitOnRestElement} from './array-split-on-rest-element.ts';
 export type {ArrayTail} from './array-tail.ts';
 export type {ArrayValues} from './array-values.ts';
+export type {ArrayWithMaxLength} from './array-with-max-length.ts';
 export type {Asyncify} from './asyncify.ts';
 export type {Branded} from './branded.ts';
 export type {Class} from './class.ts';

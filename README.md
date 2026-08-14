@@ -151,6 +151,7 @@ Candidate libraries on the radar. These cover JSON *manipulation* axes (repair, 
 | `array/arrayFill`                     | Consolidates `fill`/`toFilled`; pass `{copy: true}` to return a new array                                                                                               |
 | `array/arrayFilter`                   | Tuple-aware `Array#filter` (via `remeda`); a tuple + (inferred) type guard yields the refined tuple (`[1, 2, 3]` filtered by `!== 2` → `[1, 3]`) not `(1 \| 3)[]`       |
 | `array/arrayFirstBy`                  | First element by one or more `OrderRule`s (via `remeda`'s `firstBy`), O(n) without sorting; min/max + tie-breakers; non-empty tuples never give `undefined`             |
+| `array/arrayHasMaxElements`           | Type-guard: a literal maximum narrows to `ArrayWithMaxLength` (every length still possible, `never` if none is); non-literal returns a plain `boolean`                  |
 | `array/arrayHasMinElements`           | Type-guard (via `remeda`'s `hasAtLeast`): a literal minimum narrows to a known-minimum tuple; non-literal returns a plain `boolean`                                     |
 | `array/arrayify`                      | Wraps non-arrays (tuple-preserving); nullish input returns `[]` (or `[value]` with `wrapNullish`)                                                                       |
 | `array/arrayIntersection`             | Consolidates `intersection`/`intersectionBy`/`intersectionWith`; optional mapper or comparator                                                                          |
@@ -251,10 +252,11 @@ Candidate libraries on the radar. These cover JSON *manipulation* axes (repair, 
 
 ### Custom types
 
-| Our type group and name | Notes                                                                                                                             |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `types/Falsy`           | Union of the literal-representable falsy values (`false`, `0`, `0n`, `''`, `null`, `undefined`); `NaN` excluded (no literal type) |
-| `types/Truthy`          | Complement of `Falsy`: removes the literal falsy members from a type (`Truthy<0 \| 1>` is `1`)                                    |
+| Our type group and name    | Notes                                                                                                                                      |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `types/ArrayWithMaxLength` | Union of every shape an array can take with at most N elements, keeping per-position types; impossible shapes drop out (`never` if all do) |
+| `types/Falsy`              | Union of the literal-representable falsy values (`false`, `0`, `0n`, `''`, `null`, `undefined`); `NaN` excluded (no literal type)          |
+| `types/Truthy`             | Complement of `Falsy`: removes the literal falsy members from a type (`Truthy<0 \| 1>` is `1`)                                             |
 
 ## License
 
