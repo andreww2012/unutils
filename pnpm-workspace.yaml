@@ -27,6 +27,7 @@ peerDependencyRules:
   allowedVersions: {}
 
 patchedDependencies:
-  arkregex@0.0.8: patches/arkregex@0.0.8.patch
-  nanoid@6.0.0: patches/nanoid@6.0.0.patch
+  arkregex: patches/arkregex.patch
+  # Must include a version since multiple nanoid versions are present in the dep tree
+  nanoid@6: patches/nanoid.patch
   remeda: patches/remeda.patch

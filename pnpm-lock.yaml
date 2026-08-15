@@ -211,8 +211,8 @@ overrides:
   postcss@>=8 <=8.5.17: 8.5.26
 
 patchedDependencies:
-  arkregex@0.0.8: 3f67bd7e43eee25c719bf062c781074cdc10fd2636c0bfe0e1d332a7d32f7dcd
-  nanoid@6.0.0: a3afe33781b316243d1690babe7e0374a6e8a0c5ea5b1e811aaeac5716e1b697
+  arkregex: 3f67bd7e43eee25c719bf062c781074cdc10fd2636c0bfe0e1d332a7d32f7dcd
+  nanoid@6: 3d7c4929c5f893bd84219a435353aa1f0dec79743bc2580b372fbf009eea5c86
   remeda: e9e98c19bf4c5844450bf78de4493bf242de2fdb7c7ecf7ee2313945578d9b68
 
 importers:
@@ -313,14 +313,14 @@ importers:
         specifier: 2.1.10
         version: 2.1.10
       lossless-json:
-        specifier: 4.3.0
-        version: 4.3.0
+        specifier: 4.3.1
+        version: 4.3.1
       ms-ts:
         specifier: 1.0.0
         version: 1.0.0
       nanoid:
-        specifier: 6.0.0
-        version: 6.0.0(patch_hash=a3afe33781b316243d1690babe7e0374a6e8a0c5ea5b1e811aaeac5716e1b697)
+        specifier: 6.0.1
+        version: 6.0.1(patch_hash=3d7c4929c5f893bd84219a435353aa1f0dec79743bc2580b372fbf009eea5c86)
       neotraverse:
         specifier: 1.0.1
         version: 1.0.1
@@ -4323,8 +4323,8 @@ packages:
   longest-streak@3.1.0:
     resolution: {integrity: sha512-9Ri+o0JYgehTaVBBDoMqIl8GXtbWg711O3srftcHhZ0dqnETqLaoIK0x17fUw9rFSlK/0NlsKe0Ahhyl5pXE2g==}
 
-  lossless-json@4.3.0:
-    resolution: {integrity: sha512-ToxOC+SsduRmdSuoLZLYAr5zy1Qu7l5XhmPWM3zefCZ5IcrzW/h108qbJUKfOlDlhvhjUK84+8PSVX0kxnit0g==}
+  lossless-json@4.3.1:
+    resolution: {integrity: sha512-SqD/Bg3ZfltBJ2Z14hJ/BihnvtV553WO4g9/ePtlp4lrnl9jF3AdIJt53A/Wkg/0Li+LMfxaBqgx1MiFZdQlpQ==}
 
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
@@ -4602,8 +4602,8 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  nanoid@6.0.0:
-    resolution: {integrity: sha512-mkUH+rPkwU2qPadJ0oJZOjeZ5Mxn8Q1UhevwkTRWNuUZzyia3h4rhzK39hxaHTk0o2OxB8W2SQ6A8k23ZDi1pQ==}
+  nanoid@6.0.1:
+    resolution: {integrity: sha512-3wVS3i51pE2pi1k5FFL/95BGfVS0kSsvDVuGXHOtxox/TywUmtgq+3qiTOTbs9J7KfHaXPiN171k/A6dBnaXFw==}
     engines: {node: ^22 || ^24 || >=26}
     hasBin: true
 
@@ -9337,7 +9337,7 @@ snapshots:
 
   longest-streak@3.1.0: {}
 
-  lossless-json@4.3.0: {}
+  lossless-json@4.3.1: {}
 
   lru-cache@10.4.3: {}
 
@@ -9912,7 +9912,7 @@ snapshots:
 
   nanoid@3.3.18: {}
 
-  nanoid@6.0.0(patch_hash=a3afe33781b316243d1690babe7e0374a6e8a0c5ea5b1e811aaeac5716e1b697): {}
+  nanoid@6.0.1(patch_hash=3d7c4929c5f893bd84219a435353aa1f0dec79743bc2580b372fbf009eea5c86): {}
 
   nanospinner@1.2.2:
     dependencies:
