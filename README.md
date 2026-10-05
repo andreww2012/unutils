@@ -1,4 +1,4 @@
-<!-- cspell:ignore jsonrepair jsondiffpatch hyperjump unpatch lerp -->
+<!-- cspell:ignore jsonrepair jsondiffpatch hyperjump unpatch lerp unflatten -->
 
 <!-- eslint-disable-next-line markdown-preferences/heading-casing -->
 # unutils [![npm](https://img.shields.io/npm/v/unutils)](https://npmx.dev/unutils)
@@ -108,7 +108,7 @@ utility it provides and how it maps into `unutils` (renames, consolidations, and
 | [`arkregex`](docs/packages/arkregex.md)                           | Type-safe `RegExp` that infers the match and captures from a literal pattern                                                                   |
 | [`dedent`](docs/packages/dedent.md)                               | Tagged-template / function dedent that handles interpolations                                                                                  |
 | [`destr`](docs/packages/destr.md)                                 | Forgiving and strict JSON parsing (`jsonParseSafe` / `jsonParse`)                                                                              |
-| [`devalue`](docs/packages/devalue.md)                             | Serialize/revive `Date`/`Map`/`Set`/`BigInt` and circular refs (non-JSON)                                                                      |
+| [`devalue`](docs/packages/devalue.md)                             | Serialize/revive `Date`/`Map`/`Set`/`BigInt`, circular refs and nested promises (not plain JSON)                                                                     |
 | [`lossless-json`](docs/packages/lossless-json.md)                 | Precision-preserving JSON parse/stringify (`bigint` and decimals)                                                                              |
 | [`ms-ts`](docs/packages/ms-ts.md)                                 | Compile-time duration-string → milliseconds conversion (`ms` / `Ms`)                                                                           |
 | [`nanoid`](docs/packages/nanoid.md)                               | Secure, URL-safe unique ID generation — the `id` group / `unutils/id`                                                                          |
@@ -198,6 +198,7 @@ Candidate libraries on the radar. These cover JSON *manipulation* axes (repair, 
 | `json/jsonParseAsync`                 | Promisified non-blocking `JSON.parse` (yields to the event loop); `yieldable-json` wrapper                                                                              |
 | `json/jsonParseSafe`                  | Forgiving parse that never throws; falls back to the original input when it cannot be parsed                                                                            |
 | `json/jsonStringifyAsync`             | Promisified non-blocking `JSON.stringify` (yields to the event loop); `yieldable-json` wrapper                                                                          |
+| `json/structuredParse` | Consolidates `devalue`'s `parse`/`unflatten`; accepts the serialized string or its already-`JSON.parse`d form |
 | `math/interpolate`                    | Renamed `lerp`; `(min, max, t, clamp = false)`; extrapolates unless `clamp` is `true`                                                                                   |
 | `math/mapRange`                       | Renamed `remap`; `(value, inputRange, outputRange, clamp = false)`; affine range remap, extrapolates unless `clamp`                                                     |
 | `math/max`                            | Single-pass over any iterable; returns `undefined` for an empty input                                                                                                   |

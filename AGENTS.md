@@ -14,6 +14,7 @@ Follow [this guide](./.agents/style-guide.md).
 
 - The project targets modern JavaScript execution environments (Node.js 22+ and "Baseline Widely Available" web features).
 - Update `README.md` to reflect the made changes after you've finished.
+- When the change concers bumping bundled package's version, never mention those changes that do not affect our package's users.
 
 ## Domain description
 
