@@ -51,7 +51,7 @@ See individual symbols' JSDoc for detailed documentation.
 | `id`        | Unique ID generation                                   | ✅                 |
 | `iterable`  | Generic iterable traversal and aggregation             | ✅                 |
 | `json`      | JSON parsing and serialization                         | ✅                 |
-| `map`       | `Map` querying and transformation                      | ✅                 |
+| `map`       | `Map` querying, insertion and transformation           | ✅                 |
 | `math`      | Numeric aggregation, interpolation and randomness      | ✅                 |
 | `misc`      | Miscellaneous helpers that fit no other group          | ✅                 |
 | `object`    | Object merging, picking and deep-path access           | ✅                 |
@@ -199,6 +199,8 @@ Candidate libraries on the radar. These cover JSON *manipulation* axes (repair, 
 | `json/jsonParseSafe`                  | Forgiving parse that never throws; falls back to the original input when it cannot be parsed                                                                            |
 | `json/jsonStringifyAsync`             | Promisified non-blocking `JSON.stringify` (yields to the event loop); `yieldable-json` wrapper                                                                          |
 | `json/structuredParse` | Consolidates `devalue`'s `parse`/`unflatten`; accepts the serialized string or its already-`JSON.parse`d form |
+| `map/mapGetOrInsert`                  | Reads `key`, inserting `defaultValue` first when it is missing; the return is non-optional, so `mapGetOrInsert(map, key, []).push(item)` is a one-liner. Mirrors the native `Map#getOrInsert`, not yet widely available |
+| `map/mapGetOrInsertComputed`          | Lazy counterpart: the factory receives `key` and runs only on a miss, so every missing key gets a freshly built default. Mirrors the native `Map#getOrInsertComputed` |
 | `math/interpolate`                    | Renamed `lerp`; `(min, max, t, clamp = false)`; extrapolates unless `clamp` is `true`                                                                                   |
 | `math/mapRange`                       | Renamed `remap`; `(value, inputRange, outputRange, clamp = false)`; affine range remap, extrapolates unless `clamp`                                                     |
 | `math/max`                            | Single-pass over any iterable; returns `undefined` for an empty input                                                                                                   |
