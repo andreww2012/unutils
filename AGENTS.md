@@ -11,7 +11,11 @@ All without zero dependencies because all external dependencies are bundled.
 
 - The project targets modern JavaScript execution environments (Node.js 22+ and "Baseline Widely Available" web features).
 - Update `README.md` to reflect the made changes after you've finished.
-- When the change concerns bumping bundled package's version, never mention those changes that do not affect our package's users.
+- When you bump the version of a bundled package, only describe the upstream changes that affect our package's users: runtime behavior, types or exported API.
+  Leave out everything else, such as upstream docs, CI, tooling, refactors, or changes in their dependencies that don't reach our bundle.
+  This applies everywhere you describe the bump: changesets, commit messages, `README.md` and your replies, etc.
+  Always link the full upstream diff between the old and the new version (e.g. a GitHub compare link) instead of copying upstream changelogs.
+  If the package has no tags for these versions, use commit hashes the versions were published from.
 
 ## Domain description
 
