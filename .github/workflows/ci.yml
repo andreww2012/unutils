@@ -126,6 +126,9 @@ jobs:
           git restore .
           # `changeset version` may also create new files (like `CHANGELOG.md` on the first release)
           git clean -fdq
+        env:
+          # Needed by `@changesets/changelog-github`
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create release / Publish
         id: changesets
         uses: changesets/action@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
