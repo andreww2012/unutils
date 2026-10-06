@@ -1157,7 +1157,7 @@ function alignValue(value, precedingText) {
 	return value;
 }
 
-// node_modules/remeda/dist/words-B-xVsWyb.mjs
+// node_modules/remeda/dist/words-Cr8hSj8M.mjs
 [...`	.
 .\v.\f.\r. ..\xA0. . . . . . . . . . . . .\u2028.\u2029. . .　.﻿`.split(`.`)];
 

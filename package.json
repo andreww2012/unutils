@@ -213,7 +213,7 @@
     "npm-check-updates": "23.1.0",
     "oxfmt": "catalog:format",
     "publint": "0.3.23",
-    "remeda": "2.39.0",
+    "remeda": "2.51.0",
     "rolldown": "1.2.12",
     "safe-stable-stringify": "2.5.0",
     "string-ts": "2.3.1",

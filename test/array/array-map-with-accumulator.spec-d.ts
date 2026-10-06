@@ -13,12 +13,13 @@ describe('array/arrayMapWithAccumulator', () => {
     ).toEqualTypeOf<string[]>();
   });
 
-  it('types the accumulator and value in the callback', () => {
+  it('types the callback parameters', () => {
     arrayMapWithAccumulator(
       ['a', 'b'] as const,
-      (accumulator, value) => {
+      (accumulator, value, _index, processed) => {
         expectTypeOf(accumulator).toEqualTypeOf<number>();
         expectTypeOf(value).toEqualTypeOf<'a' | 'b'>();
+        expectTypeOf(processed).toEqualTypeOf<readonly ('a' | 'b')[]>();
         return accumulator;
       },
       0,

@@ -180,7 +180,7 @@ overrides:
 patchedDependencies:
   arkregex: 3f67bd7e43eee25c719bf062c781074cdc10fd2636c0bfe0e1d332a7d32f7dcd
   nanoid@6: 3d7c4929c5f893bd84219a435353aa1f0dec79743bc2580b372fbf009eea5c86
-  remeda: e9e98c19bf4c5844450bf78de4493bf242de2fdb7c7ecf7ee2313945578d9b68
+  remeda: e5e9cb0ab98af1439c69c33c8c0eb3417e8516a7ee031dff8616649f6126164c
   yieldable-json: b00d652e4d69666511dc9c35274fc9058e0d80582c6ad40de7c5f187db0a6659
 
 importers:
@@ -311,8 +311,8 @@ importers:
         specifier: 0.3.23
         version: 0.3.23
       remeda:
-        specifier: 2.39.0
-        version: 2.39.0(patch_hash=e9e98c19bf4c5844450bf78de4493bf242de2fdb7c7ecf7ee2313945578d9b68)
+        specifier: 2.51.0
+        version: 2.51.0(patch_hash=e5e9cb0ab98af1439c69c33c8c0eb3417e8516a7ee031dff8616649f6126164c)
       rolldown:
         specifier: 1.2.12
         version: 1.2.12
@@ -5117,8 +5117,8 @@ packages:
   remark-stringify@11.0.0:
     resolution: {integrity: sha512-1OSmLd3awB/t8qdoEOMazZkNsfVTeY4fTsgzcQFdXNq8ToTN4ZGwrMnlda4K6smTFKD+GRV6O48i6Z4iKgPPpw==}
 
-  remeda@2.39.0:
-    resolution: {integrity: sha512-3Ki8dU1o3OVu4dwIQ2Pj+yiuP7OnEbmWAGmJ3yDRqopily5jsj8NWzPvbS89H85d6UdONKEcUnrfuHY6jN9vyw==}
+  remeda@2.51.0:
+    resolution: {integrity: sha512-4X/oHoc10jkt1w1V8yG/8tS8jYYj7vaNZs3nrvuDVRE1+nDqRAnX/L0PbwL4wOKcXSLHnkXyOQOinSBGQdJ35A==}
     engines: {node: '>=18.0.0'}
 
   require-from-string@2.0.2:
@@ -10551,7 +10551,7 @@ snapshots:
       mdast-util-to-markdown: 2.1.2
       unified: 11.0.5
 
-  remeda@2.39.0(patch_hash=e9e98c19bf4c5844450bf78de4493bf242de2fdb7c7ecf7ee2313945578d9b68): {}
+  remeda@2.51.0(patch_hash=e5e9cb0ab98af1439c69c33c8c0eb3417e8516a7ee031dff8616649f6126164c): {}
 
   require-from-string@2.0.2: {}
 
