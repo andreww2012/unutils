@@ -1,5 +1,6 @@
 import {omit as omitKeys} from 'es-toolkit/compat';
 import {omitBy} from 'es-toolkit/object';
+import type {ObjectKeys} from 'es-toolkit/types';
 
 /**
  * Creates a new object with the selected properties of `object` removed.
@@ -33,11 +34,11 @@ export function omit<T extends object, K extends keyof T>(
 ): Omit<T, K>;
 export function omit<T extends object>(
   object: T,
-  selector: readonly PropertyKey[] | ((value: T[keyof T], key: keyof T) => boolean),
+  selector: readonly PropertyKey[] | ((value: T[keyof T], key: ObjectKeys<T>) => boolean),
 ): Partial<T>;
 export function omit<T extends object>(
   object: T,
-  selector: readonly PropertyKey[] | ((value: T[keyof T], key: keyof T) => boolean),
+  selector: readonly PropertyKey[] | ((value: T[keyof T], key: ObjectKeys<T>) => boolean),
 ): Partial<T> {
   return typeof selector === 'function'
     ? omitBy(object, selector)

@@ -1,1 +1,1 @@
-export {deepConstantKeys as toConstantCaseKeysDeep} from 'string-ts';
+export {toConstantCaseKeys as toConstantCaseKeysDeep} from 'es-toolkit/object';

@@ -51,9 +51,9 @@ The pure `String.prototype` wrappers re-export `string-ts` directly (their runti
 | `delimiterKeys`                     | ✅     | `object/toDelimiterCaseKeys`     | Shallow; takes a delimiter                                                                                       |
 | `deepCamelKeys`                     | ✅     | `object/toCamelCaseKeysDeep`     | Deep; es-toolkit runtime (Unicode-aware). Existing `toCamelCaseKeys` renamed to free the shallow name            |
 | `deepSnakeKeys`                     | ✅     | `object/toSnakeCaseKeysDeep`     | Deep; es-toolkit runtime (Unicode-aware)                                                                         |
-| `deepKebabKeys`                     | ✅     | `object/toKebabCaseKeysDeep`     | Deep                                                                                                             |
-| `deepPascalKeys`                    | ✅     | `object/toPascalCaseKeysDeep`    | Deep                                                                                                             |
-| `deepConstantKeys`                  | ✅     | `object/toConstantCaseKeysDeep`  | Deep                                                                                                             |
+| `deepKebabKeys`                     | ✅     | `object/toKebabCaseKeysDeep`     | Deep; es-toolkit runtime (Unicode-aware, keeps class instances as-is)                                            |
+| `deepPascalKeys`                    | ✅     | `object/toPascalCaseKeysDeep`    | Deep; es-toolkit runtime (Unicode-aware, keeps class instances as-is)                                            |
+| `deepConstantKeys`                  | ✅     | `object/toConstantCaseKeysDeep`  | Deep; es-toolkit runtime (Unicode-aware, keeps class instances as-is)                                            |
 | `deepDelimiterKeys`                 | ✅     | `object/toDelimiterCaseKeysDeep` | Deep; takes a delimiter                                                                                          |
 | `replaceKeys`                       | ✅     | `object/replaceKeys`             | Shallow substring replacement on keys                                                                            |
 | `deepTransformKeys`                 | ✅     | `object/transformKeysDeep`       | Renamed; deep `(key) => key` mapper                                                                              |

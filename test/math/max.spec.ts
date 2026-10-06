@@ -20,7 +20,7 @@ describe('math/max', () => {
   });
 
   it('returns `undefined` for an empty input', () => {
-    expect(max([])).toBeUndefined();
+    expect(max<number>([])).toBeUndefined();
   });
 
   it('works on any iterable (Set)', () => {
@@ -35,5 +35,10 @@ describe('math/max', () => {
     const large = Array.from({length: 200_000}, (_, index) => index);
 
     expect(max(large)).toBe(199_999);
+  });
+
+  it('supports bigints, even mixed with numbers', () => {
+    expect(max([3n, 10n, 4n])).toBe(10n);
+    expect(max([3n, 10.5, 4n])).toBe(10.5);
   });
 });

@@ -1,4 +1,5 @@
 import {cloneDeep, merge, mergeWith, toMerged} from 'es-toolkit/object';
+import type {Merge} from 'es-toolkit/types';
 
 type MergeValues<T, S> = (
   targetValue: unknown,
@@ -58,14 +59,18 @@ interface MergeDeepOptions<T, S> {
  * });
  * // {list: [1, 2, 3]}
  */
-export const mergeDeep = <
+export function mergeDeep<
   T extends Record<PropertyKey, unknown>,
   S extends Record<PropertyKey, unknown>,
->(
-  target: T,
-  source: S,
-  options?: MergeDeepOptions<T, S>,
-): T & S => {
+>(target: T, source: S, options?: MergeDeepOptions<T, S> & {mergeValues?: undefined}): Merge<T, S>;
+export function mergeDeep<
+  T extends Record<PropertyKey, unknown>,
+  S extends Record<PropertyKey, unknown>,
+>(target: T, source: S, options?: MergeDeepOptions<T, S>): T & S;
+export function mergeDeep<
+  T extends Record<PropertyKey, unknown>,
+  S extends Record<PropertyKey, unknown>,
+>(target: T, source: S, options?: MergeDeepOptions<T, S>) {
   const {mergeValues, copy} = options || {};
 
   if (copy) {
@@ -75,4 +80,4 @@ export const mergeDeep = <
   }
 
   return mergeValues ? mergeWith(target, source, mergeValues) : merge(target, source);
-};
+}

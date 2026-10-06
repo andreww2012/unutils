@@ -1,5 +1,6 @@
 import {pick as pickKeys} from 'es-toolkit/compat';
 import {pickBy} from 'es-toolkit/object';
+import type {ObjectKeys} from 'es-toolkit/types';
 
 /**
  * Creates a new object with only the selected properties of `object`.
@@ -33,11 +34,11 @@ export function pick<T extends object, K extends keyof T>(
 ): Pick<T, K>;
 export function pick<T extends object>(
   object: T,
-  selector: readonly PropertyKey[] | ((value: T[keyof T], key: keyof T) => boolean),
+  selector: readonly PropertyKey[] | ((value: T[keyof T], key: ObjectKeys<T>) => boolean),
 ): Partial<T>;
 export function pick<T extends object>(
   object: T,
-  selector: readonly PropertyKey[] | ((value: T[keyof T], key: keyof T) => boolean),
+  selector: readonly PropertyKey[] | ((value: T[keyof T], key: ObjectKeys<T>) => boolean),
 ): Partial<T> {
   return typeof selector === 'function'
     ? pickBy(object, selector)

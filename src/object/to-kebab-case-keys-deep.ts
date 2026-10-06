@@ -1,1 +1,1 @@
-export {deepKebabKeys as toKebabCaseKeysDeep} from 'string-ts';
+export {toKebabCaseKeys as toKebabCaseKeysDeep} from 'es-toolkit/object';

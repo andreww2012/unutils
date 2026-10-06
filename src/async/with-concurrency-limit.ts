@@ -1,1 +1,1 @@
-export {limitAsync as withConcurrencyLimit} from 'es-toolkit/array';
+export {limitAsync as withConcurrencyLimit} from 'es-toolkit/promise';

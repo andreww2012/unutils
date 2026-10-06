@@ -1,0 +1,41 @@
+---
+'unutils': minor
+---
+
+Updated [`es-toolkit` from v1.49.0 to v1.52.0](https://github.com/toss/es-toolkit/compare/v1.49.0...v1.52.0):
+
+- Added the following utilities:
+  - `object` group:
+    - `freezeDeep` (renamed from [`deepFreeze`](https://es-toolkit.dev/reference/object/deepFreeze.html))
+    - [`mapKeysAsync`](https://es-toolkit.dev/reference/object/mapKeysAsync.html) (as-is)
+    - [`mapValuesAsync`](https://es-toolkit.dev/reference/object/mapValuesAsync.html) (as-is)
+  - `function` group:
+    - `flowAsync` (`flowAsync` from `es-toolkit/fp`, taking the functions as an array like `flow`)
+    - `toDisposable` (consolidates [`defer`](https://es-toolkit.dev/reference/util/defer.html) and [`deferAsync`](https://es-toolkit.dev/reference/util/deferAsync.html))
+  - `iterable` group, from the new `es-toolkit/iterator` entrypoint (all of them accept any iterable, not only iterators):
+    - `generateSequence` (renamed from `iterate`)
+    - `iterableCartesianProduct` (renamed from `cartesianProduct`)
+    - `iterableChunks` (renamed from `chunk`)
+    - `iterableCount` (renamed from `count`)
+    - `iterableDropWhile` (renamed from `dropWhile`)
+    - `iterableFirst` (renamed from `head`)
+    - `iterablePartition` (renamed from `partition`)
+    - `iterableRange` (renamed from `range`)
+    - `iterableScan` (renamed from `scan`)
+    - `iterableTakeWhile` (renamed from `takeWhile`)
+    - `iterableTranspose` (renamed from `zip`)
+    - `iterableUnique` (renamed from `uniqBy`)
+  - `math` group, from the new `es-toolkit/bigint` entrypoint:
+    - `bigintMedian` (consolidates [`median`](https://es-toolkit.dev/reference/bigint/median.html) and [`medianBy`](https://es-toolkit.dev/reference/bigint/medianBy.html))
+    - `bigintPercentile` (renamed from [`percentile`](https://es-toolkit.dev/reference/bigint/percentile.html))
+    - `bigintSum` (consolidates [`sum`](https://es-toolkit.dev/reference/bigint/sum.html) and [`sumBy`](https://es-toolkit.dev/reference/bigint/sumBy.html))
+- The following utilities now also accept bigints, consolidated with their counterparts from the new `es-toolkit/bigint` entrypoint:
+  - `array/maxBy` ([`maxBy`](https://es-toolkit.dev/reference/bigint/maxBy.html))
+  - `array/minBy` ([`minBy`](https://es-toolkit.dev/reference/bigint/minBy.html))
+  - `math/clamp` ([`clamp`](https://es-toolkit.dev/reference/bigint/clamp.html))
+  - `math/isInRange` ([`inRange`](https://es-toolkit.dev/reference/bigint/inRange.html))
+  - `math/max` ([`max`](https://es-toolkit.dev/reference/bigint/max.html))
+  - `math/min` ([`min`](https://es-toolkit.dev/reference/bigint/min.html))
+  - `math/range` ([`range`](https://es-toolkit.dev/reference/bigint/range.html))
+  - `math/rangeRight` ([`rangeRight`](https://es-toolkit.dev/reference/bigint/rangeRight.html))
+- `toConstantCaseKeysDeep`, `toKebabCaseKeysDeep` and `toPascalCaseKeysDeep` are now based on the new [`toConstantCaseKeys`](https://es-toolkit.dev/reference/object/toConstantCaseKeys.html), [`toKebabCaseKeys`](https://es-toolkit.dev/reference/object/toKebabCaseKeys.html) and [`toPascalCaseKeys`](https://es-toolkit.dev/reference/object/toPascalCaseKeys.html): non-ASCII letters are no longer treated as word boundaries, and class instances are kept as-is

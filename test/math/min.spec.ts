@@ -20,7 +20,7 @@ describe('math/min', () => {
   });
 
   it('returns `undefined` for an empty input', () => {
-    expect(min([])).toBeUndefined();
+    expect(min<number>([])).toBeUndefined();
   });
 
   it('works on any iterable (Set)', () => {
@@ -29,5 +29,10 @@ describe('math/min', () => {
 
   it('works on a lazy generator', () => {
     expect(min(values())).toBe(2);
+  });
+
+  it('supports bigints, even mixed with numbers', () => {
+    expect(min([3n, 1n, 4n])).toBe(1n);
+    expect(min([3n, 0.5, 4n])).toBe(0.5);
   });
 });

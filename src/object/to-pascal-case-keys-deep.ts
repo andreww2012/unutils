@@ -1,1 +1,1 @@
-export {deepPascalKeys as toPascalCaseKeysDeep} from 'string-ts';
+export {toPascalCaseKeys as toPascalCaseKeysDeep} from 'es-toolkit/object';

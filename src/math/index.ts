@@ -1,3 +1,6 @@
+export {bigintMedian} from './bigint-median.ts';
+export {bigintPercentile} from './bigint-percentile.ts';
+export {bigintSum} from './bigint-sum.ts';
 export {ceil} from './ceil.ts';
 export {clamp} from './clamp.ts';
 export {floor} from './floor.ts';
