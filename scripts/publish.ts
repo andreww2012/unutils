@@ -31,6 +31,21 @@ const publish = () => {
   execFileSync('pnpm', ['exec', 'changeset', 'publish'], {stdio: 'inherit'});
 };
 
+// changesets/action finds the published packages by the names from this output, but it reads
+// them from `package.json`, which has the unscoped name again by then
+const unscopeChangesetsOutput = (scopedName: string, unscopedName: string) => {
+  const {CHANGESETS_OUTPUT: changesetsOutputPath} = process.env;
+  if (changesetsOutputPath == null || !fs.existsSync(changesetsOutputPath)) {
+    return;
+  }
+
+  const outputText = fs.readFileSync(changesetsOutputPath, 'utf8');
+  fs.writeFileSync(
+    changesetsOutputPath,
+    outputText.replaceAll(JSON.stringify(scopedName), () => JSON.stringify(unscopedName)),
+  );
+};
+
 const run = () => {
   const currentBranch = getCurrentBranch();
 
@@ -52,12 +67,14 @@ const run = () => {
 
   snapshot(THIRD_PARTY_NOTICES_PATH);
 
-  if (currentBranch === SCOPED_PUBLISH_BRANCH) {
-    const packageJsonText = snapshot(PACKAGE_JSON_PATH);
-    const packageJson = jsonParse<{name: string; author: string}>(packageJsonText);
-    const {author: packageAuthor, name: packageUnscopedName} = packageJson;
-    const scopedName = `${ensurePrefix(packageAuthor, '@')}/${packageUnscopedName}`;
+  const isScopedPublish = currentBranch === SCOPED_PUBLISH_BRANCH;
+  const packageJsonText = fs.readFileSync(PACKAGE_JSON_PATH, 'utf8');
+  const packageJson = jsonParse<{name: string; author: string}>(packageJsonText);
+  const {author: packageAuthor, name: packageUnscopedName} = packageJson;
+  const scopedName = `${ensurePrefix(packageAuthor, '@')}/${packageUnscopedName}`;
 
+  if (isScopedPublish) {
+    originalFileContents.set(PACKAGE_JSON_PATH, packageJsonText);
     packageJson.name = scopedName;
     fs.writeFileSync(PACKAGE_JSON_PATH, `${JSON.stringify(packageJson, null, 2)}\n`);
 
@@ -78,6 +95,10 @@ const run = () => {
   } finally {
     for (const [filePath, contents] of originalFileContents) {
       fs.writeFileSync(filePath, contents);
+    }
+
+    if (isScopedPublish) {
+      unscopeChangesetsOutput(scopedName, packageUnscopedName);
     }
   }
 };
