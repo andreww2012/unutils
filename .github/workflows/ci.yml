@@ -134,7 +134,6 @@ jobs:
           # Chooses the scoped vs. unscoped name by branch, without touching
           # `package.json`; see `scripts/publish.ts` for why
           publish-script: node scripts/publish.ts
-          commit-mode: github-api
           pr-title: 'chore: release v${{ env.NEW_VERSION }}'
           commit-message: 'chore: release v${{ env.NEW_VERSION }}'
         env:
