@@ -329,8 +329,8 @@ importers:
         specifier: 0.23.0
         version: 0.23.0(@arethetypeswrong/core@0.18.5)(@typescript/typescript6@6.0.2)(oxc-resolver@11.24.2)(publint@0.3.23)
       type-fest:
-        specifier: 5.8.0
-        version: 5.8.0
+        specifier: 5.10.0
+        version: 5.10.0
       typed-query-selector:
         specifier: 2.12.3
         version: 2.12.3
@@ -5494,8 +5494,8 @@ packages:
     resolution: {integrity: sha512-tLq3bSNx+xSpwvAJnzrK0Ep5CLNWjvFTOp71URMaAEWBfRb9nnJiBoUe0tF8bI4ZFO3omgBR6NvnbzVUT3Ly4g==}
     engines: {node: '>=14.16'}
 
-  type-fest@5.8.0:
-    resolution: {integrity: sha512-YGYEVz3Fm5iy/AybuA0oyNFq7H4CgQNfRp/qfe8nurE1kuCeNm3/vfm9X4Mtl+qLyaKJUh5xrFZwogr41SMjYA==}
+  type-fest@5.10.0:
+    resolution: {integrity: sha512-NoSdpq/WEiAg5sjmBkmV/hfxv6HJH4NqPNrqjtSO5CwRmpsDfaf4begxW34KdJykH/l1yHtwBWQkCRdoXO8mPA==}
     engines: {node: '>=20'}
 
   type-flag@4.5.0:
@@ -10866,7 +10866,7 @@ snapshots:
 
   ts-extras@1.2.0:
     dependencies:
-      type-fest: 5.8.0
+      type-fest: 5.10.0
 
   tsdown@0.23.0(@arethetypeswrong/core@0.18.5)(@typescript/typescript6@6.0.2)(oxc-resolver@11.24.2)(publint@0.3.23):
     dependencies:
@@ -10915,7 +10915,7 @@ snapshots:
 
   type-fest@3.13.1: {}
 
-  type-fest@5.8.0:
+  type-fest@5.10.0:
     dependencies:
       tagged-tag: 1.0.0
 
