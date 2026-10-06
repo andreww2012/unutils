@@ -37,6 +37,7 @@ Mostly thin, strongly-typed re-exports. `Unsafe` in a name flags that the strong
 | [`isEmpty`][ts-extras]           | ❌     | *(not added)*                          | Covered by `predicate/isEmptyValue` (es-toolkit)                                                 |
 | [`objectMapValues`][ts-extras]   | ❌     | *(not added)*                          | Covered by `object/mapValues` (es-toolkit)                                                       |
 | [`isEqualType`][ts-extras]       | ❌     | *(not added)*                          | Compile-time-only test helper; use `expectTypeOf` instead                                        |
+| [`assert`][ts-extras]            | ❌     | *(not added)*                          | Use `misc/invariant`                                                                             |
 | [`assertDefined`][ts-extras]     | ❌     | *(not added)*                          | Use `misc/invariant`                                                                             |
 | [`assertPresent`][ts-extras]     | ❌     | *(not added)*                          | Use `misc/invariant`                                                                             |
 | [`assertError`][ts-extras]       | ❌     | *(not added)*                          | Use the native `Error.isError`                                                                   |
