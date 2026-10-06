@@ -26,7 +26,7 @@ const quoteList = (values: readonly string[]) => values.map((value) => `'${value
 const COLUMN_GAP = '  ';
 
 const DIST_PREFIX_REGEX = /^\.\/dist\//;
-const INDEX_DTS_REGEX = /index\.d\.mts$/;
+const DTS_EXTENSION_REGEX = /\.d\.mts$/;
 
 const FLAGS_SCHEMA = v.object({
   type: v.pipe(
@@ -50,17 +50,25 @@ interface Subpath {
 }
 
 const readSubpaths = (): Subpath[] => {
-  const packageJson = jsonParse<{exports: Record<string, {types: string}>}>(
+  const packageJson = jsonParse<{exports: Record<string, string | {types: string}>}>(
     fs.readFileSync(path.join(__dirname, 'package.json'), 'utf8'),
   );
 
-  return Object.entries(packageJson.exports).map(([subpath, condition]) => {
+  return Object.entries(packageJson.exports).flatMap(([subpath, condition]) => {
+    // Entries like `./package.json` point to a non-code file directly
+    if (typeof condition === 'string') {
+      return [];
+    }
+
     const sourceEntry = path.join(
       __dirname,
-      condition.types.replace(DIST_PREFIX_REGEX, 'src/').replace(INDEX_DTS_REGEX, 'index.ts'),
+      condition.types.replace(DIST_PREFIX_REGEX, 'src/').replace(DTS_EXTENSION_REGEX, '.ts'),
     );
+    if (!fs.existsSync(sourceEntry)) {
+      throw new Error(`Could not find the source file of "${subpath}": ${sourceEntry}`);
+    }
 
-    return {subpath, sourceEntry};
+    return [{subpath, sourceEntry}];
   });
 };
 
@@ -172,7 +180,11 @@ const analyze = (subpaths: Subpath[]) => {
       }
     }
 
-    const files = collectUtilityFiles(sourceEntry, program);
+    // A non-index entry (like a `*.global` module) is a utility file itself
+    const files =
+      path.basename(sourceEntry) === 'index.ts'
+        ? collectUtilityFiles(sourceEntry, program)
+        : new Set([sourceEntry]);
     counts.files = files.size;
     for (const file of files) {
       overallFiles.add(file);
