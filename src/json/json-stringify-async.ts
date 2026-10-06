@@ -1,14 +1,10 @@
 import {stringifyAsync} from 'yieldable-json';
 
-// yieldable-json's `stringifyAsync` argument parser is buggy: when both `space` and
-// `intensity` are supplied it advances its index one slot too far and reads `space` from
-// the `intensity` position (see its index.js), so neither lands correctly. Passing a
-// throwaway numeric arg at index 2 shifts our real `space`/`intensity` into the slots its
-// parser actually reads. This 6-arg form is off-spec, hence the cast to call it.
-const stringifyWithSpaceAndIntensity = stringifyAsync as unknown as (
-  value: unknown,
-  replacer: unknown,
-  parserSlotPadding: number,
+// `@types/yieldable-json` types the replacer key as `number` (it is `string`, as in native
+// `JSON.stringify`). Cast to a clean local signature so callers see correct types.
+const stringify = stringifyAsync as unknown as (
+  value: object,
+  replacer: ((key: string, value: unknown) => unknown) | (number | string)[] | null,
   space: number | string,
   intensity: number,
   callback: (error: Error | null, result: string) => void,
@@ -39,7 +35,7 @@ export const jsonStringifyAsync = (
   intensity = 1,
 ): Promise<string> =>
   new Promise<string>((resolve, reject) => {
-    stringifyWithSpaceAndIntensity(value, replacer, 0, space, intensity, (error, result) => {
+    stringify(value, replacer, space, intensity, (error, result) => {
       if (error) {
         reject(error);
       } else {

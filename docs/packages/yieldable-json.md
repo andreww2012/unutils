@@ -7,7 +7,8 @@
 | [`parseAsync`][yieldable-json]     | ✅     | `json/jsonParseAsync`       | Promisified, typed; non-blocking `JSON.parse` that yields to the event loop. Optional `intensity` |
 | [`stringifyAsync`][yieldable-json] | ✅     | `json/jsonStringifyAsync`   | Promisified, typed; non-blocking `JSON.stringify`. Optional `replacer`/`space`/`intensity`        |
 
-> **Note:** `yieldable-json`'s own argument parser mishandles `stringifyAsync`'s `space`/`intensity` when both are passed; the wrapper works around it.
-> Its `ParseError`/`StringifyError` do not extend `Error`, so rejections carry those objects as-is.
+> **Note:** `yieldable-json`'s `ParseError`/`StringifyError` do not extend `Error`, so rejections carry those objects as-is.
+> Our bundled copy is [patched](../../patches/yieldable-json.patch) for bugs that its latest release (2.1.0) still has.
+> Without the patch, `parseAsync` assigns an undeclared variable, and `stringifyAsync` differs from `JSON.stringify` in many cases (`space`, replacers, `toJSON`, control characters), ignores `intensity` and breaks with concurrent calls.
 
 [yieldable-json]: https://github.com/ibmruntimes/yieldable-json

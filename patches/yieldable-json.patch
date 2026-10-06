@@ -1,0 +1,335 @@
+Fixes bugs of the latest release (2.1.0), mostly to make `stringifyAsync`
+behave like `JSON.stringify`.
+
+`utils/index-of-generator.js`:
+
+1. `chunk` is assigned without being declared.
+   In the original CommonJS code, this silently creates a global variable.
+   Our bundle is strict-mode ESM, where it throws a `ReferenceError` instead,
+   so `jsonParseAsync` rejected every input.
+   Backported from an unreleased upstream commit:
+   https://github.com/ibmruntimes/yieldable-json/commit/be95a02e16006111393a36886e22da5e7b1b2cb2
+
+`index.js`:
+
+2. A numeric `space` is read from the next argument.
+   Our `jsonStringifyAsync` relies on this fix: check it before dropping this part.
+3. `space` isn't limited like in `JSON.stringify`: strings are cut to 9
+   characters instead of 10 (or not cut at all), and numbers are rounded
+   instead of truncated.
+
+`yieldable-stringify.js`:
+
+4. With `space`, nested objects and arrays all get the same single level of
+   indentation.
+   Reported, but not fixed upstream:
+   https://github.com/ibmruntimes/yieldable-json/issues/32
+5. Values with `toJSON` (like `Date`) get extra whitespace with `space`, and
+   the replacer gets them before `toJSON` is called.
+   The upstream commit above fixes the whitespace, but then calls the replacer
+   a second time, with an empty key.
+   Here, `toJSON` is called before the replacer instead, like in `JSON.stringify`.
+6. `intensity` is ignored: `1` is always used.
+7. Array indexes are passed to the replacer and `toJSON` as numbers.
+8. Numbers in a replacer array are ignored, and duplicates aren't skipped.
+9. Control characters aren't escaped, so the output isn't valid JSON.
+   Reported, with an open PR that is backported here:
+   https://github.com/ibmruntimes/yieldable-json/issues/56
+   https://github.com/ibmruntimes/yieldable-json/pull/57
+   That PR alone breaks strings over 100 000 characters when their last chunk
+   contains a control character, so that is fixed too.
+10. All calls share the same state, so concurrent calls can mix up strings over
+    100 000 characters, or fail with "Circular Structure Detected".
+    Reported in https://github.com/ibmruntimes/yieldable-json/issues/8, which is
+    closed, but the state is still shared.
+
+Drop each part once a release includes its fix.
+
+diff --git a/index.js b/index.js
+index ee13c54f046c9555eaa8d3e8875ef6fb18200888..167c2de7029d6e98f7a77c94d3467aba6d94cd6d 100755
+--- a/index.js
++++ b/index.js
+@@ -24,7 +24,7 @@ const ps = require('./yieldable-stringify');
+  */
+ let validateSpace = (space) => {
+   if (typeof space === 'number') {
+-    space = Math.round(space);
++    space = Math.trunc(space) || 0;
+     if (space >= 1 && space <= 10)
+       return space;
+     else if (space < 1)
+@@ -35,7 +35,7 @@ let validateSpace = (space) => {
+     if (space.length <= 10)
+       return space;
+     else
+-    return space.substr(0, 9);
++    return space.substr(0, 10);
+   }
+ };
+ 
+@@ -112,8 +112,7 @@ module.exports = {
+       let i = 1;
+       if (typeof argv[i] === 'function' || typeof argv[i] === 'object')
+         replacer = argv[i++];
+-      if ((typeof argv[i] === 'number' || typeof argv[i] === 'string') &&
+-           typeof argv[i++] === 'number')
++      if (typeof argv[i] === 'number' || typeof argv[i] === 'string')
+         space = validateSpace(argv[i++]);
+       if (typeof argv[i] === 'number')
+         intensity = validateIntensity(argv[i]);
+diff --git a/utils/index-of-generator.js b/utils/index-of-generator.js
+index a0af3fd7f043422653410718aa9a812561bea608..17f92045b2605253cd16a7dc50a18b28134af94e 100644
+--- a/utils/index-of-generator.js
++++ b/utils/index-of-generator.js
+@@ -12,13 +12,15 @@ module.exports.indexOfGenerator = function* indexOfGenerator(stringInput, search
+   let index = -1;
+   while (true) {
+     const at = Math.max(innerAt - 1, 0);
+-    yield chunk = stringInput.slice(at, innerAt + MAX_STRING_SIZE);
++    const chunk = stringInput.slice(at, innerAt + MAX_STRING_SIZE);
++    yield chunk;
+     if (!chunk.length) {
+       return index;
+     }
+     const indexOf = chunk.indexOf(searchInput);
+     if (indexOf !== -1) {
+-      yield index = indexOf + at + initialIndex;
++      index = indexOf + at + initialIndex;
++      yield index;
+       return index;
+     }
+     innerAt += chunk.length + 1;
+diff --git a/yieldable-stringify.js b/yieldable-stringify.js
+index b3814f6dbf4d43eb9b80010f5fa762b49fd72a14..c3fe5d07868dbcaf69ebec5945b11652640f5335 100755
+--- a/yieldable-stringify.js
++++ b/yieldable-stringify.js
+@@ -14,9 +14,6 @@
+  ***************************************************************************/
+ 'use strict';
+ 
+-let counter = 0;
+-let objStack = [];
+-let temp = '';
+ const limit = 100000;
+ 
+ function StringifyError(m) {
+@@ -30,13 +27,13 @@ function StringifyError(m) {
+  * @return { string }
+  */
+ 
+-let normalize = (string, flagN) => {
++let normalize = (string, flagN, state) => {
+   let retStr = '';
+   let transform = '';
+-  let uc =
+-  '/[\\\'\u0000-\u001f\u007f-\u009f\u00ad\u0600-\u0604\u070f\u17b4' +
+-  '\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g';
+-  let unicode = new RegExp(uc);
++  // Escape remaining ASCII control characters U+0000..U+001F as \u00XX.
++  // The five short-form escapes (\b \t \n \f \r) and the quote are
++  // already handled by the escape table below.
++  let unicode = /[\u0000-\u001f]/g;
+   // Taking '\\' out of the loop to avoid change in
+   // order of execution of object entries resulting
+   // in unwanted side effect
+@@ -61,25 +58,25 @@ let normalize = (string, flagN) => {
+       return '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+     });
+     if (flagN === 1) {
+-      transform += temp;
+-      transform += transform;
+-      temp = '';
+-      return '"' + transform + '"';
++      retStr += state.temp;
++      retStr += transform;
++      state.temp = '';
++      return '"' + retStr + '"';
+     } else if (flagN === 2) {
+       return '"' + transform + '"';
+     } else {
+-      temp += transform;
++      state.temp += transform;
+     }
+   } else {
+     if (flagN === 1) {
+-      retStr += temp;
++      retStr += state.temp;
+       retStr += string;
+-      temp = '';
++      state.temp = '';
+       return '"' + retStr + '"';
+     } else if (flagN === 2) {
+       return '"' + string + '"';
+     } else {
+-      temp += string;
++      state.temp += string;
+       return;
+     }
+   }
+@@ -95,7 +92,7 @@ let normalize = (string, flagN) => {
+  * @return { function } yieldCPU
+  */
+ 
+-function * stringifyYield(field, container, replacer, space, intensity) {
++function * stringifyYield(field, container, replacer, space, intensity, state, indent = '') {
+   let itr = 0;
+   let key = '';
+   let val = '';
+@@ -110,11 +107,16 @@ function * stringifyYield(field, container, replacer, space, intensity) {
+   let len = 0;
+ 
+   // Yield the stringification at definite intervals
+-  if (++counter > 512 * intensity) {
+-    counter = 0;
++  if (++state.counter > 512 * intensity) {
++    state.counter = 0;
+     yield val;
+   }
+ 
++  // If toJSON is present, invoke it before the replacer (SPEC)
++  if (value && typeof value.toJSON === 'function') {
++    value = value.toJSON(field);
++  }
++
+   // Call replacer if one is present (SPEC)
+   if (typeof replacer === 'function') {
+     value = replacer.call(container, field, value);
+@@ -130,7 +132,7 @@ function * stringifyYield(field, container, replacer, space, intensity) {
+           len += subStr.length;
+           if (len === value.length)
+             flag1 = 1;
+-          returnStr = normalize(subStr, flag1);
++          returnStr = normalize(subStr, flag1, state);
+         }
+       } else
+         returnStr = normalize(value, 2);
+@@ -149,6 +151,7 @@ function * stringifyYield(field, container, replacer, space, intensity) {
+         return 'null';
+ 
+     // Manage special cases of Arrays and Objects
++      const innerIndent = indent + space;
+       let getResult = (decision) => {
+         if (result.length === 0)
+           if (decision)
+@@ -158,34 +161,23 @@ function * stringifyYield(field, container, replacer, space, intensity) {
+         else
+         if (decision)
+           if (space)
+-            return '{\n' + space + result.join(',\n' + space) + '\n' + '}';
++            return '{\n' + innerIndent + result.join(',\n' + innerIndent) + '\n' + indent + '}';
+           else
+             return '{' + result.join(',') + '}';
+         else
+           if (space)
+-            return '[\n' + space + result.join(',\n' + space) + '\n' + ']';
++            return '[\n' + innerIndent + result.join(',\n' + innerIndent) + '\n' + indent + ']';
+           else
+             return '[' + result.join(',') + ']';
+       };
+ 
+       result = [];
+-    // If toJSON is present, invoke it (SPEC)
+-      if (value && typeof value.toJSON === 'function') {
+-        result.push('"' + value.toJSON(field) + '"');
+-        if (result.length === 0)
+-          return '{}';
+-        else
+-        if (space)
+-          return space + result.join(',\n' + space) + '\n';
+-        else
+-          return result.join(',');
+-      }
+     // Array case
+       if (value && value.constructor === Array) {
+         length = value.length;
+         for (itr = 0; itr < length; itr += 1) {
+           tempVal =
+-          yield *stringifyYield(itr, value, replacer, space, intensity) ||
++          yield *stringifyYield(String(itr), value, replacer, space, intensity, state, innerIndent) ||
+           'null';
+           if (tempVal !== undefined)
+             result.push(tempVal);
+@@ -194,39 +186,41 @@ function * stringifyYield(field, container, replacer, space, intensity) {
+       }
+ 
+     // Manage replacing object scenario (SPEC)
+-      if (replacer && typeof replacer === 'object') {
+-        length = replacer.length;
++      if (Array.isArray(replacer)) {
++        // Like JSON.stringify: numbers are allowed and duplicates are skipped
++        const keys = [...new Set(replacer
++          .filter((item) => typeof item === 'string' || typeof item === 'number')
++          .map(String))];
++        length = keys.length;
+         for (itr = 0; itr < length; itr += 1) {
+-          if (typeof replacer[itr] === 'string') {
+-            key = replacer[itr];
+-            val = yield *stringifyYield(key, value, replacer, space, intensity);
+-            if (val !== undefined)
+-              result.push(normalize(key, 2) + (space
+-              ? ': '
+-              : ':') + val);
+-          }
++          key = keys[itr];
++          val = yield *stringifyYield(key, value, replacer, space, intensity, state, innerIndent);
++          if (val !== undefined)
++            result.push(normalize(key, 2) + (space
++            ? ': '
++            : ':') + val);
+         }
+       } else {
+       // Object case
+-        objStack.push(value);
++        state.objStack.push(value);
+         for (key in value) {
+           if (typeof value[key] === 'object' && value[key] !== null &&
+           value[key] !== undefined) {
+-            if (objStack.indexOf(value[key]) !== -1) {
++            if (state.objStack.indexOf(value[key]) !== -1) {
+               return new StringifyError('Circular Structure Detected');
+             } else
+-            objStack.push(value[key]);
++            state.objStack.push(value[key]);
+           }
+           if (Object.hasOwnProperty.call(value, key)) {
+-            val = yield *stringifyYield(key, value, replacer, space, intensity);
++            val = yield *stringifyYield(key, value, replacer, space, intensity, state, innerIndent);
+             if (val !== undefined)
+               result.push(normalize(key, 2) + (space
+               ? ': '
+               : ':') + val);
+           }
+-          objStack = objStack.filter((v, i, a) => { return v !== value[key] });
++          state.objStack = state.objStack.filter((v, i, a) => { return v !== value[key] });
+         }
+-        objStack = objStack.filter((v, i, a) => { return v !== value });
++        state.objStack = state.objStack.filter((v, i, a) => { return v !== value });
+       }
+       return getResult(true);
+     default:
+@@ -252,11 +246,13 @@ let stringifyWrapper = (value, replacer, space, intensity, callback) => {
+     indent = space;
+   }
+ 
++  // Per-call state, so that concurrent calls don't affect each other
++  const state = { counter: 0, objStack: [], temp: '' };
+   let yielding;
+ 
+   // To hold 'stringifyYield' genarator function
+   function * yieldBridge() {
+-    yielding = yield *stringifyYield('', {'': value}, replacer, indent, 1);
++    yielding = yield *stringifyYield('', {'': value}, replacer, indent, intensity, state);
+   }
+ 
+   let rs = yieldBridge();
+@@ -266,10 +262,6 @@ let stringifyWrapper = (value, replacer, space, intensity, callback) => {
+     setImmediate(() => {
+       g = rs.next();
+       if (g && g.done === true) {
+-        // Reinitializing the values at the end of API call
+-        counter = 0;
+-        temp = ''
+-        objStack = [];
+         if (typeof yielding === 'object')
+           return callback(yielding, null);
+         else

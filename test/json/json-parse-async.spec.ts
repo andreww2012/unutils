@@ -20,4 +20,11 @@ describe('json/jsonParseAsync', () => {
   it('rejects on invalid JSON', async () => {
     await expect(jsonParseAsync('{invalid}')).rejects.toBeDefined();
   });
+
+  // An undeclared variable assignment leaks a global here, but throws in the strict-mode build
+  it('does not assign undeclared variables', async () => {
+    await jsonParseAsync('{"a":"b"}');
+
+    expect(globalThis).not.toHaveProperty('chunk');
+  });
 });

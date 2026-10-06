@@ -114,11 +114,13 @@ var require_index_of_generator = __commonJSMin(((exports, module) => {
 		let index = -1;
 		while (true) {
 			const at = Math.max(innerAt - 1, 0);
-			yield chunk = stringInput.slice(at, innerAt + MAX_STRING_SIZE);
+			const chunk = stringInput.slice(at, innerAt + MAX_STRING_SIZE);
+			yield chunk;
 			if (!chunk.length) return index;
 			const indexOf = chunk.indexOf(searchInput);
 			if (indexOf !== -1) {
-				yield index = indexOf + at + initialIndex;
+				index = indexOf + at + initialIndex;
+				yield index;
 				return index;
 			}
 			innerAt += chunk.length + 1;
@@ -382,18 +384,15 @@ require_yieldable_parser();
 
 // node_modules/yieldable-json/yieldable-stringify.mjs
 var require_yieldable_stringify = __commonJSMin(((exports) => {
-	let counter = 0;
-	let objStack = [];
-	let temp = "";
 	const limit = 1e5;
 	function StringifyError(m) {
 		this.name = "Error";
 		this.message = m;
 	}
-	let normalize = (string, flagN) => {
+	let normalize = (string, flagN, state) => {
 		let retStr = "";
 		let transform = "";
-		let unicode = new RegExp("/[\\'\0--­؀-؄܏឴឵‌-‏\u2028- ⁠-⁯﻿￰-￿]/g");
+		let unicode = /[\u0000-\u001f]/g;
 		string = string.replace(/\\/gi, "\\\\");
 		let escape = {
 			"\b": "\\b",
@@ -413,24 +412,24 @@ var require_yieldable_stringify = __commonJSMin(((exports) => {
 				return "\\u" + ("0000" + a.charCodeAt(0).toString(16)).slice(-4);
 			});
 			if (flagN === 1) {
-				transform += temp;
-				transform += transform;
-				temp = "";
-				return "\"" + transform + "\"";
+				retStr += state.temp;
+				retStr += transform;
+				state.temp = "";
+				return "\"" + retStr + "\"";
 			} else if (flagN === 2) return "\"" + transform + "\"";
-			else temp += transform;
+			else state.temp += transform;
 		} else if (flagN === 1) {
-			retStr += temp;
+			retStr += state.temp;
 			retStr += string;
-			temp = "";
+			state.temp = "";
 			return "\"" + retStr + "\"";
 		} else if (flagN === 2) return "\"" + string + "\"";
 		else {
-			temp += string;
+			state.temp += string;
 			return;
 		}
 	};
-	function* stringifyYield(field, container, replacer, space, intensity) {
+	function* stringifyYield(field, container, replacer, space, intensity, state, indent = "") {
 		let itr = 0;
 		let key = "";
 		let val = "";
@@ -442,10 +441,11 @@ var require_yieldable_stringify = __commonJSMin(((exports) => {
 		let returnStr = "";
 		let subStr = "";
 		let len = 0;
-		if (++counter > 512 * intensity) {
-			counter = 0;
+		if (++state.counter > 512 * intensity) {
+			state.counter = 0;
 			yield val;
 		}
+		if (value && typeof value.toJSON === "function") value = value.toJSON(field);
 		if (typeof replacer === "function") value = replacer.call(container, field, value);
 		switch (typeof value) {
 			case "string":
@@ -455,7 +455,7 @@ var require_yieldable_stringify = __commonJSMin(((exports) => {
 					subStr = value.substr(l, limit);
 					len += subStr.length;
 					if (len === value.length) flag1 = 1;
-					returnStr = normalize(subStr, flag1);
+					returnStr = normalize(subStr, flag1, state);
 				}
 				else returnStr = normalize(value, 2);
 				return returnStr;
@@ -465,52 +465,48 @@ var require_yieldable_stringify = __commonJSMin(((exports) => {
 			case "undefined": return;
 			case "object":
 				if (!value) return "null";
+				const innerIndent = indent + space;
 				let getResult = (decision) => {
 					if (result.length === 0) if (decision) return "{}";
 					else return "[]";
-					else if (decision) if (space) return "{\n" + space + result.join(",\n" + space) + "\n}";
+					else if (decision) if (space) return "{\n" + innerIndent + result.join(",\n" + innerIndent) + "\n" + indent + "}";
 					else return "{" + result.join(",") + "}";
-					else if (space) return "[\n" + space + result.join(",\n" + space) + "\n]";
+					else if (space) return "[\n" + innerIndent + result.join(",\n" + innerIndent) + "\n" + indent + "]";
 					else return "[" + result.join(",") + "]";
 				};
 				result = [];
-				if (value && typeof value.toJSON === "function") {
-					result.push("\"" + value.toJSON(field) + "\"");
-					if (result.length === 0) return "{}";
-					else if (space) return space + result.join(",\n" + space) + "\n";
-					else return result.join(",");
-				}
 				if (value && value.constructor === Array) {
 					length = value.length;
 					for (itr = 0; itr < length; itr += 1) {
-						tempVal = yield* stringifyYield(itr, value, replacer, space, intensity) || "null";
+						tempVal = yield* stringifyYield(String(itr), value, replacer, space, intensity, state, innerIndent) || "null";
 						if (tempVal !== void 0) result.push(tempVal);
 					}
 					return getResult(false);
 				}
-				if (replacer && typeof replacer === "object") {
-					length = replacer.length;
-					for (itr = 0; itr < length; itr += 1) if (typeof replacer[itr] === "string") {
-						key = replacer[itr];
-						val = yield* stringifyYield(key, value, replacer, space, intensity);
+				if (Array.isArray(replacer)) {
+					const keys = [...new Set(replacer.filter((item) => typeof item === "string" || typeof item === "number").map(String))];
+					length = keys.length;
+					for (itr = 0; itr < length; itr += 1) {
+						key = keys[itr];
+						val = yield* stringifyYield(key, value, replacer, space, intensity, state, innerIndent);
 						if (val !== void 0) result.push(normalize(key, 2) + (space ? ": " : ":") + val);
 					}
 				} else {
-					objStack.push(value);
+					state.objStack.push(value);
 					for (key in value) {
 						if (typeof value[key] === "object" && value[key] !== null && value[key] !== void 0) {
-							if (objStack.indexOf(value[key]) !== -1) return new StringifyError("Circular Structure Detected");
-							else objStack.push(value[key]);
+							if (state.objStack.indexOf(value[key]) !== -1) return new StringifyError("Circular Structure Detected");
+							else state.objStack.push(value[key]);
 						}
 						if (Object.hasOwnProperty.call(value, key)) {
-							val = yield* stringifyYield(key, value, replacer, space, intensity);
+							val = yield* stringifyYield(key, value, replacer, space, intensity, state, innerIndent);
 							if (val !== void 0) result.push(normalize(key, 2) + (space ? ": " : ":") + val);
 						}
-						objStack = objStack.filter((v, i, a) => {
+						state.objStack = state.objStack.filter((v, i, a) => {
 							return v !== value[key];
 						});
 					}
-					objStack = objStack.filter((v, i, a) => {
+					state.objStack = state.objStack.filter((v, i, a) => {
 						return v !== value;
 					});
 				}
@@ -522,9 +518,14 @@ var require_yieldable_stringify = __commonJSMin(((exports) => {
 		let indent = "";
 		if (typeof space === "number") indent = " ".repeat(space);
 		else if (typeof space === "string") indent = space;
+		const state = {
+			counter: 0,
+			objStack: [],
+			temp: ""
+		};
 		let yielding;
 		function* yieldBridge() {
-			yielding = yield* stringifyYield("", { "": value }, replacer, indent, 1);
+			yielding = yield* stringifyYield("", { "": value }, replacer, indent, intensity, state);
 		}
 		let rs = yieldBridge();
 		let g = rs.next();
@@ -532,9 +533,6 @@ var require_yieldable_stringify = __commonJSMin(((exports) => {
 			setImmediate(() => {
 				g = rs.next();
 				if (g && g.done === true) {
-					counter = 0;
-					temp = "";
-					objStack = [];
 					if (typeof yielding === "object") return callback(yielding, null);
 					else return callback(null, yielding);
 				}
@@ -553,12 +551,12 @@ var require_yieldable_json = __commonJSMin(((exports, module) => {
 	const ps = require_yieldable_stringify();
 	let validateSpace = (space) => {
 		if (typeof space === "number") {
-			space = Math.round(space);
+			space = Math.trunc(space) || 0;
 			if (space >= 1 && space <= 10) return space;
 			else if (space < 1) return 0;
 			else return 10;
 		} else if (space.length <= 10) return space;
-		else return space.substr(0, 9);
+		else return space.substr(0, 10);
 	};
 	let validateIntensity = (intensity) => {
 		intensity = Math.round(intensity);
@@ -593,7 +591,7 @@ var require_yieldable_json = __commonJSMin(((exports, module) => {
 			if (argv.length > 2) {
 				let i = 1;
 				if (typeof argv[i] === "function" || typeof argv[i] === "object") replacer = argv[i++];
-				if ((typeof argv[i] === "number" || typeof argv[i] === "string") && typeof argv[i++] === "number") space = validateSpace(argv[i++]);
+				if (typeof argv[i] === "number" || typeof argv[i] === "string") space = validateSpace(argv[i++]);
 				if (typeof argv[i] === "number") intensity = validateIntensity(argv[i]);
 			}
 			return ps.stringifyWrapper(data, replacer, space, intensity, callback);
