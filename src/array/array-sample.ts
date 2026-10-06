@@ -53,11 +53,7 @@ export function arraySample<T>(
   }
 
   if (options?.withReplacement) {
-    if (array.length === 0) {
-      return [];
-    }
-
-    return Array.from({length: size}, () => sample(array));
+    return array.length === 0 ? [] : Array.from({length: size}, () => sample(array));
   }
 
   return sampleSize(array, size);

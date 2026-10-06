@@ -41,9 +41,7 @@ export const arrayDropRight = <T>(
   array: readonly T[],
   itemsCountOrPredicate: number | ((item: T, index: number, array: readonly T[]) => boolean),
 ): T[] => {
-  if (typeof itemsCountOrPredicate === 'function') {
-    return dropRightWhile(array, itemsCountOrPredicate);
-  }
-
-  return dropRight(array, itemsCountOrPredicate);
+  return typeof itemsCountOrPredicate === 'function'
+    ? dropRightWhile(array, itemsCountOrPredicate)
+    : dropRight(array, itemsCountOrPredicate);
 };

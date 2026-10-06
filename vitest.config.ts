@@ -2,7 +2,12 @@ import {configDefaults, defineConfig} from 'vitest/config';
 
 export default defineConfig({
   test: {
-    exclude: [...configDefaults.exclude, 'test/**/fixtures/**', 'test/published-dts/**'],
+    exclude: [
+      ...configDefaults.exclude,
+      'test/**/fixtures/**',
+      'test/published-dts/**',
+      '.claude/worktrees/**', // cspell:disable-line
+    ],
     globals: true,
     setupFiles: ['./test/setup.ts'],
     snapshotFormat: {

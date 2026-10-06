@@ -41,9 +41,5 @@ export const arrayTakeWhile = <T>(
   predicate: (item: T, index: number, array: readonly T[]) => boolean,
   isFromRight = false,
 ): T[] => {
-  if (isFromRight) {
-    return takeRightWhile(array, predicate);
-  }
-
-  return takeWhile(array, predicate);
+  return isFromRight ? takeRightWhile(array, predicate) : takeWhile(array, predicate);
 };

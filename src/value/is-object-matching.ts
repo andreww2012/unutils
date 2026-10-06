@@ -51,9 +51,5 @@ export function isObjectMatching(
   pattern: object,
   customizer?: IsObjectMatchingCustomizer,
 ): boolean {
-  if (customizer) {
-    return isMatchWith(object, pattern, customizer);
-  }
-
-  return isMatch(object, pattern);
+  return customizer ? isMatchWith(object, pattern, customizer) : isMatch(object, pattern);
 }

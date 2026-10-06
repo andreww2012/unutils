@@ -4,7 +4,8 @@
 
 > **Legend:** ✅ added · ❌ not added (see notes) · 🚧 under consideration · ⌛ planned
 
-Only remeda's standalone, data-first functions are considered; the `pipe`/`purry`/lazy machinery and every data-last (curried) form are intentionally excluded. remeda overlaps `es-toolkit` heavily — those duplicated operations are marked *via `es-toolkit`* and documented in full in the `es-toolkit` table above. Non-array categories are still being triaged group-by-group, so many remeda-unique functions there are `🚧` for now.
+Only remeda's standalone, data-first functions are considered; the `pipe`/`purry`/lazy machinery and every data-last (curried) form are intentionally excluded. remeda overlaps `es-toolkit` heavily — those duplicated operations are marked *via `es-toolkit`* and documented in full in the `es-toolkit` table above.
+Non-array categories are still being triaged group-by-group, so many remeda-unique functions there are `🚧` for now.
 
 | Original function name                                              | Status | Our function group and name           | Notes                                                                                                      |
 | ------------------------------------------------------------------- | ------ | ------------------------------------- | ---------------------------------------------------------------------------------------------------------- |

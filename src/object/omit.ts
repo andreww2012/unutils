@@ -39,9 +39,7 @@ export function omit<T extends object>(
   object: T,
   selector: readonly PropertyKey[] | ((value: T[keyof T], key: keyof T) => boolean),
 ): Partial<T> {
-  if (typeof selector === 'function') {
-    return omitBy(object, selector);
-  }
-
-  return omitKeys(object, [...selector]);
+  return typeof selector === 'function'
+    ? omitBy(object, selector)
+    : omitKeys(object, [...selector]);
 }

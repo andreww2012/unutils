@@ -33,9 +33,7 @@ export const typeOf = (value: unknown): string => {
     return 'null';
   }
 
-  if (typeof value === 'object') {
-    return Object.prototype.toString.call(value).slice(8, -1);
-  }
-
-  return typeof value;
+  return typeof value === 'object'
+    ? Object.prototype.toString.call(value).slice(8, -1)
+    : typeof value;
 };

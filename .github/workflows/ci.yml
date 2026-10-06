@@ -33,7 +33,7 @@ jobs:
       - run: pnpm knip
 
   spellcheck:
-    name: Spell checker (CSpell)
+    name: Spellcheck (cspell)
     needs: install
     runs-on: ubuntu-24.04
     steps:
@@ -42,7 +42,7 @@ jobs:
       - run: pnpm check:spelling
 
   formatting:
-    name: Formatting checker (prettier)
+    name: Formatting check (oxfmt)
     needs: install
     runs-on: ubuntu-24.04
     steps:
@@ -51,7 +51,7 @@ jobs:
       - run: pnpm check:format
 
   typecheck:
-    name: Type checker
+    name: Typecheck (tsgo)
     needs: install
     runs-on: ubuntu-24.04
     steps:
@@ -118,12 +118,16 @@ jobs:
       # Based on https://github.com/changesets/action/issues/303#issuecomment-1888167265
       - name: Capture new release version
         run: |
-          pnpm changeset version
+          # Exits with 1 if there are no unreleased changesets,
+          # in which case the version stays the same
+          pnpm changeset version || true
           echo "NEW_VERSION=$(jq -r '.version' package.json)" >> $GITHUB_ENV
           git restore .
+          # `changeset version` may also create new files (like `CHANGELOG.md` on the first release)
+          git clean -fdq
       - name: Create release / Publish
         id: changesets
-        uses: changesets/action@198f833dd7d863100ea6e28967bc9a9fdefadb0a # v2.1.0
+        uses: changesets/action@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           # Chooses the scoped vs. unscoped name by branch, without touching

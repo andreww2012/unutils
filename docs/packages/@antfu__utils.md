@@ -4,7 +4,8 @@
 
 > **Legend:** ✅ added · ❌ not added (see notes) · 🚧 under consideration · ⌛ planned
 
-A general-purpose grab-bag that overlaps heavily with `es-toolkit` and our existing utilities, so most entries are already covered. Only its **non-type** (runtime) exports are audited here; the type-level utilities are out of scope.
+A general-purpose grab-bag that overlaps heavily with `es-toolkit` and our existing utilities, so most entries are already covered.
+Only its **non-type** (runtime) exports are audited here; the type-level utilities are out of scope.
 
 | Original function         | Status | Our function group and name    | Notes                                                                                    |
 | ------------------------- | ------ | ------------------------------ | ---------------------------------------------------------------------------------------- |

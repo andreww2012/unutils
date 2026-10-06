@@ -44,9 +44,7 @@ export const flow = (
   functions: readonly ((...args: never[]) => unknown)[],
   isFromRight = false,
 ): ((...args: never[]) => unknown) => {
-  if (isFromRight) {
-    return esFlowRight(...(functions as Parameters<typeof esFlowRight>));
-  }
-
-  return esFlow(...(functions as Parameters<typeof esFlow>));
+  return isFromRight
+    ? esFlowRight(...(functions as Parameters<typeof esFlowRight>))
+    : esFlow(...(functions as Parameters<typeof esFlow>));
 };

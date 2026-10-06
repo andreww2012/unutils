@@ -54,9 +54,5 @@ interface CurryFn {
  * // 'hi'
  */
 export const curry = ((func: (...args: never[]) => unknown, isFromRight = false) => {
-  if (isFromRight) {
-    return esCurryRight(func);
-  }
-
-  return esCurry(func);
+  return isFromRight ? esCurryRight(func) : esCurry(func);
 }) as CurryFn;

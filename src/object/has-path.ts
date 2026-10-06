@@ -43,9 +43,5 @@ export const hasPath = (
     inherited?: boolean;
   },
 ): boolean => {
-  if (options?.inherited) {
-    return hasIn(object, path);
-  }
-
-  return has(object, path);
+  return options?.inherited ? hasIn(object, path) : has(object, path);
 };

@@ -56,9 +56,7 @@ export function flatMap<T, U>(
   iteratee: (item: T, index: number, array: readonly T[]) => U,
   depth?: number,
 ): unknown[] {
-  if (depth == null || depth === Number.POSITIVE_INFINITY) {
-    return flatMapDeep(array, iteratee);
-  }
-
-  return flatMapEs(array, iteratee, depth);
+  return depth == null || depth === Number.POSITIVE_INFINITY
+    ? flatMapDeep(array, iteratee)
+    : flatMapEs(array, iteratee, depth);
 }

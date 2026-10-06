@@ -79,9 +79,5 @@ export function arrayAt<ArrayType extends readonly unknown[], Index extends numb
   index: Index,
 ): ArrayElementAt<ArrayType, Index>;
 export function arrayAt(array: readonly unknown[], indices: number | number[]): unknown {
-  if (Array.isArray(indices)) {
-    return at(array, indices);
-  }
-
-  return arrayAtSingle(array, indices);
+  return Array.isArray(indices) ? at(array, indices) : arrayAtSingle(array, indices);
 }

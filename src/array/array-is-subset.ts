@@ -44,7 +44,6 @@ import {isSubsetWith} from 'es-toolkit/array';
  * );
  * // false
  */
-// eslint-disable-next-line unicorn/consistent-boolean-name
 export function arrayIsSubset<T>(superset: readonly T[], subset: readonly T[]): boolean;
 export function arrayIsSubset<T, U>(
   superset: readonly T[],

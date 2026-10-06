@@ -1,21 +1,43 @@
+# `ncu` only updates catalogs in workspace mode, which needs this
+packages:
+  - ./
+
 saveExact: true
+autoDedupe: true
+saveTypes: true
 
 minimumReleaseAge: 960 # 16 hours in minutes
 minimumReleaseAgeExclude: []
+minimumReleaseAgeExcludePrune: true
 
 trustPolicy: no-downgrade
 trustPolicyIgnoreAfter: 43200 # 30 days in minutes
 trustPolicyExclude: []
 
+audit:
+  ignore: # []
+    - GHSA-ch52-4w7c-c8xp # `http-cache-semantics` from `eslint-config-un` has no patched version yet
+  ignorePrune: true
+
 allowBuilds:
-  lefthook@2.1.10: true
-  unrs-resolver@1.12.2: false
+  lefthook@2.1.16: true
+
+  esbuild: false
+  unrs-resolver: false
 
 dedupePeers: true
 strictPeerDependencies: false
 
+catalogs:
+  format:
+    oxfmt: 0.71.0
+
 overrides:
-  # The `typescript-7` alias pulls the real `typescript@7` that does not expose the API yet
+  # Format Markdown code blocks with the same oxfmt version as all other files
+  eslint-plugin-format>oxfmt: 'catalog:format'
+  # Only used by its Prettier rule. Otherwise, `eslint-config-un` would think Prettier is used
+  eslint-plugin-format>prettier: '-'
+  # The `typescript7` alias pulls the real `typescript@7` that does not expose the API yet
   eslint-plugin-sonarjs>typescript: 'npm:@typescript/typescript6@6.0.2'
   # GHSA-fx2h-pf6j-xcff cspell:disable-line
   # Can't use range like `^8.0.16` as pnpm won't re-resolve the already-locked vite for a range replacement, only for an exact one
@@ -23,8 +45,7 @@ overrides:
   nanoid@>=3 <3.3.17: 3.3.18
   postcss@>=8 <=8.5.17: 8.5.26
 
-peerDependencyRules:
-  allowedVersions: {}
+peerDependencyRules: {}
 
 patchedDependencies:
   arkregex: patches/arkregex.patch

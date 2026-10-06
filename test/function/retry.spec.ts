@@ -5,10 +5,7 @@ describe('function/retry', () => {
     let attempts = 0;
     const flaky = () => {
       attempts++;
-      if (attempts < 3) {
-        return Promise.reject(new Error('flaky'));
-      }
-      return Promise.resolve('ok');
+      return attempts < 3 ? Promise.reject(new Error('flaky')) : Promise.resolve('ok');
     };
 
     await expect(retry(flaky, {retries: 5, delay: 0})).resolves.toBe('ok');

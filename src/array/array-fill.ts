@@ -53,9 +53,7 @@ export const arrayFill = <T, U>(
   const finalStart = start || 0;
   const finalEnd = end ?? array.length;
 
-  if (options?.copy) {
-    return toFilled(array, value, finalStart, finalEnd);
-  }
-
-  return fill(array, value, finalStart, finalEnd);
+  return options?.copy
+    ? toFilled(array, value, finalStart, finalEnd)
+    : fill(array, value, finalStart, finalEnd);
 };

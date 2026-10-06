@@ -66,9 +66,7 @@ export function arrayIntersection<T>(
     return firstArray.filter((item) => secondSet.has(item));
   }
 
-  if (fn.length === 2) {
-    return intersectionWith(firstArray, secondArray, fn as (x: T, y: unknown) => boolean);
-  }
-
-  return intersectionBy(firstArray, secondArray, fn as (value: unknown) => unknown);
+  return fn.length === 2
+    ? intersectionWith(firstArray, secondArray, fn as (x: T, y: unknown) => boolean)
+    : intersectionBy(firstArray, secondArray, fn as (value: unknown) => unknown);
 }

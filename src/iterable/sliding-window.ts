@@ -73,15 +73,17 @@ export function* slidingWindow<T>(
 
     buffer.push(item);
 
-    if (buffer.length === size) {
-      yield buffer.slice();
+    if (buffer.length !== size) {
+      continue;
+    }
 
-      if (step >= size) {
-        buffer.length = 0;
-        skip = step - size;
-      } else {
-        buffer.splice(0, step);
-      }
+    yield buffer.slice();
+
+    if (step >= size) {
+      buffer.length = 0;
+      skip = step - size;
+    } else {
+      buffer.splice(0, step);
     }
   }
 

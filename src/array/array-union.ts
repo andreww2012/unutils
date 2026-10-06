@@ -56,9 +56,7 @@ export function arrayUnion<T>(
     return [...new Set([...firstArray, ...secondArray])];
   }
 
-  if (fn.length === 2) {
-    return unionWith(firstArray, secondArray, fn as (x: T, y: T) => boolean);
-  }
-
-  return unionBy(firstArray, secondArray, fn as (value: T) => unknown);
+  return fn.length === 2
+    ? unionWith(firstArray, secondArray, fn as (x: T, y: T) => boolean)
+    : unionBy(firstArray, secondArray, fn as (value: T) => unknown);
 }

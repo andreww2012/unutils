@@ -42,9 +42,5 @@ type CloneDeepCustomizer<T> = (
 export function cloneDeep<T>(value: T, cloneValue: CloneDeepCustomizer<T>): T;
 export function cloneDeep<T>(value: T): T;
 export function cloneDeep<T>(value: T, cloneValue?: CloneDeepCustomizer<T>): T {
-  if (cloneValue) {
-    return cloneDeepWith(value, cloneValue);
-  }
-
-  return cloneDeepFromEsToolkit(value);
+  return cloneValue ? cloneDeepWith(value, cloneValue) : cloneDeepFromEsToolkit(value);
 }

@@ -69,16 +69,10 @@ export const mergeDeep = <
   const {mergeValues, copy} = options || {};
 
   if (copy) {
-    if (mergeValues) {
-      return mergeWith(cloneDeep(target), source, mergeValues);
-    }
-
-    return toMerged(target, source);
+    return mergeValues
+      ? mergeWith(cloneDeep(target), source, mergeValues)
+      : toMerged(target, source);
   }
 
-  if (mergeValues) {
-    return mergeWith(target, source, mergeValues);
-  }
-
-  return merge(target, source);
+  return mergeValues ? mergeWith(target, source, mergeValues) : merge(target, source);
 };

@@ -71,7 +71,8 @@ Names target a reader who has never used the source library: we rename whenever 
 - **Adopt a widely-recognized math/CS term when it names the operation precisely.** `zip`/`unzip` → `arrayTranspose`, `xor` → `arraySymmetricDifference`.
 - **Avoid ambiguous or misleading words.** `after`/`before` sound temporal → `fromNthCall`/`untilNthCall`; `escape` is vague → `escapeHtml`.
 - **Reflect behavior, including side effects.** Mutating array helpers share an `arrayPurge*` prefix: `pull` → `arrayPurgeValues`, `remove` → `arrayPurgeBy`, `pullAt` → `arrayPurgeIndexes`.
-- **Prefix by group to disambiguate and signal the operand**, where it helps: `map*` (`filter` → `mapFilter`), `set*` (`filter` → `setFilter`), and `array*` for many array utilities; likewise encode a precondition when it matters (`sortedArray…`). Not mandatory when the name is already unambiguous (`flatMap`, `sortBy`).
+- **Prefix by group to disambiguate and signal the operand**, where it helps: `map*` (`filter` → `mapFilter`), `set*` (`filter` → `setFilter`), and `array*` for many array utilities; likewise encode a precondition when it matters (`sortedArray…`).
+  Not mandatory when the name is already unambiguous (`flatMap`, `sortBy`).
 - **Predicates read as a question (`is*`)** — `inRange` → `isInRange`, `isLength` → `isValidLength`; converters use `to*` — `camelCase` → `toCamelCase`.
 - **Strict camelCase, acronyms included.** `isJSON` → `isJson`.
 - **Spelling preferences:**
@@ -87,7 +88,8 @@ All groups' symbols should be re-exported in `src/index.ts`, unless the group ta
 All groups automatically get their own entrypoint (`/<group-name>`) which should be declared in `package.json`'s `exports` field.
 
 > [!TIP]
-> If you are choosing between "custom implementation" and "pure-export from a package" AND the implementations are identical, and you're inclining to go for the former "because it saves bundle size", this is WRONG: all external libraries' imports are bundled anyway. You only increase maintenance cost, winning nothing.
+> If you are choosing between "custom implementation" and "pure-export from a package" AND the implementations are identical, and you're inclining to go for the former "because it saves bundle size", this is WRONG: all external libraries' imports are bundled anyway.
+> You only increase maintenance cost, winning nothing.
 
 ### Adding from a package
 

@@ -77,16 +77,12 @@ export function assignDefaults(
   const {deep, copy} = options || {};
 
   if (copy) {
-    if (deep) {
-      return defaultsDeep(cloneDeep(target), ...sources) as object;
-    }
-
-    return toDefaulted(target, ...sources);
+    return deep
+      ? (defaultsDeep(cloneDeep(target), ...sources) as object)
+      : toDefaulted(target, ...sources);
   }
 
-  if (deep) {
-    return defaultsDeep(target, ...sources) as object;
-  }
-
-  return defaults(target, ...sources) as object;
+  return deep
+    ? (defaultsDeep(target, ...sources) as object)
+    : (defaults(target, ...sources) as object);
 }

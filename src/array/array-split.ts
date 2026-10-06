@@ -55,9 +55,7 @@ export function arraySplit<T>(
   array: readonly T[],
   indexOrPredicate: number | ((value: T, index: number, array: readonly T[]) => boolean),
 ): [T[], T[]] {
-  if (typeof indexOrPredicate === 'function') {
-    return splitWhen(array, indexOrPredicate);
-  }
-
-  return splitAt(array, indexOrPredicate);
+  return typeof indexOrPredicate === 'function'
+    ? splitWhen(array, indexOrPredicate)
+    : splitAt(array, indexOrPredicate);
 }

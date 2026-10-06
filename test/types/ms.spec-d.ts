@@ -16,7 +16,6 @@ describe('types/Ms', () => {
     expectTypeOf<Ms<'1 hour'>>().toEqualTypeOf<3_600_000>();
     expectTypeOf<Ms<'-42s'>>().toEqualTypeOf<-42_000>();
     expectTypeOf<Ms<'3.14d'>>().toEqualTypeOf<271_296_000>();
-    // eslint-disable-next-line un/no-multiple-consecutive-spaces -- intentional: exercises whitespace trimming
     expectTypeOf<Ms<'  010ms  '>>().toEqualTypeOf<10>();
   });
 

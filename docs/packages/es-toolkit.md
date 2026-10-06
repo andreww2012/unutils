@@ -216,7 +216,9 @@
 
 ## `es-toolkit/compat`
 
-Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e. those whose plain `es-toolkit` equivalent isn't already covered above. Pure name-duplicates of already-added utilities are intentionally omitted. Trivially native-replaceable functions are listed as ❌ so the decision isn't re-litigated.
+Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e. those whose plain `es-toolkit` equivalent isn't already covered above.
+Pure name-duplicates of already-added utilities are intentionally omitted.
+Trivially native-replaceable functions are listed as ❌ so the decision isn't re-litigated.
 
 | Original function group and name                                                                          | Status | Our function group and name       | Notes                                                                                                                             |
 | --------------------------------------------------------------------------------------------------------- | ------ | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
@@ -382,7 +384,9 @@ Functions exclusive to the `es-toolkit/compat` (lodash-compatible) entry — i.e
 
 ## `es-toolkit/fp`
 
-Data-last, curried variants of utilities from the main entrypoints, meant for use with `pipe`. `unutils` is data-first by design, so this entire entrypoint is intentionally **not** re-exported — every function is a call-style restatement of a data-first utility already provided (or a native one-liner). Each row points to that equivalent so the decision isn't re-litigated on future updates. The sole exception is `chunkBy`, whose consecutive-run chunking has no data-first equivalent anywhere else; it is folded into `array/arrayChunks`.
+Data-last, curried variants of utilities from the main entrypoints, meant for use with `pipe`. `unutils` is data-first by design, so this entire entrypoint is intentionally **not** re-exported — every function is a call-style restatement of a data-first utility already provided (or a native one-liner).
+Each row points to that equivalent so the decision isn't re-litigated on future updates.
+The sole exception is `chunkBy`, whose consecutive-run chunking has no data-first equivalent anywhere else; it is folded into `array/arrayChunks`.
 
 | Original function group and name | Status | Our function group and name      | Notes                                                                    |
 | -------------------------------- | ------ | -------------------------------- | ------------------------------------------------------------------------ |

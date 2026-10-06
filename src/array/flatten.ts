@@ -37,9 +37,7 @@ import type {ExtractNestedArrayType} from '../_internal/types.ts';
 export function flatten<T>(array: readonly T[]): ExtractNestedArrayType<T>[];
 export function flatten<T, D extends number>(array: readonly T[], depth: D): FlatArray<T[], D>[];
 export function flatten<T>(array: readonly T[], depth?: number): unknown[] {
-  if (depth == null || depth === Number.POSITIVE_INFINITY) {
-    return flattenDeep(array);
-  }
-
-  return flattenEs(array, depth);
+  return depth == null || depth === Number.POSITIVE_INFINITY
+    ? flattenDeep(array)
+    : flattenEs(array, depth);
 }

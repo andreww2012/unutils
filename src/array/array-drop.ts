@@ -39,9 +39,7 @@ export const arrayDrop = <T>(
   array: readonly T[],
   itemsCountOrPredicate: number | ((item: T, index: number, array: readonly T[]) => boolean),
 ): T[] => {
-  if (typeof itemsCountOrPredicate === 'function') {
-    return dropWhile(array, itemsCountOrPredicate);
-  }
-
-  return drop(array, itemsCountOrPredicate);
+  return typeof itemsCountOrPredicate === 'function'
+    ? dropWhile(array, itemsCountOrPredicate)
+    : drop(array, itemsCountOrPredicate);
 };

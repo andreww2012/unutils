@@ -1,8 +1,10 @@
 import type {CSpellSettings} from 'cspell';
 
-const GLOBALLY_IGNORED_WORDS = {
+const GLOBALLY_IGNORED_WORDS: Record<string, string[]> = {
   names: [
+    'andreww',
     'unutils',
+    'verkit',
     'sonarjs',
     'destr',
     'yieldable',
@@ -12,7 +14,6 @@ const GLOBALLY_IGNORED_WORDS = {
     'cleye',
     'nanoid',
     'neotraverse',
-    'andreww',
   ],
   misc: ['knipignore', 'rearg', 'GHSA'],
   englishIshWords: [
@@ -25,7 +26,7 @@ const GLOBALLY_IGNORED_WORDS = {
     'stringifiers',
   ],
   typeFest: ['jsonify', 'jsonifiable', 'arrayable', 'asyncify', 'optionalize'],
-} satisfies Record<string, string[]>;
+};
 
 export default {
   useGitignore: true,
@@ -35,15 +36,10 @@ export default {
     '**/.git/**',
     '**/pnpm-lock.yaml',
     'patches/**',
+    '.agents/guidelines.md', // Copied from an external source
     '.all-contributorsrc',
-    '.agents/style-guide.md', // Copied from an external source
   ],
   dictionaries: ['npm', 'node', 'typescript', 'fullstack'],
-  overrides: [
-    {
-      filename: ['package.json', 'cspell.config.*s'],
-      words: ['andreww'],
-    },
-  ],
   words: Object.values(GLOBALLY_IGNORED_WORDS).flat(),
+  overrides: [],
 } satisfies CSpellSettings;

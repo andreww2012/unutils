@@ -39,9 +39,7 @@ export function pick<T extends object>(
   object: T,
   selector: readonly PropertyKey[] | ((value: T[keyof T], key: keyof T) => boolean),
 ): Partial<T> {
-  if (typeof selector === 'function') {
-    return pickBy(object, selector);
-  }
-
-  return pickKeys(object, [...selector]);
+  return typeof selector === 'function'
+    ? pickBy(object, selector)
+    : pickKeys(object, [...selector]);
 }

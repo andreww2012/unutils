@@ -1,11 +1,9 @@
 import {mergeDeep} from '../../src/object/merge-deep.ts';
 
 const concatArrays = (targetValue: unknown, sourceValue: unknown): unknown[] | undefined => {
-  if (Array.isArray(targetValue) && Array.isArray(sourceValue)) {
-    return [...(targetValue as unknown[]), ...(sourceValue as unknown[])];
-  }
-
-  return undefined;
+  return Array.isArray(targetValue) && Array.isArray(sourceValue)
+    ? [...(targetValue as unknown[]), ...(sourceValue as unknown[])]
+    : undefined;
 };
 
 describe('object/mergeDeep', () => {

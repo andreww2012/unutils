@@ -40,9 +40,7 @@ export function arrayUnique<T>(
     return [...new Set(array)];
   }
 
-  if (fn.length === 2) {
-    return uniqWith(array as T[], fn as (a: T, b: T) => boolean);
-  }
-
-  return uniqBy(array as T[], fn as (value: T) => unknown);
+  return fn.length === 2
+    ? uniqWith(array as T[], fn as (a: T, b: T) => boolean)
+    : uniqBy(array as T[], fn as (value: T) => unknown);
 }

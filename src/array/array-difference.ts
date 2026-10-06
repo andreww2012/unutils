@@ -66,9 +66,7 @@ export function arrayDifference<T>(
     return firstArray.filter((item) => !secondSet.has(item));
   }
 
-  if (fn.length === 2) {
-    return differenceWith(firstArray, secondArray, fn as (x: T, y: unknown) => boolean);
-  }
-
-  return differenceBy(firstArray, secondArray, fn as (value: unknown) => unknown);
+  return fn.length === 2
+    ? differenceWith(firstArray, secondArray, fn as (x: T, y: unknown) => boolean)
+    : differenceBy(firstArray, secondArray, fn as (value: unknown) => unknown);
 }

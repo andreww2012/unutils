@@ -30,9 +30,5 @@ export const findObjectKey = <T extends Record<PropertyKey, unknown>>(
   predicate: (value: T[keyof T], key: keyof T, object: T) => boolean,
   isFromRight?: boolean,
 ): keyof T | undefined => {
-  if (isFromRight) {
-    return findLastKey(object, predicate);
-  }
-
-  return findKey(object, predicate);
+  return isFromRight ? findLastKey(object, predicate) : findKey(object, predicate);
 };

@@ -1,9 +1,9 @@
 <!-- cspell:ignore Pooya Parsa Jong Puru Vijay Guichard Sindre Sorhus sublicensable Schlueter Andrey Sitnik arielhs -->
 
-<!-- eslint-disable-next-line markdown-preferences/heading-casing -->
 # Third-Party Notices
 
-`unutils` ships with zero runtime dependencies by bundling the packages it builds on directly into its published output (see [`docs/packages`](docs/packages) for what each one contributes). This file reproduces their license texts, as required by those licenses.
+`unutils` ships with zero runtime dependencies by bundling the packages it builds on directly into its published output (see [`docs/packages`](docs/packages) for what each one contributes).
+This file reproduces their license texts, as required by those licenses.
 
 <!-- THIRD_PARTY_NOTICES_TABLE:START -->
 

@@ -39,11 +39,7 @@ export function arrayTranspose<T>(
   iteratee?: (...args: T[]) => unknown,
 ): unknown[] {
   if (iteratee) {
-    if (rows.length === 0) {
-      return [];
-    }
-
-    return unzipWith(rows, iteratee);
+    return rows.length === 0 ? [] : unzipWith(rows, iteratee);
   }
 
   return unzip(rows);

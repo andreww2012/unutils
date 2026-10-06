@@ -35,9 +35,5 @@ export function swapObjectKeysValues(
   object: object,
   groupValueBy?: (value: never) => PropertyKey,
 ): object {
-  if (groupValueBy) {
-    return invertBy(object, groupValueBy);
-  }
-
-  return invert(object);
+  return groupValueBy ? invertBy(object, groupValueBy) : invert(object);
 }

@@ -22,6 +22,9 @@ const DEFAULT_OUTPUT_FORMAT = 'text' satisfies OutputFormat;
 
 const quoteList = (values: readonly string[]) => values.map((value) => `'${value}'`).join(', ');
 
+// Separates the columns in the text output
+const COLUMN_GAP = '  ';
+
 const DIST_PREFIX_REGEX = /^\.\/dist\//;
 const INDEX_DTS_REGEX = /index\.d\.mts$/;
 
@@ -178,7 +181,12 @@ const analyze = (subpaths: Subpath[]) => {
     return {subpath, counts};
   });
 
-  const overall: Counts = {functions: 0, types: 0, constants: 0, files: overallFiles.size};
+  const overall: Counts = {
+    functions: 0,
+    types: 0,
+    constants: 0,
+    files: overallFiles.size,
+  };
   for (const category of overallCategories.values()) {
     overall[category] += 1;
   }
@@ -192,18 +200,19 @@ const formatText = (
   requested: CountType[],
 ) => {
   const formatCounts = (counts: Counts) =>
-    requested.map((category) => `${category}=${counts[category]}`).join('  ');
+    requested.map((category) => `${category}=${counts[category]}`).join(COLUMN_GAP);
 
   const subpathWidth = max(perSubpath.map(({subpath}) => subpath.length)) || 0;
 
   const lines = [
     'unutils export counts',
     '',
-    `Overall  ${formatCounts(overall)}`,
+    `Overall${COLUMN_GAP}${formatCounts(overall)}`,
     '',
     'By subpath',
     ...perSubpath.map(
-      ({subpath, counts}) => `  ${subpath.padEnd(subpathWidth)}  ${formatCounts(counts)}`,
+      ({subpath, counts}) =>
+        `${COLUMN_GAP}${subpath.padEnd(subpathWidth)}${COLUMN_GAP}${formatCounts(counts)}`,
     ),
   ];
 

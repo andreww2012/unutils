@@ -1,1 +1,0 @@
-../../../.agents/skills/write-a-script/SKILL.md

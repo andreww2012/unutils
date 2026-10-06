@@ -79,9 +79,7 @@ export function arraySymmetricDifference<T>(
     return result;
   }
 
-  if (fn.length === 2) {
-    return xorWith(firstArray, secondArray, fn as (x: T, y: T) => boolean);
-  }
-
-  return xorBy(firstArray, secondArray, fn as (value: T) => unknown);
+  return fn.length === 2
+    ? xorWith(firstArray, secondArray, fn as (x: T, y: T) => boolean)
+    : xorBy(firstArray, secondArray, fn as (value: T) => unknown);
 }

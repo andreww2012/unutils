@@ -42,9 +42,5 @@ type IsEqualCustomizer = (
 export function isEqual(a: unknown, b: unknown, customizer: IsEqualCustomizer): boolean;
 export function isEqual(a: unknown, b: unknown): boolean;
 export function isEqual(a: unknown, b: unknown, customizer?: IsEqualCustomizer): boolean {
-  if (customizer) {
-    return isEqualWith(a, b, customizer);
-  }
-
-  return isEqualFromEsToolkit(a, b);
+  return customizer ? isEqualWith(a, b, customizer) : isEqualFromEsToolkit(a, b);
 }
