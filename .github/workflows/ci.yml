@@ -99,9 +99,10 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: ./.github/actions/prepare
       # `tsdown` runs `attw` and `publint` with `failOnWarn`, so this also lints
-      # the public types. The consumer check needs the built `dist/`.
+      # the public types. The consumer and side effects checks need the built `dist/`.
       - run: pnpm build
       - run: pnpm test:types:consumer
+      - run: pnpm test:side-effects
 
   release:
     name: Create release PR _OR_ Publish on merge

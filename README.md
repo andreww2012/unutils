@@ -7,6 +7,7 @@ A growing collection of general-purpose utilities and TypeScript types, mostly c
 ## Features
 
 - 🌱 **Zero dependencies**: everything is bundled;
+- 🌳 **Tree-shakeable**: unused utilities are dropped from your bundle;
 - ✨ **More than 250** utilities and **200** types.
 
 ## Installation

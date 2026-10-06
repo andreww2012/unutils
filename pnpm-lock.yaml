@@ -312,6 +312,9 @@ importers:
       remeda:
         specifier: 2.39.0
         version: 2.39.0(patch_hash=e9e98c19bf4c5844450bf78de4493bf242de2fdb7c7ecf7ee2313945578d9b68)
+      rolldown:
+        specifier: 1.2.12
+        version: 1.2.12
       safe-stable-stringify:
         specifier: 2.5.0
         version: 2.5.0

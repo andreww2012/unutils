@@ -20,6 +20,9 @@
   },
   "license": "MIT",
   "author": "andreww2012",
+  "sideEffects": [
+    "./dist/**/*.global.mjs"
+  ],
   "type": "module",
   "exports": {
     ".": {
@@ -160,7 +163,8 @@
     "test:vitest": "nr t run",
     "test:vitest:cov": "nr t:cov run",
     "test:types:consumer": "vitest run --config test/published-dts/vitest.config.ts",
-    "test": "nr check:deps && nr check && nr build && nr test:types:consumer && nr test:vitest:cov",
+    "test:side-effects": "vitest run --config test/published-side-effects/vitest.config.ts",
+    "test": "nr check:deps && nr check && nr build && nr test:types:consumer && nr test:side-effects && nr test:vitest:cov",
     "ch": "changeset add --message \"___REPLACE_ME___\"",
     "release": "changeset publish",
     "build": "tsdown --clean",
@@ -210,6 +214,7 @@
     "oxfmt": "catalog:format",
     "publint": "0.3.23",
     "remeda": "2.39.0",
+    "rolldown": "1.2.12",
     "safe-stable-stringify": "2.5.0",
     "string-ts": "2.3.1",
     "ts-extras": "1.2.0",

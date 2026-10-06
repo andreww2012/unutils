@@ -36,6 +36,7 @@ export default {
     '**/.git/**',
     '**/pnpm-lock.yaml',
     'patches/**',
+    'test/published-side-effects/__snapshots__/**', // Built code of bundled packages
     '.agents/guidelines.md', // Copied from an external source
     '.all-contributorsrc',
   ],

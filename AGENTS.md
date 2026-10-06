@@ -11,6 +11,9 @@ All without zero dependencies because all external dependencies are bundled.
 
 - The project targets modern JavaScript execution environments (Node.js 22+ and "Baseline Widely Available" web features).
 - Update `README.md` to reflect the made changes after you've finished.
+- The `sideEffects` field in `package.json` tells bundlers that only `*.global.ts` modules have side effects, so they drop any other module whose exports are unused.
+  Other modules, including the code of bundled packages, must not do anything on import that matters even when their exports are unused (patch globals or prototypes, add listeners, etc.)
+  `nr test:side-effects` snapshots the code that bundlers can't drop: when the snapshot changes (often after bumping a bundled package), check that the new code doesn't do that.
 - When you bump the version of a bundled package, only describe the upstream changes that affect our package's users: runtime behavior, types or exported API.
   Leave out everything else, such as upstream docs, CI, tooling, refactors, or changes in their dependencies that don't reach our bundle.
   This applies everywhere you describe the bump: changesets, commit messages, `README.md` and your replies, etc.

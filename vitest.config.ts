@@ -6,6 +6,7 @@ export default defineConfig({
       ...configDefaults.exclude,
       'test/**/fixtures/**',
       'test/published-dts/**',
+      'test/published-side-effects/**',
       '.claude/worktrees/**', // cspell:disable-line
     ],
     globals: true,
