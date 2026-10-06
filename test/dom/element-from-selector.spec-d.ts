@@ -7,6 +7,7 @@ describe('dom/ElementFromSelector', () => {
     expectTypeOf<
       ElementFromSelector<'input.form-control[name=username]'>
     >().toEqualTypeOf<HTMLInputElement>();
+    expectTypeOf<ElementFromSelector<'input[name="tags[]"]'>>().toEqualTypeOf<HTMLInputElement>();
   });
 
   it('takes the rightmost tag of a compound selector', () => {

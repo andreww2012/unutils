@@ -215,7 +215,7 @@
     "ts-extras": "1.2.0",
     "tsdown": "0.23.0",
     "type-fest": "5.8.0",
-    "typed-query-selector": "2.12.2",
+    "typed-query-selector": "2.12.3",
     "typescript": "npm:@typescript/typescript6@6.0.2",
     "typescript7": "npm:typescript@7.0.2",
     "valibot": "1.4.2",
