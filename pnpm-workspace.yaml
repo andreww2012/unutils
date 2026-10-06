@@ -20,7 +20,7 @@ audit:
   ignorePrune: true
 
 allowBuilds:
-  lefthook@2.1.16: true
+  lefthook@2.1.17: true
 
   esbuild: false
   unrs-resolver: false
