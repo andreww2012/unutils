@@ -14,11 +14,10 @@ All without zero dependencies because all external dependencies are bundled.
 - The `sideEffects` field in `package.json` tells bundlers that only `*.global.ts` modules have side effects, so they drop any other module whose exports are unused.
   Other modules, including the code of bundled packages, must not do anything on import that matters even when their exports are unused (patch globals or prototypes, add listeners, etc.)
   `nr test:side-effects` snapshots the code that bundlers can't drop: when the snapshot changes (often after bumping a bundled package), check that the new code doesn't do that.
-- When you bump the version of a bundled package, only describe the upstream changes that affect our package's users: runtime behavior, types or exported API.
-  Leave out everything else, such as upstream docs, CI, tooling, refactors, or changes in their dependencies that don't reach our bundle.
-  This applies everywhere you describe the bump: changesets, commit messages, `README.md` and your replies, etc.
-  Always link the full upstream diff between the old and the new version (e.g. a GitHub compare link) instead of copying upstream changelogs.
+- When you bump the version of a bundled package, describe only the changes to our own exports: utilities added, removed or renamed, and behavior fixes we make by patching the package (`patches/`).
+  Upstream changes, including fixes and behavior changes of utilities we already export, are covered by a link to the full upstream diff between the old and the new version (e.g. a GitHub compare link), which you always add.
   If the package has no tags for these versions, use commit hashes the versions were published from.
+  This applies everywhere you describe the bump: changesets, commit messages, `README.md` and your replies, etc.
 
 ## Domain description
 
