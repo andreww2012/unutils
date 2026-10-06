@@ -1,6 +1,13 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@4.0.0/schema.json",
-  "changelog": ["@changesets/changelog-github", {"repo": "andreww2012/unutils"}],
+  "changelog": [
+    "@changesets/changelog-github",
+    {
+      "repo": "andreww2012/unutils",
+      "disableThanks": true,
+      "template": "\n\n- {commit} - {summary}"
+    }
+  ],
   "access": "public",
   "baseBranch": "origin/main",
   "updateInternalDependencies": "patch"
