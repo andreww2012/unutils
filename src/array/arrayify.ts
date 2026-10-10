@@ -1,3 +1,12 @@
+// Distributes over a union, so its array members keep their own types instead of becoming elements
+type ArrayifyEachMember<T, ShouldWrapNullish extends boolean> = T extends null | undefined
+  ? ShouldWrapNullish extends true
+    ? [T]
+    : []
+  : T extends readonly unknown[]
+    ? T
+    : [T];
+
 /**
  * Ensures a value is an array: returns it unchanged when it already is one,
  * wraps it in a single-element array otherwise, and — by default — returns an
@@ -10,6 +19,9 @@
  * `value[]`), and nullish values collapse to `[]` rather than being wrapped as
  * `[null]` / `[undefined]`. Pass `shouldWrapNullish: true` to opt back into
  * wrapping nullish values like any other value.
+ *
+ * A union mixing arrays with other values is typed member by member: its tuples
+ * keep their types, and its other values become single-element tuples.
  * @param value - The value to ensure is an array.
  * @param shouldWrapNullish - When `true`, a nullish `value` is wrapped (`[value]`)
  * like any other value instead of collapsing to `[]`. Defaults to `false`.
@@ -23,6 +35,11 @@
  * // Returns an existing array untouched (preserving tuple types)
  * arrayify([1, 2, 3]);
  * // [1, 2, 3]
+ * @example
+ * // Types each member of a union mixing arrays with other values separately
+ * declare const formatter: 'oxfmt' | ['dprint', {language: string}];
+ * const [name, options] = arrayify(formatter);
+ * // name: 'oxfmt' | 'dprint', options: {language: string} | undefined
  * @example
  * // Wraps rather than converts — a Set is not spread
  * arrayify(new Set([1, 2, 3]));
@@ -43,8 +60,8 @@
 export function arrayify<T extends null | undefined>(value: T, shouldWrapNullish: true): [T];
 export function arrayify<T extends readonly unknown[]>(value: T, shouldWrapNullish: true): T;
 export function arrayify<T>(value: T | readonly T[], shouldWrapNullish: true): NonNullable<T>[];
-// eslint-disable-next-line ts/unified-signatures -- kept separate so the `T | readonly T[]` overload above normalizes homogeneous unions first, falling through to this permissive one for heterogeneous unions
-export function arrayify<T>(value: T, shouldWrapNullish: true): NonNullable<T>[];
+// Comes after the `T | readonly T[]` overload, which catches homogeneous unions first
+export function arrayify<T>(value: T, shouldWrapNullish: true): ArrayifyEachMember<T, true>;
 export function arrayify(value: null | undefined, shouldWrapNullish?: boolean): [];
 export function arrayify<T extends readonly unknown[]>(
   value: T | null | undefined,
@@ -54,11 +71,7 @@ export function arrayify<T>(
   value: T | readonly T[] | null | undefined,
   shouldWrapNullish?: boolean,
 ): NonNullable<T>[];
-export function arrayify<T>(
-  // eslint-disable-next-line ts/unified-signatures -- same as above
-  value: T | null | undefined,
-  shouldWrapNullish?: boolean,
-): NonNullable<T>[];
+export function arrayify<T>(value: T, shouldWrapNullish?: boolean): ArrayifyEachMember<T, false>;
 export function arrayify(value: unknown, shouldWrapNullish = false): unknown {
   if (value == null) {
     return shouldWrapNullish ? [value] : [];
