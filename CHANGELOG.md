@@ -1,5 +1,11 @@
 # unutils
 
+## 0.2.1
+
+### Patch Changes
+
+- [`57ce269`](https://github.com/andreww2012/unutils/commit/57ce2694e92edb6f5f148047450e42fed95e5cbe) - `arrayify`: a union mixing arrays with other values is now typed member by member, so its tuples keep their own types instead of becoming array elements
+
 ## 0.2.0
 
 ### Minor Changes
