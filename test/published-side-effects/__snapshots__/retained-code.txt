@@ -462,7 +462,9 @@ var require_yieldable_stringify = __commonJSMin(((exports) => {
 			case "number": return isFinite(value) ? String(value) : "null";
 			case "boolean":
 			case "null": return String(value);
-			case "undefined": return;
+			case "undefined":
+			case "function":
+			case "symbol": return;
 			case "object":
 				if (!value) return "null";
 				const innerIndent = indent + space;
@@ -475,12 +477,16 @@ var require_yieldable_stringify = __commonJSMin(((exports) => {
 					else return "[" + result.join(",") + "]";
 				};
 				result = [];
+				if (state.objStack.indexOf(value) !== -1) return new StringifyError("Circular Structure Detected");
+				state.objStack.push(value);
 				if (value && value.constructor === Array) {
 					length = value.length;
 					for (itr = 0; itr < length; itr += 1) {
-						tempVal = yield* stringifyYield(String(itr), value, replacer, space, intensity, state, innerIndent) || "null";
-						if (tempVal !== void 0) result.push(tempVal);
+						tempVal = yield* stringifyYield(String(itr), value, replacer, space, intensity, state, innerIndent);
+						if (tempVal instanceof StringifyError) return tempVal;
+						result.push(tempVal === void 0 ? "null" : tempVal);
 					}
+					state.objStack.pop();
 					return getResult(false);
 				}
 				if (Array.isArray(replacer)) {
@@ -489,27 +495,15 @@ var require_yieldable_stringify = __commonJSMin(((exports) => {
 					for (itr = 0; itr < length; itr += 1) {
 						key = keys[itr];
 						val = yield* stringifyYield(key, value, replacer, space, intensity, state, innerIndent);
+						if (val instanceof StringifyError) return val;
 						if (val !== void 0) result.push(normalize(key, 2) + (space ? ": " : ":") + val);
 					}
-				} else {
-					state.objStack.push(value);
-					for (key in value) {
-						if (typeof value[key] === "object" && value[key] !== null && value[key] !== void 0) {
-							if (state.objStack.indexOf(value[key]) !== -1) return new StringifyError("Circular Structure Detected");
-							else state.objStack.push(value[key]);
-						}
-						if (Object.hasOwnProperty.call(value, key)) {
-							val = yield* stringifyYield(key, value, replacer, space, intensity, state, innerIndent);
-							if (val !== void 0) result.push(normalize(key, 2) + (space ? ": " : ":") + val);
-						}
-						state.objStack = state.objStack.filter((v, i, a) => {
-							return v !== value[key];
-						});
-					}
-					state.objStack = state.objStack.filter((v, i, a) => {
-						return v !== value;
-					});
+				} else for (key in value) if (Object.hasOwnProperty.call(value, key)) {
+					val = yield* stringifyYield(key, value, replacer, space, intensity, state, innerIndent);
+					if (val instanceof StringifyError) return val;
+					if (val !== void 0) result.push(normalize(key, 2) + (space ? ": " : ":") + val);
 				}
+				state.objStack.pop();
 				return getResult(true);
 			default: return new StringifyError("Unexpected Character");
 		}

@@ -42,6 +42,15 @@ behave like `JSON.stringify`.
     100 000 characters, or fail with "Circular Structure Detected".
     Reported in https://github.com/ibmruntimes/yieldable-json/issues/8, which is
     closed, but the state is still shared.
+11. Errors of nested values aren't passed up, but put into the output as
+    `[object Object]`: for example, circular references below the top level.
+    Functions and symbols are turned into such errors too, while `JSON.stringify`
+    skips them (or uses `null` in arrays).
+12. `undefined` values in arrays are dropped instead of becoming `null`:
+    `yield *a() || 'null'` means `yield *(a() || 'null')`.
+13. Circular references are only checked for object keys, so circular arrays,
+    or circular objects with a replacer array, overflow the call stack and crash
+    the process.
 
 Drop each part once a release includes its fix.
 
@@ -100,7 +109,7 @@ index a0af3fd7f043422653410718aa9a812561bea608..17f92045b2605253cd16a7dc50a18b28
      }
      innerAt += chunk.length + 1;
 diff --git a/yieldable-stringify.js b/yieldable-stringify.js
-index b3814f6dbf4d43eb9b80010f5fa762b49fd72a14..c3fe5d07868dbcaf69ebec5945b11652640f5335 100755
+index b3814f6dbf4d43eb9b80010f5fa762b49fd72a14..93cd26a052e7929fb0ffacb8f6e5ed4d94e2c5cc 100755
 --- a/yieldable-stringify.js
 +++ b/yieldable-stringify.js
 @@ -14,9 +14,6 @@
@@ -203,7 +212,16 @@ index b3814f6dbf4d43eb9b80010f5fa762b49fd72a14..c3fe5d07868dbcaf69ebec5945b11652
          }
        } else
          returnStr = normalize(value, 2);
-@@ -149,6 +151,7 @@ function * stringifyYield(field, container, replacer, space, intensity) {
+@@ -143,12 +145,16 @@ function * stringifyYield(field, container, replacer, space, intensity) {
+     case 'null':
+       return String(value);
+     case 'undefined':
++    // Skipped like in JSON.stringify (SPEC)
++    case 'function':
++    case 'symbol':
+       return;
+     case 'object':
+       if (!value)
          return 'null';
  
      // Manage special cases of Arrays and Objects
@@ -211,7 +229,7 @@ index b3814f6dbf4d43eb9b80010f5fa762b49fd72a14..c3fe5d07868dbcaf69ebec5945b11652
        let getResult = (decision) => {
          if (result.length === 0)
            if (decision)
-@@ -158,34 +161,23 @@ function * stringifyYield(field, container, replacer, space, intensity) {
+@@ -158,76 +164,69 @@ function * stringifyYield(field, container, replacer, space, intensity) {
          else
          if (decision)
            if (space)
@@ -239,17 +257,28 @@ index b3814f6dbf4d43eb9b80010f5fa762b49fd72a14..c3fe5d07868dbcaf69ebec5945b11652
 -        else
 -          return result.join(',');
 -      }
++    // Detect circular structures: the stack holds the objects and arrays
++    // that are being serialized
++      if (state.objStack.indexOf(value) !== -1)
++        return new StringifyError('Circular Structure Detected');
++      state.objStack.push(value);
      // Array case
        if (value && value.constructor === Array) {
          length = value.length;
          for (itr = 0; itr < length; itr += 1) {
            tempVal =
 -          yield *stringifyYield(itr, value, replacer, space, intensity) ||
-+          yield *stringifyYield(String(itr), value, replacer, space, intensity, state, innerIndent) ||
-           'null';
-           if (tempVal !== undefined)
-             result.push(tempVal);
-@@ -194,39 +186,41 @@ function * stringifyYield(field, container, replacer, space, intensity) {
+-          'null';
+-          if (tempVal !== undefined)
+-            result.push(tempVal);
++          yield *stringifyYield(String(itr), value, replacer, space, intensity, state, innerIndent);
++          if (tempVal instanceof StringifyError)
++            return tempVal;
++          // Values that can't be serialized become null in arrays (SPEC)
++          result.push(tempVal === undefined ? 'null' : tempVal);
+         }
++        state.objStack.pop();
+         return getResult(false);
        }
  
      // Manage replacing object scenario (SPEC)
@@ -272,6 +301,8 @@ index b3814f6dbf4d43eb9b80010f5fa762b49fd72a14..c3fe5d07868dbcaf69ebec5945b11652
 -          }
 +          key = keys[itr];
 +          val = yield *stringifyYield(key, value, replacer, space, intensity, state, innerIndent);
++          if (val instanceof StringifyError)
++            return val;
 +          if (val !== undefined)
 +            result.push(normalize(key, 2) + (space
 +            ? ': '
@@ -280,34 +311,33 @@ index b3814f6dbf4d43eb9b80010f5fa762b49fd72a14..c3fe5d07868dbcaf69ebec5945b11652
        } else {
        // Object case
 -        objStack.push(value);
-+        state.objStack.push(value);
          for (key in value) {
-           if (typeof value[key] === 'object' && value[key] !== null &&
-           value[key] !== undefined) {
+-          if (typeof value[key] === 'object' && value[key] !== null &&
+-          value[key] !== undefined) {
 -            if (objStack.indexOf(value[key]) !== -1) {
-+            if (state.objStack.indexOf(value[key]) !== -1) {
-               return new StringifyError('Circular Structure Detected');
-             } else
+-              return new StringifyError('Circular Structure Detected');
+-            } else
 -            objStack.push(value[key]);
-+            state.objStack.push(value[key]);
-           }
+-          }
            if (Object.hasOwnProperty.call(value, key)) {
 -            val = yield *stringifyYield(key, value, replacer, space, intensity);
 +            val = yield *stringifyYield(key, value, replacer, space, intensity, state, innerIndent);
++            if (val instanceof StringifyError)
++              return val;
              if (val !== undefined)
                result.push(normalize(key, 2) + (space
                ? ': '
                : ':') + val);
            }
 -          objStack = objStack.filter((v, i, a) => { return v !== value[key] });
-+          state.objStack = state.objStack.filter((v, i, a) => { return v !== value[key] });
          }
 -        objStack = objStack.filter((v, i, a) => { return v !== value });
-+        state.objStack = state.objStack.filter((v, i, a) => { return v !== value });
        }
++      state.objStack.pop();
        return getResult(true);
      default:
-@@ -252,11 +246,13 @@ let stringifyWrapper = (value, replacer, space, intensity, callback) => {
+       return new StringifyError('Unexpected Character');
+@@ -252,11 +251,13 @@ let stringifyWrapper = (value, replacer, space, intensity, callback) => {
      indent = space;
    }
  
@@ -322,7 +352,7 @@ index b3814f6dbf4d43eb9b80010f5fa762b49fd72a14..c3fe5d07868dbcaf69ebec5945b11652
    }
  
    let rs = yieldBridge();
-@@ -266,10 +262,6 @@ let stringifyWrapper = (value, replacer, space, intensity, callback) => {
+@@ -266,10 +267,6 @@ let stringifyWrapper = (value, replacer, space, intensity, callback) => {
      setImmediate(() => {
        g = rs.next();
        if (g && g.done === true) {

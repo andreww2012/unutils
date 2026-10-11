@@ -185,7 +185,7 @@ patchedDependencies:
   arkregex: 3f67bd7e43eee25c719bf062c781074cdc10fd2636c0bfe0e1d332a7d32f7dcd
   nanoid@6: 3d7c4929c5f893bd84219a435353aa1f0dec79743bc2580b372fbf009eea5c86
   remeda: e5e9cb0ab98af1439c69c33c8c0eb3417e8516a7ee031dff8616649f6126164c
-  yieldable-json: b00d652e4d69666511dc9c35274fc9058e0d80582c6ad40de7c5f187db0a6659
+  yieldable-json: 99ef03f3389c09deed4e4153be94aa67496efaa60c81aad372bc2ab182524c88
 
 importers:
 
@@ -358,7 +358,7 @@ importers:
         version: 5.0.3(@types/node@22.20.5)(@vitest/coverage-v8@5.0.3)(@vitest/ui@5.0.3)(happy-dom@20.14.6)(vite@8.0.16)
       yieldable-json:
         specifier: 2.1.0
-        version: 2.1.0(patch_hash=b00d652e4d69666511dc9c35274fc9058e0d80582c6ad40de7c5f187db0a6659)
+        version: 2.1.0(patch_hash=99ef03f3389c09deed4e4153be94aa67496efaa60c81aad372bc2ab182524c88)
 
 packages:
 
@@ -11178,7 +11178,7 @@ snapshots:
       y18n: 5.0.8
       yargs-parser: 22.0.0
 
-  yieldable-json@2.1.0(patch_hash=b00d652e4d69666511dc9c35274fc9058e0d80582c6ad40de7c5f187db0a6659): {}
+  yieldable-json@2.1.0(patch_hash=99ef03f3389c09deed4e4153be94aa67496efaa60c81aad372bc2ab182524c88): {}
 
   yocto-queue@0.1.0: {}
 

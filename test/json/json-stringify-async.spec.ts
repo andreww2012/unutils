@@ -96,10 +96,31 @@ describe('json/jsonStringifyAsync', () => {
     expect(results).toStrictEqual(values.map((value) => JSON.stringify(value)));
   });
 
-  it('rejects when serialization fails', async () => {
-    const circular: {self?: unknown} = {};
-    circular.self = circular;
+  it('skips functions, symbols and `undefined` like `JSON.stringify`', async () => {
+    const value = {
+      function: () => {},
+      symbol: Symbol('a'),
+      array: [() => {}, Symbol('a'), undefined, 1],
+    };
 
-    await expect(jsonStringifyAsync(circular)).rejects.toBeDefined();
+    // eslint-disable-next-line unicorn/no-unsafe-json-serialization -- Native behavior is the expectation
+    await expect(jsonStringifyAsync(value)).resolves.toBe(JSON.stringify(value));
+  });
+
+  it('rejects circular structures at any depth', async () => {
+    const circularObject: {self?: unknown} = {};
+    circularObject.self = circularObject;
+    const circularArray: unknown[] = [];
+    circularArray.push(circularArray);
+    const circularError = {message: 'Circular Structure Detected'};
+
+    await Promise.all([
+      expect(jsonStringifyAsync(circularObject)).rejects.toMatchObject(circularError),
+      expect(jsonStringifyAsync([{nested: circularObject}])).rejects.toMatchObject(circularError),
+      expect(jsonStringifyAsync(circularArray)).rejects.toMatchObject(circularError),
+      expect(
+        jsonStringifyAsync({nested: circularObject}, ['nested', 'self']),
+      ).rejects.toMatchObject(circularError),
+    ]);
   });
 });
