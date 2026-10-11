@@ -48,11 +48,6 @@ export function median<T>(items: Iterable<T>, getValue?: (element: T) => number)
 
   const middle = values.length >>> 1;
 
-  if (values.length % 2 === 1) {
-    // eslint-disable-next-line ts/no-non-null-assertion -- `middle` is in bounds: values is non-empty and `middle < values.length`
-    return values[middle]!;
-  }
-
-  // eslint-disable-next-line ts/no-non-null-assertion -- both indices are in bounds for a non-empty even-length array
-  return (values[middle - 1]! + values[middle]!) / 2;
+  // eslint-disable-next-line ts/no-non-null-assertion -- Both indices are in bounds: `values` is non-empty
+  return values.length % 2 === 1 ? values[middle]! : (values[middle - 1]! + values[middle]!) / 2;
 }

@@ -1,11 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {eslintConfig} from 'eslint-config-un';
-import {
-  GLOB_JS_TS_X_EXTENSION,
-  GLOB_MARKDOWN,
-  GLOB_YML_YAML_EXTENSION,
-} from 'eslint-config-un/globs';
+import {GLOB_MARKDOWN_SUPPORTED_CODE_BLOCKS} from 'eslint-config-un/globs';
 import oxfmtConfig from './oxfmt.config.ts';
 
 const PACKAGE_DOC_EXTENSION_REGEX = /\.md$/;
@@ -44,13 +40,8 @@ export default eslintConfig({
     },
   ],
   configs: {
-    fileProgress: true,
     format: {
-      files: [
-        // TODO replace with `GLOB_MARKDOWN_SUPPORTED_CODE_BLOCKS` from eslint-config-un
-        // once it's exported
-        `${GLOB_MARKDOWN}/**/*.{${GLOB_JS_TS_X_EXTENSION},json,jsonc,json5,${GLOB_YML_YAML_EXTENSION}}`,
-      ],
+      files: [GLOB_MARKDOWN_SUPPORTED_CODE_BLOCKS],
       formatter: [
         'oxfmt',
         {
@@ -71,12 +62,9 @@ export default eslintConfig({
       requireModuleExtensions: true,
     },
     markdown: {
-      // Uses Prettier with default options, which conflicts with oxfmt above
+      configSentencesPerLine: true,
+      // `eslint-config-un` comes with Prettier, which would format code blocks too
       configFormatFencedCodeBlocks: false,
-      configSentencesPerLine: {
-        // Putting every sentence on its own line causes line wraps in the changelog
-        ignores: ['.changeset/**/*.md'],
-      },
     },
     ts: {
       allowDefaultProject: ['*.config.*ts'],

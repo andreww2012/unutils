@@ -68,7 +68,7 @@ const readSubpaths = (): Subpath[] => {
       throw new Error(`Could not find the source file of "${subpath}": ${sourceEntry}`);
     }
 
-    return [{subpath, sourceEntry}];
+    return {subpath, sourceEntry};
   });
 };
 

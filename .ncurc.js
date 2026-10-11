@@ -9,7 +9,6 @@ import packageJson from './package.json' with {type: 'json'};
 const NPM_ALIAS_REGEX = /^npm:(@?[^@]+)@/;
 
 const CACHE_DIRECTORY = path.join(import.meta.dirname, 'node_modules/.cache/npm-check-updates');
-// eslint-disable-next-line unicorn/no-top-level-side-effects
 fs.mkdirSync(CACHE_DIRECTORY, {recursive: true});
 
 /** @type {Set<string>} */
@@ -78,7 +77,7 @@ const collectBundledPackages = () => {
 
   walk(SRC_DIRECTORY);
 
-  return [...packageNames].sort();
+  return [...packageNames].toSorted();
 };
 
 const bundledPackages = collectBundledPackages();
@@ -160,11 +159,11 @@ export default defineConfig({
     }
 
     const [currentVersionSemver, upgradedVersionSemver] = [currentVersion, upgradedVersion].map(
-      (version) => tryParse(version || ''),
+      (version = '') => tryParse(version),
     );
-    return !(
-      PACKAGES_WITH_PINNED_MAJOR_VERSION.has(aliasedPackageName) &&
-      currentVersionSemver?.major !== upgradedVersionSemver?.major
+    return (
+      !PACKAGES_WITH_PINNED_MAJOR_VERSION.has(aliasedPackageName) ||
+      currentVersionSemver?.major === upgradedVersionSemver?.major
     );
   },
 
@@ -175,8 +174,8 @@ export default defineConfig({
     const knownGroup = PACKAGE_GROUPS[fullName] || PACKAGE_GROUPS[`${nameScope}/*`];
 
     if (knownGroup) {
-      const {groupName, icon, priority} = knownGroup;
-      return `${priority === null ? '' : `${priority ?? 3}. `}${icon || '📁'} ${groupName}`;
+      const {groupName, icon = '📁', priority = 3} = knownGroup;
+      return `${priority === null ? '' : `${priority}. `}${icon} ${groupName}`;
     }
 
     return fullName in packageJson.devDependencies
