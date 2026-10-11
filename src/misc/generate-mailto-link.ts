@@ -1,7 +1,7 @@
 import {arrayify} from '../array/arrayify.ts';
-import type {MaybeArray} from '../types/maybe-array.ts';
+import type {MaybeReadonlyArray} from '../types/maybe-readonly-array.ts';
 
-const joinRecipients = (value: MaybeArray<string> | undefined) =>
+const joinRecipients = (value: MaybeReadonlyArray<string> | undefined) =>
   arrayify(value).filter(Boolean).join(',');
 
 /**
@@ -43,9 +43,9 @@ const joinRecipients = (value: MaybeArray<string> | undefined) =>
  * // 'mailto:'
  */
 export const generateMailtoLink = (options: {
-  to?: MaybeArray<string>;
-  cc?: MaybeArray<string>;
-  bcc?: MaybeArray<string>;
+  to?: MaybeReadonlyArray<string>;
+  cc?: MaybeReadonlyArray<string>;
+  bcc?: MaybeReadonlyArray<string>;
   subject?: string;
   body?: string;
   recipientsAsQueryParam?: boolean;

@@ -281,6 +281,7 @@ These cover JSON *manipulation* axes (repair, partial parsing, diff, pointer/pat
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | `types/ArrayWithMaxLength` | Union of every shape an array can take with at most N elements, keeping per-position types; impossible shapes drop out (`never` if all do) |
 | `types/Falsy`              | Union of the literal-representable falsy values (`false`, `0`, `0n`, `''`, `null`, `undefined`); `NaN` excluded (no literal type)          |
+| `types/MaybeReadonlyArray` | A value or a readonly array of it (`T \| readonly T[]`); unlike `MaybeArray`, accepts `as const` arrays                                    |
 | `types/Truthy`             | Complement of `Falsy`: removes the literal falsy members from a type (`Truthy<0 \| 1>` is `1`)                                             |
 
 ## License

@@ -106,6 +106,7 @@ export type {LowercaseLetter} from './lowercase-letter.ts';
 export type {MaxNumberInUnion} from './max-number-in-union.ts';
 export type {MaybeArray} from './maybe-array.ts';
 export type {MaybePromise} from './maybe-promise.ts';
+export type {MaybeReadonlyArray} from './maybe-readonly-array.ts';
 export type {MergeDeep, MergeDeepOptions} from './merge-deep.ts';
 export type {MergeExclusive} from './merge-exclusive.ts';
 export type {MergeObjects} from './merge-objects.ts';

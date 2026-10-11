@@ -11,6 +11,12 @@ describe('misc/generateMailtoLink', () => {
     );
   });
 
+  it('accepts readonly recipient arrays', () => {
+    const recipients = ['a@example.com', 'b@example.com'] as const;
+
+    expect(generateMailtoLink({to: recipients})).toBe('mailto:a@example.com,b@example.com');
+  });
+
   it('percent-encodes the subject and body with %20 for spaces', () => {
     expect(generateMailtoLink({to: 'ada@example.com', subject: 'Hi there', body: 'A & B'})).toBe(
       'mailto:ada@example.com?subject=Hi%20there&body=A%20%26%20B',

@@ -1,3 +1,4 @@
+export {isArray} from './is-array.ts';
 export {isBuffer} from './is-buffer.ts';
 export {isEmptyObject} from './is-empty-object.ts';
 export {isEmptyValue} from './is-empty-value.ts';
