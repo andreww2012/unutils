@@ -42,29 +42,30 @@ See individual symbols' JSDoc for detailed documentation.
 <details>
 <summary>List of entrypoints</summary>
 
-| Entrypoint  | Description                                            | Available in main? |
-| ----------- | ------------------------------------------------------ | ------------------ |
-| `array`     | Array and tuple manipulation                           | ✅                 |
-| `async`     | Promises, mutexes, timeouts and concurrency            | ✅                 |
-| `dom`       | Selector-typed DOM lookups                             | ❌                 |
-| `function`  | Function composition, currying and partial application | ✅                 |
-| `id`        | Unique ID generation                                   | ✅                 |
-| `iterable`  | Generic iterable traversal and aggregation             | ✅                 |
-| `json`      | JSON parsing and serialization                         | ✅                 |
-| `map`       | `Map` querying, insertion and transformation           | ✅                 |
-| `math`      | Numeric aggregation, interpolation and randomness      | ✅                 |
-| `misc`      | Miscellaneous helpers that fit no other group          | ✅                 |
-| `object`    | Object merging, picking and deep-path access           | ✅                 |
-| `predicate` | Type guards and value predicates                       | ✅                 |
-| `regex`     | Type-safe `RegExp` and pattern escaping                | ✅                 |
-| `runtime`   | Runtime environment detection                          | ✅                 |
-| `server`    | Node-only helpers (filesystem, process, terminal)      | ❌                 |
-| `set`       | `Set` querying and transformation                      | ✅                 |
-| `string`    | String casing, splitting and affixing                  | ✅                 |
-| `traverse`  | Recursive visitor traversal of nested values           | ✅                 |
-| `ts`        | TypeScript runtime and compile-time assertions         | ✅                 |
-| `types`     | Type-only utility types                                | ✅                 |
-| `value`     | Cloning, equality and type inspection for any value    | ✅                 |
+| Entrypoint  | Description                                             | Available in main? |
+| ----------- | ------------------------------------------------------- | ------------------ |
+| `array`     | Array and tuple manipulation                            | ✅                 |
+| `async`     | Promises, mutexes, timeouts and concurrency             | ✅                 |
+| `bitwise`   | Bit flags and other bit manipulation of 32-bit integers | ✅                 |
+| `dom`       | Selector-typed DOM lookups                              | ❌                 |
+| `function`  | Function composition, currying and partial application  | ✅                 |
+| `id`        | Unique ID generation                                    | ✅                 |
+| `iterable`  | Generic iterable traversal and aggregation              | ✅                 |
+| `json`      | JSON parsing and serialization                          | ✅                 |
+| `map`       | `Map` querying, insertion and transformation            | ✅                 |
+| `math`      | Numeric aggregation, interpolation and randomness       | ✅                 |
+| `misc`      | Miscellaneous helpers that fit no other group           | ✅                 |
+| `object`    | Object merging, picking and deep-path access            | ✅                 |
+| `predicate` | Type guards and value predicates                        | ✅                 |
+| `regex`     | Type-safe `RegExp` and pattern escaping                 | ✅                 |
+| `runtime`   | Runtime environment detection                           | ✅                 |
+| `server`    | Node-only helpers (filesystem, process, terminal)       | ❌                 |
+| `set`       | `Set` querying and transformation                       | ✅                 |
+| `string`    | String casing, splitting and affixing                   | ✅                 |
+| `traverse`  | Recursive visitor traversal of nested values            | ✅                 |
+| `ts`        | TypeScript runtime and compile-time assertions          | ✅                 |
+| `types`     | Type-only utility types                                 | ✅                 |
+| `value`     | Cloning, equality and type inspection for any value     | ✅                 |
 
 </details>
 
@@ -116,6 +117,7 @@ utility it provides and how it maps into `unutils` (renames, consolidations, and
 | [`pretty-ms`](docs/packages/pretty-ms.md)                         | Human-readable duration formatting, including the colon notation (`misc/formatDuration`)                                                                                                 |
 | [`safe-stable-stringify`](docs/packages/safe-stable-stringify.md) | Deterministic, circular-safe `JSON.stringify`                                                                                                                                            |
 | [`string-ts`](docs/packages/string-ts.md)                         | Type-level-aware string helpers — literal-preserving case conversion, native-method wrappers and object-key transforms                                                                   |
+| [`@thi.ng/binary`](docs/packages/@thi.ng__binary.md)              | Bit manipulation of 32-bit integers: most of the `bitwise` group / `unutils/bitwise`                                                                                                     |
 | [`ts-extras`](docs/packages/ts-extras.md)                         | Thin, strongly-typed wrappers over native methods                                                                                                                                        |
 | [`type-fest`](docs/packages/type-fest.md)                         | Type-only utility types (the `types` group / `unutils/types`)                                                                                                                            |
 | [`typed-query-selector`](docs/packages/typed-query-selector.md)   | Infers the element type from a CSS selector literal — the `dom` group / `unutils/dom`                                                                                                    |
@@ -186,6 +188,10 @@ These cover JSON *manipulation* axes (repair, partial parsing, diff, pointer/pat
 | `array/sortedArrayIndexOf`            | Binary search for an existing value in a sorted array; returns its index or `-1`; `{rightmost?}`                                                                                                                        |
 | `array/sortedArrayInsertionIndex`     | Binary-search insertion point into a sorted array; `{iteratee?, rightmost?}`                                                                                                                                            |
 | `array/sortedArrayInsertionIndexWith` | Binary-search insertion index via a monotonic `predicate` (via `remeda`'s `sortedIndexWith`); any comparable condition, not just `number`/`string` keys                                                                 |
+| `bitwise/indexesOfSetBits`            | Indexes of the `1` bits of a 32-bit integer, in ascending order, typed as `BitIndex` so they can be passed to the other bit utilities                                                                                   |
+| `bitwise/isBitIndex`                  | Type guard for `BitIndex`; narrows a dynamic number (a loop counter, a parsed value) before passing it to the bit utilities                                                                                             |
+| `bitwise/isBitSet`                    | Whether a bit of a 32-bit integer is `1`                                                                                                                                                                                |
+| `bitwise/setBit`                      | Consolidates `@thi.ng/binary`'s `bitSet`/`bitClear`: pass `false` as the third argument to set the bit to `0`                                                                                                           |
 | `dom/closestTyped`                    | Typed `closest`; the matched ancestor's type is inferred from the selector literal                                                                                                                                      |
 | `dom/querySelectorAllTyped`           | Typed `querySelectorAll` returning a real array instead of a `NodeList`; optional search root                                                                                                                           |
 | `dom/querySelectorTyped`              | Typed `querySelector`; optional search root defaulting to `document`; `.as<T>()` for custom elements                                                                                                                    |
@@ -284,12 +290,13 @@ These cover JSON *manipulation* axes (repair, partial parsing, diff, pointer/pat
 
 ### Custom types
 
-| Our type group and name    | Notes                                                                                                                                      |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `types/ArrayWithMaxLength` | Union of every shape an array can take with at most N elements, keeping per-position types; impossible shapes drop out (`never` if all do) |
-| `types/Falsy`              | Union of the literal-representable falsy values (`false`, `0`, `0n`, `''`, `null`, `undefined`); `NaN` excluded (no literal type)          |
-| `types/MaybeReadonlyArray` | A value or a readonly array of it (`T \| readonly T[]`); unlike `MaybeArray`, accepts `as const` arrays                                    |
-| `types/Truthy`             | Complement of `Falsy`: removes the literal falsy members from a type (`Truthy<0 \| 1>` is `1`)                                             |
+| Our type group and name    | Notes                                                                                                                                                              |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `bitwise/BitIndex`         | Integer from `0` to `31`, the index of a bit in a 32-bit integer; the bit utilities accept only it, so out-of-range literals and enum members fail at compile time |
+| `types/ArrayWithMaxLength` | Union of every shape an array can take with at most N elements, keeping per-position types; impossible shapes drop out (`never` if all do)                         |
+| `types/Falsy`              | Union of the literal-representable falsy values (`false`, `0`, `0n`, `''`, `null`, `undefined`); `NaN` excluded (no literal type)                                  |
+| `types/MaybeReadonlyArray` | A value or a readonly array of it (`T \| readonly T[]`); unlike `MaybeArray`, accepts `as const` arrays                                                            |
+| `types/Truthy`             | Complement of `Falsy`: removes the literal falsy members from a type (`Truthy<0 \| 1>` is `1`)                                                                     |
 
 ## License
 

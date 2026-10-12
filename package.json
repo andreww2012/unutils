@@ -37,6 +37,10 @@
       "types": "./dist/async/index.d.mts",
       "default": "./dist/async/index.mjs"
     },
+    "./bitwise": {
+      "types": "./dist/bitwise/index.d.mts",
+      "default": "./dist/bitwise/index.mjs"
+    },
     "./dom": {
       "types": "./dist/dom/index.d.mts",
       "default": "./dist/dom/index.mjs"
@@ -181,6 +185,7 @@
     "@commitlint/config-conventional": "21.2.3",
     "@commitlint/types": "21.2.3",
     "@eslint/config-inspector": "3.5.0",
+    "@thi.ng/binary": "3.6.17",
     "@types/node": "22.20.5",
     "@types/yieldable-json": "2.0.2",
     "@vitest/coverage-v8": "5.0.3",
