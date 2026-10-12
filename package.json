@@ -213,6 +213,7 @@
     "neotraverse": "1.0.1",
     "npm-check-updates": "23.1.0",
     "oxfmt": "catalog:format",
+    "pretty-ms": "9.3.1",
     "publint": "0.3.25",
     "remeda": "2.51.0",
     "rolldown": "1.2.13",
