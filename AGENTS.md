@@ -20,6 +20,7 @@ All without zero dependencies because all external dependencies are bundled.
   If the package has no tags for these versions, use commit hashes the versions were published from.
   This applies everywhere you describe the bump: changesets, commit messages, `README.md` and your replies, etc.
 - In changesets, link each upstream utility name to its docs page when it has one, and write enumerations of more than a few items as a (nested) Markdown list.
+  Refer to our utilities and groups by their bare names: `getErrorMessage`, `bitwise`.
 
 ## Domain description
 
