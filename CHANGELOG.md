@@ -1,5 +1,40 @@
 # unutils
 
+## 0.3.0
+
+### Minor Changes
+
+- [`14f9bbc`](https://github.com/andreww2012/unutils/commit/14f9bbce3ebe4aa0485ae0c224bb38e7357e1751) - Added a new `bitwise` group for bit flags and other bit manipulation of 32-bit integers. Bit indexes are typed as `BitIndex` (an integer from 0 to 31), so out-of-range literals and enum members fail at compile time, and `isBitIndex` checks dynamic numbers:
+  
+  - `BitIndex`, `isBitIndex`, `isBitSet` and `indexesOfSetBits`
+  - from [`@thi.ng/binary`](https://npmx.dev/@thi.ng/binary):
+    - `setBit` ([`bitSet`](https://docs.thi.ng/umbrella/binary/functions/bitSet.html), or [`bitClear`](https://docs.thi.ng/umbrella/binary/functions/bitClear.html) when `false` is passed)
+    - `clearBit` ([`bitClear`](https://docs.thi.ng/umbrella/binary/functions/bitClear.html))
+    - `toggleBit` ([`bitFlip`](https://docs.thi.ng/umbrella/binary/functions/bitFlip.html))
+    - `countSetBits` ([`popCount`](https://docs.thi.ng/umbrella/binary/variables/popCount.html))
+    - `countTrailingZeroBits` ([`ctz32`](https://docs.thi.ng/umbrella/binary/variables/ctz32.html))
+    - `rotateBitsLeft` ([`rotateLeft`](https://docs.thi.ng/umbrella/binary/functions/rotateLeft.html)) and `rotateBitsRight` ([`rotateRight`](https://docs.thi.ng/umbrella/binary/functions/rotateRight.html))
+    - `toInt32` ([`u32i32`](https://docs.thi.ng/umbrella/binary/variables/u32i32.html)) and `toUint32` ([`i32u32`](https://docs.thi.ng/umbrella/binary/variables/i32u32.html))
+
+- [`83b38c1`](https://github.com/andreww2012/unutils/commit/83b38c19ad7b2dbdae0305b761c431b58be45e8f) - Added new `getErrorMessage` and `interopDefault` utilities: get a message from a caught value of any type, and resolve a module (or a dynamic `import()`) to its default export when it has one
+
+- [`22b4cae`](https://github.com/andreww2012/unutils/commit/22b4cae3c01abd403e5806286d0fcfda5470d3ae) - Added a new `MaybeReadonlyArray` type: a value or a readonly array of it. `generateMailtoLink` now uses it, so its recipient options also accept readonly arrays
+
+- [`22b4cae`](https://github.com/andreww2012/unutils/commit/22b4cae3c01abd403e5806286d0fcfda5470d3ae) - Added a new [`isArray`](https://remedajs.com/docs/#isArray) utility from [`remeda`](https://npmx.dev/remeda): unlike `Array.isArray`, it also narrows readonly arrays
+
+- [`01f111d`](https://github.com/andreww2012/unutils/commit/01f111de6e6fe46fb3011afa2600f4039c0fc671) - Added a new `formatDuration` utility from [`pretty-ms`](https://npmx.dev/pretty-ms) ([`prettyMilliseconds`](https://github.com/sindresorhus/pretty-ms#api)) that formats milliseconds like `'1h 2m 3s'` or, in colon notation, `'1:02:03'`, and a new `parseColonDuration` utility that parses the colon notation back into milliseconds
+
+- [`4f6604a`](https://github.com/andreww2012/unutils/commit/4f6604a765238024c37193101c2396b6d42b8e2a) - Added new `arrayIsUnique`, `arrayFindDuplicates` and `arrayToggle` utilities: check whether an array has repeated elements, find them, and add or remove a value like `classList.toggle` does
+
+### Patch Changes
+
+- [`676ca73`](https://github.com/andreww2012/unutils/commit/676ca73f53a9666801802e0229061585fe330ca4) - `jsonStringifyAsync` now matches `JSON.stringify` in more cases:
+  
+  - circular structures are rejected at any depth, instead of resolving with `[object Object]` in the output or crashing the process (circular arrays)
+  - functions and symbols are skipped, and `undefined`, functions and symbols in arrays become `null`
+
+- [`57ce269`](https://github.com/andreww2012/unutils/commit/57ce2694e92edb6f5f148047450e42fed95e5cbe) - `arrayify`: a union mixing arrays with other values is now typed member by member, so its tuples keep their own types instead of becoming array elements
+
 ## 0.2.0
 
 ### Minor Changes
